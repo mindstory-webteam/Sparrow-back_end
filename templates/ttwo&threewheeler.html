@@ -1,0 +1,1761 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <!--=============== basic  ===============-->
+        <meta charset="UTF-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Trustbook - Construction Architecture Renovate  Template</title>
+        <!--=============== css  ===============-->	
+        <link type="text/css" rel="stylesheet" href="css/plugins.css">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+        <link type="text/css" rel="stylesheet" href="css/map-style.css">
+        <!--=============== favicons ===============-->
+        <link rel="shortcut icon" href="images/favicon.ico">
+    </head>
+    <body>
+        <!-- lodaer  -->
+        <div class="loader-wrap">
+            <div class="loader-spin"><span></span></div>
+        </div>
+        <!-- loader end  -->
+        <!--  main   -->
+        <div id="main">
+             <!--  header-top  -->
+          <div class="header-top">
+                <div class="container">
+                    <a class="top-header-logo" href="index.html"></a>		
+                    <!-- nav-button-wrap-->
+                    <div class="nav-button-wrap">
+                        <div class="nav-button">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                   
+                        <style>
+                        @media (max-width: 960px) {
+                            .nav-special {
+                                display: none !important;
+                            }
+                        }
+                        </style>
+                    
+                    <!-- share button--> 	
+                <div class="nav-special" style="display: flex; justify-content: center; gap:15px;">
+
+                    <div class="share-button ">
+                        <a href="#" target="_blank"
+                            style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                            <span>Home</span>
+                             <i class="fa-light fa-house"></i>
+                        </a>
+                    </div>
+
+                    <div class="share-button ">
+                        <a href="./about.html" target="_blank"
+                            style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                            <span>Our Story</span>
+                            <i class="fa-light fa-user"></i>
+                        </a>
+                    </div>
+
+                    <div class="share-button showshare">
+                        <span>Ventures</span>
+                        <i class="fa-light fa-briefcase"></i>
+                    </div>
+
+                    <div class="share-button">
+                        <a href="./career.html" target="_blank"
+                            style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                            <span>Career</span>
+                            <i class="fa-light fa-user-tie"></i>
+                        </a>
+                    </div>
+
+                    <div class="share-button">
+                        <a href="./contact.html" target="_blank"
+                            style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                            <span>Contact</span>
+                            <i class="fa-light fa-envelope"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                    
+                    <!-- share button end-->											
+                </div>
+                <div class="share-holder isShare">
+                    <div style="display: flex;justify-content: center; gap: 50px;">
+                        <div class="hvr"><a href="./automotive.html" style="color: #ffffff;">AUTOMOTIVE</a></div>
+                        <div class="hvr"><a href="./lubricants.html" style="color: #ffffff;">LUBRICANT</a></div>
+                    </div>
+                    
+                    <!-- <div class="share-container"></div> -->
+                </div>
+                <!-- header-search-wrap -->
+                <div class="header-search-wrap">
+                    <div class="widget-inner">
+                        <form action="#">
+                            <input name="se" id="se" type="text" class="search" placeholder="Search...">
+                            <button class="search-submit" id="submit_btn"><i class="fal fa-search transition"></i> </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- header-search-wrap end -->							
+            </div>
+            <!--  header-top end -->
+            <!-- header -->
+            <header class="main-header">
+                <div class="header-container">
+                    <div class="header-inner">
+                        <a href="index.html" class="logo-holder"> <img src="images/logo3.png" alt=""> </a>
+                        <!--  navigation -->
+                        <div class="nav-title">Menu</div>
+                        <div class="nav-holder main-menu">
+                            <nav class="nav-inner" id="menu-init">
+                                <ul>
+
+                                    <li>
+                                        <a href="index.html">
+                                            <i class="fa-light fa-house"></i> Home
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="about.html">
+                                            <i class="fa-light fa-circle-user"></i> Our Story
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa-light fa-briefcase"></i> Ventures
+                                        </a>
+
+                                        <!--second level -->
+                                        <ul>
+                                            <li><a href="./automotive.html">Automotive</a></li>
+                                            <li><a href="lubricants.html">Lubricant</a></li>
+                                        </ul>
+                                        <!--second level end-->
+
+                                    </li>
+
+                                    <li>
+                                        <a href="career.html">
+                                            <i class="fa-light fa-user-tie"></i> Career
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="contact.html">
+                                            <i class="fa-light fa-envelope"></i> Contact
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </nav>
+                        </div>
+                        <!-- navigation  end -->
+                        <div class="nav-title">Contacts</div>
+                        <div class="header-contact">
+                            <ul>
+                                <li><i class="fa-light fa-envelope"></i><a href="mailto:yourmail@domain.com"> yourmail@domain.com</a></li>
+                                <li><i class="fa-light fa-location-dot"></i><a href="https://goo.gl/maps/dj5UaNJFkJ6rLNJy9" target="_blank"> 27th Brooklyn New York, NY 10065</a></li>
+                                <li><i class="fa-light fa-phone-rotary"></i><a href="tel:+9(111)123456789"> +7(111)123456789</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="contact.html" class="header_btn"><span>Request a Quote</span></a>
+            </header>
+            <!-- header end  -->
+            <!-- wrapper -->	
+             <div class="wrapper">
+                <!-- section -->
+                <div class="section hero-section">
+                    <div class="bg-wrap-container" data-scrollax-parent="true">
+                        <div class="bg bg-parallax" data-bg="images/Banner/automotive/three-wheeler.png"  data-scrollax="properties: { translateY: '30%' }"></div>
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="container">
+                        <div class="hero-section-title">
+                            <h5>Our Works</h5>
+                            <h2>Three Wheeler</h2>
+                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                            <div class="subbfooter_dec"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- section end-->				
+                <!--content-->
+                <div class="content">
+                    <!--content-box-->
+                    <div class="content-box">
+                        <!-- breadcrumbs-wrap  -->
+                        <div class="breadcrumbs">
+                            <div class="container">
+                                <div class="breadcrumbs-wrap">
+                                    <a href="#">Home</a><a href="#">Automotive</a><span>two wheeler</span> 
+                                </div>
+                                <div class="hs-scroll-down-wrap">
+                                    <div class="scroll-down-item">
+                                        <span>Scroll Down To Discover</span>
+                                        <div class="mousey">
+                                            <div class="scroller"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+
+
+                        <!--section ------------------------------------------------------------------------------->
+                        <div class="section">
+                            <div class="container">
+                                <div class="boxed-content post-container">
+                                    <div class="row">
+                                        <!--fboxed-content-item-->
+                                        <div class="col-lg-8">
+                                            <div class="single-box-container">
+                                                <div class="single-box-content">
+                                                    <div class="det-box container">
+                                                        <div class="det-box-ietm det-box-ietm_single">
+                                                            <h3 class="bold-text"> World Trade Center <span class="bt_dec"></span></h3>
+                                                            <p>Vestibulum orci felis, ullamcorper non condimentum non, ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis. Nullam sed sapien dui. Nulla auctor sit amet sem non porta. Integer iaculis tellus nulla, quis imperdiet magna venenatis vitae. Ut nec hinc dolor possim. An eros argumentum vel, elit diceret duo eu, quo et aliquid ornatus delicatissimi. Pri choro pertinax indoctum ne, ad partiendo persecuti forensibus est.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion">
+                                                    <a class="toggle act-accordion" href="#"><span>01.</span> How long does the sending process take? <i class="fa-solid fa-caret-down"></i></a>
+                                                    <div class="accordion-inner visible">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</p>
+                                                    </div>
+                                                    <a class="toggle" href="#"><span>02.</span> Can I use more than one payment method to pay for a reservation? <i class="fa-solid fa-caret-down"></i></a>
+                                                    <div class="accordion-inner">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</p>
+                                                    </div>
+                                                    <a class="toggle" href="#"><span>03.</span> How do I edit or remove a payment method?   <i class="fa-solid fa-caret-down"></i></a>
+                                                    <div class="accordion-inner">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</p>
+                                                    </div>
+                                                </div>
+                                                <!--banner-widget-wrap-->	
+                                                
+                                                <!--banner-widget-wrap end-->												
+                                                <div class="det-list">
+                                                    <div class="det-list-wrap">
+                                                        <ul>
+                                                            <li>Fusce mollis et <span>leo sit</span> amet tincidunt .</li>
+                                                            <li>Seed fermentum velit lacinia pharetra .</li>
+                                                            <li>Hex ac molestie <span>consectetur, metus tellus</span> .</li>
+                                                            <li>Donec fringilla fermentum nibh, velit lacinia .</li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li>Fusce mollis et <span>leo sit</span> amet tincidunt .</li>
+                                                            <li>Seed fermentum velit lacinia pharetra .</li>
+                                                            <li>Hex ac molestie <span>consectetur, metus tellus</span> .</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!--##################################gallery-add###################################################################-->
+
+                                                
+                                                <!--#######################################################################################################-->						
+                                            </div>
+                                        </div>
+                                        <!--boxed-content-item end-->
+                                        <!--fixed-bar-wrap-->
+                                        <div class="col-lg-4">
+                                            <!--boxed-container-->
+                                            <div class="sb-container fixed-bar">
+                                                <!--boxed-content-->
+                                                <div class="boxed-content">
+                                                    <!--boxed-content-title-->
+                                                    <h3 class="bold-text">Overall Progress<span class="bt_dec"></span></h3>
+                                                    <!--boxed-content-title end-->												
+                                                    <div class="piechart-holder animaper" data-skcolor="#F7B90F">
+                                                        <div class="piechart-container">
+                                                            <div class="piechart-container-title">
+                                                                <h4>Building frame</h4>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="piechart-container">
+                                                            <div class="piechart-container-title">
+                                                                <h4>Interior Decoration</h4>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                                            </div>
+                                                    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--boxed-content end-->
+                                                <!--boxed-content-->
+                                                    <div class="boxed-content">
+                                                    <!--boxed-content-title-->
+                                                    
+                                            <style>
+                                                .km-wrapper * {
+                                                    margin: 0;
+                                                    padding: 0;
+                                                    box-sizing: border-box;
+                                                }
+
+                                                .km-wrapper {
+                                                    width: 100%;
+                                                    height: 450px;
+                                                    padding: 0;
+                                                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                                    position: relative;
+                                                }
+
+                                                #km-map-container {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    border-radius: 0;
+                                                    overflow: hidden;
+                                                }
+
+                                                /* Search Box Styling */
+                                                .km-search-box {
+                                                    position: absolute;
+                                                    top: 10px;
+                                                    left: 50%;
+                                                    transform: translateX(-50%);
+                                                    z-index: 10;
+                                                    background: white;
+                                                    padding: 8px 15px;
+                                                    border-radius: 25px;
+                                                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                                                    display: flex;
+                                                    align-items: center;
+                                                    gap: 8px;
+                                                }
+
+                                                .km-search-box input {
+                                                    border: none;
+                                                    outline: none;
+                                                    font-size: 14px;
+                                                    width: 200px;
+                                                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                                }
+
+                                                .km-search-box button {
+                                                    background: #ef4444;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 6px 15px;
+                                                    border-radius: 20px;
+                                                    cursor: pointer;
+                                                    font-size: 13px;
+                                                    font-weight: 500;
+                                                    transition: background 0.3s;
+                                                }
+
+                                                .km-search-box button:hover {
+                                                    background: #dc2626;
+                                                }
+
+                                                /* Location Counter */
+                                                .km-location-counter {
+                                                    position: absolute;
+                                                    bottom: 15px;
+                                                    left: 15px;
+                                                    z-index: 10;
+                                                    background: white;
+                                                    padding: 8px 15px;
+                                                    border-radius: 20px;
+                                                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                                                    font-size: 13px;
+                                                    font-weight: 600;
+                                                    color: #ef4444;
+                                                }
+
+                                                /* Info Window Styling */
+                                                .km-info-content {
+                                                    padding: 15px 18px;
+                                                    font-weight: 500;
+                                                    font-size: 15px;
+                                                    color: #1f2937;
+                                                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                                    line-height: 1.6;
+                                                    min-width: 220px;
+                                                    max-width: 300px;
+                                                }
+
+                                                .km-info-content .km-loc-title {
+                                                    font-size: 18px;
+                                                    font-weight: 700;
+                                                    color: #ef4444;
+                                                    margin-bottom: 8px;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    gap: 8px;
+                                                }
+
+                                                .km-info-content .km-loc-type {
+                                                    display: inline-block;
+                                                    background: #fee2e2;
+                                                    color: #ef4444;
+                                                    padding: 2px 8px;
+                                                    border-radius: 10px;
+                                                    font-size: 11px;
+                                                    font-weight: 600;
+                                                    text-transform: uppercase;
+                                                }
+
+                                                .km-info-content .km-loc-desc {
+                                                    font-size: 14px;
+                                                    color: #6b7280;
+                                                    font-weight: 400;
+                                                    margin-top: 6px;
+                                                }
+
+                                                .km-info-content .km-loc-coords {
+                                                    font-size: 11px;
+                                                    color: #9ca3af;
+                                                    margin-top: 8px;
+                                                    font-family: monospace;
+                                                }
+
+                                                .km-info-content .km-directions-link {
+                                                    display: inline-block;
+                                                    margin-top: 10px;
+                                                    color: #ef4444;
+                                                    text-decoration: none;
+                                                    font-size: 13px;
+                                                    font-weight: 600;
+                                                    transition: color 0.3s;
+                                                }
+
+                                                .km-info-content .km-directions-link:hover {
+                                                    color: #dc2626;
+                                                }
+
+                                                /* Loading Spinner */
+                                                .km-loading {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%);
+                                                    z-index: 5;
+                                                    display: none;
+                                                }
+
+                                                .km-loading.km-active {
+                                                    display: block;
+                                                }
+
+                                                .km-spinner {
+                                                    border: 3px solid #f3f3f3;
+                                                    border-top: 3px solid #ef4444;
+                                                    border-radius: 50%;
+                                                    width: 40px;
+                                                    height: 40px;
+                                                    animation: km-spin 1s linear infinite;
+                                                }
+
+                                                @keyframes km-spin {
+                                                    0% { transform: rotate(0deg); }
+                                                    100% { transform: rotate(360deg); }
+                                                }
+
+                                                /* Error Message */
+                                                .km-error {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%);
+                                                    background: white;
+                                                    padding: 20px;
+                                                    border-radius: 10px;
+                                                    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                                                    text-align: center;
+                                                    max-width: 400px;
+                                                    display: none;
+                                                    z-index: 20;
+                                                }
+
+                                                .km-error.km-active {
+                                                    display: block;
+                                                }
+
+                                                .km-error h3 {
+                                                    color: #ef4444;
+                                                    margin-bottom: 10px;
+                                                    font-size: 16px;
+                                                }
+
+                                                .km-error p {
+                                                    color: #6b7280;
+                                                    font-size: 14px;
+                                                    line-height: 1.6;
+                                                }
+
+                                                /* Tablet Portrait - 768px and below */
+                                                @media (max-width: 768px) {
+                                                    .km-wrapper {
+                                                        height: 400px;
+                                                    }
+                                                    
+                                                    .km-search-box {
+                                                        top: 10px;
+                                                        left: 10px;
+                                                        transform: none;
+                                                        width: calc(100% - 20px);
+                                                    }
+                                                    
+                                                    .km-search-box input {
+                                                        width: 100%;
+                                                        flex: 1;
+                                                    }
+                                                    
+                                                    .km-location-counter {
+                                                        bottom: 10px;
+                                                        left: 10px;
+                                                        font-size: 12px;
+                                                        padding: 6px 12px;
+                                                    }
+                                                    
+                                                    .km-info-content {
+                                                        font-size: 14px;
+                                                        min-width: 180px;
+                                                        padding: 12px 15px;
+                                                    }
+                                                    
+                                                    .km-info-content .km-loc-title {
+                                                        font-size: 16px;
+                                                    }
+                                                    
+                                                    .km-info-content .km-loc-desc {
+                                                        font-size: 13px;
+                                                    }
+                                                }
+
+                                                /* Mobile Landscape - 576px and below */
+                                                @media (max-width: 576px) {
+                                                    .km-wrapper {
+                                                        height: 350px;
+                                                    }
+                                                    
+                                                    .km-search-box {
+                                                        padding: 6px 12px;
+                                                    }
+                                                    
+                                                    .km-search-box input {
+                                                        font-size: 13px;
+                                                    }
+                                                    
+                                                    .km-search-box button {
+                                                        padding: 5px 12px;
+                                                        font-size: 12px;
+                                                    }
+                                                    
+                                                    .km-info-content {
+                                                        font-size: 13px;
+                                                        min-width: 160px;
+                                                        padding: 10px 12px;
+                                                    }
+                                                    
+                                                    .km-info-content .km-loc-title {
+                                                        font-size: 15px;
+                                                    }
+                                                    
+                                                    .km-info-content .km-loc-desc {
+                                                        font-size: 12px;
+                                                    }
+                                                }
+
+                                                /* Small Mobile - 400px and below */
+                                                @media (max-width: 400px) {
+                                                    .km-wrapper {
+                                                        height: 300px;
+                                                    }
+                                                    
+                                                    .km-info-content {
+                                                        font-size: 12px;
+                                                        min-width: 140px;
+                                                        padding: 8px 10px;
+                                                    }
+                                                    
+                                                    .km-info-content .km-loc-title {
+                                                        font-size: 14px;
+                                                        margin-bottom: 4px;
+                                                    }
+                                                    
+                                                    .km-info-content .km-loc-desc {
+                                                        font-size: 11px;
+                                                    }
+                                                }
+
+                                                /* Large Desktop - 1920px and above */
+                                                @media (min-width: 1920px) {
+                                                    .km-wrapper {
+                                                        height: 550px;
+                                                    }
+                                                }
+                                            </style>
+
+                                         
+                                            <!--boxed-content-title end-->												
+                                            <!--boxed-content-item-->
+                                            <style>
+                                                /* Kerala Map Styles */
+                                                .kerala-tourist-map {
+                                                    width: 100%;
+                                                    height: 450px;
+                                                    position: relative;
+                                                    overflow: hidden;
+                                                    background: #f0f0f0;
+                                                }
+
+                                                #keralaMapCanvas {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    display: block;
+                                                }
+
+                                                /* Search Box at Bottom */
+                                                .kerala-search-control {
+                                                    position: absolute;
+                                                    bottom: 20px;
+                                                    left: 50%;
+                                                    transform: translateX(-50%);
+                                                    z-index: 1000;
+                                                    background: #ffffff;
+                                                    padding: 10px 16px;
+                                                    border-radius: 30px;
+                                                    box-shadow: 0 3px 15px rgba(0,0,0,0.25);
+                                                    display: flex;
+                                                    align-items: center;
+                                                    gap: 10px;
+                                                }
+
+                                                .kerala-search-control input {
+                                                    border: none;
+                                                    outline: none;
+                                                    font-size: 14px;
+                                                    width: 240px;
+                                                    background: transparent;
+                                                    color: #333;
+                                                }
+
+                                                .kerala-search-control input::placeholder {
+                                                    color: #999;
+                                                }
+
+                                                .kerala-search-btn {
+                                                    background: #ef4444;
+                                                    color: #ffffff;
+                                                    border: none;
+                                                    padding: 8px 20px;
+                                                    border-radius: 25px;
+                                                    cursor: pointer;
+                                                    font-size: 13px;
+                                                    font-weight: 600;
+                                                    transition: all 0.3s ease;
+                                                }
+
+                                                .kerala-search-btn:hover {
+                                                    background: #dc2626;
+                                                    transform: scale(1.05);
+                                                }
+
+                                                /* Location Badge at Top */
+                                                .kerala-location-badge {
+                                                    position: absolute;
+                                                    top: 15px;
+                                                    left: 15px;
+                                                    z-index: 1000;
+                                                    background: #ffffff;
+                                                    padding: 10px 18px;
+                                                    border-radius: 25px;
+                                                    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+                                                    font-size: 14px;
+                                                    font-weight: 700;
+                                                    color: #ef4444;
+                                                }
+
+                                                /* Loading Overlay */
+                                                .kerala-map-loader {
+                                                    position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    background: rgba(255,255,255,0.9);
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                    z-index: 999;
+                                                }
+
+                                                .kerala-map-loader.hidden {
+                                                    display: none;
+                                                }
+
+                                                .loader-spinner {
+                                                    width: 50px;
+                                                    height: 50px;
+                                                    border: 4px solid #f3f3f3;
+                                                    border-top: 4px solid #ef4444;
+                                                    border-radius: 50%;
+                                                    animation: spinLoader 1s linear infinite;
+                                                }
+
+                                                @keyframes spinLoader {
+                                                    0% { transform: rotate(0deg); }
+                                                    100% { transform: rotate(360deg); }
+                                                }
+
+                                                /* Info Window Custom Styles */
+                                                .kerala-info-box {
+                                                    padding: 16px 20px;
+                                                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                                    max-width: 280px;
+                                                }
+
+                                                .kerala-info-title {
+                                                    font-size: 18px;
+                                                    font-weight: 700;
+                                                    color: #ef4444;
+                                                    margin-bottom: 6px;
+                                                }
+
+                                                .kerala-info-type {
+                                                    display: inline-block;
+                                                    background: #fee2e2;
+                                                    color: #ef4444;
+                                                    padding: 3px 10px;
+                                                    border-radius: 12px;
+                                                    font-size: 11px;
+                                                    font-weight: 600;
+                                                    text-transform: uppercase;
+                                                    margin-bottom: 8px;
+                                                }
+
+                                                .kerala-info-desc {
+                                                    font-size: 14px;
+                                                    color: #6b7280;
+                                                    line-height: 1.5;
+                                                    margin-bottom: 8px;
+                                                }
+
+                                                .kerala-info-coords {
+                                                    font-size: 11px;
+                                                    color: #9ca3af;
+                                                    font-family: 'Courier New', monospace;
+                                                    margin-bottom: 10px;
+                                                }
+
+                                                .kerala-info-link {
+                                                    display: inline-block;
+                                                    color: #ef4444;
+                                                    text-decoration: none;
+                                                    font-size: 13px;
+                                                    font-weight: 600;
+                                                    transition: color 0.3s;
+                                                }
+
+                                                .kerala-info-link:hover {
+                                                    color: #dc2626;
+                                                }
+
+                                                /* Hide Google Maps errors */
+                                                .gm-style .gm-err-container,
+                                                .gm-style-cc,
+                                                .gm-style-moc {
+                                                    display: none !important;
+                                                }
+
+                                                /* Responsive Design */
+                                                @media (max-width: 768px) {
+                                                    .kerala-tourist-map {
+                                                        height: 400px;
+                                                    }
+
+                                                    .kerala-search-control {
+                                                        bottom: 15px;
+                                                        left: 15px;
+                                                        right: 15px;
+                                                        transform: none;
+                                                        width: calc(100% - 30px);
+                                                    }
+
+                                                    .kerala-search-control input {
+                                                        width: 100%;
+                                                        flex: 1;
+                                                    }
+
+                                                    .kerala-location-badge {
+                                                        font-size: 12px;
+                                                        padding: 8px 14px;
+                                                    }
+                                                }
+
+                                                @media (max-width: 576px) {
+                                                    .kerala-tourist-map {
+                                                        height: 350px;
+                                                    }
+
+                                                    .kerala-search-control {
+                                                        padding: 8px 12px;
+                                                    }
+
+                                                    .kerala-search-btn {
+                                                        padding: 7px 16px;
+                                                        font-size: 12px;
+                                                    }
+                                                }
+                                            </style>
+
+                                            <h3 class="bold-text">Project Location<span class="bt_dec"></span></h3>
+                                            <!--boxed-content-title end-->												
+                                            <!--boxed-content-item-->
+                                            <div class="boxed-content-item bc-item_smal_pad">
+                                                <!-- map-wrapper -->
+                                                <div class="map-wrapper" style="height: 450px;">
+                                                    <div class="map-container">
+                                                        <!-- Kerala Tourist Map -->
+                                                        <div class="kerala-tourist-map">
+                                                            <!-- Map Canvas -->
+                                                            <div id="keralaMapCanvas"></div>
+
+                                                            <!-- Loading Overlay -->
+                                                            <div class="kerala-map-loader" id="keralaLoader">
+                                                                <div class="loader-spinner"></div>
+                                                            </div>
+
+                                                            <!-- Location Badge -->
+                                                        
+
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- map-wrapper end -->
+                                            </div>
+                                            <!--boxed-content-item end-->
+
+                                            <!-- Location Data -->
+                                            <script id="keralaLocationData" type="application/json">
+                                            {
+                                            "locations": [
+                                                {"name":"Kovalam Beach","lat":"8.4004","lng":"76.9784","type":"Beach","info":"Famous golden sand beach with pristine waters"},
+                                                {"name":"Varkala Beach","lat":"8.7379","lng":"76.7160","type":"Beach","info":"Cliff beach with natural springs and stunning views"},
+                                                {"name":"Marari Beach","lat":"9.6052","lng":"76.3212","type":"Beach","info":"Pristine and peaceful beach, perfect for relaxation"},
+                                                {"name":"Cherai Beach","lat":"10.1413","lng":"76.1786","type":"Beach","info":"Beautiful beach near Kochi with golden sands"},
+                                                {"name":"Padmanabhaswamy Temple","lat":"8.4831","lng":"76.9453","type":"Temple","info":"Ancient Hindu temple with magnificent architecture"},
+                                                {"name":"Guruvayur Temple","lat":"10.5944","lng":"76.0392","type":"Temple","info":"Famous Krishna temple, important pilgrimage site"},
+                                                {"name":"Sabarimala Temple","lat":"9.4347","lng":"77.0820","type":"Temple","info":"Sacred pilgrimage destination in the mountains"},
+                                                {"name":"Athirappilly Falls","lat":"10.2852","lng":"76.5703","type":"Waterfall","info":"Largest waterfall in Kerala, spectacular natural beauty"},
+                                                {"name":"Vazhachal Falls","lat":"10.3157","lng":"76.5658","type":"Waterfall","info":"Scenic forest waterfall with lush surroundings"},
+                                                {"name":"Meenmutty Falls","lat":"11.5557","lng":"76.1391","type":"Waterfall","info":"Three-tier waterfall in Wayanad region"},
+                                                {"name":"Kochi (Cochin)","lat":"9.9312","lng":"76.2673","type":"City","info":"Queen of Arabian Sea, historic port city"},
+                                                {"name":"Thiruvananthapuram","lat":"8.5241","lng":"76.9366","type":"City","info":"Capital city of Kerala, cultural hub"},
+                                                {"name":"Kozhikode (Calicut)","lat":"11.2588","lng":"75.7804","type":"City","info":"City of spices, rich historical heritage"},
+                                                {"name":"Thrissur","lat":"10.5276","lng":"76.2144","type":"City","info":"Cultural capital of Kerala"},
+                                                {"name":"Munnar","lat":"10.0889","lng":"77.0595","type":"Hill Station","info":"Hill station with stunning tea gardens"},
+                                                {"name":"Alleppey Backwaters","lat":"9.4981","lng":"76.3388","type":"Backwater","info":"Venice of the East, famous houseboat destination"},
+                                                {"name":"Kumarakom","lat":"9.6177","lng":"76.4318","type":"Backwater","info":"Backwater paradise with bird sanctuary"},
+                                                {"name":"Wayanad","lat":"11.6854","lng":"76.1320","type":"Hill Station","info":"Hill station with wildlife and natural beauty"},
+                                                {"name":"Thekkady (Periyar)","lat":"9.5945","lng":"77.1642","type":"Wildlife","info":"Wildlife sanctuary with elephant reserve"},
+                                                {"name":"Bekal Fort","lat":"12.3919","lng":"75.0364","type":"Fort","info":"Historic coastal fort with ocean views"}
+                                            ]
+                                            }
+                                            </script>
+
+                                            <!-- Map Script -->
+                                            <script>
+                                            (function() {
+                                                'use strict';
+
+                                                // Global variables
+                                                var keralaMap = null;
+                                                var keralaMarkers = [];
+                                                var keralaInfoWindow = null;
+                                                var keralaLocations = [];
+
+                                                // Initialize map
+                                                function initKeralaMap() {
+                                                    try {
+                                                        // Get location data
+                                                        var dataScript = document.getElementById('keralaLocationData');
+                                                        if (!dataScript) {
+                                                            console.error('Location data not found');
+                                                            return;
+                                                        }
+
+                                                        var data = JSON.parse(dataScript.textContent);
+                                                        keralaLocations = data.locations;
+
+                                                        // Get map container
+                                                        var mapContainer = document.getElementById('keralaMapCanvas');
+                                                        if (!mapContainer) {
+                                                            console.error('Map container not found');
+                                                            return;
+                                                        }
+
+                                                        // Check if Google Maps is loaded
+                                                        if (typeof google === 'undefined' || !google.maps) {
+                                                            console.error('Google Maps not loaded');
+                                                            return;
+                                                        }
+
+                                                        // Map options
+                                                        var mapOptions = {
+                                                            center: { lat: 10.8505, lng: 76.2711 },
+                                                            zoom: window.innerWidth <= 768 ? 7 : 8,
+                                                            mapTypeControl: window.innerWidth > 768,
+                                                            streetViewControl: false,
+                                                            fullscreenControl: true,
+                                                            zoomControl: true,
+                                                            gestureHandling: 'greedy',
+                                                            styles: [
+                                                                {
+                                                                    featureType: 'water',
+                                                                    elementType: 'geometry',
+                                                                    stylers: [{ color: '#a4d7f4' }, { lightness: 17 }]
+                                                                },
+                                                                {
+                                                                    featureType: 'landscape',
+                                                                    elementType: 'geometry',
+                                                                    stylers: [{ color: '#f5f5f5' }, { lightness: 20 }]
+                                                                },
+                                                                {
+                                                                    featureType: 'road.highway',
+                                                                    elementType: 'geometry.fill',
+                                                                    stylers: [{ color: '#ffffff' }, { lightness: 17 }]
+                                                                }
+                                                            ]
+                                                        };
+
+                                                        // Create map
+                                                        keralaMap = new google.maps.Map(mapContainer, mapOptions);
+                                                        keralaInfoWindow = new google.maps.InfoWindow();
+
+                                                        // Create bounds
+                                                        var bounds = new google.maps.LatLngBounds();
+
+                                                        // Add markers
+                                                        keralaLocations.forEach(function(location) {
+                                                            var position = {
+                                                                lat: parseFloat(location.lat),
+                                                                lng: parseFloat(location.lng)
+                                                            };
+
+                                                            var marker = new google.maps.Marker({
+                                                                position: position,
+                                                                map: keralaMap,
+                                                                title: location.name,
+                                                                icon: {
+                                                                    url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                                                                    scaledSize: new google.maps.Size(32, 32)
+                                                                },
+                                                                animation: google.maps.Animation.DROP
+                                                            });
+
+                                                            // Store location data
+                                                            marker.locationData = location;
+                                                            keralaMarkers.push(marker);
+
+                                                            // Add click listener
+                                                            marker.addListener('click', function() {
+                                                                showLocationInfo(marker);
+                                                            });
+
+                                                            // Extend bounds
+                                                            bounds.extend(position);
+                                                        });
+
+                                                        // Fit map to bounds
+                                                        keralaMap.fitBounds(bounds);
+
+                                                        // Hide loader after map loads
+                                                        google.maps.event.addListenerOnce(keralaMap, 'idle', function() {
+                                                            hideLoader();
+                                                            var zoom = keralaMap.getZoom();
+                                                            if (zoom > 11) {
+                                                                keralaMap.setZoom(11);
+                                                            }
+                                                        });
+
+                                                    } catch (error) {
+                                                        console.error('Error initializing map:', error);
+                                                        hideLoader();
+                                                    }
+                                                }
+
+                                                // Show location info
+                                                function showLocationInfo(marker) {
+                                                    var loc = marker.locationData;
+                                                    var directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + loc.lat + ',' + loc.lng;
+                                                    
+                                                    var content = 
+                                                        '<div class="kerala-info-box">' +
+                                                            '<div class="kerala-info-title">' + loc.name + '</div>' +
+                                                            '<div class="kerala-info-type">' + loc.type + '</div>' +
+                                                            '<div class="kerala-info-desc">' + loc.info + '</div>' +
+                                                            '<div class="kerala-info-coords">📍 ' + loc.lat + ', ' + loc.lng + '</div>' +
+                                                            '<a href="' + directionsUrl + '" target="_blank" class="kerala-info-link">🗺️ Get Directions</a>' +
+                                                        '</div>';
+
+                                                    keralaInfoWindow.setContent(content);
+                                                    keralaInfoWindow.open(keralaMap, marker);
+                                                    keralaMap.panTo(marker.getPosition());
+                                                }
+
+                                                // Hide loader
+                                                function hideLoader() {
+                                                    var loader = document.getElementById('keralaLoader');
+                                                    if (loader) {
+                                                        loader.classList.add('hidden');
+                                                    }
+                                                }
+
+                                                // Search function
+                                                function searchLocation() {
+                                                    var input = document.getElementById('keralaSearchInput');
+                                                    if (!input) return;
+
+                                                    var query = input.value.toLowerCase().trim();
+                                                    
+                                                    if (!query) {
+                                                        alert('Please enter a location name');
+                                                        return;
+                                                    }
+
+                                                    var found = false;
+
+                                                    for (var i = 0; i < keralaMarkers.length; i++) {
+                                                        var marker = keralaMarkers[i];
+                                                        var loc = marker.locationData;
+
+                                                        if (loc.name.toLowerCase().indexOf(query) !== -1 || 
+                                                            loc.type.toLowerCase().indexOf(query) !== -1) {
+                                                            found = true;
+                                                            keralaMap.setZoom(12);
+                                                            keralaMap.panTo(marker.getPosition());
+                                                            showLocationInfo(marker);
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if (!found) {
+                                                        alert('Location not found. Try: Beach, Temple, Waterfall, City, etc.');
+                                                    }
+                                                }
+
+                                                // Setup event listeners
+                                                function setupEventListeners() {
+                                                    var searchBtn = document.getElementById('keralaSearchBtn');
+                                                    var searchInput = document.getElementById('keralaSearchInput');
+
+                                                    if (searchBtn) {
+                                                        searchBtn.addEventListener('click', searchLocation);
+                                                    }
+
+                                                    if (searchInput) {
+                                                        searchInput.addEventListener('keypress', function(e) {
+                                                            if (e.key === 'Enter' || e.keyCode === 13) {
+                                                                searchLocation();
+                                                            }
+                                                        });
+                                                    }
+                                                }
+
+                                                // Load Google Maps API
+                                                function loadGoogleMapsAPI() {
+                                                    if (typeof google !== 'undefined' && google.maps) {
+                                                        initKeralaMap();
+                                                        setupEventListeners();
+                                                        return;
+                                                    }
+
+                                                    window.initKeralaMap = initKeralaMap;
+
+                                                    var script = document.createElement('script');
+                                                    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&callback=initKeralaMap';
+                                                    script.async = true;
+                                                    script.defer = true;
+                                                    
+                                                    script.onerror = function() {
+                                                        console.error('Failed to load Google Maps');
+                                                        hideLoader();
+                                                    };
+
+                                                    document.head.appendChild(script);
+
+                                                    // Setup listeners after small delay
+                                                    setTimeout(setupEventListeners, 1000);
+                                                }
+
+                                                // Initialize on DOM ready
+                                                if (document.readyState === 'loading') {
+                                                    document.addEventListener('DOMContentLoaded', loadGoogleMapsAPI);
+                                                } else {
+                                                    loadGoogleMapsAPI();
+                                                }
+
+                                            })();
+                                            </script>
+                                                    <!--boxed-content-item end-->
+                                                </div>
+                                                <!--boxed-content end-->											
+                                                <!--boxed-content-->
+                                               
+                                                <!--boxed-content-item end-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bc_dec-line_h"></div>
+                                    <div class="bc_dec-line_v"></div>
+                                    <div class="limit-box"></div>
+                                </div>
+                                <div class="section-dec fs-wrapper">
+                                    <div class="section-dec-top"></div>
+                                    <div class="section-dec-border"></div>
+                                    <div class="section-dec-bottom"></div>
+                                    <div class="section-dec-top_line"></div>
+                                    <div class="section-dec-bottom_line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--section end-->
+                    </div>
+                    <!-- content-box end -->
+                    
+
+                    <!-- Modern Gallery Section - 4 Columns -->
+
+            <div class="single-box-content">
+                <div class="det-box">
+                    <div class="det-box-ietm det-box-ietm_single">
+                        <h3 class="bold-text"> World Trade Center <span class="bt_dec"></span></h3>
+                        <p>Vestibulum orci felis, ullamcorper non condimentum non, ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis. Nullam sed sapien dui. Nulla auctor sit amet sem non porta. Integer iaculis tellus nulla, quis imperdiet magna venenatis vitae. Ut nec hinc dolor possim. An eros argumentum vel, elit diceret duo eu, quo et aliquid ornatus delicatissimi. Pri choro pertinax indoctum ne, ad partiendo persecuti forensibus est.</p>
+                    </div>
+                </div>
+
+                <!-- Modern Gallery Section - 4 Columns -->
+                <section class="boxed-content company-events-section">
+                    <div class="company-events-container">
+                        <!-- Year Selection -->
+                        <div class="events-filter-container">
+                        <div class="events-select-wrapper">
+                            <select id="eventsYearSelect" class="events-year-dropdown">
+                            <option value="all">All Years</option>
+                            <option value="2024">2024</option>
+                            <option value="2023" selected>2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            </select>
+                            <div class="events-dropdown-arrow">
+                            <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="events-filter-display">
+                            <span class="events-display-label">Showing:</span>
+                            <span class="events-display-year" id="eventsCurrentYearDisplay">2023</span>
+                            <span class="events-display-count" id="eventsProjectCountDisplay">(4 projects)</span>
+                        </div>
+                        </div>
+
+                        <!-- Gallery Grid - 4 Columns -->
+                        <div class="company-events-gallery">
+                        <div class="events-grid-four">
+                            <!-- 2024 Events -->
+                            <div class="company-event-card" data-event-year="2024">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458127-59dc06d12c3f?w=400&h=300&fit=crop" alt="Modern Design">
+                                <div class="event-year-badge">2024</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Urban Living Complex</h3>
+                                <p class="event-description">Sustainable residential design in city center</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Architecture</span>
+                                <span class="event-tag">Residential</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2024">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458107-0dfef46b7c8a?w=400&h=300&fit=crop" alt="Office Design">
+                                <div class="event-year-badge">2024</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Tech Hub Office</h3>
+                                <p class="event-description">Collaborative workspace for innovation</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Interior</span>
+                                <span class="event-tag">Commercial</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- 2023 Events -->
+                            <div class="company-event-card" data-event-year="2023">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458127-59dc06d12c3f?w=400&h=300&fit=crop" alt="Museum Design">
+                                <div class="event-year-badge">2023</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Contemporary Art Museum</h3>
+                                <p class="event-description">Cultural space with innovative exhibition design</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Architecture</span>
+                                <span class="event-tag">Cultural</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2023">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458107-0dfef46b7c8a?w=400&h=300&fit=crop" alt="Hotel Design">
+                                <div class="event-year-badge">2023</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Boutique Hotel</h3>
+                                <p class="event-description">Luxury accommodation with local character</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Hospitality</span>
+                                <span class="event-tag">Interior</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2023">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458127-59dc06d12c3f?w=400&h=300&fit=crop" alt="Residential Project">
+                                <div class="event-year-badge">2023</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Modern Villa</h3>
+                                <p class="event-description">Minimalist design with panoramic views</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Residential</span>
+                                <span class="event-tag">Luxury</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2023">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458107-0dfef46b7c8a?w=400&h=300&fit=crop" alt="Commercial Building">
+                                <div class="event-year-badge">2023</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Business Center</h3>
+                                <p class="event-description">Corporate headquarters with sustainable features</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Commercial</span>
+                                <span class="event-tag">Office</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- 2022 Events -->
+                            <div class="company-event-card" data-event-year="2022">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458127-59dc06d12c3f?w=400&h=300&fit=crop" alt="Educational Building">
+                                <div class="event-year-badge">2022</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">University Library</h3>
+                                <p class="event-description">Modern learning environment for students</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Education</span>
+                                <span class="event-tag">Public</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2022">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458107-0dfef46b7c8a?w=400&h=300&fit=crop" alt="Retail Space">
+                                <div class="event-year-badge">2022</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Concept Store</h3>
+                                <p class="event-description">Retail experience with immersive design</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Retail</span>
+                                <span class="event-tag">Commercial</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- Additional events to fill 4 columns -->
+                            <div class="company-event-card" data-event-year="2021">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458127-59dc06d12c3f?w=400&h=300&fit=crop" alt="Residential Project">
+                                <div class="event-year-badge">2021</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Family Residence</h3>
+                                <p class="event-description">Sustainable home with natural materials</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Residential</span>
+                                <span class="event-tag">Sustainable</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2020">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458107-0dfef46b7c8a?w=400&h=300&fit=crop" alt="Community Center">
+                                <div class="event-year-badge">2020</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Community Hub</h3>
+                                <p class="event-description">Multi-purpose space for local activities</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Public</span>
+                                <span class="event-tag">Community</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="company-event-card" data-event-year="2024">
+                            <div class="event-media">
+                                <img src="https://images.unsplash.com/photo-1718023458127-59dc06d12c3f?w=400&h=300&fit=crop" alt="Modern Design">
+                                <div class="event-year-badge">2024</div>
+                            </div>
+                            <div class="event-details">
+                                <h3 class="event-title">Innovation Center</h3>
+                                <p class="event-description">Research and development facility</p>
+                                <div class="event-tags">
+                                <span class="event-tag">Research</span>
+                                <span class="event-tag">Technology</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </section>
+
+                    <style>
+                    /* Modern Gallery Section Styles - Company Events */
+                    .company-events-section {
+                    padding: 3rem 0;
+                    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+                    font-family: 'Inter', system-ui, sans-serif;
+                    }
+
+                    .company-events-container {
+                    max-width: 1400px;
+                    margin: 0 auto;
+                    padding: 0 1.25rem;
+                    }
+
+                    /* Events Filter Container */
+                    .events-filter-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 2.5rem;
+                    padding: 1.5rem;
+                    background: white;
+                    border-radius: 1rem;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                    }
+
+                    .events-select-wrapper {
+                    position: relative;
+                    min-width: 200px;
+                    }
+
+                    .events-year-dropdown {
+                    width: 100%;
+                    padding: 0.875rem 1.25rem;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    color: #1e293b;
+                    background: #f8fafc;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 0.75rem;
+                    appearance: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    }
+
+                    .events-year-dropdown:focus {
+                    outline: none;
+                    border-color: #ed3435;
+                    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+                    }
+
+                    .events-dropdown-arrow {
+                    position: absolute;
+                    right: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #64748b;
+                    pointer-events: none;
+                    }
+
+                    .events-filter-display {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    font-weight: 500;
+                    }
+
+                    .events-display-label {
+                    color: #64748b;
+                    }
+
+                    .events-display-year {
+                    color: #ed3435;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    }
+
+                    .events-display-count {
+                    color: #94a3b8;
+                    font-size: 0.9rem;
+                    }
+
+                    /* Company Events Grid - 4 Columns */
+                    .company-events-gallery {
+                    position: relative;
+                    }
+
+                    .events-grid-four {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    }
+
+                    .company-event-card {
+                    background: white;
+                    border-radius: 0.75rem;
+                    overflow: hidden;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    opacity: 1;
+                    transform: translateY(0);
+                    }
+
+                    .company-event-card.event-hidden {
+                    display: none;
+                    }
+
+                    .company-event-card:hover {
+                    transform: translateY(-0.5rem);
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                    }
+
+                    .event-media {
+                    position: relative;
+                    overflow: hidden;
+                    height: 12rem;
+                    }
+
+                    .event-media img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.6s ease;
+                    }
+
+                    .company-event-card:hover .event-media img {
+                    transform: scale(1.08);
+                    }
+
+                    .event-year-badge {
+                    position: absolute;
+                    top: 0.75rem;
+                    right: 0.75rem;
+                    background: rgba(255, 255, 255, 0.95);
+                    backdrop-filter: blur(8px);
+                    color: #ed3435;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.75rem;
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .event-details {
+                    padding: 1rem;
+                    }
+
+                    .event-title {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: #1e293b;
+                    margin-bottom: 0.5rem;
+                    line-height: 1.3;
+                    }
+
+                    .event-description {
+                    color: #64748b;
+                    font-size: 0.85rem;
+                    line-height: 1.4;
+                    margin-bottom: 0.75rem;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    }
+
+                    .event-tags {
+                    display: flex;
+                    gap: 0.25rem;
+                    flex-wrap: wrap;
+                    }
+
+                    .event-tag {
+                    background: #f1f5f9;
+                    color: #475569;
+                    padding: 0.15rem 0.5rem;
+                    border-radius: 0.75rem;
+                    font-size: 0.7rem;
+                    font-weight: 500;
+                    }
+
+                    /* Animation for event transitions */
+                    @keyframes eventsFadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(1.25rem);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                    }
+
+                    .company-event-card:not(.event-hidden) {
+                    animation: eventsFadeIn 0.6s ease forwards;
+                    }
+
+                    /* Responsive Design */
+                    @media (max-width: 1200px) {
+                    .events-grid-four {
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 1.25rem;
+                    }
+                    }
+
+                    @media (max-width: 768px) {
+                    .company-events-section {
+                        padding: 2rem 0;
+                    }
+                    
+                    .events-filter-container {
+                        flex-direction: column;
+                        gap: 1rem;
+                        align-items: stretch;
+                    }
+                    
+                    .events-select-wrapper {
+                        min-width: auto;
+                    }
+                    
+                    .events-filter-display {
+                        justify-content: center;
+                    }
+                    
+                    .events-grid-four {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1rem;
+                    }
+                    
+                    .event-media {
+                        height: 10rem;
+                    }
+                    }
+
+                    @media (max-width: 480px) {
+                    .company-events-container {
+                        padding: 0 1rem;
+                    }
+                    
+                    .events-filter-container {
+                        padding: 1rem;
+                    }
+                    
+                    .events-filter-display {
+                        flex-direction: column;
+                        gap: 0.25rem;
+                        text-align: center;
+                    }
+                    
+                    .events-grid-four {
+                        grid-template-columns: 1fr;
+                        gap: 1rem;
+                    }
+                    
+                    .event-media {
+                        height: 12rem;
+                    }
+                    }
+
+                    @media (max-width: 360px) {
+                    .events-grid-four {
+                        grid-template-columns: 1fr;
+                    }
+                    }
+                    </style>
+
+                    <script>
+                    // Company Events Filter Functionality
+                            document.addEventListener('DOMContentLoaded', function() {
+                            const eventsYearSelect = document.getElementById('eventsYearSelect');
+                            const eventsCurrentYearDisplay = document.getElementById('eventsCurrentYearDisplay');
+                            const eventsProjectCountDisplay = document.getElementById('eventsProjectCountDisplay');
+                            const companyEventCards = document.querySelectorAll('.company-event-card');
+                            
+                            // Initialize with 2023 selected
+                            filterCompanyEvents('2023');
+                            
+                            eventsYearSelect.addEventListener('change', function() {
+                                const selectedYear = this.value;
+                                filterCompanyEvents(selectedYear);
+                            });
+                            
+                            function filterCompanyEvents(year) {
+                                let visibleCount = 0;
+                                
+                                // Update current year display
+                                if (year === 'all') {
+                                eventsCurrentYearDisplay.textContent = 'All Years';
+                                } else {
+                                eventsCurrentYearDisplay.textContent = year;
+                                }
+                                
+                                // Filter company event cards
+                                companyEventCards.forEach(card => {
+                                const cardYear = card.getAttribute('data-event-year');
+                                
+                                if (year === 'all' || cardYear === year) {
+                                    card.classList.remove('event-hidden');
+                                    visibleCount++;
+                                } else {
+                                    card.classList.add('event-hidden');
+                                }
+                                });
+                                
+                                // Update project count
+                                eventsProjectCountDisplay.textContent = `(${visibleCount} project${visibleCount !== 1 ? 's' : ''})`;
+                            }
+                            });
+                    </script>
+
+
+
+
+
+            </div>
+
+                </div>
+                
+                <!-- content end -->
+                <!-- footer -->
+                <div class="boxed-content-item bc-item_smal_pad">
+    <!-- map-wrapper -->
+   
+
+
+                
+                <footer class="main-footer">
+                    <!-- footer-inner -->
+                    <div class="footer-inner ">
+                        <div class="container">
+                            <div class="footer-inner-wrap">
+                                <div class="row">
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header fl-wrap"><span>01.</span> About US</div>
+                                            <div class="footer_text  footer-box ">
+                                                <p>Our team takes over everything, from an idea and concept development to realization. We believe in traditions and incorporate them within our innovations.Client is the soul of the project. Aiusmod tempor incididunt ut labore sed dolore magna .</p>
+                                                <div class="footer-solcial">
+                                                    <ul>
+                                                        <li> <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a> </li>
+                                                        <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                                        <li><a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
+                                                        <li><a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                                                        <li><a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header fl-wrap"><span>02.</span> Contacts</div>
+                                            <!-- footer-contacts-->
+                                            <div class="footer-contacts footer-box ">
+                                                <ul>
+                                                    <li><span>Call:</span><a href="#">+489756412322</a></li>
+                                                    <li><span>Write  :</span><a href="#">yourmail@domain.com</a></li>
+                                                    <li><span>Find us : </span><a href="#">USA 27TH Brooklyn NY</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- footer contacts end -->
+                                            <a href="contact.html" class="fc_button">Get In Touch <i class="fa-light fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header "><span>03.</span> Subscribe</div>
+                                            <div class="footer-box fl-wrap">
+                                                <p>Want to be notified when we launch a new template or an udpate. Just sign up and we'll send you a notification by email.</p>
+                                                <div class="subcribe-form ">
+                                                    <form id="subscribe" class="subcribe-form_item">
+                                                        <input class="enteremail" name="email" id="subscribe-email" placeholder="Your Email" spellcheck="false" type="text">
+                                                        <button type="submit" id="subscribe-button" class="subscribe-button">Send</button>
+                                                        <label for="subscribe-email" class="subscribe-message"></label>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- footer-inner end -->
+                        <div class="footer-title-dec"><span>Trustbook  Construction</span> </div>
+                        <div class="footer-inner_dec footer-inner_dec-left"></div>
+                        <div class="footer-inner_dec footer-inner_dec-right"></div>
+                    </div>
+                    <!-- subbfooter -->
+                    <div class="subbfooter">
+                        <div class="container">
+                            <div class="policy-box">
+                                <span> &#169;  Trustbook 2025  /  All rights reserved. </span>
+                            </div>
+                            <div class="to-top-btn to-top">Back to top<i class="fal fa-long-arrow-up"></i></div>
+                            <div class="subbfooter_dec"></div>
+                        </div>
+                    </div>
+                    <!-- subbfooter end -->						
+                </footer>
+                <!-- footer end -->			
+            </div>
+            <!-- wrapper end -->
+        </div>
+        <!-- Main end -->
+        <!--=============== scripts  ===============-->   
+        <script  src="js/jquery.min.js"></script>
+        <script  src="js/plugins.js"></script>
+        <script  src="js/scripts.js"></script>
+        <script  src="js/map.js"></script>
+    </body>
+</html>

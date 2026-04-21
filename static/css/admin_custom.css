@@ -1,0 +1,126 @@
+/* ══ NAVBAR ══ */
+.main-header.navbar {
+    background-color: #164476 !important;
+    border-bottom: 3px solid #ed3435 !important;
+}
+
+/* ══ BRAND / LOGO ══ */
+.main-header .brand-link {
+    background-color: #ed3435 !important;
+    border-right: none !important;
+}
+.main-header .brand-text {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* ══ SIDEBAR ══ */
+.main-sidebar,
+.main-sidebar .sidebar {
+    background-color: #164476 !important;
+}
+.nav-sidebar .nav-link {
+    color: #cfe2ff !important;
+}
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link.active {
+    background-color: #ed3435 !important;
+    color: #ffffff !important;
+    border-radius: 4px;
+}
+.nav-sidebar .nav-header {
+    color: #8ab4d8 !important;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+}
+.sidebar .nav-sidebar .nav-treeview {
+    background-color: #0f3260 !important;
+}
+
+/* ══ USER PANEL ══ */
+.user-panel {
+    border-bottom: 1px solid rgba(237, 52, 53, 0.4) !important;
+}
+.user-panel .info a {
+    color: #cfe2ff !important;
+}
+
+/* ══ BUTTONS — Add / Change (dashboard) ══ */
+/* ✅ Change "Add" button → #ed3435 red */
+.btn-success,
+a.btn-success,
+input[type=submit].btn-success {
+    background-color: #ed3435 !important;
+    border-color: #ed3435 !important;
+    color: #ffffff !important;
+}
+.btn-success:hover {
+    background-color: #c0201f !important;
+    border-color: #c0201f !important;
+}
+
+/* ✅ Change "Change" button → #164476 blue */
+.btn-primary,
+a.btn-primary,
+input[type=submit].btn-primary {
+    background-color: #164476 !important;
+    border-color: #164476 !important;
+    color: #ffffff !important;
+}
+.btn-primary:hover {
+    background-color: #0f3260 !important;
+    border-color: #0f3260 !important;
+}
+
+/* ✅ Save / action buttons */
+.submit-row input[type=submit],
+.submit-row a.closelink {
+    background-color: #ed3435 !important;
+    border-color: #ed3435 !important;
+    color: #fff !important;
+}
+.submit-row input[name="_continue"],
+.submit-row input[name="_addanother"] {
+    background-color: #164476 !important;
+    border-color: #164476 !important;
+}
+
+/* ══ CONTENT HEADER ══ */
+.content-header h1 {
+    color: #164476 !important;
+    border-left: 4px solid #ed3435;
+    padding-left: 10px;
+}
+
+/* ══ APP INDEX CARDS ══ */
+.card-header {
+    background-color: #164476 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #ed3435 !important;
+}
+.card-header a {
+    color: #ffffff !important;
+}
+
+/* ══ TABLE LINKS ══ */
+table a {
+    color: #164476 !important;
+}
+table a:hover {
+    color: #ed3435 !important;
+}
+
+/* ══ FOOTER ══ */
+.main-footer {
+    border-top: 2px solid #164476 !important;
+    color: #164476 !important;
+}
+
+/* ══ TOP NAV LINKS ══ */
+.main-header .nav-link,
+.main-header .nav-link i {
+    color: #ffffff !important;
+}
+.main-header .nav-link:hover {
+    color: #ed3435 !important;
+}

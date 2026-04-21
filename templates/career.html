@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Career - Sparrow International{% endblock %}
+
+{% block content %}
+<!-- section -->
+<!-- hero section -->
+<div class="section hero-section">
+    <div class="bg-wrap-container" data-scrollax-parent="true">
+        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/banner-new/career-banne.png' %}" data-scrollax="properties: { translateY: '30%' }"></div>
+        <div class="overlay"></div>
+    </div>
+    <div class="container">
+        <div class="hero-section-title">
+            <h5>Join Our Team</h5>
+            <h2>our chairs are vacant</h2>
+            <p>Join our team and grow your career in a supportive, innovative, and growth-driven environment.</p>
+        </div>
+    </div>
+</div>
+
+<!--content-->
+<div class="content">
+    <!--content-box-->
+    <div class="content-box">
+        <!-- breadcrumbs-wrap  -->
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="breadcrumbs-wrap">
+                    <a href="{% url 'main:home' %}">Home</a><a href="#">Our Career</a>
+                </div>
+                <div class="hs-scroll-down-wrap">
+                    <div class="scroll-down-item">
+                        <span>Scroll Down To Discover</span>
+                        <div class="mousey">
+                            <div class="scroller"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs-wrap end  -->
+
+        <!--section -->
+        {% load static %}
+
+<div class="section">
+    <div class="container">
+        <div class="boxed-content ">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="single-box-container post-container">
+                        <div class="single-box-content">
+                            <!-- Static Content Section -->
+                            <h3 class="bold-text">Join Our Team<span class="bt_dec"></span></h3>
+                            <p>We are always looking for passionate individuals who are eager to learn and make a difference. Our workplace encourages creativity, teamwork, and professional growth. We support our employees with the right tools, guidance, and opportunities to succeed. Every team member plays an important role in our journey. Come grow your career with us.</p>
+
+                            <!-- Display Total Vacancies -->
+                            {% if total_vacancies > 0 %}
+                            <div style="background: #f0f9ff; border-left: 4px solid #164476; padding: 15px 20px; margin: 20px 0; border-radius: 8px;">
+                                <p style="margin: 0; font-size: 16px; font-weight: 600; color: #164476;">
+                                    <i class="fa-light fa-briefcase" style="margin-right: 8px;"></i>
+                                    Currently {{ total_vacancies }} position{{ total_vacancies|pluralize }} available
+                                </p>
+                            </div>
+                            {% endif %}
+
+                            <h3 class="bold-text">Apply Now<span class="bt_dec"></span></h3>
+                            
+                            <div class="comment-form custom-form">
+                                <form class="comment-form" name="careerform" id="careerform" method="post" action="{% url 'main:career' %}">
+                                    {% csrf_token %}
+                                    <fieldset>
+
+                                        <div class="row">
+                                            <!-- Full Name -->
+                                            <div class="col-sm-6">
+                                                <div class="cs-intputwrap">
+                                                    <i class="fa-light fa-user"></i>
+                                                    <input 
+                                                        name="full_name" 
+                                                        type="text" 
+                                                        placeholder="Full Name" 
+                                                        onClick="this.select()" 
+                                                        value=""
+                                                        required
+                                                        style="
+                                                            border: 1px solid #eee;
+                                                            background: #f9f9f9;
+                                                            height: 56px;
+                                                            width: 100%;
+                                                            padding: 17px 20px 17px 50px;
+                                                            color: #222;
+                                                            font-size: 12px;
+                                                            -webkit-appearance: none;
+                                                            outline: none;
+                                                            overflow: hidden;
+                                                            font-family: var(--main-font);
+                                                            font-weight: 500;
+                                                        "
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="col-sm-6">
+                                                <div class="cs-intputwrap">
+                                                    <i class="fa-light fa-envelope"></i>
+                                                    <input 
+                                                        name="email" 
+                                                        type="email" 
+                                                        placeholder="Email Address" 
+                                                        onClick="this.select()" 
+                                                        value=""
+                                                        required
+                                                        style="
+                                                            border: 1px solid #eee;
+                                                            background: #f9f9f9;
+                                                            height: 56px;
+                                                            width: 100%;
+                                                            padding: 17px 20px 17px 50px;
+                                                            color: #222;
+                                                            font-size: 12px;
+                                                            -webkit-appearance: none;
+                                                            outline: none;
+                                                            overflow: hidden;
+                                                            font-family: var(--main-font);
+                                                            font-weight: 500;
+                                                        "
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 15px;">
+
+                                            <!-- Phone -->
+                                            <div class="col-sm-6">
+                                                <div class="cs-intputwrap">
+                                                    <i class="fa-light fa-phone"></i>
+                                                    <input 
+                                                        name="phone" 
+                                                        type="text" 
+                                                        placeholder="Phone Number" 
+                                                        onClick="this.select()" 
+                                                        value=""
+                                                        required
+                                                        style="
+                                                            border: 1px solid #eee;
+                                                            background: #f9f9f9;
+                                                            height: 56px;
+                                                            width: 100%;
+                                                            padding: 17px 20px 17px 50px;
+                                                            color: #222;
+                                                            font-size: 12px;
+                                                            -webkit-appearance: none;
+                                                            outline: none;
+                                                            overflow: hidden;
+                                                            font-family: var(--main-font);
+                                                            font-weight: 500;
+                                                        "
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            <!-- Job Role Dropdown - DYNAMIC WITH VACANCY COUNT -->
+                                            <div class="col-sm-6">
+                                                <div class="cs-intputwrap">
+                                                    <i class="fa-light fa-briefcase"></i>
+
+                                                    <select 
+                                                        name="job_role"
+                                                        required
+                                                        style="
+                                                            border: 1px solid #eee;
+                                                            background: #f9f9f9;
+                                                            height: 56px;
+                                                            width: 100%;
+                                                            padding: 17px 20px 17px 50px;
+                                                            color: #222;
+                                                            font-size: 12px;
+                                                            -webkit-appearance: none;
+                                                            outline: none;
+                                                            overflow: hidden;
+                                                            font-family: var(--main-font);
+                                                            font-weight: 500;
+                                                            cursor: pointer;
+                                                        "
+                                                    >
+                                                        <option value="">Choose Job Role</option>
+                                                        {% if job_roles %}
+                                                            {% for job in job_roles %}
+                                                                <option value="{{ job.title }}">
+                                                                    {{ job.title }} 
+                                                                    {% if job.vacancy_count > 1 %}
+                                                                        ({{ job.vacancy_count }} positions)
+                                                                    {% endif %}
+                                                                </option>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <!-- Fallback options if no jobs in database -->
+                                                            <option value="Graphic Designer">Graphic Designer</option>
+                                                            <option value="Video Editor">Video Editor</option>
+                                                            <option value="Digital Marketing Executive">Digital Marketing Executive</option>
+                                                            <option value="Social Media Manager">Social Media Manager</option>
+                                                            <option value="Photographer">Photographer</option>
+                                                            <option value="Videographer">Videographer</option>
+                                                            <option value="Office Staff">Office Staff</option>
+                                                            <option value="Driver">Driver</option>
+                                                        {% endif %}
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Message -->
+                                        <textarea 
+                                            name="message" 
+                                            id="message" 
+                                            cols="40" 
+                                            rows="3" 
+                                            placeholder="Short Message / Cover Letter"
+                                            style="
+                                                border: 1px solid #eee;
+                                                background: #f9f9f9;
+                                                width: 100%;
+                                                padding: 17px 20px;
+                                                color: #222;
+                                                font-size: 12px;
+                                                font-family: var(--main-font);
+                                                font-weight: 500;
+                                                outline: none;
+                                                margin-top: 15px;
+                                            "
+                                        ></textarea>
+
+                                        <button type="submit" class="commentssubmit" id="commentssubmit" style="margin-top: 20px">
+                                            Submit Application
+                                        </button>
+
+                                    </fieldset>
+                                </form>
+
+                                <!-- Success/Error Messages -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }}" style="margin-top: 20px; padding: 15px; border-radius: 5px; {% if message.tags == 'success' %}background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;{% else %}background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;{% endif %}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+
+                        </div>
+                        <!--content-nav_holder-->
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!--boxed-container-->
+                    <div class="sb-container fixed-bar">
+                        <div class="boxed-content">
+                            <!--boxed-content-title-->
+                            <h3 class="bold-text">Our Recent Jobs<span class="bt_dec"></span></h3>
+                            <!--boxed-content-title end-->
+                            <!--boxed-content-item-->
+                            <div class="boxed-content-item bc-item_smal_pad">
+                                <div class="recent-post-widget">
+                                    <ul>
+                                        {% if recent_jobs %}
+                                            {% for job in recent_jobs %}
+                                            <li>
+                                                <div class="recent-post-img">
+                                                    <a href="#">
+                                                        <img src="{% if job.image %}{{ job.image.url }}{% else %}{% static 'images/all/1.jpg' %}{% endif %}" alt="{{ job.title }}">
+                                                    </a>
+                                                </div>
+                                                <div class="recent-post-content">
+                                                    <h4><a href="#">{{ job.title }}</a></h4>
+                                                    <div class="recent-post-opt">
+                                                        <span class="post-date">{{ job.posted_date|date:"F d, Y" }}</span>
+                                                        {% if job.vacancy_count > 1 %}
+                                                        <span style="display: block; font-size: 11px; color: #164476; margin-top: 3px;">
+                                                            <i class="fa-light fa-users" style="font-size: 10px;"></i> 
+                                                            {{ job.vacancy_count }} positions
+                                                        </span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <!-- Fallback if no recent jobs -->
+                                            {% comment %} <li>
+                                                <div class="recent-post-img"><a href="#"><img src="{% static 'images/all/1.jpg' %}" alt=""></a></div>
+                                                <div class="recent-post-content">
+                                                    <h4><a href="#">Graphic Designer</a></h4>
+                                                    <div class="recent-post-opt">
+                                                        <span class="post-date">January 15, 2026</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="recent-post-img"><a href="#"><img src="{% static 'images/all/1.jpg' %}" alt=""></a></div>
+                                                <div class="recent-post-content">
+                                                    <h4><a href="#">Digital Marketing Executive</a></h4>
+                                                    <div class="recent-post-opt">
+                                                        <span class="post-date">January 20, 2026</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="recent-post-img"><a href="#"><img src="{% static 'images/all/1.jpg' %}" alt=""></a></div>
+                                                <div class="recent-post-content">
+                                                    <h4><a href="#">Video Editor</a></h4>
+                                                    <div class="recent-post-opt">
+                                                        <span class="post-date">January 25, 2026</span>
+                                                    </div>
+                                                </div>
+                                            </li> {% endcomment %}
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--boxed-content-item end-->
+                        </div>
+                        <!--boxed-content end-->
+
+                        <!--boxed-content-->
+                        <div class="boxed-content">
+                            <!--boxed-content-title-->
+                            <h3 class="bold-text">Social Media Link<span class="bt_dec"></span></h3>
+                            <!--boxed-content-title end-->
+                            <!--boxed-content-item-->
+                            <div class="boxed-content-item bc-item_smal_pad">
+                                <div class="social-widget">
+                                    <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                                    <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                    <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                                    <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                </div>
+                            </div>
+                            <!--boxed-content-item end-->
+                        </div>
+                        <!--boxed-content end-->
+                    </div>
+                </div>
+            </div>
+            <div class="limit-box"></div>
+            <div class="bc_dec-line_h"></div>
+            <div class="bc_dec-line_v"></div>
+            <div class="limit-box"></div>
+        </div>
+        <div class="section-dec fs-wrapper">
+            <div class="section-dec-top"></div>
+            <div class="section-dec-border"></div>
+            <div class="section-dec-bottom"></div>
+            <div class="section-dec-top_line"></div>
+            <div class="section-dec-bottom_line"></div>
+        </div>
+    </div>
+</div>
+        <!--section end-->
+    </div>
+    <!-- content-box end -->
+    <div class="content-dec">
+        <div class="container">
+            <div class="content-dec-item"><span></span></div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation and handling
+    document.getElementById('careerform').addEventListener('submit', function(e) {
+        const fullName = document.querySelector('input[name="full_name"]').value.trim();
+        const email = document.querySelector('input[name="email"]').value.trim();
+        const phone = document.querySelector('input[name="phone"]').value.trim();
+        const jobRole = document.querySelector('select[name="job_role"]').value;
+
+        if (!fullName || !email || !phone || !jobRole) {
+            e.preventDefault();
+            alert('Please fill in all required fields');
+            return false;
+        }
+
+        // Phone validation
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phone)) {
+            e.preventDefault();
+            alert('Please enter a valid 10-digit phone number');
+            return false;
+        }
+    });
+
+    // Auto-hide alert messages after 5 seconds
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            alert.style.transition = 'opacity 0.5s';
+            alert.style.opacity = '0';
+            setTimeout(function() {
+                alert.remove();
+            }, 500);
+        });
+    }, 5000);
+</script>
+{% endblock %}

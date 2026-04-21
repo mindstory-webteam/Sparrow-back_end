@@ -1,0 +1,942 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Sparrow International{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="section hero-section">
+    <div class="bg-wrap-container" data-scrollax-parent="true">
+        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/banner-new/banner-wirhouse.png' %}"
+            data-scrollax="properties: { translateY: '30%' }"></div>
+        <div class="overlay"></div>
+    </div>
+    <div class="container">
+        <div class="hero-section-title">
+            <h5>Who We are</h5>
+            <h2>About our company</h2>
+            <p>We move industries forward through dependable solutions, customer-centric values, and continuous innovation.</p>
+            <div class="subbfooter_dec"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+    <div class="content-box">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="breadcrumbs-wrap">
+                    <a href="{% url 'main:home' %}">Home</a><span>About</span>
+                </div>
+                <div class="hs-scroll-down-wrap">
+                    <div class="scroll-down-item">
+                        <span>Scroll Down To Discover</span>
+                        <div class="mousey">
+                            <div class="scroller"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Story Section -->
+        <div class="section" style="padding: 0px;">
+            <div class="container">
+                <div class="boxed-content">
+                    <div class="about-wrap single-box-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="about-wrap_sin">
+                                    <div class="about-title ab-hero ab-hero2">
+                                        <h2>The Story Behind</h2>
+                                        <h4>Driven by Purpose, Defined by Performance.</h4>
+                                    </div>
+                                    <p>Every journey begins with a vision and ours was to create more than just a business.
+                                        Sparrow International Ventures Pvt. Ltd. was built with a passion to deliver excellence,
+                                        earn trust, and redefine standards in the automotive industry.
+                                        We don’t just supply components we create partnerships that drive performance and reliability.
+                                        Our commitment goes beyond products; it’s about ensuring every vehicle we support runs stronger,
+                                        lasts longer, and performs with confidence on every road.</p>
+                                    <p>
+                                        Each part we deliver represents precision, durability, and long-term value. Whether it’s OEM or premium aftermarket solutions, our focus remains unwavering to keep engines running, businesses moving, and journeys uninterrupted.This is not just our story it’s our promise to continuously grow, innovate, and move forward with purpose.
+                                    </p>
+                                    <!-- <a href="services.html" class="btn   float-btn   cf_btn" style="margin-top:30px"><i class="fas fa-caret-right"></i><span>View Our Services</span></a> -->
+                                    <!-- <div class="dots-grid-dec"></div> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="hero-image-collge-wrap">
+                                    <div class="single-dec_img">
+                                        <img src="{% static 'images/all/1.jpg' %}" alt="" class="respimg">
+                                    </div>
+                                    <div class="hero_images-collage-item" style="width: 25%; bottom: -35px; z-index: 15; left: -30px;">
+                                        <img src="{% static 'images/all/1.jpg' %}" class="respimg" alt="">
+                                    </div>
+                                    <div class="hero_images-collage-item" style="width: 35%; top: -50px; z-index: 11; right: -50px;">
+                                        <img src="{% static 'images/all/1.jpg' %}" class="respimg" alt="">
+                                    </div>
+                                    <div class="dc_dec-item_right">
+                                        <h4><span>25</span>Years of experience</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                </div>
+                <div class="section-dec fs-wrapper">
+                    <div class="section-dec-top"></div>
+                    <div class="section-dec-border"></div>
+                    <div class="section-dec-bottom"></div>
+                    <div class="section-dec-top_line"></div>
+                    <div class="section-dec-bottom_line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Journey Section - DYNAMIC -->
+        {% if journey_milestones %}
+        <div class="section" style="padding-top: 0px;">
+            <div class="container">
+                <div class="boxed-content post-container">
+                    <!-- Company Journey Section -->
+                    <section class="journey-section">
+                        <div class="journey-wrapper">
+                            <!-- Section Header -->
+                            <div class="section-header">
+                                <h2 class="section-heading">OUR JOURNEY</h2>
+                                <p class="section-subtitle">
+                                    From a small startup in Kerala, we have grown steadily through dedication, trust, and a strong commitment to quality.
+                                    Our focus on customer satisfaction and reliable service helped us expand and build a solid presence in the automotive
+                                    spare parts industry. Today, we proudly serve as an official Shell Lubricants distributor, continuing our journey with
+                                    the same passion for excellence and innovation.
+                                </p>
+                            </div>
+
+                            <!-- Timeline Container -->
+                            <div class="timeline-container">
+                                <!-- Year Navigation -->
+                                <div class="year-navigation">
+                                    {% for milestone in journey_milestones %}
+                                    <button class="year-badge {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+                                        <span class="year-number">{{ milestone.year }}</span>
+                                    </button>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Progress Track -->
+                                <div class="progress-track">
+                                    <div class="progress-fill"></div>
+                                    <div class="progress-marker"></div>
+                                </div>
+
+                                <!-- Story Content Area -->
+                                <div class="story-area">
+                                    {% for milestone in journey_milestones %}
+                                    <!-- {{ milestone.year }} -->
+                                    <div class="milestone-card {% if forloop.first %}active{% endif %}" data-milestone="{{ forloop.counter0 }}">
+                                        <div class="milestone-content">
+                                            <span class="milestone-label">{{ milestone.label }}</span>
+                                            <h3 class="milestone-year">{{ milestone.year }}</h3>
+                                            <p class="milestone-text">{{ milestone.description }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    <!-- Control Buttons -->
+                                    <div class="story-controls">
+                                        <button class="control-btn prev-control" aria-label="Previous milestone">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="15 18 9 12 15 6" />
+                                            </svg>
+                                        </button>
+                                        <button class="control-btn next-control" aria-label="Next milestone">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Decorative Elements -->
+                            <div class="decorative-circle circle-1"></div>
+                            <div class="decorative-circle circle-2"></div>
+                            <div class="decorative-circle circle-3"></div>
+                        </div>
+                    </section>
+
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                    <div class="limit-box"></div>
+                </div>
+                <div class="section-dec fs-wrapper">
+                    <div class="section-dec-top"></div>
+                    <div class="section-dec-border"></div>
+                    <div class="section-dec-bottom"></div>
+                    <div class="section-dec-top_line"></div>
+                    <div class="section-dec-bottom_line"></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+         {% comment %} <!-- section-------------clint and small benner section-----------------------------------------> {% endcomment %}
+        <div class="section  no-padding">
+            <div class="fw-container-wrap hidden-section">
+                <div class="fw-container parallax-section">
+                    <div class="bg-wrap-item">
+                        <div class="bg-wrap fs-wrapper">
+                            <div class="bg-wrap-container" data-scrollax-parent="true">
+                                <div class="bg bg-parallax" data-bg=""
+                                    data-scrollax="properties: { translateY: '30%' }"></div>
+                                <div class="overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <!-- inline-facts -->
+                        <div class="inline-facts-wrap inline_single-facts-wrap">
+                            <div class="inline-facts single-facts">
+                                <div class="milestone-counter">
+                                    <div class="stats animaper">
+                                        <div class="num" data-content="0" data-num="27">27</div>
+                                    </div>
+                                </div>
+                                <h6>Associated Brands</h6>
+                            </div>
+                            <!-- inline-facts end -->
+                            <!-- inline-facts  -->
+                            <div class="inline-facts single-facts">
+                                <div class="milestone-counter">
+                                    <div class="stats animaper">
+                                        <div class="num" data-content="0" data-num="9">9</div>
+                                    </div>
+                                </div>
+                                <h6>Year of Experience</h6>
+                            </div>
+                            <!-- inline-facts end -->
+                            <!-- inline-facts  -->
+                            <div class="inline-facts single-facts">
+                                <div class="milestone-counter">
+                                    <div class="stats animaper">
+                                        <div class="num" data-content="0" data-num="42">42</div>
+                                    </div>
+                                </div>
+                                <h6>Employees</h6>
+                            </div>
+                            <!-- inline-facts end -->
+                            <!-- inline-facts  -->
+                            <div class="inline-facts single-facts">
+                                <div class="milestone-counter">
+                                    <div class="stats animaper">
+                                        <div class="num" data-content="0" data-num="2">2</div>
+                                    </div>
+                                </div>
+                                <h6>Work In Sectors</h6>
+                            </div>
+                            <div class="chart-dec"><span><i class="fal fa-plus"></i></span></div>
+                        </div>
+                    </div>
+                    <!-- inline-facts end -->
+                </div>
+            </div>
+        </div>
+        {% comment %} <!-- section end---------------------------------------------------> {% endcomment %}
+
+        <!-- Team Section - DYNAMIC -->
+        {% if team_members %}
+        <div class="section">
+            <div class="container" style="margin-bottom: 60px;">
+                <div class="boxed-content">
+                    <div class="section-title">
+                        <h4>What said about us</h4>
+                        <h2>Meet Our Team</h2>
+                    </div>
+                    <div class="team-container">
+                        <div class="row">
+                            {% for member in team_members %}
+                            <!-- Team Member {{ forloop.counter }} -->
+                            <div class="col-lg-4 mb-3">
+                                <div class="team-box">
+                                    <div class="team-photo">
+                                        {% if member.photo %}
+                                            <img src="{{ member.photo.url }}" alt="{{ member.name }}" class="respimg">
+                                        {% else %}
+                                            <img src="{% static 'images/team/1.jpg' %}" alt="{{ member.name }}" class="respimg">
+                                        {% endif %}
+                                        <div class="team-details"></div>
+                                    </div>
+                                    <div class="team-info">
+                                        <h3>{{ member.name }}</h3>
+                                        <h4>{{ member.position }}</h4>
+                                        <p>{{ member.bio|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit." }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                </div>
+                <div class="section-dec fs-wrapper">
+                    <div class="section-dec-top"></div>
+                    <div class="section-dec-border"></div>
+                    <div class="section-dec-bottom"></div>
+                    <div class="section-dec-top_line"></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Testimonials Section -->
+        <div>
+            <div class="testimonilas-carousel-wrap">
+                <div class="boxed-content">
+                    <div class="section-title">
+                        <h4>What said about us</h4>
+                        <h2>Testimonials and Clients</h2>
+                    </div>
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                </div>
+                <div class="testimonilas-carousel">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <!-- Testimonial 1 -->
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testimonilas-text">
+                                        <div class="testi-header">
+                                            <div class="testi-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
+                                            <h3>Centa Simpson</h3>
+                                        </div>
+                                        <div class="testimonilas-text-item">
+                                            <div class="testimonilas-text-item-wrap">
+                                                <p>"Vestibulum orci felis, ullamcorper non condimentum non, ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis. Nullam sed sapien dui. Nulla auctor sit amet sem non porta. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut."</p>
+                                            </div>
+                                        </div>
+                                        <span class="testi-number">01.</span>
+                                    </div>
+                                    <div class="testi-footer">
+                                        <a href="#" class="testi-link" target="_blank">Via X-Twitter</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 2 -->
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testimonilas-text">
+                                        <div class="testi-header">
+                                            <div class="testi-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
+                                            <h3>Andy Dimasky</h3>
+                                        </div>
+                                        <div class="testimonilas-text-item">
+                                            <div class="testimonilas-text-item-wrap">
+                                                <p>"Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat. Vestibulum orci felis, ullamcorper non condimentum non, ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis."</p>
+                                            </div>
+                                        </div>
+                                        <span class="testi-number">02.</span>
+                                    </div>
+                                    <div class="testi-footer">
+                                        <a href="#" class="testi-link" target="_blank">Via Facebook</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 3 -->
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testimonilas-text">
+                                        <div class="testi-header">
+                                            <div class="testi-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
+                                            <h3>Jannet Dellov</h3>
+                                        </div>
+                                        <div class="testimonilas-text-item">
+                                            <div class="testimonilas-text-item-wrap">
+                                                <p>"Ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis. Nullam sed sapien dui. Nulla auctor sit amet sem non porta. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."</p>
+                                            </div>
+                                        </div>
+                                        <span class="testi-number">03.</span>
+                                    </div>
+                                    <div class="testi-footer">
+                                        <a href="#" class="testi-link" target="_blank">Via Instagram</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 4 -->
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testimonilas-text">
+                                        <div class="testi-header">
+                                            <div class="testi-avatar"><img src="{% static 'images/avatar/1.jpg' %}" alt=""></div>
+                                            <h3>Nicolo Svensky</h3>
+                                        </div>
+                                        <div class="testimonilas-text-item">
+                                            <div class="testimonilas-text-item-wrap">
+                                                <p>"Amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat. Vestibulum orci felis, ullamcorper non condimentum non, ultrices ac nunc. Mauris non ligula suscipit, vulputate mi accumsan, dapibus felis."</p>
+                                            </div>
+                                        </div>
+                                        <span class="testi-number">04.</span>
+                                    </div>
+                                    <div class="testi-footer">
+                                        <a href="#" class="testi-link" target="_blank">Via X-Twitter</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fwc-controls_wrap">
+                    <div class="solid-pagination_btns tcs-pagination_init"></div>
+                    <div class="tc-button tc-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="tc-button tc-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-dec">
+        <div class="container"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Root Variables */
+    :root {
+        --primary-color: #ed3435;
+        --secondary-color: #164476;
+        --text-dark: #1a202c;
+        --text-light: #4a5568;
+        --white: #ffffff;
+        --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Journey Section Styles */
+    .journey-section {
+        padding: 60px 20px;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .journey-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(237, 52, 53, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite;
+    }
+
+    .journey-section::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -5%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(237, 52, 53, 0.04) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translate(0, 0) scale(1);
+        }
+        50% {
+            transform: translate(30px, 30px) scale(1.1);
+        }
+    }
+
+    .journey-wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Decorative Circles */
+    .decorative-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(237, 52, 53, 0.03);
+        pointer-events: none;
+    }
+
+    .circle-1 {
+        width: 300px;
+        height: 300px;
+        top: 10%;
+        left: -100px;
+        animation: pulse 8s ease-in-out infinite;
+    }
+
+    .circle-2 {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        right: -50px;
+        animation: pulse 6s ease-in-out infinite 1s;
+    }
+
+    .circle-3 {
+        width: 150px;
+        height: 150px;
+        bottom: 10%;
+        left: 20%;
+        animation: pulse 10s ease-in-out infinite 2s;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.3;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0.5;
+        }
+    }
+
+    /* Header Styling */
+    .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .section-heading {
+        font-size: 46px;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin-bottom: 18px;
+        text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.05);
+        line-height: 1.1;
+        letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+        font-size: 17px;
+        color: var(--text-light);
+        max-width: 1000px;
+        margin: 0 auto;
+        line-height: 1.7;
+        font-weight: 400;
+    }
+
+    /* Timeline Container */
+    .timeline-container {
+        background: var(--white);
+        border-radius: 30px;
+        padding: 40px 50px 35px;
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(10px);
+        position: relative;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Year Navigation */
+    .year-navigation {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .year-badge {
+        padding: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .year-number {
+        display: block;
+        padding: 14px 28px;
+        background: #f7fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 14px;
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--text-light);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .year-badge:hover .year-number {
+        background: #edf2f7;
+        border-color: #ed3435;
+        color: var(--text-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(237, 52, 53, 0.25);
+    }
+
+    .year-badge.active .year-number {
+        background: var(--primary-color);
+        border-color: transparent;
+        color: var(--white);
+        transform: translateY(-3px) scale(1.05);
+    }
+
+    /* Progress Track */
+    .progress-track {
+        height: 8px;
+        background: #edf2f7;
+        border-radius: 10px;
+        margin: 0 30px 35px;
+        position: relative;
+        overflow: visible;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 10px;
+        width: 0%;
+        transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 0 20px rgba(237, 52, 53, 0.5);
+        position: relative;
+    }
+
+    .progress-marker {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+        background: var(--white);
+        border: 4px solid #ed3435;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px rgba(237, 52, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 2;
+        animation: markerPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes markerPulse {
+        0%, 100% {
+            box-shadow: 0 0 0 6px rgba(237, 52, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+            box-shadow: 0 0 0 12px rgba(237, 52, 53, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    /* Story Area */
+    .story-area {
+        position: relative;
+        min-height: 280px;
+    }
+
+    /* Milestone Cards */
+    .milestone-card {
+        display: none;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .milestone-card.active {
+        display: block;
+        animation: cardFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes cardFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .milestone-content {
+        background: #f7fafc;
+        padding: 35px;
+        border-radius: 24px;
+        border: 2px solid #e2e8f0;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .milestone-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: var(--primary-color);
+    }
+
+    .milestone-label {
+        display: inline-block;
+        padding: 8px 20px;
+        background: var(--secondary-color);
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 50px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 12px rgba(22, 68, 118, 0.3);
+    }
+
+    .milestone-year {
+        font-size: 40px;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-bottom: 18px;
+        line-height: 1;
+        letter-spacing: -2px;
+    }
+
+    .milestone-text {
+        font-size: 17px;
+        line-height: 1.7;
+        color: var(--text-dark);
+        margin: 0;
+        font-weight: 400;
+    }
+
+    /* Control Buttons */
+    .story-controls {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        background: var(--white);
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        color: #ed3435;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .control-btn:hover:not(:disabled) {
+        background: var(--primary-color);
+        border-color: transparent;
+        color: var(--white);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(237, 52, 53, 0.35);
+    }
+
+    .control-btn:active:not(:disabled) {
+        transform: translateY(-2px);
+    }
+
+    .control-btn:disabled {
+        background: #f7fafc;
+        border-color: #edf2f7;
+        color: #cbd5e0;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .journey-section {
+            padding: 40px 15px;
+        }
+        
+        .section-heading {
+            font-size: 36px;
+        }
+        
+        .timeline-container {
+            padding: 30px 30px 25px;
+            border-radius: 24px;
+        }
+        
+        .year-number {
+            padding: 12px 22px;
+            font-size: 16px;
+        }
+        
+        .milestone-content {
+            padding: 28px 25px;
+            border-radius: 20px;
+        }
+        
+        .milestone-year {
+            font-size: 32px;
+        }
+        
+        .control-btn {
+            width: 55px;
+            height: 55px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .section-heading {
+            font-size: 32px;
+        }
+        
+        .timeline-container {
+            padding: 25px 20px 20px;
+            border-radius: 20px;
+        }
+        
+        .year-number {
+            padding: 10px 18px;
+            font-size: 15px;
+        }
+        
+        .milestone-year {
+            font-size: 28px;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    (function() {
+        'use strict';
+
+        const yearBadges = document.querySelectorAll('.year-badge');
+        const milestoneCards = document.querySelectorAll('.milestone-card');
+        const progressFill = document.querySelector('.progress-fill');
+        const progressMarker = document.querySelector('.progress-marker');
+        const prevControl = document.querySelector('.prev-control');
+        const nextControl = document.querySelector('.next-control');
+
+        const totalMilestones = milestoneCards.length;
+        let currentMilestone = 0;
+
+        function updateJourney(index) {
+            if (index < 0 || index >= totalMilestones) return;
+
+            currentMilestone = index;
+
+            // Update year badges
+            yearBadges.forEach((badge, i) => {
+                badge.classList.toggle('active', i === index);
+            });
+
+            // Update milestone cards
+            milestoneCards.forEach((card, i) => {
+                if (i === index) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Update progress bar
+            const progressPercentage = (index / (totalMilestones - 1)) * 100;
+            progressFill.style.width = `${progressPercentage}%`;
+            progressMarker.style.left = `${progressPercentage}%`;
+
+            // Update control buttons
+            prevControl.disabled = index === 0;
+            nextControl.disabled = index === totalMilestones - 1;
+        }
+
+        // Year badge click handlers
+        yearBadges.forEach((badge, index) => {
+            badge.addEventListener('click', () => {
+                updateJourney(index);
+            });
+        });
+
+        // Control button handlers
+        prevControl.addEventListener('click', () => {
+            if (currentMilestone > 0) {
+                updateJourney(currentMilestone - 1);
+            }
+        });
+
+        nextControl.addEventListener('click', () => {
+            if (currentMilestone < totalMilestones - 1) {
+                updateJourney(currentMilestone + 1);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentMilestone > 0) {
+                    updateJourney(currentMilestone - 1);
+                }
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentMilestone < totalMilestones - 1) {
+                    updateJourney(currentMilestone + 1);
+                }
+            }
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const storyArea = document.querySelector('.story-area');
+
+        if (storyArea) {
+            storyArea.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            storyArea.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentMilestone < totalMilestones - 1) {
+                    updateJourney(currentMilestone + 1);
+                } else if (diff < 0 && currentMilestone > 0) {
+                    updateJourney(currentMilestone - 1);
+                }
+            }
+        }
+
+        // Initialize
+        if (totalMilestones > 0) {
+            updateJourney(0);
+        }
+    })();
+</script>
+{% endblock %}

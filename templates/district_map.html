@@ -1,0 +1,173 @@
+<div class="main-grid">
+    <div>
+        <div class="sidebar-container">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">District Selection</h2>
+                <p class="sidebar-subtitle">Click on districts to view on map</p>
+            </div>
+
+            <div class="filter-toggle-container">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="font-size: 14px; font-weight: 600; color: #374151;">Show All Districts</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="filterToggle" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all shadow-sm"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="district-list" id="districtList"></div>
+        </div>
+    </div>
+
+    <div>
+        <div class="map-container">
+            <div class="legend-container">
+                <div class="legend-item">
+                    <div class="legend-dot operational"></div>
+                    <span class="legend-label">Operational</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot inactive"></div>
+                    <span class="legend-label">Not Active</span>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const districts = [
+    {% for district in all_districts %}
+    {
+        name: '{{ district.name }}',
+        lat: {{ district.latitude }},
+        lng: {{ district.longitude }},
+        operational: {{ district.is_operational|yesno:"true,false" }},
+        selected: {% if forloop.first %}true{% else %}false{% endif %},
+        hq: {{ district.is_headquarters|yesno:"true,false" }}
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
+
+let map;
+let markers = {};
+
+map = L.map('map').setView([10.8505, 76.2711], 8);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 18
+}).addTo(map);
+
+function createCustomIcon(operational, selected) {
+    if (operational) {
+        return L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="font-size: ${selected ? '32px' : '24px'}; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); transform: translate(-50%, -100%); line-height: 1;">🚩</div>`,
+            iconSize: [selected ? 32 : 24, selected ? 32 : 24],
+            iconAnchor: [selected ? 16 : 12, selected ? 32 : 24]
+        });
+    } else {
+        return L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="width: ${selected ? '28px' : '22px'}; height: ${selected ? '28px' : '22px'}; background: #9ca3af; border: 3px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transform: translate(-50%, -50%);"></div>`,
+            iconSize: [selected ? 28 : 22, selected ? 28 : 22],
+            iconAnchor: [selected ? 14 : 11, selected ? 14 : 11]
+        });
+    }
+}
+
+districts.forEach(district => {
+    const marker = L.marker([district.lat, district.lng], {
+        icon: createCustomIcon(district.operational, district.selected)
+    }).addTo(map);
+
+    const popupContent = `
+        <div style="padding: 20px; min-width: 240px; background: #ffffff; border-radius: 16px;">
+            <h3 style="font-size: 20px; font-weight: bold; color: #1f2937; margin-bottom: 12px;">
+                ${district.name} District
+            </h3>
+            <span style="display: inline-block; background: ${district.operational ? '#dcfce7' : '#fee2e2'}; color: ${district.operational ? '#15803d' : '#991b1b'}; padding: 6px 14px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; border: 1px solid ${district.operational ? '#86efac' : '#fca5a5'}; letter-spacing: 0.5px;">
+                ${district.operational ? '✓ Operational' : '✕ Not Active'}
+            </span>
+            ${district.hq ? '<p style="margin-top: 12px; font-size: 13px; color: #6b7280;">🏢 Headquarters</p>' : ''}
+        </div>
+    `;
+
+    marker.bindPopup(popupContent);
+
+    if (district.selected) {
+        marker.openPopup();
+    }
+
+    marker.on('click', function() {
+        Object.keys(markers).forEach(key => {
+            const m = markers[key];
+            m.marker.setIcon(createCustomIcon(m.district.operational, false));
+        });
+        
+        marker.setIcon(createCustomIcon(district.operational, true));
+        map.setView([district.lat, district.lng], 10);
+        updateDistrictList(district.name);
+    });
+
+    markers[district.name] = { marker, district };
+});
+
+function populateDistrictList() {
+    const listContainer = document.getElementById('districtList');
+    const filterToggle = document.getElementById('filterToggle');
+    
+    function renderList() {
+        const showOnlyOperational = filterToggle.checked;
+        const filteredDistricts = showOnlyOperational 
+            ? districts.filter(d => d.operational) 
+            : districts;
+
+        listContainer.innerHTML = filteredDistricts.map(district => `
+            <div class="district-item ${district.selected ? 'selected' : ''} ${!district.operational && !showOnlyOperational ? 'inactive' : ''}"
+                onclick="focusDistrict('${district.name}')">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" ${district.operational ? 'checked' : ''} 
+                        style="width: 18px; height: 18px; border-radius: 6px; pointer-events: none; accent-color: #164476; cursor: pointer;">
+                    <span style="font-weight: ${district.selected ? '700' : '500'}; color: ${district.selected ? '#ffffff' : '#374151'}; font-size: 14px;">
+                        ${district.name}
+                    </span>
+                </div>
+                ${district.selected ? 
+                    '<span style="font-size: 10px; background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 8px; font-weight: 600; color: white;">SELECTED</span>' : 
+                    district.hq ? '<span style="font-size: 11px; color: #6b7280; font-weight: 600;">HQ</span>' :
+                    `<span style="width: 8px; height: 8px; background: ${district.operational ? '#10b981' : '#ef4444'}; border-radius: 50%; display: block;"></span>`
+                }
+            </div>
+        `).join('');
+    }
+
+    filterToggle.addEventListener('change', renderList);
+    renderList();
+}
+
+function updateDistrictList(selectedName) {
+    districts.forEach(d => d.selected = d.name === selectedName);
+    populateDistrictList();
+}
+
+function focusDistrict(name) {
+    const markerData = markers[name];
+    if (markerData) {
+        map.setView([markerData.district.lat, markerData.district.lng], 10);
+        markerData.marker.openPopup();
+        
+        Object.keys(markers).forEach(key => {
+            const m = markers[key];
+            m.marker.setIcon(createCustomIcon(m.district.operational, key === name));
+        });
+        
+        updateDistrictList(name);
+    }
+}
+
+populateDistrictList();
+</script>

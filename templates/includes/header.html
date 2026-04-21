@@ -1,0 +1,274 @@
+{% load static %}
+
+<!--  header-top  -->
+<div class="header-top">
+    <div class="container">
+        <a class="top-header-logo" href="{% url 'home' %}"></a>
+
+        <!-- nav-button-wrap -->
+        <div class="nav-button-wrap">
+            <div class="nav-button">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <style>
+        @media (max-width: 960px) {
+            .nav-special {
+                display: none !important;
+            }
+        }
+        .sector-heading:hover {
+            opacity: 0.8;
+        }
+        .venture-link:hover {
+            color: #ffffff !important;
+        }
+        </style>
+
+        <!-- desktop top-bar buttons -->
+        <div class="nav-special" style="display:flex; justify-content:center; gap:15px;">
+
+            <!-- Home -->
+            <div class="share-button {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <a href="{% url 'home' %}"
+                   style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                    <span>Home</span>
+                    <i class="fa-light fa-house"></i>
+                </a>
+            </div>
+
+            <!-- Our Story -->
+            <div class="share-button {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                <a href="{% url 'about' %}"
+                   style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                    <span>Our Story</span>
+                    <i class="fa-light fa-user"></i>
+                </a>
+            </div>
+
+            <!-- Ventures — hover triggers dropdown -->
+            <div class="share-button showshare {% if request.resolver_match.namespace == 'ventures' %}active{% endif %}"
+                 style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                <span>Ventures</span>
+                <i class="fa-light fa-briefcase"></i>
+            </div>
+
+            <!-- Career -->
+            <div class="share-button {% if request.resolver_match.url_name == 'career' %}active{% endif %}">
+                <a href="{% url 'career' %}"
+                   style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                    <span>Career</span>
+                    <i class="fa-light fa-user-tie"></i>
+                </a>
+            </div>
+
+            <!-- Contact -->
+            <div class="share-button {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                <a href="{% url 'contact' %}"
+                   style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                    <span>Contact</span>
+                    <i class="fa-light fa-envelope"></i>
+                </a>
+            </div>
+
+        </div>
+        <!-- desktop top-bar buttons end -->
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         VENTURES MEGA-DROPDOWN
+         Each Sector is shown as a clickable link → goes to sector inner page.
+         Ventures under each sector are listed below the sector heading.
+    ═══════════════════════════════════════════════════════════════ -->
+    <div class="share-holder isShare">
+        <div style="display:flex; justify-content:center; align-items:flex-start;
+                    gap:50px; flex-wrap:wrap; padding:20px 40px;">
+
+            {% for item in nav_sectors %}
+                <div style="min-width:140px;">
+
+                    <!-- ★ SECTOR → links to sector inner/detail page ★ -->
+                    <a href="{% url 'ventures:sector_detail' item.sector.slug %}"
+                       class="sector-heading"
+                       style="color:#ffffff; font-weight:700; font-size:0.85em;
+                              letter-spacing:0.1em; text-transform:uppercase;
+                              text-decoration:none; display:flex;
+                              align-items:center; gap:8px;
+                              padding-bottom:10px; margin-bottom:10px;
+                              border-bottom:2px solid rgba(255,255,255,0.3);">
+                        <i class="fa-light fa-layer-group" style="font-size:0.9em;"></i>
+                        {{ item.sector.name }}
+                    </a>
+
+                    <!-- Ventures under this sector → each links to venture detail page -->
+                    {% if item.ventures %}
+                        <ul style="list-style:none; margin:0; padding:0;">
+                            {% for venture in item.ventures %}
+                                <li style="margin-bottom:8px;">
+                                    <a href="{% url 'ventures:venture_detail' item.sector.slug venture.slug %}"
+                                       class="venture-link"
+                                       style="color:#cccccc; font-size:0.87em;
+                                              text-decoration:none;
+                                              display:flex; align-items:center; gap:7px;">
+                                        <i class="fa-light fa-angle-right"
+                                           style="font-size:0.75em; opacity:0.6;"></i>
+                                        {{ venture.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                </div>
+            {% empty %}
+                <p style="color:#ffffff; margin:0; font-size:0.9em;">No sectors available.</p>
+            {% endfor %}
+
+        </div>
+    </div>
+    <!-- mega-dropdown end -->
+
+    <!-- header-search-wrap -->
+    <div class="header-search-wrap">
+        <div class="widget-inner">
+            <form action="#" method="get">
+                <input name="se" id="se" type="text" class="search" placeholder="Search...">
+                <button class="search-submit" id="submit_btn" type="submit">
+                    <i class="fal fa-search transition"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- header-search-wrap end -->
+</div>
+<!--  header-top end -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAIN SIDEBAR / MOBILE HEADER
+═══════════════════════════════════════════════════════════════ -->
+<header class="main-header">
+    <div class="header-container">
+        <div class="header-inner">
+
+            <a href="{% url 'home' %}" class="logo-holder">
+                <img src="{% static 'images/logo3.png' %}" alt="Sparrow International">
+            </a>
+
+            <!-- navigation -->
+            <div class="nav-title">Menu</div>
+            <div class="nav-holder main-menu">
+                <nav class="nav-inner" id="menu-init">
+                    <ul>
+
+                        <!-- Home -->
+                        <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                            <a href="{% url 'home' %}">
+                                <i class="fa-light fa-house"></i> Home
+                            </a>
+                        </li>
+
+                        <!-- Our Story -->
+                        <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                            <a href="{% url 'about' %}">
+                                <i class="fa-light fa-circle-user"></i> Our Story
+                            </a>
+                        </li>
+
+                        <!-- ── Ventures: dynamic nested sub-menu ── -->
+                        <li class="{% if request.resolver_match.namespace == 'ventures' %}active{% endif %}">
+                            <a href="{% url 'ventures:sector_list' %}">
+                                <i class="fa-light fa-briefcase"></i> Ventures
+                            </a>
+
+                            {% if nav_sectors %}
+                            <ul>
+                                {% for item in nav_sectors %}
+
+                                    {% if item.ventures|length > 1 %}
+                                        <!-- Multiple ventures → sector as group with sub-list -->
+                                        <li>
+                                            <a href="{% url 'ventures:sector_detail' item.sector.slug %}">
+                                                {{ item.sector.name }}
+                                            </a>
+                                            <ul>
+                                                {% for venture in item.ventures %}
+                                                    <li>
+                                                        <a href="{% url 'ventures:venture_detail' item.sector.slug venture.slug %}">
+                                                            {{ venture.name }}
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+
+                                    {% elif item.ventures|length == 1 %}
+                                        <!-- Single venture → link directly to venture -->
+                                        {% for venture in item.ventures %}
+                                            <li>
+                                                <a href="{% url 'ventures:venture_detail' item.sector.slug venture.slug %}">
+                                                    {{ venture.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <!-- Sector with no ventures → show sector link only -->
+                                        <li>
+                                            <a href="{% url 'ventures:sector_detail' item.sector.slug %}">
+                                                {{ item.sector.name }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        <!-- ── Ventures end ── -->
+
+                        <!-- Career -->
+                        <li class="{% if request.resolver_match.url_name == 'career' %}active{% endif %}">
+                            <a href="{% url 'career' %}">
+                                <i class="fa-light fa-user-tie"></i> Career
+                            </a>
+                        </li>
+
+                        <!-- Contact -->
+                        <li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                            <a href="{% url 'contact' %}">
+                                <i class="fa-light fa-envelope"></i> Contact
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+            <!-- navigation end -->
+
+            <div class="nav-title">Connect Us</div>
+            <div class="header-contact">
+                <ul>
+                    <li>
+                        <i class="fa-light fa-envelope"></i>
+                        <a href="mailto:manutomy@sparrowgroup.in" style="color:#fff"> manutomy@sparrowgroup.in</a>
+                    </li>
+                    <li>
+                        <i class="fa-light fa-location-dot"></i>
+                        <a href="#" target="_blank" style="color:#fff">
+                            12/1624&amp;125, 2nd floor Delma Centre, Vadakkencherry, Palakkad, Kerala, 678683
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-light fa-phone-rotary"></i>
+                        <a href="tel:+918086699553" style="color:#fff"> +91 8086699553</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <a href="{% url 'contact' %}" class="header_btn"><span>Request a Quote</span></a>
+</header>
+<!-- header end -->

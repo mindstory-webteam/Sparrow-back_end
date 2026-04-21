@@ -1,0 +1,374 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site_settings.site_name }}{% endblock %}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map-style.css' %}">
+
+    <!-- Favicon -->
+    {% if site_settings.favicon %}
+        <link rel="shortcut icon" href="{{ site_settings.favicon.url }}">
+    {% else %}
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    {% endif %}
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<!-- Loader -->
+<div class="loader-wrap">
+    <div class="loader-spin"><span></span></div>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- ══════════════════════════════════════════════════════
+         HEADER TOP
+    ══════════════════════════════════════════════════════ -->
+    <div class="header-top">
+        <div class="container">
+
+            <a class="top-header-logo" href="{% url 'main:home' %}"></a>
+
+            <!-- Mobile nav toggle -->
+            <div class="nav-button-wrap">
+                <div class="nav-button">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <style>
+                @media (max-width: 960px) {
+                    .nav-special { display: none !important; }
+                }
+            </style>
+
+            <!-- Desktop top-bar pill buttons -->
+            <div class="nav-special" style="display:flex; justify-content:center; gap:15px;">
+
+                <div class="share-button {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <a href="{% url 'main:home' %}"
+                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Home</span>
+                        <i class="fa-light fa-house"></i>
+                    </a>
+                </div>
+
+                <div class="share-button {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                    <a href="{% url 'main:about' %}"
+                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Our Story</span>
+                        <i class="fa-light fa-user"></i>
+                    </a>
+                </div>
+
+                <!-- Ventures pill — opens mega-dropdown -->
+                <div class="share-button showshare {% if request.resolver_match.namespace == 'ventures' %}active{% endif %}">
+                    <span>Ventures</span>
+                    <i class="fa-light fa-briefcase"></i>
+                </div>
+
+                <div class="share-button {% if request.resolver_match.url_name == 'career' %}active{% endif %}">
+                    <a href="{% url 'main:career' %}"
+                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Career</span>
+                        <i class="fa-light fa-user-tie"></i>
+                    </a>
+                </div>
+
+                <div class="share-button {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                    <a href="{% url 'main:contact' %}"
+                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Contact</span>
+                        <i class="fa-light fa-envelope"></i>
+                    </a>
+                </div>
+
+            </div>
+            <!-- desktop pills end -->
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+             VENTURES MEGA-DROPDOWN
+             Powered by ventures_navigation context processor.
+             All URLs are pre-built in Python — safe, no crashes.
+             Add a Sector/Venture in Django admin → shows here instantly.
+        ══════════════════════════════════════════════════════ -->
+        <div class="share-holder isShare">
+            <div style="display:flex; justify-content:center; gap:50px; flex-wrap:wrap;">
+                {% if nav_sectors %}
+                    {% for sector in nav_sectors %}
+                        <div>
+                            <!-- Sector heading -->
+                            <a href="{{ sector.url }}"
+                               style="color:#ffffff; letter-spacing:0.07em;
+                                      display:block; margin-bottom:10px; text-decoration:none;">
+                                {{ sector.name|upper }}
+                            </a>
+                            <!-- Ventures list -->
+                            {% if sector.ventures %}
+                                <ul style="list-style:none; margin:0; padding:0;">
+                                    {% for venture in sector.ventures %}
+                                        <li style="margin-bottom:6px;">
+                                            <a href="{{ venture.url }}"
+                                               style="color:#cccccc; font-size:0.88em; text-decoration:none;">
+                                                {{ venture.name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color:#ffffff; margin:0; font-size:0.9em;">No ventures available.</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- mega-dropdown end -->
+
+    </div>
+    <!-- header-top end -->
+
+
+    <!-- ══════════════════════════════════════════════════════
+         MAIN HEADER / MOBILE SIDEBAR
+    ══════════════════════════════════════════════════════ -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-inner">
+
+                <a href="{% url 'main:home' %}" class="logo-holder">
+                    {% if site_settings.logo %}
+                        <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}">
+                    {% else %}
+                        <img src="{% static 'images/logo3.png' %}" alt="Logo">
+                    {% endif %}
+                </a>
+
+                <!-- Sidebar navigation -->
+                <div class="nav-title">Menu</div>
+                <div class="nav-holder main-menu">
+                    <nav class="nav-inner" id="menu-init">
+                        <ul>
+
+                            <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                                <a href="{% url 'main:home' %}">
+                                    <i class="fa-light fa-house"></i> Home
+                                </a>
+                            </li>
+
+                            <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                                <a href="{% url 'main:about' %}">
+                                    <i class="fa-light fa-circle-user"></i> Our Story
+                                </a>
+                            </li>
+
+                            <!-- ── Ventures dynamic nested sub-menu ── -->
+                            <li class="{% if request.resolver_match.namespace == 'ventures' %}active{% endif %}">
+                                <a href="{% url 'ventures:sector_list' %}">
+                                    <i class="fa-light fa-briefcase"></i> Ventures
+                                </a>
+                                {% if nav_sectors %}
+                                <ul>
+                                    {% for sector in nav_sectors %}
+                                        {% if sector.ventures|length > 1 %}
+                                            <!-- Multiple ventures → group under sector -->
+                                            <li>
+                                                <a href="{{ sector.url }}">{{ sector.name }}</a>
+                                                <ul>
+                                                    {% for venture in sector.ventures %}
+                                                        <li>
+                                                            <a href="{{ venture.url }}">{{ venture.name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% elif sector.ventures|length == 1 %}
+                                            <!-- Single venture → link directly -->
+                                            {% for venture in sector.ventures %}
+                                                <li>
+                                                    <a href="{{ venture.url }}">{{ venture.name }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <!-- Sector with no ventures yet -->
+                                            <li>
+                                                <a href="{{ sector.url }}">{{ sector.name }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </li>
+                            <!-- ── Ventures end ── -->
+
+                            <li class="{% if request.resolver_match.url_name == 'career' %}active{% endif %}">
+                                <a href="{% url 'main:career' %}">
+                                    <i class="fa-light fa-user-tie"></i> Career
+                                </a>
+                            </li>
+
+                            <li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                                <a href="{% url 'main:contact' %}">
+                                    <i class="fa-light fa-envelope"></i> Contact
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+                <!-- sidebar navigation end -->
+
+                <!-- Sidebar contact info -->
+                <div class="nav-title">Connect Us</div>
+                {% comment %} ---------css------- {% endcomment %}
+                <style>
+                /* Header sidebar contact links */
+                .header-contact ul li a {
+                    color: #ffffff;
+                    text-decoration: none;
+                }
+
+                .header-contact ul li a:hover {
+                    color: #cccccc;
+                }
+            </style>
+                {% comment %} ----------end css------ {% endcomment %}
+                <div class="header-contact">
+                    <ul>
+                                <li><i class="fa-light fa-envelope"></i><a href="mailto:gintopaul@sparrowgroup.in" style="color: #fff;"> gintopaul@sparrowgroup.in</a></li>
+                                <li><i class="fa-light fa-location-dot"></i><a href="" target="_blank" style="color: #fff;"> 12/1624&125,2nd floor Delma Centre,Vadakkencherry,Palakkad, Kerala,678683</a></li>
+                                <li><i class="fa-light fa-phone-rotary"></i><a href="tel:+917558888822" style="color: #fff;"> +91 7558888822</a></li>
+                            </ul>
+                </div>
+
+            </div>
+        </div>
+        <a href="{% url 'main:contact' %}" class="header_btn">
+            <span>Request a Quote</span>
+        </a>
+    </header>
+    <!-- header end -->
+
+
+    <!-- ══════════════════════════════════════════════════════
+         PAGE CONTENT
+    ══════════════════════════════════════════════════════ -->
+    <div class="wrapper">
+        {% block content %}{% endblock %}
+
+        <!-- ══════════════════════════════════════════════════════
+             FOOTER — wrapped in a block so child templates can hide it
+        ══════════════════════════════════════════════════════ -->
+        {% block footer %}
+        <footer class="main-footer">
+                    <!-- footer-inner -->
+                    <div class="footer-inner ">
+                        <div class="container">
+                            <div class="footer-inner-wrap">
+                                <div class="row">
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header fl-wrap"> Contact US</div>
+                                            <div class="footer_text  footer-box ">
+                                                <div class="footer-contacts footer-box " style="margin-top: 10px;">
+                                                <ul>
+                                                    <li><span>Find us : </span><br>
+                                                        <a href="#">12/1624&125,2nd floor<br>
+                                                                    Delma Centre,Vadakkencherry,<br>
+                                                                    Palakkad,Kerala,678683</a>
+                                                    </li>
+                                                    <li><span>Call:</span><br>
+                                                        <a href="#">+91 7558888822</a>
+                                                    </li>
+                                                    <li><span>Email :</span><br>
+                                                        <a href="#" style="text-transform: lowercase;">gintopaul@sparrowgroup.in</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header fl-wrap"> quick links</div>
+                                            <!-- footer-contacts-->
+                                            <div class="footer-contacts footer-box ">
+                                                <ul>
+                                                    <li><span></span><a href="./index.html">Home</a></li>
+                                                    <li><span></span><a href="./about.html">Our Story</a></li>
+                                                    <li><span></span><a href="./automotive.html">Automotive</a></li>
+                                                    <li><span></span><a href="./it&technology.html">Technology & It  </a></li>
+                                                    <li><span></span><a href="./career.html">Career </a></li>
+                                                    <li><span></span><a href="./contact.html">Contact </a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- footer contacts end -->
+                                            <!-- <a href="contact.html" class="fc_button">Get In Touch <i class="fa-light fa-arrow-right"></i></a> -->
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header ">Head office</div>
+                                            <div class="footer-box fl-wrap">
+                                                <div >
+                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3921.8312169528435!2d76.485506!3d10.592366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDM1JzMyLjUiTiA3NsKwMjknMDcuOCJF!5e0!3m2!1sen!2sin!4v1766057885729!5m2!1sen!2sin" width="80%" height="200" style="border:0;border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- footer-inner end -->
+                        <div class="footer-title-dec"><span>Sparrow International</span> </div>
+                        <div class="footer-inner_dec footer-inner_dec-left"></div>
+                        <div class="footer-inner_dec footer-inner_dec-right"></div>
+                    </div>
+                    <!-- subbfooter -->
+                    <div class="subbfooter">
+                        <div class="container">
+                            <div class="policy-box">
+                                <span> &#169;  Sparrow International 2026  /  All rights reserved. </span>
+                            </div>
+                            <div class="to-top-btn to-top" style="color: #ffffff;">Back to top<i class="fal fa-long-arrow-up"></i></div>
+                            <div class="subbfooter_dec"></div>
+                        </div>
+                    </div>
+                    <!-- subbfooter end -->						
+            </footer>
+        {% endblock footer %}
+        <!-- footer end -->
+
+    </div>
+    <!-- wrapper end -->
+
+</div>
+<!-- main end -->
+
+<!-- Scripts -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

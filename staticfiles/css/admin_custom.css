@@ -1,0 +1,72 @@
+/* ── Navbar ── */
+.main-header.navbar {
+    background-color: #164476 !important;
+    border-bottom: 3px solid #ed3435 !important;
+}
+
+/* ── Brand / Logo area ── */
+.main-header .brand-link,
+.main-header .brand-text {
+    background-color: #ed3435 !important;
+    color: #ffffff !important;
+}
+
+/* ── Sidebar ── */
+.main-sidebar,
+.main-sidebar .sidebar {
+    background-color: #164476 !important;
+}
+
+/* ── Sidebar nav links ── */
+.nav-sidebar .nav-link {
+    color: #cfe2ff !important;
+}
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link.active {
+    background-color: #ed3435 !important;
+    color: #ffffff !important;
+}
+
+/* ── Sidebar section headers ── */
+.nav-sidebar .nav-header {
+    color: #aac4e8 !important;
+}
+
+/* ── User panel avatar icon ── */
+.user-panel .image i,
+.navbar-nav .nav-link i.fa-user-circle,
+.navbar-nav .nav-link .fa {
+    color: #ed3435 !important;
+    font-size: 1.6rem;
+}
+
+/* ── Top nav icons & links ── */
+.main-header .nav-link,
+.main-header .nav-link i {
+    color: #ffffff !important;
+}
+.main-header .nav-link:hover {
+    color: #ed3435 !important;
+}
+
+/* ── Accent buttons ── */
+.btn-primary,
+.accent-danger .btn-primary {
+    background-color: #ed3435 !important;
+    border-color: #ed3435 !important;
+}
+.btn-primary:hover {
+    background-color: #164476 !important;
+    border-color: #164476 !important;
+}
+
+/* ── Content header breadcrumb bar ── */
+.content-header {
+    border-left: 4px solid #ed3435;
+}
+
+/* ── Footer ── */
+.main-footer {
+    border-top: 2px solid #164476 !important;
+    color: #164476 !important;
+}

@@ -1,0 +1,50 @@
+<section class="boxed-content company-events-section">
+    <div class="company-events-container">
+        <!-- Year Selection -->
+        <div class="events-filter-container">
+            <div class="events-select-wrapper">
+                <select id="eventsYearSelect" class="events-year-dropdown">
+                    <option value="all">All Years</option>
+                    {% for year in gallery_years %}
+                    <option value="{{ year }}" {% if forloop.first %}selected{% endif %}>{{ year }}</option>
+                    {% endfor %}
+                </select>
+                <div class="events-dropdown-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="events-filter-display">
+                <span class="events-display-label">Showing:</span>
+                <span class="events-display-year" id="eventsCurrentYearDisplay">{{ gallery_years.0|default:"All Years" }}</span>
+                <span class="events-display-count" id="eventsProjectCountDisplay">({{ gallery_images|length }} project{{ gallery_images|length|pluralize }})</span>
+            </div>
+        </div>
+
+        <!-- Gallery Grid - 4 Columns -->
+        <div class="company-events-gallery">
+            <div class="events-grid-four">
+                {% for image in gallery_images %}
+                <div class="company-event-card" data-event-year="{{ image.year }}">
+                    <div class="event-media">
+                        <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                        <div class="event-year-badge">{{ image.year }}</div>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">{{ image.title }}</h3>
+                        {% if image.description %}
+                        <p class="event-description">{{ image.description|truncatewords:15 }}</p>
+                        {% endif %}
+                        {% if image.tags %}
+                        <div class="event-tags">
+                            {% for tag in image.get_tags_list %}
+                            <span class="event-tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 – Page Not Found | Sparrow International</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #144273;
+      --flame:  #ed3435;
+      --ink:    #12172b;
+      --mist:   #f4f6fb;
+      --border: #e0e6f0;
+      --white:  #ffffff;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── Main grid ── */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+      gap: 4rem;
+    }
+
+    /* ── Left ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--flame);
+      margin-bottom: 1.4rem;
+    }
+    .tag::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 2px;
+      background: var(--flame);
+      border-radius: 2px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.1rem;
+    }
+    h1 em { font-style: normal; color: var(--flame); }
+
+    .desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #6b7280;
+      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 2.4rem;
+    }
+
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .82rem 2rem;
+      border-radius: 8px;
+      font-size: .92rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .25s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-solid {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(20,66,115,.25);
+    }
+    .btn-solid:hover {
+      background: var(--flame);
+      box-shadow: 0 6px 22px rgba(237,52,53,.35);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .links-strip {
+      display: flex;
+      gap: 1.6rem;
+      margin-top: 2.8rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .links-strip a {
+      font-size: .85rem;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      transition: color .2s;
+    }
+    .links-strip a:hover { color: var(--navy); }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      display: inline-block;
+      transition: background .2s;
+    }
+    .links-strip a:hover .dot { background: var(--navy); }
+
+    /* ── Right ── */
+    .right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+    }
+
+    .big404 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(9rem, 17vw, 15rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -6px;
+      background: linear-gradient(135deg, rgba(20,66,115,.07) 0%, rgba(237,52,53,.07) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      user-select: none;
+      position: relative;
+    }
+    .big404::after {
+      content: '404';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--flame) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: .13;
+    }
+
+    .bird-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -58%);
+      animation: birdFly 3.5s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes birdFly {
+      0%,100% { transform: translate(-50%,-58%) rotate(-4deg) translateY(0); }
+      50%      { transform: translate(-50%,-58%) rotate(4deg) translateY(-14px); }
+    }
+
+    .float-card {
+      position: absolute;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 16px 48px rgba(20,66,115,.09);
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      min-width: 210px;
+      z-index: 3;
+    }
+    .card-a { top: 8%; right: 0; animation: float 4s ease-in-out infinite; }
+    .card-b { bottom: 10%; left: 0; animation: float 4s ease-in-out infinite 2s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .ci-navy  { background: rgba(20,66,115,.1); }
+    .ci-flame { background: rgba(237,52,53,.1); }
+    .card-text p { font-size: .82rem; font-weight: 600; color: var(--ink); }
+    .card-text span { font-size: .74rem; color: #9ca3af; }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .s1 {
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(20,66,115,.05) 0%, transparent 70%);
+      top: -70px; right: -50px;
+    }
+    .s2 {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(237,52,53,.06) 0%, transparent 70%);
+      bottom: -30px; left: 10px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    footer p { font-size: .8rem; color: #9ca3af; }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .78rem;
+      font-weight: 500;
+      color: #059669;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: .3rem .85rem;
+      border-radius: 20px;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity:1; } 50% { opacity:.3; }
+    }
+
+    @media (max-width: 860px) {
+      main { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
+      .right { display: none; }
+      footer { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <!-- LEFT -->
+    <div class="left">
+      <span class="tag">Error 404</span>
+      <h1>This page took<br/>an unexpected<br/><em>flight.</em></h1>
+      <p class="desc">
+        We couldn't find the page you were looking for.
+        It may have been moved, renamed, or never existed.
+        Let's get you back on course.
+      </p>
+      <div class="btn-row">
+        <a href="/" class="btn btn-solid">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+          Back to Home
+        </a>
+        <a href="javascript:history.back()" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Go Back
+        </a>
+      </div>
+      {% comment %} <div class="links-strip">
+        <a href="#"><span class="dot"></span>Help Center</a>
+        <a href="#"><span class="dot"></span>Contact Support</a>
+        <a href="#"><span class="dot"></span>Sitemap</a>
+        <a href="#"><span class="dot"></span>Report Issue</a>
+      </div> {% endcomment %}
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="shape s1"></div>
+      <div class="shape s2"></div>
+      <div class="big404">404</div>
+
+      <div class="bird-wrap">
+        <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="48" cy="56" rx="24" ry="15" fill="#144273"/>
+          <path d="M24 56 Q10 40 19 31 Q32 46 48 52Z" fill="#ed3435"/>
+          <path d="M72 56 Q86 40 77 31 Q64 46 48 52Z" fill="#144273" opacity=".65"/>
+          <circle cx="60" cy="44" r="13" fill="#144273"/>
+          <path d="M72 42 L82 39 L72 47Z" fill="#ed3435"/>
+          <circle cx="63" cy="41" r="3" fill="white"/>
+          <circle cx="64" cy="41" r="1.4" fill="#12172b"/>
+          <path d="M24 62 Q7 70 12 78 Q24 66 38 63Z" fill="#144273" opacity=".75"/>
+        </svg>
+      </div>
+
+      <div class="float-card card-a">
+        <div class="card-icon ci-navy">🔍</div>
+        <div class="card-text">
+          <p>Page Not Found</p>
+          <span>Error 404 – Invalid URL</span>
+        </div>
+      </div>
+
+      <div class="float-card card-b">
+        <div class="card-icon ci-flame">🗺️</div>
+        <div class="card-text">
+          <p>Need directions?</p>
+          <span>Visit our sitemap</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Sparrow International. All rights reserved.</p>
+    
+  </footer>
+
+</body>
+</html>

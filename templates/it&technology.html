@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Technology & IT Industry - Sparrow International{% endblock %}
+
+{% block content %}
+<!-- section -->
+<div class="section hero-section">
+    <div class="bg-wrap-container" data-scrollax-parent="true">
+        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/shell-folder/shell-banner.png' %}" data-scrollax="properties: { translateY: '30%' }"></div>
+        <div class="overlay"></div>
+    </div>
+    <div class="container">
+        <div class="hero-section-title">
+            <h5>Our Services</h5>
+            <h2>TECHNOLOGY & IT INDUSTRY</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        </div>
+    </div>
+</div>
+<!-- section end-->
+
+<!--content-->
+<div class="content">
+    <!--content-box-->
+    <div class="content-box">
+        <!-- breadcrumbs-wrap  -->
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="breadcrumbs-wrap">
+                    <a href="{% url 'main:home' %}">Home</a><a href="#">TECHNOLOGY & IT INDUSTRY</a>
+                </div>
+                <div class="hs-scroll-down-wrap">
+                    <div class="scroll-down-item">
+                        <span>Scroll Down To Discover</span>
+                        <div class="mousey">
+                            <div class="scroller"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs-wrap end  -->
+        
+        <!--section -->
+        <div class="section">
+            <div class="container">
+                <div class="boxed-content">
+                    <div class="container small-container">
+                        <div class="fs-gallery-filters-container gfc-fs" style="margin-bottom: 30px;">
+                            <div class="gallery-filters-wrap  gfc-fs2">
+                                <div class="fixed-filters_title filter-button dark-bg2"><i class="fa-regular fa-bars-filter"></i>Filters</div>
+                                <div class="gallery-filters hid-filter">
+                                    <a href="#" class="gallery-filter gallery-filter-active" data-filter="*"><span>All</span></a>
+                                    <a href="#" class="gallery-filter " data-filter=".renovate"><span>/</span></a>
+                                    <a href="#" class="gallery-filter" data-filter=".bulding"><span>TECHNOLOGY & IT INDUSTRY</span></a>
+                                </div>
+                                <div class="count-folio">
+                                    <div class="num-album"></div>
+                                    <div class="all-album"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-items three-columns gi-fw2 gfc-fs-container gallery-items_smal-pading vis_det-wrap">
+                        <div class="gallery-items-container">
+                            <!-- gallery-item-->
+                            <div class="gallery-item bulding">
+                                <div class="grid-item-holder hov_zoom">
+                                    <ul class="post_header_cat">
+                                        <li><a href="#" class="cat-opt">TECHNOLOGY &</a></li>
+                                        <li><a href="#" class="cat-opt">IT INDUSTRY</a></li>
+                                    </ul>
+                                    <img src="{% static 'images/Banner/shell-folder/shell-box-img.png' %}" alt="">
+                                    <a href="#" class="box-media-zoom"><i class="fal fa-search"></i></a>
+                                    <div class="overlay"></div>
+                                    <div class="grid-item-det-wrap">
+                                        <div class="grid-item-det"><a href="#"><span>TECHNOLOGY & IT INDUSTRY</span><i class="fa-regular fa-arrow-right"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gallery-item end-->
+                        </div>
+                        <!--boxed-content-item end-->
+                    </div>
+                    
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                    
+                    <div class="order-wrap gfc-fs2">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="ticker">Need expert assistance? Get in touch with us</div>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{% url 'main:contact' %}" class="btn"><span>Get In Touch</span><i class="fa-regular fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-dec fs-wrapper">
+                    <div class="section-dec-top"></div>
+                    <div class="section-dec-border"></div>
+                    <div class="section-dec-bottom"></div>
+                    <div class="section-dec-top_line"></div>
+                    <div class="section-dec-bottom_line"></div>
+                </div>
+            </div>
+        </div>
+        <!--section end-->
+    </div>
+    <!-- content-box end -->
+    
+    <div class="content-dec">
+        <div class="container">
+            <div class="content-dec-item"><span></span></div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add any page-specific JavaScript here
+</script>
+{% endblock %}

@@ -19,7 +19,8 @@
         
         <!--  main   -->
         <div id="main">
-             <!-- ══════════════════════════════════════════════════════
+
+    <!-- ══════════════════════════════════════════════════════
          HEADER TOP
     ══════════════════════════════════════════════════════ -->
     <div class="header-top">
@@ -27,7 +28,6 @@
 
             <a class="top-header-logo" href="{% url 'main:home' %}"></a>
 
-            <!-- Mobile nav toggle -->
             <div class="nav-button-wrap">
                 <div class="nav-button">
                     <span></span><span></span><span></span>
@@ -35,80 +35,56 @@
             </div>
 
             <style>
-                @media (max-width: 960px) {
-                    .nav-special { display: none !important; }
-                }
+                @media (max-width: 960px) { .nav-special { display: none !important; } }
             </style>
 
-            <!-- Desktop top-bar pill buttons -->
             <div class="nav-special" style="display:flex; justify-content:center; gap:15px;">
 
                 <div class="share-button {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                    <a href="{% url 'main:home' %}"
-                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
-                        <span>Home</span>
-                        <i class="fa-light fa-house"></i>
+                    <a href="{% url 'main:home' %}" style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Home</span><i class="fa-light fa-house"></i>
                     </a>
                 </div>
 
                 <div class="share-button {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-                    <a href="{% url 'main:about' %}"
-                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
-                        <span>Our Story</span>
-                        <i class="fa-light fa-user"></i>
+                    <a href="{% url 'main:about' %}" style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Our Story</span><i class="fa-light fa-user"></i>
                     </a>
                 </div>
 
-                <!-- Ventures pill — opens mega-dropdown -->
                 <div class="share-button showshare {% if request.resolver_match.namespace == 'ventures' %}active{% endif %}">
-                    <span>Ventures</span>
-                    <i class="fa-light fa-briefcase"></i>
+                    <span>Ventures</span><i class="fa-light fa-briefcase"></i>
                 </div>
 
                 <div class="share-button {% if request.resolver_match.url_name == 'career' %}active{% endif %}">
-                    <a href="{% url 'main:career' %}"
-                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
-                        <span>Career</span>
-                        <i class="fa-light fa-user-tie"></i>
+                    <a href="{% url 'main:career' %}" style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Career</span><i class="fa-light fa-user-tie"></i>
                     </a>
                 </div>
 
                 <div class="share-button {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-                    <a href="{% url 'main:contact' %}"
-                       style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
-                        <span>Contact</span>
-                        <i class="fa-light fa-envelope"></i>
+                    <a href="{% url 'main:contact' %}" style="text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:6px;">
+                        <span>Contact</span><i class="fa-light fa-envelope"></i>
                     </a>
                 </div>
 
             </div>
-            <!-- desktop pills end -->
         </div>
 
-        <!-- ══════════════════════════════════════════════════════
-             VENTURES MEGA-DROPDOWN
-             Powered by ventures_navigation context processor.
-             All URLs are pre-built in Python — safe, no crashes.
-             Add a Sector/Venture in Django admin → shows here instantly.
-        ══════════════════════════════════════════════════════ -->
+        <!-- VENTURES MEGA-DROPDOWN -->
         <div class="share-holder isShare">
             <div style="display:flex; justify-content:center; gap:50px; flex-wrap:wrap;">
                 {% if nav_sectors %}
                     {% for sector in nav_sectors %}
                         <div>
-                            <!-- Sector heading -->
-                            <a href="{{ sector.url }}"
-                               style="color:#ffffff; letter-spacing:0.07em;
-                                      display:block; margin-bottom:10px; text-decoration:none;">
+                            <a href="{{ sector.url }}" style="color:#ffffff; letter-spacing:0.07em; display:block; margin-bottom:10px; text-decoration:none;">
                                 {{ sector.name|upper }}
                             </a>
-                            <!-- Ventures list -->
                             {% if sector.ventures %}
                                 <ul style="list-style:none; margin:0; padding:0;">
                                     {% for venture in sector.ventures %}
                                         <li style="margin-bottom:6px;">
-                                            <a href="{{ venture.url }}"
-                                               style="color:#cccccc; font-size:0.88em; text-decoration:none;">
+                                            <a href="{{ venture.url }}" style="color:#cccccc; font-size:0.88em; text-decoration:none;">
                                                 {{ venture.name }}
                                             </a>
                                         </li>
@@ -122,11 +98,8 @@
                 {% endif %}
             </div>
         </div>
-        <!-- mega-dropdown end -->
-
     </div>
     <!-- header-top end -->
-
 
     <!-- ══════════════════════════════════════════════════════
          MAIN HEADER / MOBILE SIDEBAR
@@ -143,132 +116,133 @@
                     {% endif %}
                 </a>
 
-                <!-- Sidebar navigation -->
                 <div class="nav-title">Menu</div>
                 <div class="nav-holder main-menu">
                     <nav class="nav-inner" id="menu-init">
                         <ul>
 
                             <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                                <a href="{% url 'main:home' %}">
-                                    <i class="fa-light fa-house"></i> Home
-                                </a>
+                                <a href="{% url 'main:home' %}"><i class="fa-light fa-house"></i> Home</a>
                             </li>
 
                             <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-                                <a href="{% url 'main:about' %}">
-                                    <i class="fa-light fa-circle-user"></i> Our Story
-                                </a>
+                                <a href="{% url 'main:about' %}"><i class="fa-light fa-circle-user"></i> Our Story</a>
                             </li>
 
-                            <!-- ── Ventures dynamic nested sub-menu ── -->
                             <li class="{% if request.resolver_match.namespace == 'ventures' %}active{% endif %}">
-                                <a href="{% url 'ventures:sector_list' %}">
-                                    <i class="fa-light fa-briefcase"></i> Ventures
-                                </a>
+                                <a href="{% url 'ventures:sector_list' %}"><i class="fa-light fa-briefcase"></i> Ventures</a>
                                 {% if nav_sectors %}
                                 <ul>
                                     {% for sector in nav_sectors %}
                                         {% if sector.ventures|length > 1 %}
-                                            <!-- Multiple ventures → group under sector -->
                                             <li>
                                                 <a href="{{ sector.url }}">{{ sector.name }}</a>
                                                 <ul>
                                                     {% for venture in sector.ventures %}
-                                                        <li>
-                                                            <a href="{{ venture.url }}">{{ venture.name }}</a>
-                                                        </li>
+                                                        <li><a href="{{ venture.url }}">{{ venture.name }}</a></li>
                                                     {% endfor %}
                                                 </ul>
                                             </li>
                                         {% elif sector.ventures|length == 1 %}
-                                            <!-- Single venture → link directly -->
                                             {% for venture in sector.ventures %}
-                                                <li>
-                                                    <a href="{{ venture.url }}">{{ venture.name }}</a>
-                                                </li>
+                                                <li><a href="{{ venture.url }}">{{ venture.name }}</a></li>
                                             {% endfor %}
                                         {% else %}
-                                            <!-- Sector with no ventures yet -->
-                                            <li>
-                                                <a href="{{ sector.url }}">{{ sector.name }}</a>
-                                            </li>
+                                            <li><a href="{{ sector.url }}">{{ sector.name }}</a></li>
                                         {% endif %}
                                     {% endfor %}
                                 </ul>
                                 {% endif %}
                             </li>
-                            <!-- ── Ventures end ── -->
 
                             <li class="{% if request.resolver_match.url_name == 'career' %}active{% endif %}">
-                                <a href="{% url 'main:career' %}">
-                                    <i class="fa-light fa-user-tie"></i> Career
-                                </a>
+                                <a href="{% url 'main:career' %}"><i class="fa-light fa-user-tie"></i> Career</a>
                             </li>
 
                             <li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-                                <a href="{% url 'main:contact' %}">
-                                    <i class="fa-light fa-envelope"></i> Contact
-                                </a>
+                                <a href="{% url 'main:contact' %}"><i class="fa-light fa-envelope"></i> Contact</a>
                             </li>
 
                         </ul>
                     </nav>
                 </div>
-                <!-- sidebar navigation end -->
 
-                <!-- Sidebar contact info -->
                 <div class="nav-title">Connect Us</div>
-                {% comment %} ---------css------- {% endcomment %}
                 <style>
-                /* Header sidebar contact links */
-                .header-contact ul li a {
-                    color: #ffffff;
-                    text-decoration: none;
-                }
-
-                .header-contact ul li a:hover {
-                    color: #cccccc;
-                }
-            </style>
-                {% comment %} ----------end css------ {% endcomment %}
+                    .header-contact ul li a { color: #ffffff; text-decoration: none; }
+                    .header-contact ul li a:hover { color: #cccccc; }
+                </style>
                 <div class="header-contact">
                     <ul>
-                                <li><i class="fa-light fa-envelope"></i><a href="mailto:gintopaul@sparrowgroup.in" style="color: #fff;"> gintopaul@sparrowgroup.in</a></li>
-                                <li><i class="fa-light fa-location-dot"></i><a href="" target="_blank" style="color: #fff;"> 12/1624&125,2nd floor Delma Centre,Vadakkencherry,Palakkad, Kerala,678683</a></li>
-                                <li><i class="fa-light fa-phone-rotary"></i><a href="tel:+917558888822" style="color: #fff;"> +91 7558888822</a></li>
-                            </ul>
+                        <li><i class="fa-light fa-envelope"></i><a href="mailto:gintopaul@sparrowgroup.in" style="color:#fff;"> gintopaul@sparrowgroup.in</a></li>
+                        <li><i class="fa-light fa-location-dot"></i><a href="" target="_blank" style="color:#fff;"> 12/1624&125,2nd floor Delma Centre,Vadakkencherry,Palakkad, Kerala,678683</a></li>
+                        <li><i class="fa-light fa-phone-rotary"></i><a href="tel:+917558888822" style="color:#fff;"> +91 7558888822</a></li>
+                    </ul>
                 </div>
 
             </div>
         </div>
-        <a href="{% url 'main:contact' %}" class="header_btn">
-            <span>Request a Quote</span>
-        </a>
+        <a href="{% url 'main:contact' %}" class="header_btn"><span>Request a Quote</span></a>
     </header>
     <!-- header end -->
             
             <!-- wrapper -->	
             <div class="wrapper">
-                <!-- section -->
-                <div class="section hero-section">
-                    <div class="bg-wrap-container" data-scrollax-parent="true">
-                        {% if venture.banner_image %}
-                        <div class="bg bg-parallax" data-bg="{{ venture.banner_image.url }}" data-scrollax="properties: { translateY: '30%' }"></div>
-                        {% else %}
-                        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/automotive/automotive-banner.png' %}" data-scrollax="properties: { translateY: '30%' }"></div>
-                        {% endif %}
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="container">
-                        <div class="hero-section-title">
-                            <h5>{{ venture.sector.name }}</h5>
-                            <h2>{{ venture.name }}</h2>
-                            <p>{{ venture.description|truncatewords:20 }}</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- section end-->				
+
+                <!-- ══════════════════════════════════════════════════════
+                     MAIN HERO — venture.banner_image
+                ══════════════════════════════════════════════════════ -->
+    <div class="section hero-section" >
+    <div class="bg-wrap-container" data-scrollax-parent="true">
+
+        {% for detail in venture.details.all %}
+
+            {% if detail.banner_image %}
+
+            <div class="bg bg-parallax"
+                 data-bg="{{ detail.banner_image.url }}"
+                 data-scrollax="properties: { translateY: '30%' }"></div>
+
+            {% endif %}
+
+        {% empty %}
+
+            <div class="bg bg-parallax"
+                 data-bg="{% static 'images/Banner/automotive/automotive-banner.png' %}"
+                 data-scrollax="properties: { translateY: '30%' }"></div>
+
+        {% endfor %}
+
+        <div class="overlay"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero-section-title">
+
+            <h5>{{ venture.sector.name }}</h5>
+            <h2>{{ venture.name }}</h2>
+
+            {% for detail in venture.details.all %}
+
+                <h3>{{ detail.title }}</h3>
+                <p>{{ detail.description|truncatewords:25 }}</p>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+                <!-- main hero end -->
+
+                <!-- ══════════════════════════════════════════════════════
+                     VENTURE DETAIL BANNER SECTIONS
+                     One parallax hero strip per VentureDetail that has
+                     a banner_image uploaded. Details without an image
+                     are skipped here and shown as cards in the content
+                     section below.
+                ══════════════════════════════════════════════════════ -->
+                
+                <!-- venture detail banners end -->
                 
                 <!--content-->
                 <div class="content">
@@ -375,7 +349,6 @@
                                                                     {% endif %}
                                                                 </div>
                                                                 {% endfor %}
-                                                                <!-- Duplicate for seamless loop -->
                                                                 {% for brand in venture.brands.all %}
                                                                 <div class="brand-item">
                                                                     {% if brand.logo %}
@@ -408,178 +381,39 @@
 
                                         <!-- Styles for Product Gallery and Brand Carousel -->
                                         <style>
-                                            /* Product Gallery Styles */
-                                            .product-gallery-section {
-                                                padding: 30px 0;
-                                            }
+                                            .product-gallery-section { padding: 30px 0; }
+                                            .gallery-title { font-size: 28px; font-weight: 700; margin-bottom: 35px; color: #333; }
+                                            .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+                                            .gallery-item { display: flex; flex-direction: column; }
+                                            .gallery-img-box { width: 100%; height: 200px; overflow: hidden; border-radius: 8px; }
+                                            .gallery-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+                                            .gallery-item:hover .gallery-img-box img { transform: scale(1.05); }
+                                            .product-info { padding: 15px 0; text-align: center; }
+                                            .product-info h4 { margin: 0; font-size: 14px; font-weight: 600; color: #333; }
 
-                                            .gallery-title {
-                                                font-size: 28px;
-                                                font-weight: 700;
-                                                margin-bottom: 35px;
-                                                color: #333;
-                                            }
+                                            .brand-carousel-section { background: #f9f9f9; border-radius: 10px; }
+                                            .brand-title { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 40px; color: #333; }
+                                            .brand-carousel-wrapper { overflow: hidden; position: relative; padding: 10px 0; }
+                                            .brand-carousel { display: flex; gap: 40px; animation: scroll 20s linear infinite; }
+                                            .brand-carousel:hover { animation-play-state: paused; }
+                                            .brand-item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; min-width: 180px; }
+                                            .brand-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+                                            .brand-item img { max-width: 150px; max-height: 80px; object-fit: contain; transition: filter 0.3s ease; }
+                                            @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-                                            .gallery-grid {
-                                                display: grid;
-                                                grid-template-columns: repeat(4, 1fr);
-                                                gap: 30px;
-                                            }
-
-                                            .gallery-item {
-                                                display: flex;
-                                                flex-direction: column;
-                                            }
-
-                                            .gallery-img-box {
-                                                width: 100%;
-                                                height: 200px;
-                                                overflow: hidden;
-                                                border-radius: 8px;
-                                            }
-
-                                            .gallery-img-box img {
-                                                width: 100%;
-                                                height: 100%;
-                                                object-fit: cover;
-                                                transition: transform 0.3s ease;
-                                            }
-
-                                            .gallery-item:hover .gallery-img-box img {
-                                                transform: scale(1.05);
-                                            }
-
-                                            .product-info {
-                                                padding: 15px 0;
-                                                text-align: center;
-                                            }
-
-                                            .product-info h4 {
-                                                margin: 0;
-                                                font-size: 14px;
-                                                font-weight: 600;
-                                                color: #333;
-                                            }
-
-                                            /* Brand Carousel Styles */
-                                            .brand-carousel-section {
-                                                background: #f9f9f9;
-                                                border-radius: 10px;
-                                            }
-
-                                            .brand-title {
-                                                font-size: 28px;
-                                                font-weight: 700;
-                                                text-align: center;
-                                                margin-bottom: 40px;
-                                                color: #333;
-                                            }
-
-                                            .brand-carousel-wrapper {
-                                                overflow: hidden;
-                                                position: relative;
-                                                padding: 10px 0;
-                                            }
-
-                                            .brand-carousel {
-                                                display: flex;
-                                                gap: 40px;
-                                                animation: scroll 20s linear infinite;
-                                            }
-
-                                            .brand-carousel:hover {
-                                                animation-play-state: paused;
-                                            }
-
-                                            .brand-item {
-                                                flex: 0 0 auto;
-                                                display: flex;
-                                                align-items: center;
-                                                justify-content: center;
-                                                padding: 20px;
-                                                background: white;
-                                                border-radius: 8px;
-                                                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                                                transition: transform 0.3s ease;
-                                                min-width: 180px;
-                                            }
-
-                                            .brand-item:hover {
-                                                transform: translateY(-5px);
-                                                box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-                                            }
-
-                                            .brand-item img {
-                                                max-width: 150px;
-                                                max-height: 80px;
-                                                object-fit: contain;
-                                                transition: filter 0.3s ease;
-                                            }
-
-                                            .brand-item:hover img {
-                                                filter: grayscale(0%);
-                                            }
-
-                                            @keyframes scroll {
-                                                0% {
-                                                    transform: translateX(0);
-                                                }
-                                                100% {
-                                                    transform: translateX(-50%);
-                                                }
-                                            }
-
-                                            /* Responsive Design */
                                             @media (max-width: 992px) {
-                                                .gallery-grid {
-                                                    grid-template-columns: repeat(2, 1fr);
-                                                    gap: 20px;
-                                                }
-                                                
-                                                .gallery-img-box {
-                                                    height: 220px;
-                                                }
-                                                
-                                                .brand-carousel {
-                                                    gap: 30px;
-                                                }
-                                                
-                                                .brand-item {
-                                                    min-width: 150px;
-                                                }
+                                                .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+                                                .gallery-img-box { height: 220px; }
+                                                .brand-item { min-width: 150px; }
                                             }
-
                                             @media (max-width: 576px) {
-                                                .gallery-grid {
-                                                    grid-template-columns: 1fr;
-                                                    gap: 20px;
-                                                }
-                                                
-                                                .gallery-img-box {
-                                                    height: 250px;
-                                                }
-                                                
-                                                .product-info h4 {
-                                                    font-size: 16px;
-                                                }
-                                                
-                                                .brand-title {
-                                                    font-size: 24px;
-                                                }
-                                                
-                                                .brand-carousel {
-                                                    gap: 20px;
-                                                }
-                                                
-                                                .brand-item {
-                                                    min-width: 130px;
-                                                    padding: 15px;
-                                                }
-                                                
-                                                .brand-item img {
-                                                    max-width: 120px;
-                                                    max-height: 60px;
-                                                }
+                                                .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+                                                .gallery-img-box { height: 250px; }
+                                                .product-info h4 { font-size: 16px; }
+                                                .brand-title { font-size: 24px; }
+                                                .brand-carousel { gap: 20px; }
+                                                .brand-item { min-width: 130px; padding: 15px; }
+                                                .brand-item img { max-width: 120px; max-height: 60px; }
                                             }
                                         </style>
 
@@ -609,369 +443,212 @@
                                                     </div>
                                                 </div>
 
-                                                {% comment %} ────────────────────────────────────────────────────────────────
-                                Area of Working Section
-                                ──────────────────────────────────────────────────────────────────
-                                Context variables required from the view:
-                                    • venture            – Venture instance
-                                    • areas_of_working   – QuerySet of AreaOfWorking
-                                        each item: .name  .is_operational  .order  .area_image (ImageField)
-                                ──────────────────────────────────────────────────────────────── {% endcomment %}
+                                                <!-- ════════════════════════════════════════════════
+                                                     AREA OF WORKING
+                                                ════════════════════════════════════════════════ -->
+                                                <div class="boxed-content">
+                                                <style>
+                                                    .aow-wrap *, .aow-wrap *::before, .aow-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
+                                                    .aow-wrap { background: #f8fafc; padding: 10px; }
+                                                    @media (min-width: 768px)  { .aow-wrap { padding: 16px; } }
+                                                    @media (min-width: 1024px) { .aow-wrap { padding: 20px; } }
+                                                    .aow-grid { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
+                                                    @media (min-width: 1024px) { .aow-grid { grid-template-columns: 300px 1fr; gap: 16px; } }
+                                                    .aow-panel { background: #fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.07); border: 1px solid #e5e7eb; overflow: hidden; }
+                                                    .aow-sidebar { display: flex; flex-direction: column; padding: 14px; height: 440px; }
+                                                    @media (min-width: 768px)  { .aow-sidebar { height: 500px; padding: 18px; } }
+                                                    @media (min-width: 1024px) { .aow-sidebar { height: 100%; padding: 20px; } }
+                                                    .aow-sidebar-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
+                                                    .aow-hr { border: 1px solid #164476; margin-bottom: 10px; }
+                                                    .aow-filter-row { display: flex; align-items: center; justify-content: space-between; background: #f3f4f6; padding: 8px 11px; border-radius: 9px; margin-bottom: 10px; border: 1px solid #e9eaec; flex-shrink: 0; }
+                                                    .aow-filter-label { font-size: 12px; font-weight: 600; color: #374151; }
+                                                    .aow-switch { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }
+                                                    .aow-switch input { opacity: 0; width: 0; height: 0; }
+                                                    .aow-slider { position: absolute; cursor: pointer; inset: 0; background: #d1d5db; border-radius: 20px; transition: .3s; }
+                                                    .aow-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .3s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+                                                    .aow-switch input:checked + .aow-slider { background: #164476; }
+                                                    .aow-switch input:checked + .aow-slider::before { transform: translateX(16px); }
+                                                    .aow-stats { display: flex; gap: 8px; margin-bottom: 10px; flex-shrink: 0; }
+                                                    .aow-chip { flex: 1; text-align: center; padding: 7px 4px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fafafa; }
+                                                    .aow-chip .num { font-size: 16px; font-weight: 800; color: #164476; line-height: 1; }
+                                                    .aow-chip .lbl { font-size: 9px; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; margin-top: 3px; }
+                                                    .aow-chip.green .num { color: #059669; }
+                                                    .aow-chip.red   .num { color: #dc2626; }
+                                                    .aow-list { overflow-y: auto; flex: 1; padding-right: 3px; }
+                                                    .aow-list::-webkit-scrollbar { width: 4px; }
+                                                    .aow-list::-webkit-scrollbar-track { background: transparent; }
+                                                    .aow-list::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+                                                    .aow-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 11px; border-radius: 9px; margin-bottom: 5px; cursor: pointer; border: 1px solid transparent; transition: background .15s, border-color .15s; }
+                                                    .aow-item:hover { background: #f3f4f6; border-color: #e5e7eb; }
+                                                    .aow-item.active { background: #164476; border-color: transparent; box-shadow: 0 3px 10px rgba(22,68,118,.22); }
+                                                    .aow-item.active .aow-d-name { color: #fff; font-weight: 700; }
+                                                    .aow-d-name { font-size: 13px; font-weight: 500; color: #374151; }
+                                                    .aow-badge { font-size: 8px; background: rgba(255,255,255,.22); padding: 3px 8px; border-radius: 5px; font-weight: 700; color: #fff; letter-spacing: .3px; text-transform: uppercase; }
+                                                    .aow-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+                                                    .aow-empty { text-align: center; padding: 30px 16px; color: #9ca3af; font-size: 13px; font-weight: 500; }
+                                                    .aow-imgpanel { display: flex; flex-direction: column; padding: 14px; min-height: 300px; }
+                                                    @media (min-width: 768px)  { .aow-imgpanel { padding: 18px; min-height: 400px; } }
+                                                    @media (min-width: 1024px) { .aow-imgpanel { padding: 20px; height: 100%; min-height: 0; } }
+                                                    .aow-imgpanel-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
+                                                    .aow-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; position: relative; }
+                                                    #aowMapImg { width: 100%; height: 100%; object-fit: contain; border-radius: 9px; display: none; max-height: 540px; transition: opacity .3s ease; }
+                                                    .aow-no-img { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 220px; border: 2px dashed #e5e7eb; border-radius: 12px; color: #9ca3af; font-size: 13px; font-weight: 500; text-align: center; padding: 20px; }
+                                                    .aow-no-img svg { opacity: .3; }
+                                                    .aow-img-label { margin-top: 10px; text-align: center; font-size: 13px; font-weight: 700; color: #164476; min-height: 20px; }
+                                                </style>
 
-                                <div class="boxed-content">
-                                <style>
-                                /* ── Scoped reset ── */
-                                .aow-wrap *, .aow-wrap *::before, .aow-wrap *::after {
-                                    box-sizing: border-box; margin: 0; padding: 0;
-                                }
+                                                <script>
+                                                    const AOW_AREAS = [
+                                                    {% for a in areas_of_working %}
+                                                    {
+                                                        name        : "{{ a.name|escapejs }}",
+                                                        operational : {{ a.is_operational|yesno:"true,false" }},
+                                                        image       : "{% if a.area_image %}{{ a.area_image.url|escapejs }}{% endif %}"
+                                                    }{% if not forloop.last %},{% endif %}
+                                                    {% empty %}
+                                                    {% endfor %}
+                                                    ];
+                                                </script>
 
-                                .aow-wrap { background: #f8fafc; padding: 10px; }
-                                @media (min-width: 768px)  { .aow-wrap { padding: 16px; } }
-                                @media (min-width: 1024px) { .aow-wrap { padding: 20px; } }
+                                                <div class="aow-wrap">
+                                                    <div class="aow-grid">
 
-                                /* ── Grid ── */
-                                .aow-grid {
-                                    display: grid;
-                                    grid-template-columns: 1fr;
-                                    gap: 12px;
-                                    max-width: 1200px;
-                                    margin: 0 auto;
-                                    align-items: stretch;
-                                }
-                                @media (min-width: 1024px) {
-                                    .aow-grid { grid-template-columns: 300px 1fr; gap: 16px; }
-                                }
+                                                    <!-- LEFT: Area list -->
+                                                    <div class="aow-panel aow-sidebar">
+                                                        <h2 class="aow-sidebar-title">Area of Working</h2>
+                                                        <hr class="aow-hr">
+                                                        <div class="aow-filter-row">
+                                                            <span class="aow-filter-label">Show Active Only</span>
+                                                            <label class="aow-switch">
+                                                                <input type="checkbox" id="aowFilterToggle">
+                                                                <span class="aow-slider"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="aow-stats">
+                                                            <div class="aow-chip"><div class="num" id="aowTotal">0</div><div class="lbl">Total</div></div>
+                                                            <div class="aow-chip green"><div class="num" id="aowActive">0</div><div class="lbl">Active</div></div>
+                                                            <div class="aow-chip red"><div class="num" id="aowInactive">0</div><div class="lbl">Inactive</div></div>
+                                                        </div>
+                                                        <div class="aow-list" id="aowList"></div>
+                                                    </div>
 
-                                /* ── Panel shell ── */
-                                .aow-panel {
-                                    background: #fff;
-                                    border-radius: 14px;
-                                    box-shadow: 0 2px 10px rgba(0,0,0,.07);
-                                    border: 1px solid #e5e7eb;
-                                    overflow: hidden;
-                                }
+                                                    <!-- RIGHT: Image panel -->
+                                                    <div class="aow-panel aow-imgpanel">
+                                                        <h2 class="aow-imgpanel-title">Area of Working</h2>
+                                                        <hr class="aow-hr">
+                                                        <div class="aow-img-wrap">
+                                                            <img id="aowMapImg" src="" alt="Area Map">
+                                                            <div class="aow-no-img" id="aowNoImg">
+                                                                <svg width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="#164476" stroke-width="1.3">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l5.447-2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 13V7"/>
+                                                                </svg>
+                                                                <span id="aowNoImgText">Select an area to view its map</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="aow-img-label" id="aowImgLabel"></div>
+                                                    </div>
 
-                                /* ══════════════ LEFT sidebar ══════════════ */
-                                .aow-sidebar {
-                                    display: flex; flex-direction: column;
-                                    padding: 14px; height: 440px;
-                                }
-                                @media (min-width: 768px)  { .aow-sidebar { height: 500px; padding: 18px; } }
-                                @media (min-width: 1024px) { .aow-sidebar { height: 100%;  padding: 20px; } }
+                                                    </div>
+                                                </div>
 
-                                .aow-sidebar-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
-                                .aow-hr            { border: 1px solid #164476; margin-bottom: 10px; }
+                                                <script>
+                                                (function () {
+                                                    const listEl    = document.getElementById('aowList');
+                                                    const toggleEl  = document.getElementById('aowFilterToggle');
+                                                    const totalEl   = document.getElementById('aowTotal');
+                                                    const activeEl  = document.getElementById('aowActive');
+                                                    const inactEl   = document.getElementById('aowInactive');
+                                                    const mapImg    = document.getElementById('aowMapImg');
+                                                    const noImgEl   = document.getElementById('aowNoImg');
+                                                    const noImgText = document.getElementById('aowNoImgText');
+                                                    const imgLabel  = document.getElementById('aowImgLabel');
 
-                                /* Filter toggle */
-                                .aow-filter-row {
-                                    display: flex; align-items: center; justify-content: space-between;
-                                    background: #f3f4f6; padding: 8px 11px; border-radius: 9px;
-                                    margin-bottom: 10px; border: 1px solid #e9eaec; flex-shrink: 0;
-                                }
-                                .aow-filter-label { font-size: 12px; font-weight: 600; color: #374151; }
+                                                    let selectedIdx   = -1;
+                                                    let filteredAreas = [];
 
-                                .aow-switch { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }
-                                .aow-switch input { opacity: 0; width: 0; height: 0; }
-                                .aow-slider {
-                                    position: absolute; cursor: pointer; inset: 0;
-                                    background: #d1d5db; border-radius: 20px; transition: .3s;
-                                }
-                                .aow-slider::before {
-                                    content: ''; position: absolute;
-                                    width: 14px; height: 14px; left: 3px; top: 3px;
-                                    background: #fff; border-radius: 50%;
-                                    transition: .3s; box-shadow: 0 1px 3px rgba(0,0,0,.2);
-                                }
-                                .aow-switch input:checked + .aow-slider            { background: #164476; }
-                                .aow-switch input:checked + .aow-slider::before    { transform: translateX(16px); }
+                                                    function showImage(area) {
+                                                        if (area && area.image) {
+                                                            mapImg.style.opacity = '0';
+                                                            mapImg.style.display = 'block';
+                                                            noImgEl.style.display = 'none';
+                                                            mapImg.src = area.image;
+                                                            mapImg.onload  = () => { mapImg.style.opacity = '1'; };
+                                                            mapImg.onerror = () => { mapImg.style.display = 'none'; noImgEl.style.display = 'flex'; noImgText.textContent = 'Image not available'; };
+                                                            imgLabel.textContent = area.name;
+                                                        } else if (area) {
+                                                            mapImg.style.display = 'none';
+                                                            noImgEl.style.display = 'flex';
+                                                            noImgText.textContent = 'No image uploaded for "' + area.name + '"';
+                                                            imgLabel.textContent  = area.name;
+                                                        } else {
+                                                            mapImg.style.display = 'none';
+                                                            noImgEl.style.display = 'flex';
+                                                            noImgText.textContent = 'Select an area to view its map';
+                                                            imgLabel.textContent  = '';
+                                                        }
+                                                    }
 
-                                /* Stats chips */
-                                .aow-stats { display: flex; gap: 8px; margin-bottom: 10px; flex-shrink: 0; }
-                                .aow-chip  {
-                                    flex: 1; text-align: center; padding: 7px 4px;
-                                    border-radius: 8px; border: 1px solid #e5e7eb; background: #fafafa;
-                                }
-                                .aow-chip .num { font-size: 16px; font-weight: 800; color: #164476; line-height: 1; }
-                                .aow-chip .lbl {
-                                    font-size: 9px; color: #9ca3af; font-weight: 600;
-                                    text-transform: uppercase; letter-spacing: .3px; margin-top: 3px;
-                                }
-                                .aow-chip.green .num { color: #059669; }
-                                .aow-chip.red   .num { color: #dc2626; }
+                                                    function selectArea(idx) {
+                                                        selectedIdx = idx;
+                                                        showImage(filteredAreas[idx] || null);
+                                                        renderList();
+                                                    }
 
-                                /* Scrollable list */
-                                .aow-list { overflow-y: auto; flex: 1; padding-right: 3px; }
-                                .aow-list::-webkit-scrollbar       { width: 4px; }
-                                .aow-list::-webkit-scrollbar-track { background: transparent; }
-                                .aow-list::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+                                                    function renderList() {
+                                                        const activeOnly = toggleEl.checked;
+                                                        filteredAreas = activeOnly ? AOW_AREAS.filter(a => a.operational) : AOW_AREAS;
 
-                                /* Area item */
-                                .aow-item {
-                                    display: flex; align-items: center; justify-content: space-between;
-                                    padding: 9px 11px; border-radius: 9px; margin-bottom: 5px;
-                                    cursor: pointer;
-                                    border: 1px solid transparent;
-                                    transition: background .15s, border-color .15s;
-                                }
-                                .aow-item:hover  { background: #f3f4f6; border-color: #e5e7eb; }
-                                .aow-item.active {
-                                    background: #164476; border-color: transparent;
-                                    box-shadow: 0 3px 10px rgba(22,68,118,.22);
-                                }
-                                .aow-item.active .aow-d-name { color: #fff; font-weight: 700; }
+                                                        totalEl.textContent  = filteredAreas.length;
+                                                        activeEl.textContent = filteredAreas.filter(a =>  a.operational).length;
+                                                        inactEl.textContent  = filteredAreas.filter(a => !a.operational).length;
 
-                                .aow-d-name { font-size: 13px; font-weight: 500; color: #374151; }
+                                                        if (selectedIdx >= filteredAreas.length) {
+                                                            selectedIdx = filteredAreas.length > 0 ? 0 : -1;
+                                                            showImage(selectedIdx >= 0 ? filteredAreas[selectedIdx] : null);
+                                                        }
 
-                                .aow-badge {
-                                    font-size: 8px; background: rgba(255,255,255,.22);
-                                    padding: 3px 8px; border-radius: 5px;
-                                    font-weight: 700; color: #fff; letter-spacing: .3px; text-transform: uppercase;
-                                }
-                                .aow-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+                                                        if (filteredAreas.length === 0) {
+                                                            listEl.innerHTML = '<div class="aow-empty">No areas found.</div>';
+                                                            return;
+                                                        }
 
-                                .aow-empty {
-                                    text-align: center; padding: 30px 16px;
-                                    color: #9ca3af; font-size: 13px; font-weight: 500;
-                                }
+                                                        listEl.innerHTML = filteredAreas.map(function (a, i) {
+                                                            const isActive = (i === selectedIdx);
+                                                            const dotColor = a.operational ? '#10b981' : '#ef4444';
+                                                            const right    = isActive
+                                                                ? `<span class="aow-badge">Selected</span>`
+                                                                : `<span class="aow-dot" style="background:${dotColor}"></span>`;
+                                                            return `<div class="aow-item${isActive ? ' active' : ''}" onclick="AOW_select(${i})">
+                                                                <div style="display:flex;align-items:center;gap:9px;">
+                                                                    <input type="checkbox" ${a.operational ? 'checked' : ''} disabled style="width:14px;height:14px;accent-color:#164476;pointer-events:none;flex-shrink:0;">
+                                                                    <span class="aow-d-name">${a.name}</span>
+                                                                </div>
+                                                                ${right}
+                                                            </div>`;
+                                                        }).join('');
+                                                    }
 
-                                /* ══════════════ RIGHT image panel ══════════════ */
-                                .aow-imgpanel {
-                                    display: flex; flex-direction: column;
-                                    padding: 14px; min-height: 300px;
-                                }
-                                @media (min-width: 768px)  { .aow-imgpanel { padding: 18px; min-height: 400px; } }
-                                @media (min-width: 1024px) { .aow-imgpanel { padding: 20px; height: 100%; min-height: 0; } }
+                                                    window.AOW_select = selectArea;
 
-                                .aow-imgpanel-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
+                                                    toggleEl.addEventListener('change', function () {
+                                                        selectedIdx = 0;
+                                                        renderList();
+                                                        showImage(filteredAreas.length > 0 ? filteredAreas[0] : null);
+                                                    });
 
-                                .aow-img-wrap {
-                                    flex: 1; display: flex; align-items: center;
-                                    justify-content: center; min-height: 0; position: relative;
-                                }
+                                                    if (AOW_AREAS.length > 0) {
+                                                        selectedIdx = 0;
+                                                        renderList();
+                                                        showImage(AOW_AREAS[0]);
+                                                    } else {
+                                                        renderList();
+                                                        showImage(null);
+                                                    }
+                                                })();
+                                                </script>
 
-                                /* The displayed map image */
-                                #aowMapImg {
-                                    width: 100%; height: 100%;
-                                    object-fit: contain; border-radius: 9px;
-                                    display: none; max-height: 540px;
-                                    transition: opacity .3s ease;
-                                }
-
-                                /* Placeholder */
-                                .aow-no-img {
-                                    display: flex; flex-direction: column;
-                                    align-items: center; justify-content: center; gap: 12px;
-                                    width: 100%; min-height: 220px;
-                                    border: 2px dashed #e5e7eb; border-radius: 12px;
-                                    color: #9ca3af; font-size: 13px; font-weight: 500; text-align: center;
-                                    padding: 20px;
-                                }
-                                .aow-no-img svg { opacity: .3; }
-
-                                /* Selected area label under image */
-                                .aow-img-label {
-                                    margin-top: 10px; text-align: center;
-                                    font-size: 13px; font-weight: 700; color: #164476;
-                                    min-height: 20px;
-                                }
-                                </style>
-
-                                <!-- ── Embed area data from Django ────────────────────────────── -->
-                                <script>
-                                    const AOW_AREAS = [
-                                    {% for a in areas_of_working %}
-                                    {
-                                        name        : "{{ a.name|escapejs }}",
-                                        operational : {{ a.is_operational|yesno:"true,false" }},
-                                        image       : "{% if a.area_image %}{{ a.area_image.url|escapejs }}{% endif %}"
-                                    }{% if not forloop.last %},{% endif %}
-                                    {% empty %}
-                                    {% endfor %}
-                                    ];
-                                </script>
-
-                                <div class="aow-wrap">
-                                    <div class="aow-grid">
-
-                                    <!-- ══ LEFT: Area list ══════════════════════════════════════ -->
-                                    <div class="aow-panel aow-sidebar">
-                                        <h2 class="aow-sidebar-title">Area of Working</h2>
-                                        <hr class="aow-hr">
-
-                                        <div class="aow-filter-row">
-                                        <span class="aow-filter-label">Show Active Only</span>
-                                        <label class="aow-switch">
-                                            <input type="checkbox" id="aowFilterToggle">
-                                            <span class="aow-slider"></span>
-                                        </label>
-                                        </div>
-
-                                        <div class="aow-stats">
-                                        <div class="aow-chip">
-                                            <div class="num" id="aowTotal">0</div>
-                                            <div class="lbl">Total</div>
-                                        </div>
-                                        <div class="aow-chip green">
-                                            <div class="num" id="aowActive">0</div>
-                                            <div class="lbl">Active</div>
-                                        </div>
-                                        <div class="aow-chip red">
-                                            <div class="num" id="aowInactive">0</div>
-                                            <div class="lbl">Inactive</div>
-                                        </div>
-                                        </div>
-
-                                        <div class="aow-list" id="aowList"></div>
-                                    </div>
-
-                                    <!-- ══ RIGHT: Image panel ════════════════════════════════════ -->
-                                    <div class="aow-panel aow-imgpanel">
-                                        <h2 class="aow-imgpanel-title">Area of Working</h2>
-                                        <hr class="aow-hr">
-
-                                        <div class="aow-img-wrap">
-                                        <!-- Image swapped by JS on area click -->
-                                        <img id="aowMapImg" src="" alt="Area Map">
-
-                                        <!-- Placeholder shown when no image / nothing selected -->
-                                        <div class="aow-no-img" id="aowNoImg">
-                                            <svg width="52" height="52" fill="none" viewBox="0 0 24 24"
-                                                stroke="#164476" stroke-width="1.3">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1
-                                                0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16
-                                                l5.447-2.724A1 1 0 0021 16.382V5.618a1 1
-                                                0 00-1.447-.894L15 7m0 13V7"/>
-                                            </svg>
-                                            <span id="aowNoImgText">Select an area to view its map</span>
-                                        </div>
-                                        </div>
-
-                                        <div class="aow-img-label" id="aowImgLabel"></div>
-                                    </div>
-
-                                    </div>
-                                </div>
-
-                                <script>
-                                    (function () {
-                                    /* ── DOM refs ── */
-                                    const listEl     = document.getElementById('aowList');
-                                    const toggleEl   = document.getElementById('aowFilterToggle');
-                                    const totalEl    = document.getElementById('aowTotal');
-                                    const activeEl   = document.getElementById('aowActive');
-                                    const inactEl    = document.getElementById('aowInactive');
-                                    const mapImg     = document.getElementById('aowMapImg');
-                                    const noImgEl    = document.getElementById('aowNoImg');
-                                    const noImgText  = document.getElementById('aowNoImgText');
-                                    const imgLabel   = document.getElementById('aowImgLabel');
-
-                                    /* ── state ── */
-                                    let selectedIdx      = -1;
-                                    let filteredAreas    = [];
-
-                                    /* ── swap right-panel image ── */
-                                    function showImage(area) {
-                                        if (area && area.image) {
-                                        mapImg.style.opacity = '0';
-                                        mapImg.style.display = 'block';
-                                        noImgEl.style.display = 'none';
-                                        mapImg.src = area.image;
-                                        mapImg.onload  = () => { mapImg.style.opacity = '1'; };
-                                        mapImg.onerror = () => {
-                                            mapImg.style.display = 'none';
-                                            noImgEl.style.display = 'flex';
-                                            noImgText.textContent = 'Image not available';
-                                        };
-                                        imgLabel.textContent = area.name;
-                                        } else if (area) {
-                                        /* area selected but no image uploaded */
-                                        mapImg.style.display = 'none';
-                                        noImgEl.style.display = 'flex';
-                                        noImgText.textContent = 'No image uploaded for "' + area.name + '"';
-                                        imgLabel.textContent  = area.name;
-                                        } else {
-                                        mapImg.style.display = 'none';
-                                        noImgEl.style.display = 'flex';
-                                        noImgText.textContent = 'Select an area to view its map';
-                                        imgLabel.textContent  = '';
-                                        }
-                                    }
-
-                                    /* ── select area by index in filteredAreas ── */
-                                    function selectArea(idx) {
-                                        selectedIdx = idx;
-                                        showImage(filteredAreas[idx] || null);
-                                        renderList();
-                                    }
-
-                                    /* ── render left list ── */
-                                    function renderList() {
-                                        const activeOnly = toggleEl.checked;
-                                        filteredAreas = activeOnly
-                                        ? AOW_AREAS.filter(a => a.operational)
-                                        : AOW_AREAS;
-
-                                        totalEl.textContent = filteredAreas.length;
-                                        activeEl.textContent = filteredAreas.filter(a =>  a.operational).length;
-                                        inactEl.textContent  = filteredAreas.filter(a => !a.operational).length;
-
-                                        /* clamp selection */
-                                        if (selectedIdx >= filteredAreas.length) {
-                                        selectedIdx = filteredAreas.length > 0 ? 0 : -1;
-                                        showImage(selectedIdx >= 0 ? filteredAreas[selectedIdx] : null);
-                                        }
-
-                                        if (filteredAreas.length === 0) {
-                                        listEl.innerHTML = '<div class="aow-empty">No areas found.</div>';
-                                        return;
-                                        }
-
-                                        listEl.innerHTML = filteredAreas.map(function (a, i) {
-                                        const isActive = (i === selectedIdx);
-                                        const dotColor = a.operational ? '#10b981' : '#ef4444';
-                                        const right    = isActive
-                                            ? `<span class="aow-badge">Selected</span>`
-                                            : `<span class="aow-dot" style="background:${dotColor}"></span>`;
-
-                                        return `
-                                            <div class="aow-item${isActive ? ' active' : ''}"
-                                                onclick="AOW_select(${i})">
-                                            <div style="display:flex;align-items:center;gap:9px;">
-                                                <input type="checkbox" ${a.operational ? 'checked' : ''} disabled
-                                                    style="width:14px;height:14px;accent-color:#164476;
-                                                            pointer-events:none;flex-shrink:0;">
-                                                <span class="aow-d-name">${a.name}</span>
-                                            </div>
-                                            ${right}
-                                            </div>`;
-                                        }).join('');
-                                    }
-
-                                    /* expose to inline onclick */
-                                    window.AOW_select = selectArea;
-
-                                    /* ── toggle handler ── */
-                                    toggleEl.addEventListener('change', function () {
-                                        selectedIdx = 0;
-                                        renderList();
-                                        showImage(filteredAreas.length > 0 ? filteredAreas[0] : null);
-                                    });
-
-                                    /* ── init: auto-select first area ── */
-                                    if (AOW_AREAS.length > 0) {
-                                        selectedIdx = 0;
-                                        renderList();
-                                        showImage(AOW_AREAS[0]);
-                                    } else {
-                                        renderList();
-                                        showImage(null);
-                                    }
-                                    })();
-                                </script>
-
-                                </div>
-                                {% comment %} ── END Area of Working ── {% endcomment %}
+                                                </div>
+                                                <!-- END Area of Working -->
                                            
                                             </div>
 
@@ -987,7 +664,6 @@
 
                                                 <section class="boxed-content company-events-section">
                                                     <div class="company-events-container">
-                                                        <!-- Year Selection -->
                                                         <div class="events-filter-container">
                                                             <div class="events-select-wrapper">
                                                                 <select id="eventsYearSelect" class="events-year-dropdown">
@@ -1008,7 +684,6 @@
                                                             </div>
                                                         </div>
 
-                                                        <!-- Gallery Grid -->
                                                         <div class="company-events-gallery">
                                                             <div class="events-grid-four">
                                                                 {% for item in venture.gallery.all %}
@@ -1031,212 +706,49 @@
                                                 </section>
 
                                                 <style>
-                                                    .company-events-section {
-                                                        padding: 3rem 0;
-                                                        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-                                                        font-family: 'Inter', system-ui, sans-serif;
-                                                    }
-
-                                                    .company-events-container {
-                                                        max-width: 1400px;
-                                                        margin: 0 auto;
-                                                        padding: 0 1.25rem;
-                                                    }
-
-                                                    .events-filter-container {
-                                                        display: flex;
-                                                        align-items: center;
-                                                        justify-content: space-between;
-                                                        margin-bottom: 2.5rem;
-                                                        padding: 1rem;
-                                                        background: white;
-                                                        border-radius: 1rem;
-                                                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                                                    }
-
-                                                    .events-select-wrapper {
-                                                        position: relative;
-                                                        min-width: 200px;
-                                                    }
-
-                                                    .events-year-dropdown {
-                                                        width: 100%;
-                                                        padding: 0.645rem 1.10rem;
-                                                        font-size: 1rem;
-                                                        font-weight: 500;
-                                                        color: #1e293b;
-                                                        background: #f8fafc;
-                                                        border: 2px solid #e2e8f0;
-                                                        border-radius: 0.75rem;
-                                                        appearance: none;
-                                                        cursor: pointer;
-                                                        transition: all 0.3s ease;
-                                                    }
-
-                                                    .events-year-dropdown:focus {
-                                                        outline: none;
-                                                        border-color: #164476;
-                                                        box-shadow: 0 0 0 3px rgba(22, 68, 118, 0.1);
-                                                    }
-
-                                                    .events-dropdown-arrow {
-                                                        position: absolute;
-                                                        right: 1rem;
-                                                        top: 50%;
-                                                        transform: translateY(-50%);
-                                                        color: #64748b;
-                                                        pointer-events: none;
-                                                    }
-
-                                                    .events-filter-display {
-                                                        display: flex;
-                                                        align-items: center;
-                                                        gap: 0.75rem;
-                                                        font-weight: 500;
-                                                    }
-
-                                                    .events-display-label {
-                                                        color: #64748b;
-                                                    }
-
-                                                    .events-display-year {
-                                                        color: #164476;
-                                                        font-weight: 600;
-                                                        font-size: 1rem;
-                                                    }
-
-                                                    .events-display-count {
-                                                        color: #94a3b8;
-                                                        font-size: 0.7rem;
-                                                    }
-
-                                                    .events-grid-four {
-                                                        display: grid;
-                                                        grid-template-columns: repeat(4, 1fr);
-                                                        gap: 1.5rem;
-                                                    }
-
-                                                    .company-event-card {
-                                                        background: white;
-                                                        border-radius: 0.75rem;
-                                                        overflow: hidden;
-                                                        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                                                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                                                        opacity: 1;
-                                                        transform: translateY(0);
-                                                    }
-
-                                                    .company-event-card.event-hidden {
-                                                        display: none;
-                                                    }
-
-                                                    .company-event-card:hover {
-                                                        transform: translateY(-0.5rem);
-                                                        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-                                                    }
-
-                                                    .event-media {
-                                                        position: relative;
-                                                        overflow: hidden;
-                                                        height: 12rem;
-                                                    }
-
-                                                    .event-media img {
-                                                        width: 100%;
-                                                        height: 100%;
-                                                        object-fit: cover;
-                                                        transition: transform 0.6s ease;
-                                                    }
-
-                                                    .company-event-card:hover .event-media img {
-                                                        transform: scale(1.08);
-                                                    }
-
-                                                    .event-year-badge {
-                                                        position: absolute;
-                                                        top: 0.75rem;
-                                                        right: 0.75rem;
-                                                        background: rgba(255, 255, 255, 0.95);
-                                                        backdrop-filter: blur(8px);
-                                                        color: #164476;
-                                                        padding: 0.25rem 0.5rem;
-                                                        border-radius: 0.75rem;
-                                                        font-size: 0.7rem;
-                                                        font-weight: 600;
-                                                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                                                    }
-
-                                                    .event-details {
-                                                        padding: 1rem;
-                                                    }
-
-                                                    .event-title {
-                                                        font-size: 1rem;
-                                                        font-weight: 600;
-                                                        color: #1e293b;
-                                                        margin-bottom: 0.5rem;
-                                                        line-height: 1.3;
-                                                    }
-
-                                                    .event-description {
-                                                        color: #64748b;
-                                                        font-size: 0.85rem;
-                                                        line-height: 1.4;
-                                                        margin-bottom: 0.75rem;
-                                                        display: -webkit-box;
-                                                        -webkit-line-clamp: 2;
-                                                        -webkit-box-orient: vertical;
-                                                        overflow: hidden;
-                                                    }
-
-                                                    @media (max-width: 1200px) {
-                                                        .events-grid-four {
-                                                            grid-template-columns: repeat(3, 1fr);
-                                                        }
-                                                    }
-
-                                                    @media (max-width: 768px) {
-                                                        .events-filter-container {
-                                                            flex-direction: column;
-                                                            gap: 1rem;
-                                                        }
-                                                        
-                                                        .events-grid-four {
-                                                            grid-template-columns: repeat(2, 1fr);
-                                                        }
-                                                    }
-
-                                                    @media (max-width: 480px) {
-                                                        .events-grid-four {
-                                                            grid-template-columns: 1fr;
-                                                        }
-                                                    }
+                                                    .company-events-section { padding: 3rem 0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); font-family: 'Inter', system-ui, sans-serif; }
+                                                    .company-events-container { max-width: 1400px; margin: 0 auto; padding: 0 1.25rem; }
+                                                    .events-filter-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; padding: 1rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+                                                    .events-select-wrapper { position: relative; min-width: 200px; }
+                                                    .events-year-dropdown { width: 100%; padding: 0.645rem 1.10rem; font-size: 1rem; font-weight: 500; color: #1e293b; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 0.75rem; appearance: none; cursor: pointer; transition: all 0.3s ease; }
+                                                    .events-year-dropdown:focus { outline: none; border-color: #164476; box-shadow: 0 0 0 3px rgba(22,68,118,0.1); }
+                                                    .events-dropdown-arrow { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; pointer-events: none; }
+                                                    .events-filter-display { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+                                                    .events-display-label { color: #64748b; }
+                                                    .events-display-year { color: #164476; font-weight: 600; font-size: 1rem; }
+                                                    .events-display-count { color: #94a3b8; font-size: 0.7rem; }
+                                                    .events-grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+                                                    .company-event-card { background: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+                                                    .company-event-card.event-hidden { display: none; }
+                                                    .company-event-card:hover { transform: translateY(-0.5rem); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+                                                    .event-media { position: relative; overflow: hidden; height: 12rem; }
+                                                    .event-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+                                                    .company-event-card:hover .event-media img { transform: scale(1.08); }
+                                                    .event-year-badge { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); color: #164476; padding: 0.25rem 0.5rem; border-radius: 0.75rem; font-size: 0.7rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+                                                    .event-details { padding: 1rem; }
+                                                    .event-title { font-size: 1rem; font-weight: 600; color: #1e293b; margin-bottom: 0.5rem; line-height: 1.3; }
+                                                    .event-description { color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+                                                    @media (max-width: 1200px) { .events-grid-four { grid-template-columns: repeat(3, 1fr); } }
+                                                    @media (max-width: 768px) { .events-filter-container { flex-direction: column; gap: 1rem; } .events-grid-four { grid-template-columns: repeat(2, 1fr); } }
+                                                    @media (max-width: 480px) { .events-grid-four { grid-template-columns: 1fr; } }
                                                 </style>
 
                                                 <script>
                                                     document.addEventListener('DOMContentLoaded', function() {
-                                                        const eventsYearSelect = document.getElementById('eventsYearSelect');
-                                                        const eventsCurrentYearDisplay = document.getElementById('eventsCurrentYearDisplay');
+                                                        const eventsYearSelect          = document.getElementById('eventsYearSelect');
+                                                        const eventsCurrentYearDisplay  = document.getElementById('eventsCurrentYearDisplay');
                                                         const eventsProjectCountDisplay = document.getElementById('eventsProjectCountDisplay');
-                                                        const companyEventCards = document.querySelectorAll('.company-event-card');
+                                                        const companyEventCards         = document.querySelectorAll('.company-event-card');
                                                         
                                                         eventsYearSelect.addEventListener('change', function() {
-                                                            const selectedYear = this.value;
-                                                            filterCompanyEvents(selectedYear);
+                                                            filterCompanyEvents(this.value);
                                                         });
                                                         
                                                         function filterCompanyEvents(year) {
                                                             let visibleCount = 0;
-                                                            
-                                                            if (year === 'all') {
-                                                                eventsCurrentYearDisplay.textContent = 'All Years';
-                                                            } else {
-                                                                eventsCurrentYearDisplay.textContent = year;
-                                                            }
-                                                            
+                                                            eventsCurrentYearDisplay.textContent = (year === 'all') ? 'All Years' : year;
                                                             companyEventCards.forEach(card => {
                                                                 const cardYear = card.getAttribute('data-event-year');
-                                                                
                                                                 if (year === 'all' || cardYear === year) {
                                                                     card.classList.remove('event-hidden');
                                                                     visibleCount++;
@@ -1244,7 +756,6 @@
                                                                     card.classList.add('event-hidden');
                                                                 }
                                                             });
-                                                            
                                                             eventsProjectCountDisplay.textContent = `(${visibleCount} item${visibleCount !== 1 ? 's' : ''})`;
                                                         }
                                                     });

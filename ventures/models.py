@@ -52,6 +52,12 @@ class VentureDetail(models.Model):
     venture = models.ForeignKey(Venture, on_delete=models.CASCADE, related_name='details')
     title = models.CharField(max_length=200)
     description = models.TextField()
+    banner_image = models.ImageField(          # ← NEW FIELD
+        upload_to='venture_details/',
+        blank=True,
+        null=True,
+        help_text="Optional banner / feature image for this detail section."
+    )
     order = models.IntegerField(default=0)
 
     class Meta:
@@ -113,10 +119,6 @@ class Gallery(models.Model):
 
 
 class AreaOfWorking(models.Model):
-    """
-    Each area/district listed in the left panel.
-    Each area has its OWN map image shown on the right panel when selected.
-    """
     venture = models.ForeignKey(
         Venture,
         on_delete=models.CASCADE,

@@ -3,101 +3,132 @@ from django.contrib import admin
 from .models import Sector, Venture, Product, Brand, VentureDetail, Gallery, AreaOfWorking
 
 
-# ── Sector ────────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTOR
+# ══════════════════════════════════════════════════════════════════════════════
 @admin.register(Sector)
 class SectorAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'is_active', 'order']
+    list_display  = ['name', 'slug', 'is_active', 'order']
     list_editable = ['is_active', 'order']
     prepopulated_fields = {'slug': ('name',)}
 
 
-# ── Venture inlines ───────────────────────────────────────────────────────────
-class VentureDetailInline(admin.TabularInline):
-    model = VentureDetail
-    extra = 0
-    fields = ['title', 'description', 'order']
+# ══════════════════════════════════════════════════════════════════════════════
+# VENTURE INLINES
+# All inlines with an ImageField use StackedInline so the file-picker
+# widget renders correctly (TabularInline clips the upload input).
+# ══════════════════════════════════════════════════════════════════════════════
+
+class VentureDetailInline(admin.StackedInline):
+    """Has banner_image → StackedInline required for image upload to work."""
+    model  = VentureDetail
+    extra  = 0
+    fields = ['title', 'description', 'banner_image', 'order']
+    verbose_name        = "Venture Detail"
+    verbose_name_plural = "3. Venture Details"
 
 
-class ProductInline(admin.TabularInline):
-    model = Product
-    extra = 0
-    fields = ['name', 'image', 'order']
+class ProductInline(admin.StackedInline):
+    model  = Product
+    extra  = 0
+    fields = ['name', 'description', 'image', 'order']
+    verbose_name        = "Product"
+    verbose_name_plural = "4. Products"
 
 
-class BrandInline(admin.TabularInline):
-    model = Brand
-    extra = 0
-    fields = ['name', 'logo', 'order']
+class BrandInline(admin.StackedInline):
+    model  = Brand
+    extra  = 0
+    fields = ['name', 'description', 'logo', 'order']
+    verbose_name        = "Brand"
+    verbose_name_plural = "5. Brands"
 
 
-class GalleryInline(admin.TabularInline):
-    model = Gallery
-    extra = 0
-    fields = ['title', 'image', 'year', 'order']
+class GalleryInline(admin.StackedInline):
+    model  = Gallery
+    extra  = 0
+    fields = ['title', 'description', 'image', 'year', 'order']
+    verbose_name        = "Gallery Item"
+    verbose_name_plural = "6. Galleries"
 
 
-class AreaOfWorkingInline(admin.TabularInline):
-    """
-    Add / edit areas directly inside the Venture admin page.
-    Each area has its own image uploaded here.
-    """
-    model = AreaOfWorking
-    extra = 1
+class AreaOfWorkingInline(admin.StackedInline):
+    model  = AreaOfWorking
+    extra  = 1
     fields = ['name', 'area_image', 'is_operational', 'order']
-    verbose_name = "Area of Working"
-    verbose_name_plural = "Areas of Working"
+    verbose_name        = "Area of Working"
+    verbose_name_plural = "7. Areas of Working"
 
 
-# ── Venture ───────────────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# VENTURE
+# ══════════════════════════════════════════════════════════════════════════════
 @admin.register(Venture)
 class VentureAdmin(admin.ModelAdmin):
-    list_display = ['name', 'sector', 'slug', 'is_active', 'order']
+    list_display  = ['name', 'sector', 'slug', 'is_active', 'order']
     list_editable = ['is_active', 'order']
-    list_filter = ['sector', 'is_active']
+    list_filter   = ['sector', 'is_active']
     search_fields = ['name']
     prepopulated_fields = {'slug': ('name',)}
 
     fieldsets = (
-        (None, {
-            'fields': ('sector', 'name', 'slug', 'description', 'is_active', 'order')
+        ('General', {
+            'fields': ('sector', 'name', 'slug', 'description', 'is_active', 'order'),
         }),
         ('Images', {
             'fields': ('banner_image',),
         }),
     )
 
-    inlines = [VentureDetailInline, ProductInline, BrandInline, GalleryInline, AreaOfWorkingInline]
+    inlines = [
+        VentureDetailInline,
+        ProductInline,
+        BrandInline,
+        GalleryInline,
+        AreaOfWorkingInline,
+    ]
 
 
-# ── Standalone admins ─────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# STANDALONE ADMINS
+# ══════════════════════════════════════════════════════════════════════════════
+@admin.register(VentureDetail)
+class VentureDetailAdmin(admin.ModelAdmin):
+    list_display  = ['title', 'venture', 'order']
+    list_editable = ['order']
+    list_filter   = ['venture']
+    search_fields = ['title']
+    fields        = ['venture', 'title', 'description', 'banner_image', 'order']
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'venture', 'order']
+    list_display  = ['name', 'venture', 'order']
     list_editable = ['order']
+    list_filter   = ['venture']
+    search_fields = ['name']
 
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ['name', 'venture', 'order']
+    list_display  = ['name', 'venture', 'order']
     list_editable = ['order']
-
-
-@admin.register(VentureDetail)
-class VentureDetailAdmin(admin.ModelAdmin):
-    list_display = ['title', 'venture', 'order']
-    list_editable = ['order']
+    list_filter   = ['venture']
+    search_fields = ['name']
 
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'venture', 'year', 'order']
+    list_display  = ['title', 'venture', 'year', 'order']
     list_editable = ['order']
+    list_filter   = ['venture', 'year']
+    search_fields = ['title']
 
 
 @admin.register(AreaOfWorking)
 class AreaOfWorkingAdmin(admin.ModelAdmin):
-    list_display = ['name', 'venture', 'is_operational', 'order']
+    list_display  = ['name', 'venture', 'is_operational', 'order']
     list_editable = ['is_operational', 'order']
-    list_filter = ['venture', 'is_operational']
+    list_filter   = ['venture', 'is_operational']
     search_fields = ['name']
-    fields = ['venture', 'name', 'area_image', 'is_operational', 'order']
+    fields        = ['venture', 'name', 'area_image', 'is_operational', 'order']

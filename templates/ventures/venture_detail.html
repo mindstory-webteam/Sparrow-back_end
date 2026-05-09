@@ -224,7 +224,7 @@
 
             {% for detail in venture.details.all %}
 
-                <h3>{{ detail.title }}</h3>
+                {% comment %} <h3>{{ detail.title }}</h3> {% endcomment %}
                 <p>{{ detail.description|truncatewords:25 }}</p>
 
             {% endfor %}

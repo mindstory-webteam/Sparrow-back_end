@@ -190,59 +190,44 @@
             <div class="wrapper">
 
                 <!-- ══════════════════════════════════════════════════════
-                     MAIN HERO — venture.banner_image
+                     MAIN HERO — uses first VentureDetail banner_image,
+                     falls back to venture.banner_image, then static default
                 ══════════════════════════════════════════════════════ -->
-    <div class="section hero-section" >
-    <div class="bg-wrap-container" data-scrollax-parent="true">
+                <div class="section hero-section">
+                    <div class="bg-wrap-container" data-scrollax-parent="true">
 
-        {% for detail in venture.details.all %}
+                        {% for detail in venture.details.all %}
+                            {% if detail.banner_image %}
+                            <div class="bg bg-parallax"
+                                 data-bg="{{ detail.banner_image.url }}"
+                                 data-scrollax="properties: { translateY: '30%' }"></div>
+                            {% endif %}
+                        {% empty %}
+                            {% if venture.banner_image %}
+                            <div class="bg bg-parallax"
+                                 data-bg="{{ venture.banner_image.url }}"
+                                 data-scrollax="properties: { translateY: '30%' }"></div>
+                            {% else %}
+                            <div class="bg bg-parallax"
+                                 data-bg="{% static 'images/Banner/automotive/automotive-banner.png' %}"
+                                 data-scrollax="properties: { translateY: '30%' }"></div>
+                            {% endif %}
+                        {% endfor %}
 
-            {% if detail.banner_image %}
+                        <div class="overlay"></div>
+                    </div>
 
-            <div class="bg bg-parallax"
-                 data-bg="{{ detail.banner_image.url }}"
-                 data-scrollax="properties: { translateY: '30%' }"></div>
-
-            {% endif %}
-
-        {% empty %}
-
-            <div class="bg bg-parallax"
-                 data-bg="{% static 'images/Banner/automotive/automotive-banner.png' %}"
-                 data-scrollax="properties: { translateY: '30%' }"></div>
-
-        {% endfor %}
-
-        <div class="overlay"></div>
-    </div>
-
-    <div class="container">
-        <div class="hero-section-title">
-
-            <h5>{{ venture.sector.name }}</h5>
-            <h2>{{ venture.name }}</h2>
-
-            {% for detail in venture.details.all %}
-
-                {% comment %} <h3>{{ detail.title }}</h3> {% endcomment %}
-                <p>{{ detail.description }}</p>
-
-            {% endfor %}
-
-        </div>
-    </div>
-</div>
+                    <div class="container">
+                        <div class="hero-section-title">
+                            <h5>{{ venture.sector.name }}</h5>
+                            <h2>{{ venture.name }}</h2>
+                            {% for detail in venture.details.all %}
+                                <p>{{ detail.description }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
                 <!-- main hero end -->
-
-                <!-- ══════════════════════════════════════════════════════
-                     VENTURE DETAIL BANNER SECTIONS
-                     One parallax hero strip per VentureDetail that has
-                     a banner_image uploaded. Details without an image
-                     are skipped here and shown as cards in the content
-                     section below.
-                ══════════════════════════════════════════════════════ -->
-                
-                <!-- venture detail banners end -->
                 
                 <!--content-->
                 <div class="content">
@@ -276,15 +261,20 @@
                                         <div class="col-lg-12">
                                             <div class="single-box-container">
                                                 <div class="single-box-content">
-                                                    <div class="det-box container">
-                                                        <div class="det-box-ietm det-box-ietm_single">
-                                                            <h3 class="bold-text">{{ venture.name }}<span class="bt_dec"></span></h3>
-                                                            <p>{{ venture.description }}</p>
-                                                        </div>
+                                                    {% if venture_about %}
+                                                <div class="det-box container">
+                                                    <div class="det-box-ietm det-box-ietm_single">
+                                                        <h3 class="bold-text">
+                                                            {{ venture_about.title }}<span class="bt_dec"></span>
+                                                        </h3>
+                                                        <p>{{ venture_about.description }}</p>
                                                     </div>
                                                 </div>
+                                                {% endif %}
 
-                                                <!-- Products Gallery Section -->
+                                                </div>
+
+                                                <!-- ══ Products Gallery ══════════════════════════ -->
                                                 {% if venture.products.all %}
                                                 <div class="product-gallery-section">
                                                     <div class="single-box-content">
@@ -308,552 +298,565 @@
                                                     </div>
                                                 </div>
                                                 {% endif %}
-                                                <!-- End Product Gallery Section -->
+                                                <!-- End Products -->
 
-                                                <!-- Details/Features List -->
-                                                {% if venture.details.all %}
+
+                                                <!-- ══════════════════════════════════════════════════
+                                                     FEATURES OF PRODUCT
+                                                    
+                                                ══════════════════════════════════════════════════ -->
+                                                {% if features %}
                                                 <div class="det-list">
                                                     <div class="det-list-wrap">
+
+                                                        <!-- Left Column -->
                                                         <ul>
-                                                            {% for detail in venture.details.all %}
-                                                            {% if forloop.counter0|divisibleby:2 %}
-                                                            <li><span>{{ detail.title }}</span> - {{ detail.description }}</li>
-                                                            {% endif %}
+                                                            {% for feature in features %}
+                                                                {% if forloop.counter0|divisibleby:2 %}
+                                                                <li>
+                                                                    {{ feature.text|safe }}
+                                                                </li>
+                                                                {% endif %}
                                                             {% endfor %}
                                                         </ul>
+
+                                                        <!-- Right Column -->
                                                         <ul>
-                                                            {% for detail in venture.details.all %}
-                                                            {% if not forloop.counter0|divisibleby:2 %}
-                                                            <li><span>{{ detail.title }}</span> - {{ detail.description }}</li>
-                                                            {% endif %}
+                                                            {% for feature in features %}
+                                                                {% if not forloop.counter0|divisibleby:2 %}
+                                                                <li>
+                                                                    {{ feature.text|safe }}
+                                                                </li>
+                                                                {% endif %}
                                                             {% endfor %}
                                                         </ul>
+
                                                     </div>
                                                 </div>
                                                 {% endif %}
-                                                <!-- end points -->
+                             <!-- ══ END FEATURES OF PRODUCT ══ -->
 
-                                                <!-- Brand Logo Carousel Section -->
-                                                {% if venture.brands.all %}
-                                                <div class="brand-carousel-section">
-                                                    <div class="single-box-content">
-                                                        <h3 class="brand-title">Our Product Brands</h3>
-                                                        <div class="brand-carousel-wrapper">
-                                                            <div class="brand-carousel">
-                                                                {% for brand in venture.brands.all %}
-                                                                <div class="brand-item">
-                                                                    {% if brand.logo %}
-                                                                    <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
-                                                                    {% else %}
-                                                                    <img src="{% static 'images/clients/india-nippon.png' %}" alt="{{ brand.name }}">
-                                                                    {% endif %}
-                                                                </div>
-                                                                {% endfor %}
-                                                                {% for brand in venture.brands.all %}
-                                                                <div class="brand-item">
-                                                                    {% if brand.logo %}
-                                                                    <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
-                                                                    {% else %}
-                                                                    <img src="{% static 'images/clients/india-nippon.png' %}" alt="{{ brand.name }}">
-                                                                    {% endif %}
-                                                                </div>
-                                                                {% endfor %}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {% endif %}
-                                                <!-- End Brand Logo Carousel -->
+                                                                                                <!-- ══ Brand Logo Carousel ════════════════════════ -->
+                                                                                                {% if venture.brands.all %}
+                                                                                                <div class="brand-carousel-section">
+                                                                                                    <div class="single-box-content">
+                                                                                                        <h3 class="brand-title">Our Product Brands</h3>
+                                                                                                        <div class="brand-carousel-wrapper">
+                                                                                                            <div class="brand-carousel">
+                                                                                                                {% for brand in venture.brands.all %}
+                                                                                                                <div class="brand-item">
+                                                                                                                    {% if brand.logo %}
+                                                                                                                    <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
+                                                                                                                    {% else %}
+                                                                                                                    <img src="{% static 'images/clients/india-nippon.png' %}" alt="{{ brand.name }}">
+                                                                                                                    {% endif %}
+                                                                                                                </div>
+                                                                                                                {% endfor %}
+                                                                                                                {% for brand in venture.brands.all %}
+                                                                                                                <div class="brand-item">
+                                                                                                                    {% if brand.logo %}
+                                                                                                                    <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
+                                                                                                                    {% else %}
+                                                                                                                    <img src="{% static 'images/clients/india-nippon.png' %}" alt="{{ brand.name }}">
+                                                                                                                    {% endif %}
+                                                                                                                </div>
+                                                                                                                {% endfor %}
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                {% endif %}
+                                                                                                <!-- End Brand Logo Carousel -->
 
-                                            </div>
+                                                                                            </div>
 
-                                            <div class="order-wrap gfc-fs2">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="ticker">Need expert assistance? Get in touch with us</div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <a href="{% url 'main:contact' %}" class="btn"><span>Get In Touch</span><i class="fa-regular fa-arrow-right"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                                                            <div class="order-wrap gfc-fs2">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-8">
+                                                                                                        <div class="ticker">Need expert assistance? Get in touch with us</div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <a href="{% url 'main:contact' %}" class="btn"><span>Get In Touch</span><i class="fa-regular fa-arrow-right"></i></a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
 
-                                        <!-- Styles for Product Gallery and Brand Carousel -->
-                                        <style>
-                                            .product-gallery-section { padding: 30px 0; }
-                                            .gallery-title { font-size: 28px; font-weight: 700; margin-bottom: 35px; color: #333; }
-                                            .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-                                            .gallery-item { display: flex; flex-direction: column; }
-                                            .gallery-img-box { width: 100%; height: 200px; overflow: hidden; border-radius: 8px; }
-                                            .gallery-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-                                            .gallery-item:hover .gallery-img-box img { transform: scale(1.05); }
-                                            .product-info { padding: 15px 0; text-align: center; }
-                                            .product-info h4 { margin: 0; font-size: 14px; font-weight: 600; color: #333; }
+                                                                                        <!-- Styles for Product Gallery and Brand Carousel -->
+                                                                                        <style>
+                                                                                            .product-gallery-section { padding: 30px 0; }
+                                                                                            .gallery-title { font-size: 28px; font-weight: 700; margin-bottom: 35px; color: #333; }
+                                                                                            .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+                                                                                            .gallery-item { display: flex; flex-direction: column; }
+                                                                                            .gallery-img-box { width: 100%; height: 200px; overflow: hidden; border-radius: 8px; }
+                                                                                            .gallery-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+                                                                                            .gallery-item:hover .gallery-img-box img { transform: scale(1.05); }
+                                                                                            .product-info { padding: 15px 0; text-align: center; }
+                                                                                            .product-info h4 { margin: 0; font-size: 14px; font-weight: 600; color: #333; }
 
-                                            .brand-carousel-section { background: #f9f9f9; border-radius: 10px; }
-                                            .brand-title { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 40px; color: #333; }
-                                            .brand-carousel-wrapper { overflow: hidden; position: relative; padding: 10px 0; }
-                                            .brand-carousel { display: flex; gap: 40px; animation: scroll 20s linear infinite; }
-                                            .brand-carousel:hover { animation-play-state: paused; }
-                                            .brand-item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; min-width: 180px; }
-                                            .brand-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
-                                            .brand-item img { max-width: 150px; max-height: 80px; object-fit: contain; transition: filter 0.3s ease; }
-                                            @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+                                                                                            .brand-carousel-section { background: #f9f9f9; border-radius: 10px; }
+                                                                                            .brand-title { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 40px; color: #333; }
+                                                                                            .brand-carousel-wrapper { overflow: hidden; position: relative; padding: 10px 0; }
+                                                                                            .brand-carousel { display: flex; gap: 40px; animation: scroll 20s linear infinite; }
+                                                                                            .brand-carousel:hover { animation-play-state: paused; }
+                                                                                            .brand-item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; min-width: 180px; }
+                                                                                            .brand-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+                                                                                            .brand-item img { max-width: 150px; max-height: 80px; object-fit: contain; transition: filter 0.3s ease; }
+                                                                                            @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-                                            @media (max-width: 992px) {
-                                                .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-                                                .gallery-img-box { height: 220px; }
-                                                .brand-item { min-width: 150px; }
-                                            }
-                                            @media (max-width: 576px) {
-                                                .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
-                                                .gallery-img-box { height: 250px; }
-                                                .product-info h4 { font-size: 16px; }
-                                                .brand-title { font-size: 24px; }
-                                                .brand-carousel { gap: 20px; }
-                                                .brand-item { min-width: 130px; padding: 15px; }
-                                                .brand-item img { max-width: 120px; max-height: 60px; }
-                                            }
-                                        </style>
+                                                                                            @media (max-width: 992px) {
+                                                                                                .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+                                                                                                .gallery-img-box { height: 220px; }
+                                                                                                .brand-item { min-width: 150px; }
+                                                                                            }
+                                                                                            @media (max-width: 576px) {
+                                                                                                .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+                                                                                                .gallery-img-box { height: 250px; }
+                                                                                                .product-info h4 { font-size: 16px; }
+                                                                                                .brand-title { font-size: 24px; }
+                                                                                                .brand-carousel { gap: 20px; }
+                                                                                                .brand-item { min-width: 130px; padding: 15px; }
+                                                                                                .brand-item img { max-width: 120px; max-height: 60px; }
+                                                                                            }
+                                                                                        </style>
 
-                                        <!-- Right box section - Other Details -->
-                                        <div class="col-lg-12">
-                                            <div class="sb-container fixed-bar">
-                                                <div class="boxed-content">
-                                                    <h3 class="bold-text">Other Details <span class="bt_dec"></span></h3>
-                                                    <div class="piechart-holder animaper" data-skcolor="#F7B90F">
-                                                        {% if venture.details.all %}
-                                                        {% for detail in venture.details.all|slice:":3" %}
-                                                        <div class="piechart-container">
-                                                            <div class="piechart-container-title">
-                                                                <h4>{{ detail.title }}</h4>
-                                                                <p>{{ detail.description }}</p>
-                                                            </div>
-                                                        </div>
-                                                        {% endfor %}
-                                                        {% else %}
-                                                        <div class="piechart-container">
-                                                            <div class="piechart-container-title">
-                                                                <h4>Quality Service</h4>
-                                                                <p>Reliable components designed for smooth performance and improved efficiency.</p>
-                                                            </div>
-                                                        </div>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
+                                                                                        <!-- Right box section - Other Details -->
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="sb-container fixed-bar">
+                                                                                                {% comment %} <div class="boxed-content">
+                                                                                                    <h3 class="bold-text">Other Details <span class="bt_dec"></span></h3>
+                                                                                                    <div class="piechart-holder animaper" data-skcolor="#F7B90F">
+                                                                                                        {% if venture.details.all %}
+                                                                                                        {% for detail in venture.details.all|slice:":3" %}
+                                                                                                        <div class="piechart-container">
+                                                                                                            <div class="piechart-container-title">
+                                                                                                                <h4>{{ detail.title }}</h4>
+                                                                                                                <p>{{ detail.description }}</p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        {% endfor %}
+                                                                                                        {% else %}
+                                                                                                        <div class="piechart-container">
+                                                                                                            <div class="piechart-container-title">
+                                                                                                                <h4>Quality Service</h4>
+                                                                                                                <p>Reliable components designed for smooth performance and improved efficiency.</p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        {% endif %}
+                                                                                                    </div>
+                                                                                                </div> {% endcomment %}
 
-                                                <!-- ════════════════════════════════════════════════
-                                                     AREA OF WORKING
-                                                ════════════════════════════════════════════════ -->
-                                                <div class="boxed-content">
-                                                <style>
-                                                    .aow-wrap *, .aow-wrap *::before, .aow-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
-                                                    .aow-wrap { background: #f8fafc; padding: 10px; }
-                                                    @media (min-width: 768px)  { .aow-wrap { padding: 16px; } }
-                                                    @media (min-width: 1024px) { .aow-wrap { padding: 20px; } }
-                                                    .aow-grid { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
-                                                    @media (min-width: 1024px) { .aow-grid { grid-template-columns: 300px 1fr; gap: 16px; } }
-                                                    .aow-panel { background: #fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.07); border: 1px solid #e5e7eb; overflow: hidden; }
-                                                    .aow-sidebar { display: flex; flex-direction: column; padding: 14px; height: 440px; }
-                                                    @media (min-width: 768px)  { .aow-sidebar { height: 500px; padding: 18px; } }
-                                                    @media (min-width: 1024px) { .aow-sidebar { height: 100%; padding: 20px; } }
-                                                    .aow-sidebar-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
-                                                    .aow-hr { border: 1px solid #164476; margin-bottom: 10px; }
-                                                    .aow-filter-row { display: flex; align-items: center; justify-content: space-between; background: #f3f4f6; padding: 8px 11px; border-radius: 9px; margin-bottom: 10px; border: 1px solid #e9eaec; flex-shrink: 0; }
-                                                    .aow-filter-label { font-size: 12px; font-weight: 600; color: #374151; }
-                                                    .aow-switch { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }
-                                                    .aow-switch input { opacity: 0; width: 0; height: 0; }
-                                                    .aow-slider { position: absolute; cursor: pointer; inset: 0; background: #d1d5db; border-radius: 20px; transition: .3s; }
-                                                    .aow-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .3s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
-                                                    .aow-switch input:checked + .aow-slider { background: #164476; }
-                                                    .aow-switch input:checked + .aow-slider::before { transform: translateX(16px); }
-                                                    .aow-stats { display: flex; gap: 8px; margin-bottom: 10px; flex-shrink: 0; }
-                                                    .aow-chip { flex: 1; text-align: center; padding: 7px 4px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fafafa; }
-                                                    .aow-chip .num { font-size: 16px; font-weight: 800; color: #164476; line-height: 1; }
-                                                    .aow-chip .lbl { font-size: 9px; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; margin-top: 3px; }
-                                                    .aow-chip.green .num { color: #059669; }
-                                                    .aow-chip.red   .num { color: #dc2626; }
-                                                    .aow-list { overflow-y: auto; flex: 1; padding-right: 3px; }
-                                                    .aow-list::-webkit-scrollbar { width: 4px; }
-                                                    .aow-list::-webkit-scrollbar-track { background: transparent; }
-                                                    .aow-list::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
-                                                    .aow-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 11px; border-radius: 9px; margin-bottom: 5px; cursor: pointer; border: 1px solid transparent; transition: background .15s, border-color .15s; }
-                                                    .aow-item:hover { background: #f3f4f6; border-color: #e5e7eb; }
-                                                    .aow-item.active { background: #164476; border-color: transparent; box-shadow: 0 3px 10px rgba(22,68,118,.22); }
-                                                    .aow-item.active .aow-d-name { color: #fff; font-weight: 700; }
-                                                    .aow-d-name { font-size: 13px; font-weight: 500; color: #374151; }
-                                                    .aow-badge { font-size: 8px; background: rgba(255,255,255,.22); padding: 3px 8px; border-radius: 5px; font-weight: 700; color: #fff; letter-spacing: .3px; text-transform: uppercase; }
-                                                    .aow-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-                                                    .aow-empty { text-align: center; padding: 30px 16px; color: #9ca3af; font-size: 13px; font-weight: 500; }
-                                                    .aow-imgpanel { display: flex; flex-direction: column; padding: 14px; min-height: 300px; }
-                                                    @media (min-width: 768px)  { .aow-imgpanel { padding: 18px; min-height: 400px; } }
-                                                    @media (min-width: 1024px) { .aow-imgpanel { padding: 20px; height: 100%; min-height: 0; } }
-                                                    .aow-imgpanel-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
-                                                    .aow-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; position: relative; }
-                                                    #aowMapImg { width: 100%; height: 100%; object-fit: contain; border-radius: 9px; display: none; max-height: 540px; transition: opacity .3s ease; }
-                                                    .aow-no-img { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 220px; border: 2px dashed #e5e7eb; border-radius: 12px; color: #9ca3af; font-size: 13px; font-weight: 500; text-align: center; padding: 20px; }
-                                                    .aow-no-img svg { opacity: .3; }
-                                                    .aow-img-label { margin-top: 10px; text-align: center; font-size: 13px; font-weight: 700; color: #164476; min-height: 20px; }
-                                                </style>
+                                                                                                <!-- ════════════════════════════════════════════════
+                                                                                                    AREA OF WORKING
+                                                                                                ════════════════════════════════════════════════ -->
+                                                                                                <div class="boxed-content">
+                                                                                                <style>
+                                                                                                    .aow-wrap *, .aow-wrap *::before, .aow-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
+                                                                                                    .aow-wrap { background: #f8fafc; padding: 10px; }
+                                                                                                    @media (min-width: 768px)  { .aow-wrap { padding: 16px; } }
+                                                                                                    @media (min-width: 1024px) { .aow-wrap { padding: 20px; } }
+                                                                                                    .aow-grid { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
+                                                                                                    @media (min-width: 1024px) { .aow-grid { grid-template-columns: 300px 1fr; gap: 16px; } }
+                                                                                                    .aow-panel { background: #fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.07); border: 1px solid #e5e7eb; overflow: hidden; }
+                                                                                                    .aow-sidebar { display: flex; flex-direction: column; padding: 14px; height: 440px; }
+                                                                                                    @media (min-width: 768px)  { .aow-sidebar { height: 500px; padding: 18px; } }
+                                                                                                    @media (min-width: 1024px) { .aow-sidebar { height: 100%; padding: 20px; } }
+                                                                                                    .aow-sidebar-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
+                                                                                                    .aow-hr { border: 1px solid #164476; margin-bottom: 10px; }
+                                                                                                    .aow-filter-row { display: flex; align-items: center; justify-content: space-between; background: #f3f4f6; padding: 8px 11px; border-radius: 9px; margin-bottom: 10px; border: 1px solid #e9eaec; flex-shrink: 0; }
+                                                                                                    .aow-filter-label { font-size: 12px; font-weight: 600; color: #374151; }
+                                                                                                    .aow-switch { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }
+                                                                                                    .aow-switch input { opacity: 0; width: 0; height: 0; }
+                                                                                                    .aow-slider { position: absolute; cursor: pointer; inset: 0; background: #d1d5db; border-radius: 20px; transition: .3s; }
+                                                                                                    .aow-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .3s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+                                                                                                    .aow-switch input:checked + .aow-slider { background: #164476; }
+                                                                                                    .aow-switch input:checked + .aow-slider::before { transform: translateX(16px); }
+                                                                                                    .aow-stats { display: flex; gap: 8px; margin-bottom: 10px; flex-shrink: 0; }
+                                                                                                    .aow-chip { flex: 1; text-align: center; padding: 7px 4px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fafafa; }
+                                                                                                    .aow-chip .num { font-size: 16px; font-weight: 800; color: #164476; line-height: 1; }
+                                                                                                    .aow-chip .lbl { font-size: 9px; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; margin-top: 3px; }
+                                                                                                    .aow-chip.green .num { color: #059669; }
+                                                                                                    .aow-chip.red   .num { color: #dc2626; }
+                                                                                                    .aow-list { overflow-y: auto; flex: 1; padding-right: 3px; }
+                                                                                                    .aow-list::-webkit-scrollbar { width: 4px; }
+                                                                                                    .aow-list::-webkit-scrollbar-track { background: transparent; }
+                                                                                                    .aow-list::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+                                                                                                    .aow-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 11px; border-radius: 9px; margin-bottom: 5px; cursor: pointer; border: 1px solid transparent; transition: background .15s, border-color .15s; }
+                                                                                                    .aow-item:hover { background: #f3f4f6; border-color: #e5e7eb; }
+                                                                                                    .aow-item.active { background: #164476; border-color: transparent; box-shadow: 0 3px 10px rgba(22,68,118,.22); }
+                                                                                                    .aow-item.active .aow-d-name { color: #fff; font-weight: 700; }
+                                                                                                    .aow-d-name { font-size: 13px; font-weight: 500; color: #374151; }
+                                                                                                    .aow-badge { font-size: 8px; background: rgba(255,255,255,.22); padding: 3px 8px; border-radius: 5px; font-weight: 700; color: #fff; letter-spacing: .3px; text-transform: uppercase; }
+                                                                                                    .aow-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+                                                                                                    .aow-empty { text-align: center; padding: 30px 16px; color: #9ca3af; font-size: 13px; font-weight: 500; }
+                                                                                                    .aow-imgpanel { display: flex; flex-direction: column; padding: 14px; min-height: 300px; }
+                                                                                                    @media (min-width: 768px)  { .aow-imgpanel { padding: 18px; min-height: 400px; } }
+                                                                                                    @media (min-width: 1024px) { .aow-imgpanel { padding: 20px; height: 100%; min-height: 0; } }
+                                                                                                    .aow-imgpanel-title { font-size: 15px; font-weight: 800; color: #1f2937; margin-bottom: 3px; }
+                                                                                                    .aow-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; position: relative; }
+                                                                                                    #aowMapImg { width: 100%; height: 100%; object-fit: contain; border-radius: 9px; display: none; max-height: 540px; transition: opacity .3s ease; }
+                                                                                                    .aow-no-img { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 220px; border: 2px dashed #e5e7eb; border-radius: 12px; color: #9ca3af; font-size: 13px; font-weight: 500; text-align: center; padding: 20px; }
+                                                                                                    .aow-no-img svg { opacity: .3; }
+                                                                                                    .aow-img-label { margin-top: 10px; text-align: center; font-size: 13px; font-weight: 700; color: #164476; min-height: 20px; }
+                                                                                                </style>
 
-                                                <script>
-                                                    const AOW_AREAS = [
-                                                    {% for a in areas_of_working %}
-                                                    {
-                                                        name        : "{{ a.name|escapejs }}",
-                                                        operational : {{ a.is_operational|yesno:"true,false" }},
-                                                        image       : "{% if a.area_image %}{{ a.area_image.url|escapejs }}{% endif %}"
-                                                    }{% if not forloop.last %},{% endif %}
-                                                    {% empty %}
-                                                    {% endfor %}
-                                                    ];
-                                                </script>
+                                                                                                <script>
+                                                                                                    const AOW_AREAS = [
+                                                                                                    {% for a in areas_of_working %}
+                                                                                                    {
+                                                                                                        name        : "{{ a.name|escapejs }}",
+                                                                                                        operational : {{ a.is_operational|yesno:"true,false" }},
+                                                                                                        image       : "{% if a.area_image %}{{ a.area_image.url|escapejs }}{% endif %}"
+                                                                                                    }{% if not forloop.last %},{% endif %}
+                                                                                                    {% empty %}
+                                                                                                    {% endfor %}
+                                                                                                    ];
+                                                                                                </script>
 
-                                                <div class="aow-wrap">
-                                                    <div class="aow-grid">
+                                                                                                <div class="aow-wrap">
+                                                                                                    <div class="aow-grid">
 
-                                                    <!-- LEFT: Area list -->
-                                                    <div class="aow-panel aow-sidebar">
-                                                        <h2 class="aow-sidebar-title">Area of Working</h2>
-                                                        <hr class="aow-hr">
-                                                        <div class="aow-filter-row">
-                                                            <span class="aow-filter-label">Show Active Only</span>
-                                                            <label class="aow-switch">
-                                                                <input type="checkbox" id="aowFilterToggle">
-                                                                <span class="aow-slider"></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="aow-stats">
-                                                            <div class="aow-chip"><div class="num" id="aowTotal">0</div><div class="lbl">Total</div></div>
-                                                            <div class="aow-chip green"><div class="num" id="aowActive">0</div><div class="lbl">Active</div></div>
-                                                            <div class="aow-chip red"><div class="num" id="aowInactive">0</div><div class="lbl">Inactive</div></div>
-                                                        </div>
-                                                        <div class="aow-list" id="aowList"></div>
-                                                    </div>
+                                                                                                    <!-- LEFT: Area list -->
+                                                                                                    <div class="aow-panel aow-sidebar">
+                                                                                                        <h2 class="aow-sidebar-title">Area of Working</h2>
+                                                                                                        <hr class="aow-hr">
+                                                                                                        <div class="aow-filter-row">
+                                                                                                            <span class="aow-filter-label">Show Active Only</span>
+                                                                                                            <label class="aow-switch">
+                                                                                                                <input type="checkbox" id="aowFilterToggle">
+                                                                                                                <span class="aow-slider"></span>
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="aow-stats">
+                                                                                                            <div class="aow-chip"><div class="num" id="aowTotal">0</div><div class="lbl">Total</div></div>
+                                                                                                            <div class="aow-chip green"><div class="num" id="aowActive">0</div><div class="lbl">Active</div></div>
+                                                                                                            <div class="aow-chip red"><div class="num" id="aowInactive">0</div><div class="lbl">Inactive</div></div>
+                                                                                                        </div>
+                                                                                                        <div class="aow-list" id="aowList"></div>
+                                                                                                    </div>
 
-                                                    <!-- RIGHT: Image panel -->
-                                                    <div class="aow-panel aow-imgpanel">
-                                                        <h2 class="aow-imgpanel-title">Area of Working</h2>
-                                                        <hr class="aow-hr">
-                                                        <div class="aow-img-wrap">
-                                                            <img id="aowMapImg" src="" alt="Area Map">
-                                                            <div class="aow-no-img" id="aowNoImg">
-                                                                <svg width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="#164476" stroke-width="1.3">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l5.447-2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 13V7"/>
-                                                                </svg>
-                                                                <span id="aowNoImgText">Select an area to view its map</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="aow-img-label" id="aowImgLabel"></div>
-                                                    </div>
+                                                                                                    <!-- RIGHT: Image panel -->
+                                                                                                    <div class="aow-panel aow-imgpanel">
+                                                                                                        <h2 class="aow-imgpanel-title">Area of Working</h2>
+                                                                                                        <hr class="aow-hr">
+                                                                                                        <div class="aow-img-wrap">
+                                                                                                            <img id="aowMapImg" src="" alt="Area Map">
+                                                                                                            <div class="aow-no-img" id="aowNoImg">
+                                                                                                                <svg width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="#164476" stroke-width="1.3">
+                                                                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l5.447-2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 13V7"/>
+                                                                                                                </svg>
+                                                                                                                <span id="aowNoImgText">Select an area to view its map</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="aow-img-label" id="aowImgLabel"></div>
+                                                                                                    </div>
 
-                                                    </div>
-                                                </div>
+                                                                                                    </div>
+                                                                                                </div>
 
-                                                <script>
-                                                (function () {
-                                                    const listEl    = document.getElementById('aowList');
-                                                    const toggleEl  = document.getElementById('aowFilterToggle');
-                                                    const totalEl   = document.getElementById('aowTotal');
-                                                    const activeEl  = document.getElementById('aowActive');
-                                                    const inactEl   = document.getElementById('aowInactive');
-                                                    const mapImg    = document.getElementById('aowMapImg');
-                                                    const noImgEl   = document.getElementById('aowNoImg');
-                                                    const noImgText = document.getElementById('aowNoImgText');
-                                                    const imgLabel  = document.getElementById('aowImgLabel');
+                                                                                                <script>
+                                                                                                (function () {
+                                                                                                    const listEl    = document.getElementById('aowList');
+                                                                                                    const toggleEl  = document.getElementById('aowFilterToggle');
+                                                                                                    const totalEl   = document.getElementById('aowTotal');
+                                                                                                    const activeEl  = document.getElementById('aowActive');
+                                                                                                    const inactEl   = document.getElementById('aowInactive');
+                                                                                                    const mapImg    = document.getElementById('aowMapImg');
+                                                                                                    const noImgEl   = document.getElementById('aowNoImg');
+                                                                                                    const noImgText = document.getElementById('aowNoImgText');
+                                                                                                    const imgLabel  = document.getElementById('aowImgLabel');
 
-                                                    let selectedIdx   = -1;
-                                                    let filteredAreas = [];
+                                                                                                    let selectedIdx   = -1;
+                                                                                                    let filteredAreas = [];
 
-                                                    function showImage(area) {
-                                                        if (area && area.image) {
-                                                            mapImg.style.opacity = '0';
-                                                            mapImg.style.display = 'block';
-                                                            noImgEl.style.display = 'none';
-                                                            mapImg.src = area.image;
-                                                            mapImg.onload  = () => { mapImg.style.opacity = '1'; };
-                                                            mapImg.onerror = () => { mapImg.style.display = 'none'; noImgEl.style.display = 'flex'; noImgText.textContent = 'Image not available'; };
-                                                            imgLabel.textContent = area.name;
-                                                        } else if (area) {
-                                                            mapImg.style.display = 'none';
-                                                            noImgEl.style.display = 'flex';
-                                                            noImgText.textContent = 'No image uploaded for "' + area.name + '"';
-                                                            imgLabel.textContent  = area.name;
-                                                        } else {
-                                                            mapImg.style.display = 'none';
-                                                            noImgEl.style.display = 'flex';
-                                                            noImgText.textContent = 'Select an area to view its map';
-                                                            imgLabel.textContent  = '';
-                                                        }
-                                                    }
+                                                                                                    function showImage(area) {
+                                                                                                        if (area && area.image) {
+                                                                                                            mapImg.style.opacity = '0';
+                                                                                                            mapImg.style.display = 'block';
+                                                                                                            noImgEl.style.display = 'none';
+                                                                                                            mapImg.src = area.image;
+                                                                                                            mapImg.onload  = () => { mapImg.style.opacity = '1'; };
+                                                                                                            mapImg.onerror = () => { mapImg.style.display = 'none'; noImgEl.style.display = 'flex'; noImgText.textContent = 'Image not available'; };
+                                                                                                            imgLabel.textContent = area.name;
+                                                                                                        } else if (area) {
+                                                                                                            mapImg.style.display = 'none';
+                                                                                                            noImgEl.style.display = 'flex';
+                                                                                                            noImgText.textContent = 'No image uploaded for "' + area.name + '"';
+                                                                                                            imgLabel.textContent  = area.name;
+                                                                                                        } else {
+                                                                                                            mapImg.style.display = 'none';
+                                                                                                            noImgEl.style.display = 'flex';
+                                                                                                            noImgText.textContent = 'Select an area to view its map';
+                                                                                                            imgLabel.textContent  = '';
+                                                                                                        }
+                                                                                                    }
 
-                                                    function selectArea(idx) {
-                                                        selectedIdx = idx;
-                                                        showImage(filteredAreas[idx] || null);
-                                                        renderList();
-                                                    }
+                                                                                                    function selectArea(idx) {
+                                                                                                        selectedIdx = idx;
+                                                                                                        showImage(filteredAreas[idx] || null);
+                                                                                                        renderList();
+                                                                                                    }
 
-                                                    function renderList() {
-                                                        const activeOnly = toggleEl.checked;
-                                                        filteredAreas = activeOnly ? AOW_AREAS.filter(a => a.operational) : AOW_AREAS;
+                                                                                                    function renderList() {
+                                                                                                        const activeOnly = toggleEl.checked;
+                                                                                                        filteredAreas = activeOnly ? AOW_AREAS.filter(a => a.operational) : AOW_AREAS;
 
-                                                        totalEl.textContent  = filteredAreas.length;
-                                                        activeEl.textContent = filteredAreas.filter(a =>  a.operational).length;
-                                                        inactEl.textContent  = filteredAreas.filter(a => !a.operational).length;
+                                                                                                        totalEl.textContent  = filteredAreas.length;
+                                                                                                        activeEl.textContent = filteredAreas.filter(a =>  a.operational).length;
+                                                                                                        inactEl.textContent  = filteredAreas.filter(a => !a.operational).length;
 
-                                                        if (selectedIdx >= filteredAreas.length) {
-                                                            selectedIdx = filteredAreas.length > 0 ? 0 : -1;
-                                                            showImage(selectedIdx >= 0 ? filteredAreas[selectedIdx] : null);
-                                                        }
+                                                                                                        if (selectedIdx >= filteredAreas.length) {
+                                                                                                            selectedIdx = filteredAreas.length > 0 ? 0 : -1;
+                                                                                                            showImage(selectedIdx >= 0 ? filteredAreas[selectedIdx] : null);
+                                                                                                        }
 
-                                                        if (filteredAreas.length === 0) {
-                                                            listEl.innerHTML = '<div class="aow-empty">No areas found.</div>';
-                                                            return;
-                                                        }
+                                                                                                        if (filteredAreas.length === 0) {
+                                                                                                            listEl.innerHTML = '<div class="aow-empty">No areas found.</div>';
+                                                                                                            return;
+                                                                                                        }
 
-                                                        listEl.innerHTML = filteredAreas.map(function (a, i) {
-                                                            const isActive = (i === selectedIdx);
-                                                            const dotColor = a.operational ? '#10b981' : '#ef4444';
-                                                            const right    = isActive
-                                                                ? `<span class="aow-badge">Selected</span>`
-                                                                : `<span class="aow-dot" style="background:${dotColor}"></span>`;
-                                                            return `<div class="aow-item${isActive ? ' active' : ''}" onclick="AOW_select(${i})">
-                                                                <div style="display:flex;align-items:center;gap:9px;">
-                                                                    <input type="checkbox" ${a.operational ? 'checked' : ''} disabled style="width:14px;height:14px;accent-color:#164476;pointer-events:none;flex-shrink:0;">
-                                                                    <span class="aow-d-name">${a.name}</span>
-                                                                </div>
-                                                                ${right}
-                                                            </div>`;
-                                                        }).join('');
-                                                    }
+                                                                                                        listEl.innerHTML = filteredAreas.map(function (a, i) {
+                                                                                                            const isActive = (i === selectedIdx);
+                                                                                                            const dotColor = a.operational ? '#10b981' : '#ef4444';
+                                                                                                            const right    = isActive
+                                                                                                                ? `<span class="aow-badge">Selected</span>`
+                                                                                                                : `<span class="aow-dot" style="background:${dotColor}"></span>`;
+                                                                                                            return `<div class="aow-item${isActive ? ' active' : ''}" onclick="AOW_select(${i})">
+                                                                                                                <div style="display:flex;align-items:center;gap:9px;">
+                                                                                                                    <input type="checkbox" ${a.operational ? 'checked' : ''} disabled style="width:14px;height:14px;accent-color:#164476;pointer-events:none;flex-shrink:0;">
+                                                                                                                    <span class="aow-d-name">${a.name}</span>
+                                                                                                                </div>
+                                                                                                                ${right}
+                                                                                                            </div>`;
+                                                                                                        }).join('');
+                                                                                                    }
 
-                                                    window.AOW_select = selectArea;
+                                                                                                    window.AOW_select = selectArea;
 
-                                                    toggleEl.addEventListener('change', function () {
-                                                        selectedIdx = 0;
-                                                        renderList();
-                                                        showImage(filteredAreas.length > 0 ? filteredAreas[0] : null);
-                                                    });
+                                                                                                    toggleEl.addEventListener('change', function () {
+                                                                                                        selectedIdx = 0;
+                                                                                                        renderList();
+                                                                                                        showImage(filteredAreas.length > 0 ? filteredAreas[0] : null);
+                                                                                                    });
 
-                                                    if (AOW_AREAS.length > 0) {
-                                                        selectedIdx = 0;
-                                                        renderList();
-                                                        showImage(AOW_AREAS[0]);
-                                                    } else {
-                                                        renderList();
-                                                        showImage(null);
-                                                    }
-                                                })();
-                                                </script>
+                                                                                                    if (AOW_AREAS.length > 0) {
+                                                                                                        selectedIdx = 0;
+                                                                                                        renderList();
+                                                                                                        showImage(AOW_AREAS[0]);
+                                                                                                    } else {
+                                                                                                        renderList();
+                                                                                                        showImage(null);
+                                                                                                    }
+                                                                                                })();
+                                                                                                </script>
 
-                                                </div>
-                                                <!-- END Area of Working -->
-                                           
-                                            </div>
+                                                                                                </div>
+                                                                                                <!-- END Area of Working -->
+                                                                                        
+                                                                                            </div>
 
-                                            <!-- Gallery Section -->
-                                            {% if venture.gallery.all %}
-                                            <div class="single-box-content">
-                                                <div class="det-box">
-                                                    <div class="det-box-ietm det-box-ietm_single">
-                                                        <h3 class="bold-text">Programs Gallery<span class="bt_dec"></span></h3>
-                                                        <p>Explore snapshots from our operations and events.</p>
-                                                    </div>
-                                                </div>
+                                                                                            <!-- Gallery Section -->
+                                                                                            {% if venture.gallery.all %}
+                                                                                            <div class="single-box-content">
+                                                                                                <div class="det-box">
+                                                                                                    <div class="det-box-ietm det-box-ietm_single">
+                                                                                                        <h3 class="bold-text">Programs Gallery<span class="bt_dec"></span></h3>
+                                                                                                        <p>Explore snapshots from our operations and events.</p>
+                                                                                                    </div>
+                                                                                                </div>
 
-                                                <section class="boxed-content company-events-section">
-                                                    <div class="company-events-container">
-                                                        <div class="events-filter-container">
-                                                            <div class="events-select-wrapper">
-                                                                <select id="eventsYearSelect" class="events-year-dropdown">
-                                                                    <option value="all">All Years</option>
-                                                                    {% regroup venture.gallery.all by year as gallery_years %}
-                                                                    {% for year_group in gallery_years %}
-                                                                    <option value="{{ year_group.grouper }}">{{ year_group.grouper }}</option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                                <div class="events-dropdown-arrow">
-                                                                    <i class="fas fa-chevron-down"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="events-filter-display">
-                                                                <span class="events-display-label">Showing:</span>
-                                                                <span class="events-display-year" id="eventsCurrentYearDisplay">All Years</span>
-                                                                <span class="events-display-count" id="eventsProjectCountDisplay">({{ venture.gallery.all.count }} items)</span>
-                                                            </div>
-                                                        </div>
+                                                                                                <section class="boxed-content company-events-section">
+                                                                                                    <div class="company-events-container">
+                                                                                                        <div class="events-filter-container">
+                                                                                                            <div class="events-select-wrapper">
+                                                                                                                <select id="eventsYearSelect" class="events-year-dropdown">
+                                                                                                                    <option value="all">All Years</option>
+                                                                                                                    {% regroup venture.gallery.all by year as gallery_years %}
+                                                                                                                    {% for year_group in gallery_years %}
+                                                                                                                    <option value="{{ year_group.grouper }}">{{ year_group.grouper }}</option>
+                                                                                                                    {% endfor %}
+                                                                                                                </select>
+                                                                                                                <div class="events-dropdown-arrow">
+                                                                                                                    <i class="fas fa-chevron-down"></i>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="events-filter-display">
+                                                                                                                <span class="events-display-label">Showing:</span>
+                                                                                                                <span class="events-display-year" id="eventsCurrentYearDisplay">All Years</span>
+                                                                                                                <span class="events-display-count" id="eventsProjectCountDisplay">({{ venture.gallery.all.count }} items)</span>
+                                                                                                            </div>
+                                                                                                        </div>
 
-                                                        <div class="company-events-gallery">
-                                                            <div class="events-grid-four">
-                                                                {% for item in venture.gallery.all %}
-                                                                <div class="company-event-card" data-event-year="{{ item.year }}">
-                                                                    <div class="event-media">
-                                                                        <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                                                                        <div class="event-year-badge">{{ item.year }}</div>
+                                                                                                        <div class="company-events-gallery">
+                                                                                                            <div class="events-grid-four">
+                                                                                                                {% for item in venture.gallery.all %}
+                                                                                                                <div class="company-event-card" data-event-year="{{ item.year }}">
+                                                                                                                    <div class="event-media">
+                                                                                                                        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                                                                                                                        <div class="event-year-badge">{{ item.year }}</div>
+                                                                                                                    </div>
+                                                                                                                    <div class="event-details">
+                                                                                                                        <h3 class="event-title">{{ item.title }}</h3>
+                                                                                                                        {% if item.description %}
+                                                                                                                        <p class="event-description">{{ item.description }}</p>
+                                                                                                                        {% endif %}
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                {% endfor %}
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </section>
+
+                                                                                                <style>
+                                                                                                    .company-events-section { padding: 3rem 0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); font-family: 'Inter', system-ui, sans-serif; }
+                                                                                                    .company-events-container { max-width: 1400px; margin: 0 auto; padding: 0 1.25rem; }
+                                                                                                    .events-filter-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; padding: 1rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+                                                                                                    .events-select-wrapper { position: relative; min-width: 200px; }
+                                                                                                    .events-year-dropdown { width: 100%; padding: 0.645rem 1.10rem; font-size: 1rem; font-weight: 500; color: #1e293b; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 0.75rem; appearance: none; cursor: pointer; transition: all 0.3s ease; }
+                                                                                                    .events-year-dropdown:focus { outline: none; border-color: #164476; box-shadow: 0 0 0 3px rgba(22,68,118,0.1); }
+                                                                                                    .events-dropdown-arrow { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; pointer-events: none; }
+                                                                                                    .events-filter-display { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+                                                                                                    .events-display-label { color: #64748b; }
+                                                                                                    .events-display-year { color: #164476; font-weight: 600; font-size: 1rem; }
+                                                                                                    .events-display-count { color: #94a3b8; font-size: 0.7rem; }
+                                                                                                    .events-grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+                                                                                                    .company-event-card { background: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+                                                                                                    .company-event-card.event-hidden { display: none; }
+                                                                                                    .company-event-card:hover { transform: translateY(-0.5rem); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+                                                                                                    .event-media { position: relative; overflow: hidden; height: 12rem; }
+                                                                                                    .event-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+                                                                                                    .company-event-card:hover .event-media img { transform: scale(1.08); }
+                                                                                                    .event-year-badge { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); color: #164476; padding: 0.25rem 0.5rem; border-radius: 0.75rem; font-size: 0.7rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+                                                                                                    .event-details { padding: 1rem; }
+                                                                                                    .event-title { font-size: 1rem; font-weight: 600; color: #1e293b; margin-bottom: 0.5rem; line-height: 1.3; }
+                                                                                                    .event-description { color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+                                                                                                    @media (max-width: 1200px) { .events-grid-four { grid-template-columns: repeat(3, 1fr); } }
+                                                                                                    @media (max-width: 768px) { .events-filter-container { flex-direction: column; gap: 1rem; } .events-grid-four { grid-template-columns: repeat(2, 1fr); } }
+                                                                                                    @media (max-width: 480px) { .events-grid-four { grid-template-columns: 1fr; } }
+                                                                                                </style>
+
+                                                                                                <script>
+                                                                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                                                                        const eventsYearSelect          = document.getElementById('eventsYearSelect');
+                                                                                                        const eventsCurrentYearDisplay  = document.getElementById('eventsCurrentYearDisplay');
+                                                                                                        const eventsProjectCountDisplay = document.getElementById('eventsProjectCountDisplay');
+                                                                                                        const companyEventCards         = document.querySelectorAll('.company-event-card');
+                                                                                                        
+                                                                                                        eventsYearSelect.addEventListener('change', function() {
+                                                                                                            filterCompanyEvents(this.value);
+                                                                                                        });
+                                                                                                        
+                                                                                                        function filterCompanyEvents(year) {
+                                                                                                            let visibleCount = 0;
+                                                                                                            eventsCurrentYearDisplay.textContent = (year === 'all') ? 'All Years' : year;
+                                                                                                            companyEventCards.forEach(card => {
+                                                                                                                const cardYear = card.getAttribute('data-event-year');
+                                                                                                                if (year === 'all' || cardYear === year) {
+                                                                                                                    card.classList.remove('event-hidden');
+                                                                                                                    visibleCount++;
+                                                                                                                } else {
+                                                                                                                    card.classList.add('event-hidden');
+                                                                                                                }
+                                                                                                            });
+                                                                                                            eventsProjectCountDisplay.textContent = `(${visibleCount} item${visibleCount !== 1 ? 's' : ''})`;
+                                                                                                        }
+                                                                                                    });
+                                                                                                </script>
+                                                                                            </div>
+                                                                                            {% endif %}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="section-dec fs-wrapper">
+                                                                                    <div class="section-dec-top"></div>
+                                                                                    <div class="section-dec-border"></div>
+                                                                                    <div class="section-dec-bottom"></div>
+                                                                                    <div class="section-dec-top_line"></div>
+                                                                                    <div class="section-dec-bottom_line"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--section end-->
                                                                     </div>
-                                                                    <div class="event-details">
-                                                                        <h3 class="event-title">{{ item.title }}</h3>
-                                                                        {% if item.description %}
-                                                                        <p class="event-description">{{ item.description }}</p>
-                                                                        {% endif %}
-                                                                    </div>
+                                                                    <!-- content-box end -->
                                                                 </div>
-                                                                {% endfor %}
+                                                                <!-- content end -->
+                                                                
+                                                                <!-- footer -->
+                                                                <footer class="main-footer">
+                                                                    <div class="footer-inner">
+                                                                        <div class="container">
+                                                                            <div class="footer-inner-wrap">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="footer-widget">
+                                                                                            <div class="footer-header fl-wrap"> About US</div>
+                                                                                            <div class="footer_text footer-box">
+                                                                                                <p>Our team takes over everything, from an idea and concept development to realization. We believe in traditions and incorporate them within our innovations.</p>
+                                                                                                <div class="footer-contacts footer-box" style="margin-top: 10px;">
+                                                                                                    <ul>
+                                                                                                        <li><span>Call:</span><a href="tel:+918086699553">+91 8086699553</a></li>
+                                                                                                        <li><span>Email :</span><a href="mailto:manutomy@sparrowgroup.in" style="text-transform: lowercase;">manutomy@sparrowgroup.in</a></li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="footer-widget">
+                                                                                            <div class="footer-header fl-wrap"> quick links</div>
+                                                                                            <div class="footer-contacts footer-box">
+                                                                                                <ul>
+                                                                                                    <li><a href="{% url 'main:home' %}">Home</a></li>
+                                                                                                    <li><a href="{% url 'main:about' %}">Our Story</a></li>
+                                                                                                    <li><a href="{% url 'ventures:sector_detail' 'automotive' %}">Automotive</a></li>
+                                                                                                    <li><a href="{% url 'ventures:sector_detail' 'technology' %}">Technology & IT Industry</a></li>
+                                                                                                    <li><a href="{% url 'main:career' %}">Career</a></li>
+                                                                                                    <li><a href="{% url 'main:contact' %}">Contact</a></li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="footer-widget">
+                                                                                            <div class="footer-header">Head office</div>
+                                                                                            <div class="footer-box fl-wrap">
+                                                                                                <div>
+                                                                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3921.8312169528435!2d76.485506!3d10.592366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDM1JzMyLjUiTiA3NsKwMjknMDcuOCJF!5e0!3m2!1sen!2sin!4v1766057885729!5m2!1sen!2sin" width="80%" height="200" style="border:0;border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="footer-title-dec"><span>Sparrow International</span></div>
+                                                                        <div class="footer-inner_dec footer-inner_dec-left"></div>
+                                                                        <div class="footer-inner_dec footer-inner_dec-right"></div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="subbfooter">
+                                                                        <div class="container">
+                                                                            <div class="policy-box">
+                                                                                <span> &#169; Sparrow International 2026 / All rights reserved. </span>
+                                                                            </div>
+                                                                            <div class="to-top-btn to-top" style="color: #ffffff;">Back to top<i class="fal fa-long-arrow-up"></i></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </footer>
+                                                                <!-- footer end -->			
                                                             </div>
+                                                            <!-- wrapper end -->
                                                         </div>
-                                                    </div>
-                                                </section>
-
-                                                <style>
-                                                    .company-events-section { padding: 3rem 0; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); font-family: 'Inter', system-ui, sans-serif; }
-                                                    .company-events-container { max-width: 1400px; margin: 0 auto; padding: 0 1.25rem; }
-                                                    .events-filter-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; padding: 1rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-                                                    .events-select-wrapper { position: relative; min-width: 200px; }
-                                                    .events-year-dropdown { width: 100%; padding: 0.645rem 1.10rem; font-size: 1rem; font-weight: 500; color: #1e293b; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 0.75rem; appearance: none; cursor: pointer; transition: all 0.3s ease; }
-                                                    .events-year-dropdown:focus { outline: none; border-color: #164476; box-shadow: 0 0 0 3px rgba(22,68,118,0.1); }
-                                                    .events-dropdown-arrow { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; pointer-events: none; }
-                                                    .events-filter-display { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
-                                                    .events-display-label { color: #64748b; }
-                                                    .events-display-year { color: #164476; font-weight: 600; font-size: 1rem; }
-                                                    .events-display-count { color: #94a3b8; font-size: 0.7rem; }
-                                                    .events-grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-                                                    .company-event-card { background: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
-                                                    .company-event-card.event-hidden { display: none; }
-                                                    .company-event-card:hover { transform: translateY(-0.5rem); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-                                                    .event-media { position: relative; overflow: hidden; height: 12rem; }
-                                                    .event-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-                                                    .company-event-card:hover .event-media img { transform: scale(1.08); }
-                                                    .event-year-badge { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); color: #164476; padding: 0.25rem 0.5rem; border-radius: 0.75rem; font-size: 0.7rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-                                                    .event-details { padding: 1rem; }
-                                                    .event-title { font-size: 1rem; font-weight: 600; color: #1e293b; margin-bottom: 0.5rem; line-height: 1.3; }
-                                                    .event-description { color: #64748b; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-                                                    @media (max-width: 1200px) { .events-grid-four { grid-template-columns: repeat(3, 1fr); } }
-                                                    @media (max-width: 768px) { .events-filter-container { flex-direction: column; gap: 1rem; } .events-grid-four { grid-template-columns: repeat(2, 1fr); } }
-                                                    @media (max-width: 480px) { .events-grid-four { grid-template-columns: 1fr; } }
-                                                </style>
-
-                                                <script>
-                                                    document.addEventListener('DOMContentLoaded', function() {
-                                                        const eventsYearSelect          = document.getElementById('eventsYearSelect');
-                                                        const eventsCurrentYearDisplay  = document.getElementById('eventsCurrentYearDisplay');
-                                                        const eventsProjectCountDisplay = document.getElementById('eventsProjectCountDisplay');
-                                                        const companyEventCards         = document.querySelectorAll('.company-event-card');
+                                                        <!-- Main end -->
                                                         
-                                                        eventsYearSelect.addEventListener('change', function() {
-                                                            filterCompanyEvents(this.value);
-                                                        });
-                                                        
-                                                        function filterCompanyEvents(year) {
-                                                            let visibleCount = 0;
-                                                            eventsCurrentYearDisplay.textContent = (year === 'all') ? 'All Years' : year;
-                                                            companyEventCards.forEach(card => {
-                                                                const cardYear = card.getAttribute('data-event-year');
-                                                                if (year === 'all' || cardYear === year) {
-                                                                    card.classList.remove('event-hidden');
-                                                                    visibleCount++;
-                                                                } else {
-                                                                    card.classList.add('event-hidden');
-                                                                }
-                                                            });
-                                                            eventsProjectCountDisplay.textContent = `(${visibleCount} item${visibleCount !== 1 ? 's' : ''})`;
-                                                        }
-                                                    });
-                                                </script>
-                                            </div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section-dec fs-wrapper">
-                                    <div class="section-dec-top"></div>
-                                    <div class="section-dec-border"></div>
-                                    <div class="section-dec-bottom"></div>
-                                    <div class="section-dec-top_line"></div>
-                                    <div class="section-dec-bottom_line"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--section end-->
-                    </div>
-                    <!-- content-box end -->
-                </div>
-                <!-- content end -->
-                
-                <!-- footer -->
-                <footer class="main-footer">
-                    <div class="footer-inner">
-                        <div class="container">
-                            <div class="footer-inner-wrap">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="footer-widget">
-                                            <div class="footer-header fl-wrap"> About US</div>
-                                            <div class="footer_text footer-box">
-                                                <p>Our team takes over everything, from an idea and concept development to realization. We believe in traditions and incorporate them within our innovations.</p>
-                                                <div class="footer-contacts footer-box" style="margin-top: 10px;">
-                                                    <ul>
-                                                        <li><span>Call:</span><a href="tel:+918086699553">+91 8086699553</a></li>
-                                                        <li><span>Email :</span><a href="mailto:manutomy@sparrowgroup.in" style="text-transform: lowercase;">manutomy@sparrowgroup.in</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-4">
-                                        <div class="footer-widget">
-                                            <div class="footer-header fl-wrap"> quick links</div>
-                                            <div class="footer-contacts footer-box">
-                                                <ul>
-                                                    <li><a href="{% url 'main:home' %}">Home</a></li>
-                                                    <li><a href="{% url 'main:about' %}">Our Story</a></li>
-                                                    <li><a href="{% url 'ventures:sector_detail' 'automotive' %}">Automotive</a></li>
-                                                    <li><a href="{% url 'ventures:sector_detail' 'technology' %}">Technology & IT Industry</a></li>
-                                                    <li><a href="{% url 'main:career' %}">Career</a></li>
-                                                    <li><a href="{% url 'main:contact' %}">Contact</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-4">
-                                        <div class="footer-widget">
-                                            <div class="footer-header">Head office</div>
-                                            <div class="footer-box fl-wrap">
-                                                <div>
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3921.8312169528435!2d76.485506!3d10.592366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDM1JzMyLjUiTiA3NsKwMjknMDcuOCJF!5e0!3m2!1sen!2sin!4v1766057885729!5m2!1sen!2sin" width="80%" height="200" style="border:0;border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer-title-dec"><span>Sparrow International</span></div>
-                        <div class="footer-inner_dec footer-inner_dec-left"></div>
-                        <div class="footer-inner_dec footer-inner_dec-right"></div>
-                    </div>
-                    
-                    <div class="subbfooter">
-                        <div class="container">
-                            <div class="policy-box">
-                                <span> &#169; Sparrow International 2026 / All rights reserved. </span>
-                            </div>
-                            <div class="to-top-btn to-top" style="color: #ffffff;">Back to top<i class="fal fa-long-arrow-up"></i></div>
-                        </div>
-                    </div>
-                </footer>
-                <!-- footer end -->			
-            </div>
-            <!-- wrapper end -->
-        </div>
-        <!-- Main end -->
-        
-        <!--=============== scripts  ===============-->   
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-        <script src="{% static 'js/plugins.js' %}"></script>
-        <script src="{% static 'js/scripts.js' %}"></script>
-        <script src="{% static 'js/map.js' %}"></script>
-    </body>
-</html>
+                                                        <!--=============== scripts  ===============-->   
+                                                        <script src="{% static 'js/jquery.min.js' %}"></script>
+                                                        <script src="{% static 'js/plugins.js' %}"></script>
+                                                        <script src="{% static 'js/scripts.js' %}"></script>
+                                                        <script src="{% static 'js/map.js' %}"></script>
+                                                    </body>
+                                                </html>

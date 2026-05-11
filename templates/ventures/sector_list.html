@@ -8,18 +8,26 @@
 <!-- hero section -->
 <div class="section hero-section">
     <div class="bg-wrap-container" data-scrollax-parent="true">
-        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/automotive/automotive-banner.png' %}" data-scrollax="properties: { translateY: '30%' }"></div>
+        {% if sector.banner_image %}
+            <div class="bg bg-parallax"
+                 data-bg="{{ sector.banner_image.url }}"
+                 data-scrollax="properties: { translateY: '30%' }"></div>
+        {% else %}
+            <div class="bg bg-parallax"
+                 data-bg="{% static 'images/Banner/automotive/automotive-banner.png' %}"
+                 data-scrollax="properties: { translateY: '30%' }"></div>
+        {% endif %}
         <div class="overlay"></div>
     </div>
     <div class="container">
         <div class="hero-section-title">
             <h5>Our Services</h5>
-            <h2>Our Automotive Sector</h2>
-            <p>From sourcing trusted brands to maintaining well-organized warehouse logistics, we ensure timely availability of essential automotive components for business clients.</p>
+            <h2>Our {{ sector.name }} Sector</h2>
+            <p>{{ sector.description }}</p>
         </div>
     </div>
 </div>
-<!-- section end-->
+<!-- section end -->
 
 <!--content-->
 <div class="content">

@@ -13,11 +13,21 @@
     <link rel="stylesheet" href="{% static 'css/map-style.css' %}">
 
     <!-- Favicon -->
-    {% if site_settings.favicon %}
-        <link rel="shortcut icon" href="{{ site_settings.favicon.url }}">
+        {% if site_settings.favicon %}
+        <link rel="icon" type="image/png" href="{{ site_settings.favicon.url }}" sizes="96x96" />
+        <link rel="icon" type="svg+xml" href="{{ site_settings.favicon.url }}" />
+        <link rel="shortcut icon" href="{{ site_settings.favicon.url }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ site_settings.favicon.url }}" />
+        <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}" />
     {% else %}
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="icon" type="image/png" href="{% static 'images/favicon/favicon-96x96.png' %}" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon/favicon.svg' %}" />
+        <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}" />
+        <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}" />
     {% endif %}
+
+    
 
     {% block extra_css %}{% endblock %}
 </head>

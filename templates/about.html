@@ -310,6 +310,56 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
 
+                    <style>
+                        /* ── Testimonial Fixed Height Fix ── */
+                        .testimonilas-carousel .swiper-wrapper {
+                            align-items: stretch;
+                        }
+
+                        .testimonilas-carousel .swiper-slide {
+                            height: auto;
+                        }
+
+                        .testi-item {
+                            height: 320px;                /* ✅ Fixed height — adjust to your needs */
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            overflow: hidden;
+                            box-sizing: border-box;
+                        }
+
+                        .testimonilas-text {
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                        }
+
+                        .testimonilas-text-item {
+                            flex: 1;
+                            overflow: hidden;
+                        }
+
+                        .testimonilas-text-item-wrap {
+                            height: 100%;
+                            overflow: hidden;
+                        }
+
+                        .testimonilas-text-item-wrap p {
+                            display: -webkit-box;
+                            -webkit-line-clamp: 5;       /* clips text if too long */
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            margin: 0;
+                        }
+
+                        .testi-footer {
+                            flex-shrink: 0;              /* footer never gets squished */
+                            padding-top: 12px;
+                        }
+                    </style>
+
                     {% for testimonial in testimonials %}
                     <div class="swiper-slide">
                         <div class="testi-item">

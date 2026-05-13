@@ -288,3 +288,33 @@ class CareerApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.job_role} ({self.applied_date.strftime('%Y-%m-%d')})"
+
+
+# ---------------------(TESTIMONIALS)-------------------
+
+class Testimonial(models.Model):
+    PLATFORM_CHOICES = [
+        ('twitter', 'Via X-Twitter'),
+        ('facebook', 'Via Facebook'),
+        ('instagram', 'Via Instagram'),
+        ('linkedin', 'Via LinkedIn'),
+        ('google', 'Via Google'),
+        ('other', 'Other'),
+    ]
+
+    name = models.CharField(max_length=100)
+    avatar = models.ImageField(upload_to='images/avatar/', blank=True, null=True)
+    review = models.TextField(default='')          # ✅ added default=''
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES, default='other')
+    platform_url = models.URLField(blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'created_at']
+
+    def __str__(self):
+        return f"{self.name} — {self.get_platform_display()}"
+    
+# ---------------------(TESTIMONIALS)-------------------

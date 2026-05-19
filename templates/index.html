@@ -571,7 +571,12 @@
                                     <div class="team-info">
                                         <h3>{{ member.name }}</h3>
                                         <h4>{{ member.position }}</h4>
-                                        <p>{{ member.bio|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }}</p>
+                                        {% if member.bio %}
+                                        <p>{{ member.bio }}</p>
+                                        {% endif %}
+
+
+                                        {% comment %} <p>{{ member.bio|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }}</p> {% endcomment %}
                                     </div>
                                 </div>
                             </div>

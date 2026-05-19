@@ -38,12 +38,11 @@
                                 <!-- footer-contacts-->
                                 <div class="footer-contacts footer-box ">
                                     <ul>
-                                        <li><span></span><a href="./index.html">Home</a></li>
-                                        <li><span></span><a href="./about.html">Our Story</a></li>
-                                        <li><span></span><a href="./automotive.html">Automotive</a></li>
-                                        <li><span></span><a href="./it&technology.html">Technology & It  </a></li>
-                                        <li><span></span><a href="./career.html">Career </a></li>
-                                        <li><span></span><a href="./contact.html">Contact </a></li>
+                                        <li><span></span><a href="{% url 'home' %}">Home</a></li>
+                                        <li><span></span><a href="{% url 'about' %}">Our Story</a></li>
+                                        <li><span></span><a href="{% url 'ventures:sector_list' %}">Ventures</a></li>
+                                        <li><span></span><a href="{% url 'career' %}">Career</a></li>
+                                        <li><span></span><a href="{% url 'contact' %}">Contact</a></li>
                                     </ul>
                                 </div>
                                 <!-- footer contacts end -->

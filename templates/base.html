@@ -319,12 +319,11 @@
                                             <!-- footer-contacts-->
                                             <div class="footer-contacts footer-box ">
                                                 <ul>
-                                                    <li><span></span><a href="./index.html">Home</a></li>
-                                                    <li><span></span><a href="./about.html">Our Story</a></li>
-                                                    <li><span></span><a href="./automotive.html">Automotive</a></li>
-                                                    <li><span></span><a href="./it&technology.html">Technology & It  </a></li>
-                                                    <li><span></span><a href="./career.html">Career </a></li>
-                                                    <li><span></span><a href="./contact.html">Contact </a></li>
+                                                    <li><span></span><a href="{% url 'main:home' %}">Home</a></li>
+                                                    <li><span></span><a href="{% url 'main:about' %}">Our Story</a></li>
+                                                    <li><span></span><a href="{% url 'ventures:sector_list' %}">Ventures</a></li>
+                                                    <li><span></span><a href="{% url 'main:career' %}">Career</a></li>
+                                                    <li><span></span><a href="{% url 'main:contact' %}">Contact</a></li>
                                                 </ul>
                                             </div>
                                             <!-- footer contacts end -->

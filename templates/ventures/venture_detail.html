@@ -783,72 +783,116 @@
                                                                 </div>
                                                                 <!-- content end -->
                                                                 
-                                                                <!-- footer -->
-                                                                <footer class="main-footer">
-                                                                    <div class="footer-inner">
-                                                                        <div class="container">
-                                                                            <div class="footer-inner-wrap">
-                                                                                <div class="row">
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="footer-widget">
-                                                                                            <div class="footer-header fl-wrap"> About US</div>
-                                                                                            <div class="footer_text footer-box">
-                                                                                                <p>Our team takes over everything, from an idea and concept development to realization. We believe in traditions and incorporate them within our innovations.</p>
-                                                                                                <div class="footer-contacts footer-box" style="margin-top: 10px;">
-                                                                                                    <ul>
-                                                                                                        <li><span>Call:</span><a href="tel:+918086699553">+91 8086699553</a></li>
-                                                                                                        <li><span>Email :</span><a href="mailto:manutomy@sparrowgroup.in" style="text-transform: lowercase;">manutomy@sparrowgroup.in</a></li>
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="footer-widget">
-                                                                                            <div class="footer-header fl-wrap"> quick links</div>
-                                                                                            <div class="footer-contacts footer-box">
-                                                                                                <ul>
-                                                                                                    <li><a href="{% url 'main:home' %}">Home</a></li>
-                                                                                                    <li><a href="{% url 'main:about' %}">Our Story</a></li>
-                                                                                                    <li><a href="{% url 'ventures:sector_detail' 'automotive' %}">Automotive</a></li>
-                                                                                                    <li><a href="{% url 'ventures:sector_detail' 'technology' %}">Technology & IT Industry</a></li>
-                                                                                                    <li><a href="{% url 'main:career' %}">Career</a></li>
-                                                                                                    <li><a href="{% url 'main:contact' %}">Contact</a></li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="footer-widget">
-                                                                                            <div class="footer-header">Head office</div>
-                                                                                            <div class="footer-box fl-wrap">
-                                                                                                <div>
-                                                                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3921.8312169528435!2d76.485506!3d10.592366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDM1JzMyLjUiTiA3NsKwMjknMDcuOCJF!5e0!3m2!1sen!2sin!4v1766057885729!5m2!1sen!2sin" width="80%" height="200" style="border:0;border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="footer-title-dec"><span>Sparrow International</span></div>
-                                                                        <div class="footer-inner_dec footer-inner_dec-left"></div>
-                                                                        <div class="footer-inner_dec footer-inner_dec-right"></div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="subbfooter">
-                                                                        <div class="container">
-                                                                            <div class="policy-box">
-                                                                                <span> &#169; Sparrow International 2026 / All rights reserved. </span>
-                                                                            </div>
-                                                                            <div class="to-top-btn to-top" style="color: #ffffff;">Back to top<i class="fal fa-long-arrow-up"></i></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </footer>
-                                                                <!-- footer end -->			
-                                                            </div>
+                                                                <!-- ══════════════════════════════════════════════════════
+             FOOTER — wrapped in a block so child templates can hide it
+        ══════════════════════════════════════════════════════ -->
+        {% block footer %}
+        <footer class="main-footer">
+                    <!-- footer-inner -->
+                    <div class="footer-inner ">
+                        <div class="container">
+                            <div class="footer-inner-wrap">
+                                <div class="row">
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header fl-wrap"> Contact US</div>
+                                            <div class="footer_text  footer-box ">
+                                                <div class="footer-contacts footer-box " style="margin-top: 10px;">
+                                                <ul>
+                                                    <li><span>Find us : </span><br>
+                                                        <a href="#">12/1624&125,2nd floor<br>
+                                                                    Delma Centre,Vadakkencherry,<br>
+                                                                    Palakkad,Kerala,678683</a>
+                                                    </li>
+                                                    <li><span>Call:</span><br>
+                                                        <a href="#">+91 7558888822</a>
+                                                    </li>
+                                                    <li><span>Email :</span><br>
+                                                        <a href="#" style="text-transform: lowercase;">gintopaul@sparrowgroup.in</a>
+                                                    </li>
+                                                </ul>
+                                            <div class="footer-solcial">
+                                                <ul>
+                                                    <li>
+                                                        <a href="https://www.facebook.com/share/1HBLeqNLcj/" target="_blank" style="background: #fff;">
+                                                            <i class="fa-brands fa-facebook-f"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="https://www.instagram.com/accounts/edit/?__coig_login=1" target="_blank" style="background: #fff;">
+                                                            <i class="fa-brands fa-instagram"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="https://www.linkedin.com/company/sparrow-international-ventures-pvt-ltd/?viewAsMember=true" target="_blank" style="background: #fff;">
+                                                            <i class="fa-brands fa-linkedin-in"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header fl-wrap"> quick links</div>
+                                            <!-- footer-contacts-->
+                                            <div class="footer-contacts footer-box ">
+                                                <ul>
+                                                    <li><span></span><a href="{% url 'main:home' %}">Home</a></li>
+                                                    <li><span></span><a href="{% url 'main:about' %}">Our Story</a></li>
+                                                    <li><span></span><a href="{% url 'ventures:sector_list' %}">Ventures</a></li>
+                                                    <li><span></span><a href="{% url 'main:career' %}">Career</a></li>
+                                                    <li><span></span><a href="{% url 'main:contact' %}">Contact</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- footer contacts end -->
+                                            <!-- <a href="contact.html" class="fc_button">Get In Touch <i class="fa-light fa-arrow-right"></i></a> -->
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                    <!-- footer-widget-->
+                                    <div class="col-lg-4">
+                                        <div class="footer-widget">
+                                            <div class="footer-header ">Head office</div>
+                                            <div class="footer-box fl-wrap">
+                                                <div >
+                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3921.8312169528435!2d76.485506!3d10.592366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDM1JzMyLjUiTiA3NsKwMjknMDcuOCJF!5e0!3m2!1sen!2sin!4v1766057885729!5m2!1sen!2sin" width="80%" height="200" style="border:0;border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- footer-widget end-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- footer-inner end -->
+                        <div class="footer-title-dec"><span>Sparrow International</span> </div>
+                        <div class="footer-inner_dec footer-inner_dec-left"></div>
+                        <div class="footer-inner_dec footer-inner_dec-right"></div>
+                    </div>
+                    <!-- subbfooter -->
+                    <div class="subbfooter">
+                        <div class="container">
+                            <div class="policy-box">
+                                <span> &#169;  Sparrow International 2026  /  All rights reserved. </span>
+                            </div>
+                            <div class="to-top-btn to-top" style="color: #ffffff;">Back to top<i class="fal fa-long-arrow-up"></i></div>
+                            <div class="subbfooter_dec"></div>
+                        </div>
+                    </div>
+                    <!-- subbfooter end -->						
+            </footer>
+        {% endblock footer %}
+        <!-- footer end -->
+
+    </div>
                                                             <!-- wrapper end -->
                                                         </div>
                                                         <!-- Main end -->

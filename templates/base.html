@@ -259,7 +259,7 @@
                     <ul>
                                 <li><i class="fa-light fa-envelope"></i><a href="mailto:gintopaul@sparrowgroup.in" style="color: #fff;"> gintopaul@sparrowgroup.in</a></li>
                                 <li><i class="fa-light fa-location-dot"></i><a href="" target="_blank" style="color: #fff;"> 12/1624&125,2nd floor Delma Centre,Vadakkencherry,Palakkad, Kerala,678683</a></li>
-                                <li><i class="fa-light fa-phone-rotary"></i><a href="tel:+917558888822" style="color: #fff;"> +91 7558888822</a></li>
+                                <li><i class="fa-light fa-phone-rotary"></i><a href="tel:+917558888822" style="color: #fff;"> +91 92495 36377</a></li>
                             </ul>
                 </div>
 
@@ -282,7 +282,7 @@
              FOOTER — wrapped in a block so child templates can hide it
         ══════════════════════════════════════════════════════ -->
         {% block footer %}
-        <footer class="main-footer">
+        {% comment %} <footer class="main-footer">
                     <!-- footer-inner -->
                     <div class="footer-inner ">
                         <div class="container">
@@ -301,7 +301,7 @@
                                                                     Palakkad,Kerala,678683</a>
                                                     </li>
                                                     <li><span>Call:</span><br>
-                                                        <a href="#">+91 7558888822</a>
+                                                        <a href="#">+91 92495 36377</a>
                                                     </li>
                                                     <li><span>Email :</span><br>
                                                         <a href="#" style="text-transform: lowercase;">gintopaul@sparrowgroup.in</a>
@@ -376,14 +376,35 @@
                     <div class="subbfooter">
                         <div class="container">
                             <div class="policy-box">
-                                <span> &#169;  Sparrow International 2026  /  All rights reserved. </span>
+                                <span> &#169;  Sparrow International Ventures Pvt. Ltd 202l rights reserved. </span>
                             </div>
                             <div class="to-top-btn to-top" style="color: #ffffff;">Back to top<i class="fal fa-long-arrow-up"></i></div>
                             <div class="subbfooter_dec"></div>
                         </div>
                     </div>
                     <!-- subbfooter end -->						
-            </footer>
+            </footer> {% endcomment %}
+
+
+             <!-- footer -->
+                <footer class="main-footer">
+                    <!-- footer-inner -->
+                    
+                    <!-- subbfooter -->
+                    <div class="subbfooter">
+                        <div class="container">
+                            <div class="policy-box">
+                                <span> &#169;  Sparrow International Ventures Pvt. Ltd. 2026  /  All rights reserved. </span>
+                            </div>
+                            <div class="to-top-btn to-top">Back to top<i class="fal fa-long-arrow-up"></i></div>
+                            <!-- <div class="subbfooter_dec"></div> -->
+                        </div>
+                    </div>
+                    <!-- subbfooter end -->						
+                </footer>
+                <!-- footer end -->	
+
+
         {% endblock footer %}
         <!-- footer end -->
 

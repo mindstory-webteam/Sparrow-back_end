@@ -277,9 +277,9 @@
                                                     </a>
                                                 </div>
                                                 <div class="recent-post-content">
-                                                    <h4><a href="#">{{ job.title }}</a></h4>
+                                                    <h4 style="color:#000;">Position : <a href="#" style="color:#ed3435;">{{ job.title }}</a></h4>
                                                     <div class="recent-post-opt">
-                                                        <span class="post-date">{{ job.posted_date|date:"F d, Y" }}</span>
+                                                        <span class="post-date">Posted On: {{ job.posted_date|date:"F d, Y" }}</span>
                                                         {% if job.vacancy_count > 1 %}
                                                         <span style="display: block; font-size: 11px; color: #164476; margin-top: 3px;">
                                                             <i class="fa-light fa-users" style="font-size: 10px;"></i> 

@@ -56,11 +56,11 @@
                                     <p>Every journey begins with a vision and ours was to create more than just a business.
                                         Sparrow International Ventures Pvt. Ltd. was built with a passion to deliver excellence,
                                         earn trust, and redefine standards in the automotive industry.
-                                        We don’t just supply components we create partnerships that drive performance and reliability.
-                                        Our commitment goes beyond products; it’s about ensuring every vehicle we support runs stronger,
+                                        We don't just supply components we create partnerships that drive performance and reliability.
+                                        Our commitment goes beyond products; it's about ensuring every vehicle we support runs stronger,
                                         lasts longer, and performs with confidence on every road.</p>
                                     <p>
-                                        Each part we deliver represents precision, durability, and long-term value. Whether it’s OEM or premium aftermarket solutions, our focus remains unwavering to keep engines running, businesses moving, and journeys uninterrupted.This is not just our story it’s our promise to continuously grow, innovate, and move forward with purpose.
+                                        Each part we deliver represents precision, durability, and long-term value. Whether it's OEM or premium aftermarket solutions, our focus remains unwavering to keep engines running, businesses moving, and journeys uninterrupted.This is not just our story it's our promise to continuously grow, innovate, and move forward with purpose.
                                     </p>
                                     <!-- <a href="services.html" class="btn   float-btn   cf_btn" style="margin-top:30px"><i class="fas fa-caret-right"></i><span>View Our Services</span></a> -->
                                     <!-- <div class="dots-grid-dec"></div> -->
@@ -102,10 +102,8 @@
         <div class="section" style="padding-top: 0px;">
             <div class="container">
                 <div class="boxed-content post-container">
-                    <!-- Company Journey Section -->
                     <section class="journey-section">
                         <div class="journey-wrapper">
-                            <!-- Section Header -->
                             <div class="section-header">
                                 <h2 class="section-heading">OUR JOURNEY</h2>
                                 <p class="section-subtitle">
@@ -115,10 +113,7 @@
                                     the same passion for excellence and innovation.
                                 </p>
                             </div>
-
-                            <!-- Timeline Container -->
                             <div class="timeline-container">
-                                <!-- Year Navigation -->
                                 <div class="year-navigation">
                                     {% for milestone in journey_milestones %}
                                     <button class="year-badge {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
@@ -126,17 +121,12 @@
                                     </button>
                                     {% endfor %}
                                 </div>
-
-                                <!-- Progress Track -->
                                 <div class="progress-track">
                                     <div class="progress-fill"></div>
                                     <div class="progress-marker"></div>
                                 </div>
-
-                                <!-- Story Content Area -->
                                 <div class="story-area">
                                     {% for milestone in journey_milestones %}
-                                    <!-- {{ milestone.year }} -->
                                     <div class="milestone-card {% if forloop.first %}active{% endif %}" data-milestone="{{ forloop.counter0 }}">
                                         <div class="milestone-content">
                                             <span class="milestone-label">{{ milestone.label }}</span>
@@ -145,8 +135,6 @@
                                         </div>
                                     </div>
                                     {% endfor %}
-
-                                    <!-- Control Buttons -->
                                     <div class="story-controls">
                                         <button class="control-btn prev-control" aria-label="Previous milestone">
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
@@ -161,14 +149,11 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Decorative Elements -->
                             <div class="decorative-circle circle-1"></div>
                             <div class="decorative-circle circle-2"></div>
                             <div class="decorative-circle circle-3"></div>
                         </div>
                     </section>
-
                     <div class="bc_dec-line_h"></div>
                     <div class="bc_dec-line_v"></div>
                     <div class="limit-box"></div>
@@ -184,7 +169,7 @@
         </div>
         {% endif %}
 
-         {% comment %} <!-- section-------------clint and small benner section-----------------------------------------> {% endcomment %}
+        {% comment %} <!-- section-------------clint and small benner section-----------------------------------------> {% endcomment %}
         <div class="section  no-padding">
             <div class="fw-container-wrap hidden-section">
                 <div class="fw-container parallax-section">
@@ -198,7 +183,6 @@
                         </div>
                     </div>
                     <div class="container">
-                        <!-- inline-facts -->
                         <div class="inline-facts-wrap inline_single-facts-wrap">
                             <div class="inline-facts single-facts">
                                 <div class="milestone-counter">
@@ -208,8 +192,6 @@
                                 </div>
                                 <h6>Associated Brands</h6>
                             </div>
-                            <!-- inline-facts end -->
-                            <!-- inline-facts  -->
                             <div class="inline-facts single-facts">
                                 <div class="milestone-counter">
                                     <div class="stats animaper">
@@ -218,8 +200,6 @@
                                 </div>
                                 <h6>Year of Experience</h6>
                             </div>
-                            <!-- inline-facts end -->
-                            <!-- inline-facts  -->
                             <div class="inline-facts single-facts">
                                 <div class="milestone-counter">
                                     <div class="stats animaper">
@@ -228,8 +208,6 @@
                                 </div>
                                 <h6>Employees</h6>
                             </div>
-                            <!-- inline-facts end -->
-                            <!-- inline-facts  -->
                             <div class="inline-facts single-facts">
                                 <div class="milestone-counter">
                                     <div class="stats animaper">
@@ -241,7 +219,6 @@
                             <div class="chart-dec"><span><i class="fal fa-plus"></i></span></div>
                         </div>
                     </div>
-                    <!-- inline-facts end -->
                 </div>
             </div>
         </div>
@@ -276,7 +253,6 @@
                                         {% if member.bio %}
                                         <p>{{ member.bio }}</p>
                                         {% endif %}
-                                        {% comment %} <p>{{ member.bio|default:"Lorem ipsum dolor sit amet, consectetur adipiscing elit." }}</p> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
@@ -296,124 +272,177 @@
         </div>
         {% endif %}
 
-        <!-- Testimonials Section -->
-        
-        <div>
-    <div class="testimonilas-carousel-wrap">
-        <div class="boxed-content">
-            <div class="section-title">
-                <h4>What said about us</h4>
-                <h2>Testimonials and Clients</h2>
-            </div>
-            <div class="bc_dec-line_h"></div>
-            <div class="bc_dec-line_v"></div>
-        </div>
+        <!-- ==================== PROGRAMS GALLERY SECTION ==================== -->
+        <div class="section" style="padding-top: 0; padding-bottom: 60px;">
+            <div class="container">
+                <div class="boxed-content">
 
-        <div class="testimonilas-carousel">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
+                    <div class="section-title">
+                        <h4>Our Events</h4>
+                        <h2>Programs Gallery</h2>
+                    </div>
 
-                    <style>
-                        /* ── Testimonial Fixed Height Fix ── */
-                        .testimonilas-carousel .swiper-wrapper {
-                            align-items: stretch;
-                        }
-
-                        .testimonilas-carousel .swiper-slide {
-                            height: auto;
-                        }
-
-                        .testi-item {
-                            height: 320px;                /* ✅ Fixed height — adjust to your needs */
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                            overflow: hidden;
-                            box-sizing: border-box;
-                        }
-
-                        .testimonilas-text {
-                            flex: 1;
-                            display: flex;
-                            flex-direction: column;
-                            overflow: hidden;
-                        }
-
-                        .testimonilas-text-item {
-                            flex: 1;
-                            overflow: hidden;
-                        }
-
-                        .testimonilas-text-item-wrap {
-                            height: 100%;
-                            overflow: hidden;
-                        }
-
-                        .testimonilas-text-item-wrap p {
-                            display: -webkit-box;
-                            -webkit-line-clamp: 5;       /* clips text if too long */
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            margin: 0;
-                        }
-
-                        .testi-footer {
-                            flex-shrink: 0;              /* footer never gets squished */
-                            padding-top: 12px;
-                        }
-                    </style>
-
-                    {% for testimonial in testimonials %}
-                    <div class="swiper-slide">
-                        <div class="testi-item">
-                            <div class="testimonilas-text">
-
-                                <div class="testi-header">
-                                    <div class="testi-avatar">
-                                        {% if testimonial.avatar %}
-                                            <img src="{{ testimonial.avatar.url }}" alt="{{ testimonial.name }}">
-                                        {% else %}
-                                            <img src="{% static 'images/avatar/1.jpg' %}" alt="{{ testimonial.name }}">
-                                        {% endif %}
-                                    </div>
-                                    <h3>{{ testimonial.name }}</h3>
-                                </div>
-
-                                <div class="testimonilas-text-item">
-                                    <div class="testimonilas-text-item-wrap">
-                                        <p>"{{ testimonial.review }}"</p>
-                                    </div>
-                                </div>
-
-                                
-
-                            </div>
-                            <div class="testi-footer">
-                                <a href="{{ testimonial.platform_url|default:'#' }}" 
-                                   class="testi-link" 
-                                   target="_blank">
-                                    {{ testimonial.get_platform_display }}
-                                </a>
-                            </div>
+                    <!-- Filter Bar -->
+                    <div class="pg-filter-bar d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4 p-3 rounded-3">
+                        <div>
+                            <select id="pgYearFilter" class="pg-year-select">
+                                <option value="">All Years</option>
+                                {% for year in program_years %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="pg-count-display">
+                            <span class="pg-count-label">Showing:</span>
+                            <span class="pg-count-year" id="pgCountYear">All Years</span>
+                            <span class="pg-count-badge" id="pgCountBadge">({{ programs|length }} item{{ programs|length|pluralize }})</span>
                         </div>
                     </div>
-                    {% empty %}
-                    <div class="swiper-slide">
-                        <p>No testimonials available at the moment.</p>
-                    </div>
-                    {% endfor %}
 
+                    <!-- Gallery Grid -->
+                    <div class="row g-3" id="pgGrid">
+                        {% for program in programs %}
+                        <div class="col-6 col-md-4 col-lg-3 pg-card-col" data-year="{{ program.year }}">
+                            <div class="pg-card bg-white rounded-3 overflow-hidden h-100">
+                                <div class="pg-img-wrap position-relative">
+                                    {% if program.image %}
+                                        <img src="{{ program.image.url }}"
+                                             alt="{{ program.title }}"
+                                             class="pg-img w-100"
+                                             loading="lazy">
+                                    {% else %}
+                                        <div class="pg-img-placeholder d-flex align-items-center justify-content-center bg-light">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="#ccc">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                        </div>
+                                    {% endif %}
+                                    <span class="pg-year-badge">{{ program.year }}</span>
+                                </div>
+                                <div class="p-3">
+                                    <h6 class="pg-card-title mb-1">{{ program.title }}</h6>
+                                    {% if program.description %}
+                                        <p class="pg-card-desc text-muted small mb-0">{{ program.description }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted">No programs added yet. Add programs from the admin panel.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- View All Button -->
+                    {% comment %} <div class="text-center mt-4">
+                        <a href="{% url 'main:programs_gallery' %}" class="btn float-btn cf_btn">
+                            <i class="fas fa-caret-right"></i><span>View All Programs</span>
+                        </a>
+                    </div> {% endcomment %}
+
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                </div>
+                <div class="section-dec fs-wrapper">
+                    <div class="section-dec-top"></div>
+                    <div class="section-dec-border"></div>
+                    <div class="section-dec-bottom"></div>
+                    <div class="section-dec-top_line"></div>
+                    <div class="section-dec-bottom_line"></div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================== END PROGRAMS GALLERY SECTION ==================== -->
+
+        <!-- Testimonials Section -->
+        <div>
+            <div class="testimonilas-carousel-wrap">
+                <div class="boxed-content">
+                    <div class="section-title">
+                        <h4>What said about us</h4>
+                        <h2>Testimonials and Clients</h2>
+                    </div>
+                    <div class="bc_dec-line_h"></div>
+                    <div class="bc_dec-line_v"></div>
+                </div>
+
+                <div class="testimonilas-carousel">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+
+                            <style>
+                                .testimonilas-carousel .swiper-wrapper { align-items: stretch; }
+                                .testimonilas-carousel .swiper-slide { height: auto; }
+                                .testi-item {
+                                    height: 320px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    overflow: hidden;
+                                    box-sizing: border-box;
+                                }
+                                .testimonilas-text { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+                                .testimonilas-text-item { flex: 1; overflow: hidden; }
+                                .testimonilas-text-item-wrap { height: 100%; overflow: hidden; }
+                                .testimonilas-text-item-wrap p {
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 5;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    margin: 0;
+                                }
+                                .testi-footer { flex-shrink: 0; padding-top: 12px; }
+                            </style>
+
+                            {% for testimonial in testimonials %}
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testimonilas-text">
+                                        <div class="testi-header">
+                                            <div class="testi-avatar">
+                                                {% if testimonial.avatar %}
+                                                    <img src="{{ testimonial.avatar.url }}" alt="{{ testimonial.name }}">
+                                                {% else %}
+                                                    <img src="{% static 'images/avatar/1.jpg' %}" alt="{{ testimonial.name }}">
+                                                {% endif %}
+                                            </div>
+                                            <h3>{{ testimonial.name }}</h3>
+                                        </div>
+                                        <div class="testimonilas-text-item">
+                                            <div class="testimonilas-text-item-wrap">
+                                                <p>"{{ testimonial.review }}"</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="testi-footer">
+                                        <a href="{{ testimonial.platform_url|default:'#' }}"
+                                           class="testi-link"
+                                           target="_blank">
+                                            {{ testimonial.get_platform_display }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="swiper-slide">
+                                <p>No testimonials available at the moment.</p>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fwc-controls_wrap">
+                    <div class="solid-pagination_btns tcs-pagination_init"></div>
+                    <div class="tc-button tc-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="tc-button tc-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
                 </div>
             </div>
         </div>
 
-        <div class="fwc-controls_wrap">
-            <div class="solid-pagination_btns tcs-pagination_init"></div>
-            <div class="tc-button tc-button-next"><i class="fa-solid fa-chevron-right"></i></div>
-            <div class="tc-button tc-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
-        </div>
-    </div>
-</div>
     </div>
 
     <div class="content-dec">
@@ -424,7 +453,6 @@
 
 {% block extra_css %}
 <style>
-    /* Root Variables */
     :root {
         --primary-color: #ed3435;
         --secondary-color: #164476;
@@ -436,405 +464,152 @@
         --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
     }
 
-    /* Journey Section Styles */
+    /* ── Journey ── */
     .journey-section {
         padding: 60px 20px;
         background: #fff;
         position: relative;
         overflow: hidden;
     }
-
     .journey-section::before {
         content: '';
         position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(237, 52, 53, 0.05) 0%, transparent 70%);
+        top: -50%; right: -10%;
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, rgba(237,52,53,0.05) 0%, transparent 70%);
         border-radius: 50%;
         animation: float 20s ease-in-out infinite;
     }
-
     .journey-section::after {
         content: '';
         position: absolute;
-        bottom: -30%;
-        left: -5%;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, rgba(237, 52, 53, 0.04) 0%, transparent 70%);
+        bottom: -30%; left: -5%;
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(237,52,53,0.04) 0%, transparent 70%);
         border-radius: 50%;
         animation: float 15s ease-in-out infinite reverse;
     }
-
     @keyframes float {
-        0%, 100% {
-            transform: translate(0, 0) scale(1);
-        }
-        50% {
-            transform: translate(30px, 30px) scale(1.1);
-        }
+        0%,100% { transform: translate(0,0) scale(1); }
+        50%      { transform: translate(30px,30px) scale(1.1); }
     }
-
-    .journey-wrapper {
-        max-width: 1100px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Decorative Circles */
-    .decorative-circle {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(237, 52, 53, 0.03);
-        pointer-events: none;
-    }
-
-    .circle-1 {
-        width: 300px;
-        height: 300px;
-        top: 10%;
-        left: -100px;
-        animation: pulse 8s ease-in-out infinite;
-    }
-
-    .circle-2 {
-        width: 200px;
-        height: 200px;
-        top: 50%;
-        right: -50px;
-        animation: pulse 6s ease-in-out infinite 1s;
-    }
-
-    .circle-3 {
-        width: 150px;
-        height: 150px;
-        bottom: 10%;
-        left: 20%;
-        animation: pulse 10s ease-in-out infinite 2s;
-    }
-
+    .journey-wrapper { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .decorative-circle { position: absolute; border-radius: 50%; background: rgba(237,52,53,0.03); pointer-events: none; }
+    .circle-1 { width:300px; height:300px; top:10%; left:-100px; animation: pulse 8s ease-in-out infinite; }
+    .circle-2 { width:200px; height:200px; top:50%; right:-50px; animation: pulse 6s ease-in-out infinite 1s; }
+    .circle-3 { width:150px; height:150px; bottom:10%; left:20%; animation: pulse 10s ease-in-out infinite 2s; }
     @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-            opacity: 0.3;
-        }
-        50% {
-            transform: scale(1.2);
-            opacity: 0.5;
-        }
+        0%,100% { transform:scale(1); opacity:0.3; }
+        50%      { transform:scale(1.2); opacity:0.5; }
     }
-
-    /* Header Styling */
-    .section-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .section-heading {
-        font-size: 46px;
-        font-weight: 800;
-        color: var(--text-dark);
-        margin-bottom: 18px;
-        text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.05);
-        line-height: 1.1;
-        letter-spacing: -1px;
-    }
-
-    .section-subtitle {
-        font-size: 17px;
-        color: var(--text-light);
-        max-width: 1000px;
-        margin: 0 auto;
-        line-height: 1.7;
-        font-weight: 400;
-    }
-
-    /* Timeline Container */
-    .timeline-container {
-        background: var(--white);
-        border-radius: 30px;
-        padding: 40px 50px 35px;
-        box-shadow: var(--shadow-lg);
-        backdrop-filter: blur(10px);
-        position: relative;
-        border: 1px solid #e2e8f0;
-    }
-
-    /* Year Navigation */
-    .year-navigation {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-bottom: 30px;
-    }
-
-    .year-badge {
-        padding: 0;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-    }
-
-    .year-number {
-        display: block;
-        padding: 14px 28px;
-        background: #f7fafc;
-        border: 2px solid #e2e8f0;
-        border-radius: 14px;
-        font-size: 17px;
-        font-weight: 700;
-        color: var(--text-light);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .year-badge:hover .year-number {
-        background: #edf2f7;
-        border-color: #ed3435;
-        color: var(--text-dark);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(237, 52, 53, 0.25);
-    }
-
-    .year-badge.active .year-number {
-        background: var(--primary-color);
-        border-color: transparent;
-        color: var(--white);
-        transform: translateY(-3px) scale(1.05);
-    }
-
-    /* Progress Track */
-    .progress-track {
-        height: 8px;
-        background: #edf2f7;
-        border-radius: 10px;
-        margin: 0 30px 35px;
-        position: relative;
-        overflow: visible;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .progress-fill {
-        height: 100%;
-        background: var(--primary-color);
-        border-radius: 10px;
-        width: 0%;
-        transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 0 20px rgba(237, 52, 53, 0.5);
-        position: relative;
-    }
-
-    .progress-marker {
-        position: absolute;
-        top: 50%;
-        left: 0%;
-        transform: translate(-50%, -50%);
-        width: 24px;
-        height: 24px;
-        background: var(--white);
-        border: 4px solid #ed3435;
-        border-radius: 50%;
-        box-shadow: 0 0 0 6px rgba(237, 52, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2);
-        transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 2;
-        animation: markerPulse 2s ease-in-out infinite;
-    }
-
+    .section-header { text-align:center; margin-bottom:40px; }
+    .section-heading { font-size:46px; font-weight:800; color:var(--text-dark); margin-bottom:18px; text-shadow:2px 4px 8px rgba(0,0,0,0.05); line-height:1.1; letter-spacing:-1px; }
+    .section-subtitle { font-size:17px; color:var(--text-light); max-width:1000px; margin:0 auto; line-height:1.7; font-weight:400; }
+    .timeline-container { background:var(--white); border-radius:30px; padding:40px 50px 35px; box-shadow:var(--shadow-lg); backdrop-filter:blur(10px); position:relative; border:1px solid #e2e8f0; }
+    .year-navigation { display:flex; justify-content:center; flex-wrap:wrap; gap:15px; margin-bottom:30px; }
+    .year-badge { padding:0; background:transparent; border:none; cursor:pointer; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); position:relative; }
+    .year-number { display:block; padding:14px 28px; background:#f7fafc; border:2px solid #e2e8f0; border-radius:14px; font-size:17px; font-weight:700; color:var(--text-light); transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .year-badge:hover .year-number { background:#edf2f7; border-color:#ed3435; color:var(--text-dark); transform:translateY(-3px); box-shadow:0 6px 20px rgba(237,52,53,0.25); }
+    .year-badge.active .year-number { background:var(--primary-color); border-color:transparent; color:var(--white); transform:translateY(-3px) scale(1.05); }
+    .progress-track { height:8px; background:#edf2f7; border-radius:10px; margin:0 30px 35px; position:relative; overflow:visible; box-shadow:inset 0 2px 4px rgba(0,0,0,0.05); }
+    .progress-fill { height:100%; background:var(--primary-color); border-radius:10px; width:0%; transition:width 0.8s cubic-bezier(0.4,0,0.2,1); box-shadow:0 0 20px rgba(237,52,53,0.5); position:relative; }
+    .progress-marker { position:absolute; top:50%; left:0%; transform:translate(-50%,-50%); width:24px; height:24px; background:var(--white); border:4px solid #ed3435; border-radius:50%; box-shadow:0 0 0 6px rgba(237,52,53,0.15),0 4px 12px rgba(0,0,0,0.2); transition:left 0.8s cubic-bezier(0.4,0,0.2,1); z-index:2; animation:markerPulse 2s ease-in-out infinite; }
     @keyframes markerPulse {
-        0%, 100% {
-            box-shadow: 0 0 0 6px rgba(237, 52, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        50% {
-            box-shadow: 0 0 0 12px rgba(237, 52, 53, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
+        0%,100% { box-shadow:0 0 0 6px rgba(237,52,53,0.15),0 4px 12px rgba(0,0,0,0.2); }
+        50%      { box-shadow:0 0 0 12px rgba(237,52,53,0.1),0 4px 12px rgba(0,0,0,0.2); }
     }
-
-    /* Story Area */
-    .story-area {
-        position: relative;
-        min-height: 280px;
-    }
-
-    /* Milestone Cards */
-    .milestone-card {
-        display: none;
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    .milestone-card.active {
-        display: block;
-        animation: cardFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
+    .story-area { position:relative; min-height:280px; }
+    .milestone-card { display:none; opacity:0; transform:translateY(20px); }
+    .milestone-card.active { display:block; animation:cardFadeIn 0.6s cubic-bezier(0.4,0,0.2,1) forwards; }
     @keyframes cardFadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity:0; transform:translateY(30px); }
+        to   { opacity:1; transform:translateY(0); }
     }
+    .milestone-content { background:#f7fafc; padding:35px; border-radius:24px; border:2px solid #e2e8f0; box-shadow:var(--shadow-md); position:relative; overflow:hidden; }
+    .milestone-content::before { content:''; position:absolute; top:0; left:0; width:6px; height:100%; background:var(--primary-color); }
+    .milestone-label { display:inline-block; padding:8px 20px; background:var(--secondary-color); color:var(--white); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; border-radius:50px; margin-bottom:15px; box-shadow:0 4px 12px rgba(22,68,118,0.3); }
+    .milestone-year { font-size:40px; font-weight:800; color:var(--primary-color); margin-bottom:18px; line-height:1; letter-spacing:-2px; }
+    .milestone-text { font-size:17px; line-height:1.7; color:var(--text-dark); margin:0; font-weight:400; }
+    .story-controls { display:flex; gap:20px; justify-content:center; margin-top:35px; }
+    .control-btn { width:60px; height:60px; background:var(--white); border:2px solid #e2e8f0; border-radius:16px; color:#ed3435; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); box-shadow:var(--shadow-sm); }
+    .control-btn:hover:not(:disabled) { background:var(--primary-color); border-color:transparent; color:var(--white); transform:translateY(-4px); box-shadow:0 10px 25px rgba(237,52,53,0.35); }
+    .control-btn:active:not(:disabled) { transform:translateY(-2px); }
+    .control-btn:disabled { background:#f7fafc; border-color:#edf2f7; color:#cbd5e0; cursor:not-allowed; box-shadow:none; }
 
-    .milestone-content {
-        background: #f7fafc;
-        padding: 35px;
-        border-radius: 24px;
-        border: 2px solid #e2e8f0;
-        box-shadow: var(--shadow-md);
-        position: relative;
-        overflow: hidden;
+    /* ── Programs Gallery ── */
+    .pg-filter-bar {
+        border: 1px solid #e9ecef;
+        background: #f8f9fa;
     }
-
-    .milestone-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 6px;
-        height: 100%;
-        background: var(--primary-color);
-    }
-
-    .milestone-label {
-        display: inline-block;
-        padding: 8px 20px;
-        background: var(--secondary-color);
-        color: var(--white);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        border-radius: 50px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 12px rgba(22, 68, 118, 0.3);
-    }
-
-    .milestone-year {
-        font-size: 40px;
-        font-weight: 800;
-        color: var(--primary-color);
-        margin-bottom: 18px;
-        line-height: 1;
-        letter-spacing: -2px;
-    }
-
-    .milestone-text {
-        font-size: 17px;
-        line-height: 1.7;
-        color: var(--text-dark);
-        margin: 0;
-        font-weight: 400;
-    }
-
-    /* Control Buttons */
-    .story-controls {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 35px;
-    }
-
-    .control-btn {
-        width: 60px;
-        height: 60px;
-        background: var(--white);
-        border: 2px solid #e2e8f0;
-        border-radius: 16px;
-        color: #ed3435;
+    .pg-year-select {
+        min-width: 160px;
+        border: 1.5px solid #dee2e6;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 0.92rem;
+        color: #0f1f3d;
+        background: #fff;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: var(--shadow-sm);
+        outline: none;
+        appearance: auto;
+        transition: border-color .2s;
     }
-
-    .control-btn:hover:not(:disabled) {
-        background: var(--primary-color);
-        border-color: transparent;
-        color: var(--white);
-        transform: translateY(-4px);
-        box-shadow: 0 10px 25px rgba(237, 52, 53, 0.35);
+    .pg-year-select:focus {
+        border-color: #ed3435;
+        box-shadow: 0 0 0 3px rgba(237,52,53,.1);
     }
-
-    .control-btn:active:not(:disabled) {
-        transform: translateY(-2px);
+    .pg-count-label { font-size:.88rem; color:#6c757d; margin-right:4px; }
+    .pg-count-year  { font-size:.95rem; color:#0f1f3d; font-weight:700; margin-right:4px; }
+    .pg-count-badge { font-size:.88rem; color:#6c757d; }
+    .pg-card {
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 2px 10px rgba(0,0,0,.05);
+        transition: transform .22s ease, box-shadow .22s ease;
     }
-
-    .control-btn:disabled {
-        background: #f7fafc;
-        border-color: #edf2f7;
-        color: #cbd5e0;
-        cursor: not-allowed;
-        box-shadow: none;
+    .pg-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,.10) !important; }
+    .pg-img-wrap { overflow:hidden; height:190px; background:#f5f5f5; }
+    .pg-img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease; }
+    .pg-card:hover .pg-img { transform:scale(1.04); }
+    .pg-img-placeholder { height:100%; }
+    .pg-year-badge {
+        position:absolute; top:10px; right:10px;
+        background:#fff; color:#0f1f3d;
+        font-size:.75rem; font-weight:700;
+        padding:3px 10px; border-radius:20px;
+        box-shadow:0 2px 8px rgba(0,0,0,.15);
     }
+    .pg-card-title { font-size:.92rem; color:#0f1f3d; font-weight:600; line-height:1.35; }
+    .pg-card-desc { font-size:.80rem; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    @keyframes pgFadeIn {
+        from { opacity:0; transform:translateY(12px); }
+        to   { opacity:1; transform:translateY(0); }
+    }
+    .pg-card-col { animation:pgFadeIn .3s ease both; }
+    .pg-card-col:nth-child(1){ animation-delay:.05s; }
+    .pg-card-col:nth-child(2){ animation-delay:.10s; }
+    .pg-card-col:nth-child(3){ animation-delay:.15s; }
+    .pg-card-col:nth-child(4){ animation-delay:.20s; }
+    .pg-card-col:nth-child(5){ animation-delay:.25s; }
+    .pg-card-col:nth-child(6){ animation-delay:.30s; }
+    .pg-card-col:nth-child(7){ animation-delay:.35s; }
+    .pg-card-col:nth-child(8){ animation-delay:.40s; }
 
-    /* Responsive Design */
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-        .journey-section {
-            padding: 40px 15px;
-        }
-        
-        .section-heading {
-            font-size: 36px;
-        }
-        
-        .timeline-container {
-            padding: 30px 30px 25px;
-            border-radius: 24px;
-        }
-        
-        .year-number {
-            padding: 12px 22px;
-            font-size: 16px;
-        }
-        
-        .milestone-content {
-            padding: 28px 25px;
-            border-radius: 20px;
-        }
-        
-        .milestone-year {
-            font-size: 32px;
-        }
-        
-        .control-btn {
-            width: 55px;
-            height: 55px;
-        }
+        .journey-section { padding:40px 15px; }
+        .section-heading { font-size:36px; }
+        .timeline-container { padding:30px 30px 25px; border-radius:24px; }
+        .year-number { padding:12px 22px; font-size:16px; }
+        .milestone-content { padding:28px 25px; border-radius:20px; }
+        .milestone-year { font-size:32px; }
+        .control-btn { width:55px; height:55px; }
     }
-
     @media (max-width: 480px) {
-        .section-heading {
-            font-size: 32px;
-        }
-        
-        .timeline-container {
-            padding: 25px 20px 20px;
-            border-radius: 20px;
-        }
-        
-        .year-number {
-            padding: 10px 18px;
-            font-size: 15px;
-        }
-        
-        .milestone-year {
-            font-size: 28px;
-        }
-        
-        .control-btn {
-            width: 50px;
-            height: 50px;
-        }
+        .section-heading { font-size:32px; }
+        .timeline-container { padding:25px 20px 20px; border-radius:20px; }
+        .year-number { padding:10px 18px; font-size:15px; }
+        .milestone-year { font-size:28px; }
+        .control-btn { width:50px; height:50px; }
     }
 </style>
 {% endblock %}
@@ -844,113 +619,70 @@
     (function() {
         'use strict';
 
-        const yearBadges = document.querySelectorAll('.year-badge');
+        /* ── Journey Timeline ── */
+        const yearBadges     = document.querySelectorAll('.year-badge');
         const milestoneCards = document.querySelectorAll('.milestone-card');
-        const progressFill = document.querySelector('.progress-fill');
+        const progressFill   = document.querySelector('.progress-fill');
         const progressMarker = document.querySelector('.progress-marker');
-        const prevControl = document.querySelector('.prev-control');
-        const nextControl = document.querySelector('.next-control');
+        const prevControl    = document.querySelector('.prev-control');
+        const nextControl    = document.querySelector('.next-control');
 
         const totalMilestones = milestoneCards.length;
-        let currentMilestone = 0;
+        let currentMilestone  = 0;
 
         function updateJourney(index) {
             if (index < 0 || index >= totalMilestones) return;
-
             currentMilestone = index;
-
-            // Update year badges
-            yearBadges.forEach((badge, i) => {
-                badge.classList.toggle('active', i === index);
-            });
-
-            // Update milestone cards
-            milestoneCards.forEach((card, i) => {
-                if (i === index) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-
-            // Update progress bar
-            const progressPercentage = (index / (totalMilestones - 1)) * 100;
-            progressFill.style.width = `${progressPercentage}%`;
-            progressMarker.style.left = `${progressPercentage}%`;
-
-            // Update control buttons
-            prevControl.disabled = index === 0;
-            nextControl.disabled = index === totalMilestones - 1;
+            yearBadges.forEach((badge, i) => badge.classList.toggle('active', i === index));
+            milestoneCards.forEach((card, i) => card.classList.toggle('active', i === index));
+            const pct = (index / (totalMilestones - 1)) * 100;
+            progressFill.style.width  = pct + '%';
+            progressMarker.style.left = pct + '%';
+            if (prevControl) prevControl.disabled = index === 0;
+            if (nextControl) nextControl.disabled = index === totalMilestones - 1;
         }
 
-        // Year badge click handlers
-        yearBadges.forEach((badge, index) => {
-            badge.addEventListener('click', () => {
-                updateJourney(index);
-            });
-        });
+        yearBadges.forEach((badge, index) => badge.addEventListener('click', () => updateJourney(index)));
+        if (prevControl) prevControl.addEventListener('click', () => updateJourney(currentMilestone - 1));
+        if (nextControl) nextControl.addEventListener('click', () => updateJourney(currentMilestone + 1));
 
-        // Control button handlers
-        prevControl.addEventListener('click', () => {
-            if (currentMilestone > 0) {
-                updateJourney(currentMilestone - 1);
-            }
-        });
-
-        nextControl.addEventListener('click', () => {
-            if (currentMilestone < totalMilestones - 1) {
-                updateJourney(currentMilestone + 1);
-            }
-        });
-
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (currentMilestone > 0) {
-                    updateJourney(currentMilestone - 1);
-                }
-            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (currentMilestone < totalMilestones - 1) {
-                    updateJourney(currentMilestone + 1);
-                }
-            }
+            if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); updateJourney(currentMilestone - 1); }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  { e.preventDefault(); updateJourney(currentMilestone + 1); }
         });
 
-        // Touch swipe support
         let touchStartX = 0;
-        let touchEndX = 0;
         const storyArea = document.querySelector('.story-area');
-
         if (storyArea) {
-            storyArea.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
+            storyArea.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive:true });
             storyArea.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) updateJourney(currentMilestone + (diff > 0 ? 1 : -1));
+            }, { passive:true });
         }
 
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
+        if (totalMilestones > 0) updateJourney(0);
 
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0 && currentMilestone < totalMilestones - 1) {
-                    updateJourney(currentMilestone + 1);
-                } else if (diff < 0 && currentMilestone > 0) {
-                    updateJourney(currentMilestone - 1);
-                }
-            }
+        /* ── Programs Gallery Filter ── */
+        const pgFilter     = document.getElementById('pgYearFilter');
+        const pgGrid       = document.getElementById('pgGrid');
+        const pgCountYear  = document.getElementById('pgCountYear');
+        const pgCountBadge = document.getElementById('pgCountBadge');
+
+        if (pgFilter && pgGrid) {
+            pgFilter.addEventListener('change', function () {
+                const selected = this.value;
+                let visible = 0;
+                pgGrid.querySelectorAll('.pg-card-col').forEach(function (col) {
+                    const show = !selected || col.dataset.year === selected;
+                    col.style.display = show ? '' : 'none';
+                    if (show) visible++;
+                });
+                pgCountYear.textContent  = selected || 'All Years';
+                pgCountBadge.textContent = '(' + visible + ' item' + (visible !== 1 ? 's' : '') + ')';
+            });
         }
 
-        // Initialize
-        if (totalMilestones > 0) {
-            updateJourney(0);
-        }
     })();
 </script>
 {% endblock %}

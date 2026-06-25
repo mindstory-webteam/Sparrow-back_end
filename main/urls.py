@@ -1,4 +1,3 @@
-
 from django.urls import path
 from . import views
 
@@ -13,5 +12,6 @@ urlpatterns = [
     # path('it-technology/', views.it_technology, name='it_technology'),
     path('career/', views.career, name='career'),
     path('contact/', views.contact, name='contact'),
+    path('programs/', views.programs_gallery, name='programs_gallery'),
     path('test-404/', views.test_404),  # ← Visit this to see your 404 page
 ]

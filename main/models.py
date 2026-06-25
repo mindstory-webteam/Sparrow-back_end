@@ -50,6 +50,7 @@ class MapConnection(models.Model):
 
 # ---------------------(MAP)-------------------
 
+
 class Brand(models.Model):
     """Model for brand logos only"""
     
@@ -77,6 +78,7 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class JourneyMilestone(models.Model):
     """Model for company journey milestones"""
@@ -304,7 +306,7 @@ class Testimonial(models.Model):
 
     name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to='images/avatar/', blank=True, null=True)
-    review = models.TextField(default='')          # ✅ added default=''
+    review = models.TextField(default='')
     platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES, default='other')
     platform_url = models.URLField(blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
@@ -316,5 +318,49 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"{self.name} — {self.get_platform_display()}"
-    
+
 # ---------------------(TESTIMONIALS)-------------------
+
+
+# ---------------------(PROGRAMS GALLERY)-------------------
+
+class ProgramGallery(models.Model):
+    """Model for Programs Gallery images with year-based filtering"""
+
+    title = models.CharField(
+        max_length=200,
+        help_text="Program title / name"
+    )
+    description = models.TextField(
+        blank=True,
+        help_text="Short description of the program (optional)"
+    )
+    image = models.ImageField(
+        upload_to='programs/',
+        help_text="Program image"
+    )
+    year = models.IntegerField(
+        validators=[MinValueValidator(2000), MaxValueValidator(2100)],
+        default=timezone.now().year,
+        help_text="Year the program took place"
+    )
+    order = models.IntegerField(
+        default=0,
+        help_text="Display order (lower numbers appear first)"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Whether to display this program"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-year', 'order', 'title']
+        verbose_name = "Program Gallery"
+        verbose_name_plural = "Program Gallery"
+
+    def __str__(self):
+        return f"{self.title} ({self.year})"
+
+# ---------------------(PROGRAMS GALLERY)-------------------

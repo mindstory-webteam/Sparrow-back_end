@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication, MapLocation, MapConnection, Testimonial
+from .models import (
+    JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication,
+    MapLocation, MapConnection, Testimonial, ProgramGallery
+)
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, JsonResponse
 import json
 
 
@@ -68,7 +71,6 @@ def Home(request):
         is_active=True
     ).order_by('order')
 
-    # ✅ Fetch active testimonials
     testimonials = Testimonial.objects.filter(
         is_active=True
     ).order_by('order')
@@ -109,7 +111,7 @@ def Home(request):
         'active_page': 'home',
         'team_members': team_members,
         'brands': brands,
-        'testimonials': testimonials,          # ✅ added
+        'testimonials': testimonials,
         'locations_json': json.dumps(locations_data),
         'connections_json': json.dumps(connections_data),
     }
@@ -128,17 +130,31 @@ def about(request):
         is_active=True
     ).order_by('order', 'name')
 
-    # ✅ Fetch active testimonials for about page too
     testimonials = Testimonial.objects.filter(
         is_active=True
     ).order_by('order')
+
+    # Programs Gallery — show latest 8 on the about page
+    programs = ProgramGallery.objects.filter(
+        is_active=True
+    ).order_by('-year', 'order')[:8]
+
+    program_years = (
+        ProgramGallery.objects
+        .filter(is_active=True)
+        .values_list('year', flat=True)
+        .distinct()
+        .order_by('-year')
+    )
 
     context = {
         'page_title': 'Our Story - Sparrow International',
         'active_page': 'about',
         'journey_milestones': journey_milestones,
         'team_members': team_members,
-        'testimonials': testimonials,          # ✅ added
+        'testimonials': testimonials,
+        'programs': programs,
+        'program_years': program_years,
     }
 
     return render(request, 'about.html', context)
@@ -193,6 +209,60 @@ def career(request):
     }
 
     return render(request, 'career.html', context)
+
+
+def programs_gallery(request):
+    """
+    Programs Gallery page view.
+    Supports optional ?year=YYYY GET filter.
+    Returns JSON when request is AJAX (for dynamic year filtering).
+    """
+    # Collect all distinct years that have active programs
+    all_years = (
+        ProgramGallery.objects
+        .filter(is_active=True)
+        .values_list('year', flat=True)
+        .distinct()
+        .order_by('-year')
+    )
+
+    # Read optional year filter from query string
+    selected_year = request.GET.get('year', '')
+
+    programs_qs = ProgramGallery.objects.filter(is_active=True)
+    if selected_year and selected_year.isdigit():
+        programs_qs = programs_qs.filter(year=int(selected_year))
+
+    programs_qs = programs_qs.order_by('-year', 'order', 'title')
+
+    # Return JSON for AJAX requests (year-filter dropdown)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = [
+            {
+                'id': p.id,
+                'title': p.title,
+                'description': p.description,
+                'image_url': p.image.url if p.image else '',
+                'year': p.year,
+            }
+            for p in programs_qs
+        ]
+        return JsonResponse({
+            'programs': data,
+            'count': len(data),
+            'selected_year': selected_year or 'All Years',
+        })
+
+    context = {
+        'page_title': 'Programs Gallery - Sparrow International',
+        'active_page': 'programs',
+        'programs': programs_qs,
+        'all_years': all_years,
+        'selected_year': selected_year,
+        'total_count': programs_qs.count(),
+    }
+
+    return render(request, 'programs_gallery.html', context)
 
 
 def custom_404(request, exception=None):

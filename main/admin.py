@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication, MapLocation, MapConnection, Testimonial
+from .models import (
+    JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication,
+    MapLocation, MapConnection, Testimonial, ProgramGallery
+)
 
 
 # -------------(MAP)-------------------------------
@@ -166,6 +169,37 @@ class TeamMemberAdmin(admin.ModelAdmin):
             'fields': ('order', 'is_active')
         }),
     )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ['created_at', 'updated_at']
+        return []
+
+
+# ----------------Programs Gallery----------------
+@admin.register(ProgramGallery)
+class ProgramGalleryAdmin(admin.ModelAdmin):
+    list_display = ['title', 'year', 'order', 'is_active', 'preview', 'updated_at']
+    list_filter = ['is_active', 'year']
+    search_fields = ['title', 'description']
+    list_editable = ['year', 'order', 'is_active']
+    ordering = ['-year', 'order']
+
+    fieldsets = (
+        ('Program Information', {
+            'fields': ('title', 'description', 'image', 'year')
+        }),
+        ('Display Settings', {
+            'fields': ('order', 'is_active')
+        }),
+    )
+
+    def preview(self, obj):
+        if obj.image:
+            return f'<img src="{obj.image.url}" height="50" style="border-radius:4px;">'
+        return '-'
+    preview.allow_tags = True
+    preview.short_description = 'Preview'
 
     def get_readonly_fields(self, request, obj=None):
         if obj:

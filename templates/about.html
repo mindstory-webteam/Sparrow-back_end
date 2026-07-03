@@ -7,8 +7,7 @@
 <!-- Hero Section -->
 <div class="section hero-section">
     <div class="bg-wrap-container" data-scrollax-parent="true">
-        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/banner-new/banner-wirhouse.png' %}"
-            data-scrollax="properties: { translateY: '30%' }"></div>
+        <div class="bg bg-parallax" data-bg="{% static 'images/Banner/banner-new/banner-wirhouse.png' %}" data-scrollax="properties: { translateY: '30%' }"></div>
         <div class="overlay"></div>
     </div>
     <div class="container">
@@ -21,7 +20,6 @@
     </div>
 </div>
 
-<!-- Content -->
 <div class="content">
     <div class="content-box">
         <!-- Breadcrumbs -->
@@ -33,16 +31,14 @@
                 <div class="hs-scroll-down-wrap">
                     <div class="scroll-down-item">
                         <span>Scroll Down To Discover</span>
-                        <div class="mousey">
-                            <div class="scroller"></div>
-                        </div>
+                        <div class="mousey"><div class="scroller"></div></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- About Story Section -->
-        <div class="section" style="padding: 0px;">
+        <!-- About Story -->
+        <div class="section" style="padding:0">
             <div class="container">
                 <div class="boxed-content">
                     <div class="about-wrap single-box-content">
@@ -53,65 +49,36 @@
                                         <h2>The Story Behind</h2>
                                         <h4>Driven by Purpose, Defined by Performance.</h4>
                                     </div>
-                                    <p>Every journey begins with a vision and ours was to create more than just a business.
-                                        Sparrow International Ventures Pvt. Ltd. was built with a passion to deliver excellence,
-                                        earn trust, and redefine standards in the automotive industry.
-                                        We don't just supply components we create partnerships that drive performance and reliability.
-                                        Our commitment goes beyond products; it's about ensuring every vehicle we support runs stronger,
-                                        lasts longer, and performs with confidence on every road.</p>
-                                    <p>
-                                        Each part we deliver represents precision, durability, and long-term value. Whether it's OEM or premium aftermarket solutions, our focus remains unwavering to keep engines running, businesses moving, and journeys uninterrupted.This is not just our story it's our promise to continuously grow, innovate, and move forward with purpose.
-                                    </p>
-                                    <!-- <a href="services.html" class="btn   float-btn   cf_btn" style="margin-top:30px"><i class="fas fa-caret-right"></i><span>View Our Services</span></a> -->
-                                    <!-- <div class="dots-grid-dec"></div> -->
+                                    <p>Every journey begins with a vision and ours was to create more than just a business. Sparrow International Ventures Pvt. Ltd. was built with a passion to deliver excellence, earn trust, and redefine standards in the automotive industry. We don't just supply components we create partnerships that drive performance and reliability.</p>
+                                    <p>Each part we deliver represents precision, durability, and long-term value. Whether it's OEM or premium aftermarket solutions, our focus remains unwavering to keep engines running, businesses moving, and journeys uninterrupted.</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="hero-image-collge-wrap">
-                                    <div class="single-dec_img">
-                                        <img src="{% static 'images/all/1.jpg' %}" alt="" class="respimg">
-                                    </div>
-                                    <div class="hero_images-collage-item" style="width: 25%; bottom: -35px; z-index: 15; left: -30px;">
-                                        <img src="{% static 'images/all/1.jpg' %}" class="respimg" alt="">
-                                    </div>
-                                    <div class="hero_images-collage-item" style="width: 35%; top: -50px; z-index: 11; right: -50px;">
-                                        <img src="{% static 'images/all/1.jpg' %}" class="respimg" alt="">
-                                    </div>
-                                    <div class="dc_dec-item_right">
-                                        <h4><span>9</span>Years of experience</h4>
-                                    </div>
+                                    <div class="single-dec_img"><img src="{% static 'images/all/sparrow1.png' %}" alt="" class="respimg"></div>
+                                    {% comment %} <div class="hero_images-collage-item" style="width:25%;bottom:-35px;z-index:15;left:-30px;"><img src="{% static 'images/all/founder-img.png' %}" class="respimg" alt=""></div>
+                                    <div class="hero_images-collage-item" style="width:35%;top:-50px;z-index:11;right:-50px;"><img src="{% static 'images/all/founder-img.png' %}" class="respimg" alt=""></div> {% endcomment %}
+                                    <div class="dc_dec-item_right"><h4><span>9</span>Years of experience</h4></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="bc_dec-line_h"></div>
-                    <div class="bc_dec-line_v"></div>
+                    <div class="bc_dec-line_h"></div><div class="bc_dec-line_v"></div>
                 </div>
-                <div class="section-dec fs-wrapper">
-                    <div class="section-dec-top"></div>
-                    <div class="section-dec-border"></div>
-                    <div class="section-dec-bottom"></div>
-                    <div class="section-dec-top_line"></div>
-                    <div class="section-dec-bottom_line"></div>
-                </div>
+                <div class="section-dec fs-wrapper"><div class="section-dec-top"></div><div class="section-dec-border"></div><div class="section-dec-bottom"></div><div class="section-dec-top_line"></div><div class="section-dec-bottom_line"></div></div>
             </div>
         </div>
 
-        <!-- Journey Section - DYNAMIC -->
+        <!-- Journey -->
         {% if journey_milestones %}
-        <div class="section" style="padding-top: 0px;">
+        <div class="section" style="padding-top:0">
             <div class="container">
                 <div class="boxed-content post-container">
                     <section class="journey-section">
                         <div class="journey-wrapper">
                             <div class="section-header">
                                 <h2 class="section-heading">OUR JOURNEY</h2>
-                                <p class="section-subtitle">
-                                    From a small startup in Kerala, we have grown steadily through dedication, trust, and a strong commitment to quality.
-                                    Our focus on customer satisfaction and reliable service helped us expand and build a solid presence in the automotive
-                                    spare parts industry. Today, we proudly serve as an official Shell Lubricants distributor, continuing our journey with
-                                    the same passion for excellence and innovation.
-                                </p>
+                                <p class="section-subtitle">From a small startup in Kerala, we have grown steadily through dedication, trust, and a strong commitment to quality. Today, we proudly serve as an official Shell Lubricants distributor.</p>
                             </div>
                             <div class="timeline-container">
                                 <div class="year-navigation">
@@ -121,10 +88,7 @@
                                     </button>
                                     {% endfor %}
                                 </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill"></div>
-                                    <div class="progress-marker"></div>
-                                </div>
+                                <div class="progress-track"><div class="progress-fill"></div><div class="progress-marker"></div></div>
                                 <div class="story-area">
                                     {% for milestone in journey_milestones %}
                                     <div class="milestone-card {% if forloop.first %}active{% endif %}" data-milestone="{{ forloop.counter0 }}">
@@ -136,305 +100,266 @@
                                     </div>
                                     {% endfor %}
                                     <div class="story-controls">
-                                        <button class="control-btn prev-control" aria-label="Previous milestone">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                                <polyline points="15 18 9 12 15 6" />
-                                            </svg>
-                                        </button>
-                                        <button class="control-btn next-control" aria-label="Next milestone">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                                <polyline points="9 18 15 12 9 6" />
-                                            </svg>
-                                        </button>
+                                        <button class="control-btn prev-control"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"/></svg></button>
+                                        <button class="control-btn next-control"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg></button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="decorative-circle circle-1"></div>
-                            <div class="decorative-circle circle-2"></div>
-                            <div class="decorative-circle circle-3"></div>
+                            <div class="decorative-circle circle-1"></div><div class="decorative-circle circle-2"></div><div class="decorative-circle circle-3"></div>
                         </div>
                     </section>
-                    <div class="bc_dec-line_h"></div>
-                    <div class="bc_dec-line_v"></div>
-                    <div class="limit-box"></div>
+                    <div class="bc_dec-line_h"></div><div class="bc_dec-line_v"></div><div class="limit-box"></div>
                 </div>
-                <div class="section-dec fs-wrapper">
-                    <div class="section-dec-top"></div>
-                    <div class="section-dec-border"></div>
-                    <div class="section-dec-bottom"></div>
-                    <div class="section-dec-top_line"></div>
-                    <div class="section-dec-bottom_line"></div>
-                </div>
+                <div class="section-dec fs-wrapper"><div class="section-dec-top"></div><div class="section-dec-border"></div><div class="section-dec-bottom"></div><div class="section-dec-top_line"></div><div class="section-dec-bottom_line"></div></div>
             </div>
         </div>
         {% endif %}
 
-        {% comment %} <!-- section-------------clint and small benner section-----------------------------------------> {% endcomment %}
-        <div class="section  no-padding">
+        <!-- Stats -->
+        <div class="section no-padding">
             <div class="fw-container-wrap hidden-section">
                 <div class="fw-container parallax-section">
-                    <div class="bg-wrap-item">
-                        <div class="bg-wrap fs-wrapper">
-                            <div class="bg-wrap-container" data-scrollax-parent="true">
-                                <div class="bg bg-parallax" data-bg=""
-                                    data-scrollax="properties: { translateY: '30%' }"></div>
-                                <div class="overlay"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="bg-wrap-item"><div class="bg-wrap fs-wrapper"><div class="bg-wrap-container" data-scrollax-parent="true"><div class="bg bg-parallax" data-bg="" data-scrollax="properties: { translateY: '30%' }"></div><div class="overlay"></div></div></div></div>
                     <div class="container">
                         <div class="inline-facts-wrap inline_single-facts-wrap">
-                            <div class="inline-facts single-facts">
-                                <div class="milestone-counter">
-                                    <div class="stats animaper">
-                                        <div class="num" data-content="0" data-num="27">27</div>
-                                    </div>
-                                </div>
-                                <h6>Associated Brands</h6>
-                            </div>
-                            <div class="inline-facts single-facts">
-                                <div class="milestone-counter">
-                                    <div class="stats animaper">
-                                        <div class="num" data-content="0" data-num="9">9</div>
-                                    </div>
-                                </div>
-                                <h6>Year of Experience</h6>
-                            </div>
-                            <div class="inline-facts single-facts">
-                                <div class="milestone-counter">
-                                    <div class="stats animaper">
-                                        <div class="num" data-content="0" data-num="42">42</div>
-                                    </div>
-                                </div>
-                                <h6>Employees</h6>
-                            </div>
-                            <div class="inline-facts single-facts">
-                                <div class="milestone-counter">
-                                    <div class="stats animaper">
-                                        <div class="num" data-content="0" data-num="2">2</div>
-                                    </div>
-                                </div>
-                                <h6>Work In Sectors</h6>
-                            </div>
+                            <div class="inline-facts single-facts"><div class="milestone-counter"><div class="stats animaper"><div class="num" data-content="0" data-num="27">27</div></div></div><h6>Associated Brands</h6></div>
+                            <div class="inline-facts single-facts"><div class="milestone-counter"><div class="stats animaper"><div class="num" data-content="0" data-num="9">9</div></div></div><h6>Year of Experience</h6></div>
+                            <div class="inline-facts single-facts"><div class="milestone-counter"><div class="stats animaper"><div class="num" data-content="0" data-num="42">42</div></div></div><h6>Employees</h6></div>
+                            <div class="inline-facts single-facts"><div class="milestone-counter"><div class="stats animaper"><div class="num" data-content="0" data-num="2">2</div></div></div><h6>Work In Sectors</h6></div>
                             <div class="chart-dec"><span><i class="fal fa-plus"></i></span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {% comment %} <!-- section end---------------------------------------------------> {% endcomment %}
 
-        <!-- Team Section - DYNAMIC -->
+        <!-- Team -->
         {% if team_members %}
         <div class="section">
-            <div class="container" style="margin-bottom: 60px;">
+            <div class="container" style="margin-bottom:60px">
                 <div class="boxed-content">
-                    <div class="section-title">
-                        <h4>What said about us</h4>
-                        <h2>Meet Our Team</h2>
-                    </div>
+                    <div class="section-title"><h4>The People Behind Us</h4><h2>Meet Our Team</h2></div>
                     <div class="team-container">
                         <div class="row">
                             {% for member in team_members %}
-                            <!-- Team Member {{ forloop.counter }} -->
                             <div class="col-lg-4 mb-3">
                                 <div class="team-box">
                                     <div class="team-photo">
-                                        {% if member.photo %}
-                                            <img src="{{ member.photo.url }}" alt="{{ member.name }}" class="respimg">
-                                        {% else %}
-                                            <img src="{% static 'images/team/1.jpg' %}" alt="{{ member.name }}" class="respimg">
-                                        {% endif %}
+                                        {% if member.photo %}<img src="{{ member.photo.url }}" alt="{{ member.name }}" class="respimg">{% else %}<img src="{% static 'images/team/1.jpg' %}" alt="{{ member.name }}" class="respimg">{% endif %}
                                         <div class="team-details"></div>
                                     </div>
                                     <div class="team-info">
-                                        <h3>{{ member.name }}</h3>
-                                        <h4>{{ member.position }}</h4>
-                                        {% if member.bio %}
-                                        <p>{{ member.bio }}</p>
-                                        {% endif %}
+                                        <h3>{{ member.name }}</h3><h4>{{ member.position }}</h4>
+                                        {% if member.bio %}<p>{{ member.bio }}</p>{% endif %}
                                     </div>
                                 </div>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="bc_dec-line_h"></div>
-                    <div class="bc_dec-line_v"></div>
+                    <div class="bc_dec-line_h"></div><div class="bc_dec-line_v"></div>
                 </div>
-                <div class="section-dec fs-wrapper">
-                    <div class="section-dec-top"></div>
-                    <div class="section-dec-border"></div>
-                    <div class="section-dec-bottom"></div>
-                    <div class="section-dec-top_line"></div>
-                </div>
+                <div class="section-dec fs-wrapper"><div class="section-dec-top"></div><div class="section-dec-border"></div><div class="section-dec-bottom"></div><div class="section-dec-top_line"></div></div>
             </div>
         </div>
         {% endif %}
 
-        <!-- ==================== PROGRAMS GALLERY SECTION ==================== -->
-        <div class="section" style="padding-top: 0; padding-bottom: 60px;">
+        <!-- ═══════════════════════════════════════
+             PROGRAMS GALLERY
+        ═══════════════════════════════════════ -->
+        <div class="section" style="padding-top:0;padding-bottom:70px;">
             <div class="container">
                 <div class="boxed-content">
 
                     <div class="section-title">
-                        <h4>Our Events</h4>
+                        <h4>Our Events &amp; Celebrations</h4>
                         <h2>Programs Gallery</h2>
                     </div>
 
-                    <!-- Filter Bar -->
-                    <div class="pg-filter-bar d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4 p-3 rounded-3">
-                        <div>
-                            <select id="pgYearFilter" class="pg-year-select">
-                                <option value="">All Years</option>
-                                {% for year in program_years %}
-                                    <option value="{{ year }}">{{ year }}</option>
-                                {% endfor %}
-                            </select>
+                    <!-- Category filter tabs + Year -->
+                    <div class="pg-filter-bar mb-4">
+                        <div class="pg-cat-pills">
+                            <button class="pg-cat-pill active" data-cat="">All</button>
+                            {% for cat in program_categories %}
+                            <button class="pg-cat-pill" data-cat="{{ cat.slug }}">{{ cat.name }}</button>
+                            {% endfor %}
                         </div>
-                        <div class="pg-count-display">
-                            <span class="pg-count-label">Showing:</span>
-                            <span class="pg-count-year" id="pgCountYear">All Years</span>
-                            <span class="pg-count-badge" id="pgCountBadge">({{ programs|length }} item{{ programs|length|pluralize }})</span>
+                        <div class="pg-filter-right">
+                            <select id="pgYearSel" class="pg-year-sel">
+                                <option value="">All Years</option>
+                                {% for yr in program_years %}<option value="{{ yr }}">{{ yr }}</option>{% endfor %}
+                            </select>
+                            <span class="pg-result-count"><span id="pgVisCount">0</span> event<span id="pgVisPlural">s</span></span>
                         </div>
                     </div>
 
-                    <!-- Gallery Grid -->
-                    <div class="row g-3" id="pgGrid">
-                        {% for program in programs %}
-                        <div class="col-6 col-md-4 col-lg-3 pg-card-col" data-year="{{ program.year }}">
-                            <div class="pg-card bg-white rounded-3 overflow-hidden h-100">
-                                <div class="pg-img-wrap position-relative">
-                                    {% if program.image %}
-                                        <img src="{{ program.image.url }}"
-                                             alt="{{ program.title }}"
-                                             class="pg-img w-100"
-                                             loading="lazy">
-                                    {% else %}
-                                        <div class="pg-img-placeholder d-flex align-items-center justify-content-center bg-light">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="#ccc">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                            </svg>
+                    <!-- Event cards grid -->
+                    <div class="row g-4" id="pgEventGrid">
+                        {% for cat in program_categories %}
+                            {% for event in cat.active_events %}
+                            {% with imgs=event.active_images %}
+                            <div class="col-12 col-md-6 col-lg-4 pg-event-col"
+                                 data-cat="{{ cat.slug }}"
+                                 data-year="{{ event.year }}">
+
+                                <div class="pg-event-card">
+                                    <!-- Image slider -->
+                                    <div class="pg-slider" id="slider-{{ event.pk }}">
+                                        <div class="pg-slides">
+                                            {% if event.cover_image %}
+                                            <div class="pg-slide">
+                                                <img src="{{ event.cover_image.url }}" alt="{{ event.title }}" loading="lazy">
+                                            </div>
+                                            {% endif %}
+                                            {% for img in imgs %}
+                                            <div class="pg-slide">
+                                                <img src="{{ img.image.url }}" alt="{{ img.caption|default:event.title }}" loading="lazy">
+                                            </div>
+                                            {% endfor %}
+                                            {% if not event.cover_image and not imgs %}
+                                            <div class="pg-slide pg-slide-placeholder">
+                                                <div class="pg-placeholder-inner"><svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="#ccc"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+                                            </div>
+                                            {% endif %}
                                         </div>
-                                    {% endif %}
-                                    <span class="pg-year-badge">{{ program.year }}</span>
-                                </div>
-                                <div class="p-3">
-                                    <h6 class="pg-card-title mb-1">{{ program.title }}</h6>
-                                    {% if program.description %}
-                                        <p class="pg-card-desc text-muted small mb-0">{{ program.description }}</p>
-                                    {% endif %}
+
+                                        <!-- Slider controls -->
+                                        {% with total_count=imgs|length %}
+                                        {% if total_count > 1 or event.cover_image and total_count > 0 %}
+                                        <button class="pg-sl-btn pg-sl-prev" onclick="pgSlide('{{ event.pk }}',-1)" aria-label="prev">&#8249;</button>
+                                        <button class="pg-sl-btn pg-sl-next" onclick="pgSlide('{{ event.pk }}',1)"  aria-label="next">&#8250;</button>
+                                        <div class="pg-sl-counter" id="sl-counter-{{ event.pk }}">1 / {{ total_count|add:event.cover_image|yesno:"1,0"|add:total_count }}</div>
+                                        {% endif %}
+                                        {% endwith %}
+
+                                        <!-- Badges -->
+                                        <span class="pg-year-pill">{{ event.year }}</span>
+                                        <span class="pg-cat-pill-badge">{{ cat.name }}</span>
+
+                                        <!-- Open lightbox button -->
+                                        <button class="pg-lightbox-btn"
+                                            data-event-id="{{ event.pk }}"
+                                            data-event-title="{{ event.title }}"
+                                            onclick="pgOpenLightbox('{{ event.pk }}')"
+                                            aria-label="View all photos">
+                                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                                            View all
+                                        </button>
+                                    </div>
+
+                                    <!-- Card body -->
+                                    <div class="pg-event-body">
+                                        <h5 class="pg-event-title">{{ event.title }}</h5>
+                                        {% if event.description %}<p class="pg-event-desc">{{ event.description }}</p>{% endif %}
+                                        <div class="pg-event-meta">
+                                            <span class="pg-img-count">
+                                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                                {{ event.image_count }} photo{{ event.image_count|pluralize }}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden image data for lightbox -->
+                                    <script type="application/json" id="lb-data-{{ event.pk }}">
+                                    {
+                                        "title": "{{ event.title|escapejs }}",
+                                        "year": {{ event.year }},
+                                        "images": [
+                                            {% if event.cover_image %}{"url":"{{ event.cover_image.url }}","caption":"Cover"},{% endif %}
+                                            {% for img in imgs %}{"url":"{{ img.image.url }}","caption":"{{ img.caption|default:event.title|escapejs }}"}{% if not forloop.last %},{% endif %}{% endfor %}
+                                        ]
+                                    }
+                                    </script>
                                 </div>
                             </div>
-                        </div>
+                            {% endwith %}
+                            {% empty %}
+                            <div class="col-12 text-center py-4 text-muted">No events in {{ cat.name }} yet.</div>
+                            {% endfor %}
                         {% empty %}
                         <div class="col-12 text-center py-5">
-                            <p class="text-muted">No programs added yet. Add programs from the admin panel.</p>
+                            <p class="text-muted">No programs added yet. Add categories and events from the admin panel.</p>
                         </div>
                         {% endfor %}
                     </div>
 
-                    <!-- View All Button -->
-                    {% comment %} <div class="text-center mt-4">
-                        <a href="{% url 'main:programs_gallery' %}" class="btn float-btn cf_btn">
-                            <i class="fas fa-caret-right"></i><span>View All Programs</span>
-                        </a>
-                    </div> {% endcomment %}
+                    <!-- No results -->
+                    <div id="pgNoResults" style="display:none" class="text-center py-5">
+                        <p class="text-muted">No events found for the selected filters.</p>
+                    </div>
 
-                    <div class="bc_dec-line_h"></div>
-                    <div class="bc_dec-line_v"></div>
+                    <div class="text-center mt-5">
+                        <a href="{% url 'main:programs_gallery' %}" class="btn float-btn cf_btn">
+                            <i class="fas fa-caret-right"></i><span>View Full Gallery</span>
+                        </a>
+                    </div>
+
+                    <div class="bc_dec-line_h"></div><div class="bc_dec-line_v"></div>
                 </div>
-                <div class="section-dec fs-wrapper">
-                    <div class="section-dec-top"></div>
-                    <div class="section-dec-border"></div>
-                    <div class="section-dec-bottom"></div>
-                    <div class="section-dec-top_line"></div>
-                    <div class="section-dec-bottom_line"></div>
-                </div>
+                <div class="section-dec fs-wrapper"><div class="section-dec-top"></div><div class="section-dec-border"></div><div class="section-dec-bottom"></div><div class="section-dec-top_line"></div><div class="section-dec-bottom_line"></div></div>
             </div>
         </div>
-        <!-- ==================== END PROGRAMS GALLERY SECTION ==================== -->
 
-        <!-- Testimonials Section -->
+        <!-- ═══════════════════════════════════════
+             LIGHTBOX POPUP
+        ═══════════════════════════════════════ -->
+        <div id="pgLightbox" class="pg-lb-overlay" role="dialog" aria-modal="true" style="display:none">
+            <div class="pg-lb-box">
+                <div class="pg-lb-header">
+                    <div>
+                        <h4 class="pg-lb-title" id="pgLbTitle"></h4>
+                        <p class="pg-lb-subtitle" id="pgLbSubtitle"></p>
+                    </div>
+                    <button class="pg-lb-close" onclick="pgCloseLightbox()" aria-label="Close">&times;</button>
+                </div>
+                <div class="pg-lb-main">
+                    <button class="pg-lb-nav pg-lb-prev" onclick="pgLbNav(-1)" aria-label="Previous">&#8249;</button>
+                    <div class="pg-lb-img-wrap">
+                        <img id="pgLbImg" src="" alt="">
+                        <div class="pg-lb-caption" id="pgLbCaption"></div>
+                    </div>
+                    <button class="pg-lb-nav pg-lb-next" onclick="pgLbNav(1)" aria-label="Next">&#8250;</button>
+                </div>
+                <div class="pg-lb-thumbs" id="pgLbThumbs"></div>
+                <div class="pg-lb-counter" id="pgLbCounter"></div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
         <div>
             <div class="testimonilas-carousel-wrap">
                 <div class="boxed-content">
-                    <div class="section-title">
-                        <h4>What said about us</h4>
-                        <h2>Testimonials and Clients</h2>
-                    </div>
-                    <div class="bc_dec-line_h"></div>
-                    <div class="bc_dec-line_v"></div>
+                    <div class="section-title"><h4>What said about us</h4><h2>Testimonials and Clients</h2></div>
+                    <div class="bc_dec-line_h"></div><div class="bc_dec-line_v"></div>
                 </div>
-
                 <div class="testimonilas-carousel">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-
                             <style>
-                                .testimonilas-carousel .swiper-wrapper { align-items: stretch; }
-                                .testimonilas-carousel .swiper-slide { height: auto; }
-                                .testi-item {
-                                    height: 320px;
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: space-between;
-                                    overflow: hidden;
-                                    box-sizing: border-box;
-                                }
-                                .testimonilas-text { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-                                .testimonilas-text-item { flex: 1; overflow: hidden; }
-                                .testimonilas-text-item-wrap { height: 100%; overflow: hidden; }
-                                .testimonilas-text-item-wrap p {
-                                    display: -webkit-box;
-                                    -webkit-line-clamp: 5;
-                                    -webkit-box-orient: vertical;
-                                    overflow: hidden;
-                                    margin: 0;
-                                }
-                                .testi-footer { flex-shrink: 0; padding-top: 12px; }
+                                .testimonilas-carousel .swiper-wrapper{align-items:stretch;} .testimonilas-carousel .swiper-slide{height:auto;}
+                                .testi-item{height:320px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;box-sizing:border-box;}
+                                .testimonilas-text{flex:1;display:flex;flex-direction:column;overflow:hidden;} .testimonilas-text-item{flex:1;overflow:hidden;}
+                                .testimonilas-text-item-wrap{height:100%;overflow:hidden;} .testimonilas-text-item-wrap p{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;margin:0;}
+                                .testi-footer{flex-shrink:0;padding-top:12px;}
                             </style>
-
                             {% for testimonial in testimonials %}
                             <div class="swiper-slide">
                                 <div class="testi-item">
                                     <div class="testimonilas-text">
                                         <div class="testi-header">
-                                            <div class="testi-avatar">
-                                                {% if testimonial.avatar %}
-                                                    <img src="{{ testimonial.avatar.url }}" alt="{{ testimonial.name }}">
-                                                {% else %}
-                                                    <img src="{% static 'images/avatar/1.jpg' %}" alt="{{ testimonial.name }}">
-                                                {% endif %}
-                                            </div>
+                                            <div class="testi-avatar">{% if testimonial.avatar %}<img src="{{ testimonial.avatar.url }}" alt="{{ testimonial.name }}">{% else %}<img src="{% static 'images/avatar/1.jpg' %}" alt="{{ testimonial.name }}">{% endif %}</div>
                                             <h3>{{ testimonial.name }}</h3>
                                         </div>
-                                        <div class="testimonilas-text-item">
-                                            <div class="testimonilas-text-item-wrap">
-                                                <p>"{{ testimonial.review }}"</p>
-                                            </div>
-                                        </div>
+                                        <div class="testimonilas-text-item"><div class="testimonilas-text-item-wrap"><p>"{{ testimonial.review }}"</p></div></div>
                                     </div>
-                                    <div class="testi-footer">
-                                        <a href="{{ testimonial.platform_url|default:'#' }}"
-                                           class="testi-link"
-                                           target="_blank">
-                                            {{ testimonial.get_platform_display }}
-                                        </a>
-                                    </div>
+                                    <div class="testi-footer"><a href="{{ testimonial.platform_url|default:'#' }}" class="testi-link" target="_blank">{{ testimonial.get_platform_display }}</a></div>
                                 </div>
                             </div>
-                            {% empty %}
-                            <div class="swiper-slide">
-                                <p>No testimonials available at the moment.</p>
-                            </div>
+                            {% empty %}<div class="swiper-slide"><p>No testimonials available.</p></div>
                             {% endfor %}
-
                         </div>
                     </div>
                 </div>
-
                 <div class="fwc-controls_wrap">
                     <div class="solid-pagination_btns tcs-pagination_init"></div>
                     <div class="tc-button tc-button-next"><i class="fa-solid fa-chevron-right"></i></div>
@@ -444,245 +369,307 @@
         </div>
 
     </div>
-
-    <div class="content-dec">
-        <div class="container"></div>
-    </div>
+    <div class="content-dec"><div class="container"></div></div>
 </div>
 {% endblock %}
 
 {% block extra_css %}
 <style>
-    :root {
-        --primary-color: #ed3435;
-        --secondary-color: #164476;
-        --text-dark: #1a202c;
-        --text-light: #4a5568;
-        --white: #ffffff;
-        --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-        --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-    }
+:root{--primary:#ed3435;--navy:#164476;--dark:#1a202c;--muted:#4a5568;--white:#fff;--sh-sm:0 2px 10px rgba(0,0,0,.06);--sh-md:0 8px 30px rgba(0,0,0,.10);--sh-lg:0 20px 60px rgba(0,0,0,.15);}
 
-    /* ── Journey ── */
-    .journey-section {
-        padding: 60px 20px;
-        background: #fff;
-        position: relative;
-        overflow: hidden;
-    }
-    .journey-section::before {
-        content: '';
-        position: absolute;
-        top: -50%; right: -10%;
-        width: 600px; height: 600px;
-        background: radial-gradient(circle, rgba(237,52,53,0.05) 0%, transparent 70%);
-        border-radius: 50%;
-        animation: float 20s ease-in-out infinite;
-    }
-    .journey-section::after {
-        content: '';
-        position: absolute;
-        bottom: -30%; left: -5%;
-        width: 500px; height: 500px;
-        background: radial-gradient(circle, rgba(237,52,53,0.04) 0%, transparent 70%);
-        border-radius: 50%;
-        animation: float 15s ease-in-out infinite reverse;
-    }
-    @keyframes float {
-        0%,100% { transform: translate(0,0) scale(1); }
-        50%      { transform: translate(30px,30px) scale(1.1); }
-    }
-    .journey-wrapper { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-    .decorative-circle { position: absolute; border-radius: 50%; background: rgba(237,52,53,0.03); pointer-events: none; }
-    .circle-1 { width:300px; height:300px; top:10%; left:-100px; animation: pulse 8s ease-in-out infinite; }
-    .circle-2 { width:200px; height:200px; top:50%; right:-50px; animation: pulse 6s ease-in-out infinite 1s; }
-    .circle-3 { width:150px; height:150px; bottom:10%; left:20%; animation: pulse 10s ease-in-out infinite 2s; }
-    @keyframes pulse {
-        0%,100% { transform:scale(1); opacity:0.3; }
-        50%      { transform:scale(1.2); opacity:0.5; }
-    }
-    .section-header { text-align:center; margin-bottom:40px; }
-    .section-heading { font-size:46px; font-weight:800; color:var(--text-dark); margin-bottom:18px; text-shadow:2px 4px 8px rgba(0,0,0,0.05); line-height:1.1; letter-spacing:-1px; }
-    .section-subtitle { font-size:17px; color:var(--text-light); max-width:1000px; margin:0 auto; line-height:1.7; font-weight:400; }
-    .timeline-container { background:var(--white); border-radius:30px; padding:40px 50px 35px; box-shadow:var(--shadow-lg); backdrop-filter:blur(10px); position:relative; border:1px solid #e2e8f0; }
-    .year-navigation { display:flex; justify-content:center; flex-wrap:wrap; gap:15px; margin-bottom:30px; }
-    .year-badge { padding:0; background:transparent; border:none; cursor:pointer; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); position:relative; }
-    .year-number { display:block; padding:14px 28px; background:#f7fafc; border:2px solid #e2e8f0; border-radius:14px; font-size:17px; font-weight:700; color:var(--text-light); transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
-    .year-badge:hover .year-number { background:#edf2f7; border-color:#ed3435; color:var(--text-dark); transform:translateY(-3px); box-shadow:0 6px 20px rgba(237,52,53,0.25); }
-    .year-badge.active .year-number { background:var(--primary-color); border-color:transparent; color:var(--white); transform:translateY(-3px) scale(1.05); }
-    .progress-track { height:8px; background:#edf2f7; border-radius:10px; margin:0 30px 35px; position:relative; overflow:visible; box-shadow:inset 0 2px 4px rgba(0,0,0,0.05); }
-    .progress-fill { height:100%; background:var(--primary-color); border-radius:10px; width:0%; transition:width 0.8s cubic-bezier(0.4,0,0.2,1); box-shadow:0 0 20px rgba(237,52,53,0.5); position:relative; }
-    .progress-marker { position:absolute; top:50%; left:0%; transform:translate(-50%,-50%); width:24px; height:24px; background:var(--white); border:4px solid #ed3435; border-radius:50%; box-shadow:0 0 0 6px rgba(237,52,53,0.15),0 4px 12px rgba(0,0,0,0.2); transition:left 0.8s cubic-bezier(0.4,0,0.2,1); z-index:2; animation:markerPulse 2s ease-in-out infinite; }
-    @keyframes markerPulse {
-        0%,100% { box-shadow:0 0 0 6px rgba(237,52,53,0.15),0 4px 12px rgba(0,0,0,0.2); }
-        50%      { box-shadow:0 0 0 12px rgba(237,52,53,0.1),0 4px 12px rgba(0,0,0,0.2); }
-    }
-    .story-area { position:relative; min-height:280px; }
-    .milestone-card { display:none; opacity:0; transform:translateY(20px); }
-    .milestone-card.active { display:block; animation:cardFadeIn 0.6s cubic-bezier(0.4,0,0.2,1) forwards; }
-    @keyframes cardFadeIn {
-        from { opacity:0; transform:translateY(30px); }
-        to   { opacity:1; transform:translateY(0); }
-    }
-    .milestone-content { background:#f7fafc; padding:35px; border-radius:24px; border:2px solid #e2e8f0; box-shadow:var(--shadow-md); position:relative; overflow:hidden; }
-    .milestone-content::before { content:''; position:absolute; top:0; left:0; width:6px; height:100%; background:var(--primary-color); }
-    .milestone-label { display:inline-block; padding:8px 20px; background:var(--secondary-color); color:var(--white); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; border-radius:50px; margin-bottom:15px; box-shadow:0 4px 12px rgba(22,68,118,0.3); }
-    .milestone-year { font-size:40px; font-weight:800; color:var(--primary-color); margin-bottom:18px; line-height:1; letter-spacing:-2px; }
-    .milestone-text { font-size:17px; line-height:1.7; color:var(--text-dark); margin:0; font-weight:400; }
-    .story-controls { display:flex; gap:20px; justify-content:center; margin-top:35px; }
-    .control-btn { width:60px; height:60px; background:var(--white); border:2px solid #e2e8f0; border-radius:16px; color:#ed3435; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); box-shadow:var(--shadow-sm); }
-    .control-btn:hover:not(:disabled) { background:var(--primary-color); border-color:transparent; color:var(--white); transform:translateY(-4px); box-shadow:0 10px 25px rgba(237,52,53,0.35); }
-    .control-btn:active:not(:disabled) { transform:translateY(-2px); }
-    .control-btn:disabled { background:#f7fafc; border-color:#edf2f7; color:#cbd5e0; cursor:not-allowed; box-shadow:none; }
+/* ── Journey ── */
+.journey-section{padding:60px 20px;background:#fff;position:relative;overflow:hidden;}
+.journey-section::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(237,52,53,.05) 0%,transparent 70%);border-radius:50%;animation:jfloat 20s ease-in-out infinite;}
+.journey-section::after{content:'';position:absolute;bottom:-30%;left:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(237,52,53,.04) 0%,transparent 70%);border-radius:50%;animation:jfloat 15s ease-in-out infinite reverse;}
+@keyframes jfloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,30px) scale(1.1);}}
+.journey-wrapper{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.decorative-circle{position:absolute;border-radius:50%;background:rgba(237,52,53,.03);pointer-events:none;}
+.circle-1{width:300px;height:300px;top:10%;left:-100px;animation:jpulse 8s ease-in-out infinite;}
+.circle-2{width:200px;height:200px;top:50%;right:-50px;animation:jpulse 6s ease-in-out infinite 1s;}
+.circle-3{width:150px;height:150px;bottom:10%;left:20%;animation:jpulse 10s ease-in-out infinite 2s;}
+@keyframes jpulse{0%,100%{transform:scale(1);opacity:.3;}50%{transform:scale(1.2);opacity:.5;}}
+.section-header{text-align:center;margin-bottom:40px;}
+.section-heading{font-size:46px;font-weight:800;color:var(--dark);margin-bottom:18px;line-height:1.1;letter-spacing:-1px;}
+.section-subtitle{font-size:17px;color:var(--muted);max-width:1000px;margin:0 auto;line-height:1.7;}
+.timeline-container{background:var(--white);border-radius:30px;padding:40px 50px 35px;box-shadow:var(--sh-lg);border:1px solid #e2e8f0;}
+.year-navigation{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-bottom:30px;}
+.year-badge{padding:0;background:transparent;border:none;cursor:pointer;transition:all .3s ease;}
+.year-number{display:block;padding:14px 28px;background:#f7fafc;border:2px solid #e2e8f0;border-radius:14px;font-size:17px;font-weight:700;color:var(--muted);transition:all .3s ease;}
+.year-badge:hover .year-number{background:#edf2f7;border-color:var(--primary);color:var(--dark);transform:translateY(-3px);box-shadow:0 6px 20px rgba(237,52,53,.25);}
+.year-badge.active .year-number{background:var(--primary);border-color:transparent;color:var(--white);transform:translateY(-3px) scale(1.05);}
+.progress-track{height:8px;background:#edf2f7;border-radius:10px;margin:0 30px 35px;position:relative;overflow:visible;}
+.progress-fill{height:100%;background:var(--primary);border-radius:10px;width:0%;transition:width .8s ease;box-shadow:0 0 20px rgba(237,52,53,.5);}
+.progress-marker{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:24px;height:24px;background:var(--white);border:4px solid var(--primary);border-radius:50%;box-shadow:0 0 0 6px rgba(237,52,53,.15);transition:left .8s ease;z-index:2;animation:mPulse 2s ease-in-out infinite;}
+@keyframes mPulse{0%,100%{box-shadow:0 0 0 6px rgba(237,52,53,.15);}50%{box-shadow:0 0 0 12px rgba(237,52,53,.08);}}
+.story-area{position:relative;min-height:280px;}
+.milestone-card{display:none;opacity:0;}
+.milestone-card.active{display:block;animation:mFade .6s ease forwards;}
+@keyframes mFade{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.milestone-content{background:#f7fafc;padding:35px;border-radius:24px;border:2px solid #e2e8f0;box-shadow:var(--sh-md);position:relative;overflow:hidden;}
+.milestone-content::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;background:var(--primary);}
+.milestone-label{display:inline-block;padding:8px 20px;background:var(--navy);color:var(--white);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:50px;margin-bottom:15px;}
+.milestone-year{font-size:40px;font-weight:800;color:var(--primary);margin-bottom:18px;line-height:1;letter-spacing:-2px;}
+.milestone-text{font-size:17px;line-height:1.7;color:var(--dark);margin:0;}
+.story-controls{display:flex;gap:20px;justify-content:center;margin-top:35px;}
+.control-btn{width:60px;height:60px;background:var(--white);border:2px solid #e2e8f0;border-radius:16px;color:var(--primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease;box-shadow:var(--sh-sm);}
+.control-btn:hover:not(:disabled){background:var(--primary);border-color:transparent;color:var(--white);transform:translateY(-4px);box-shadow:0 10px 25px rgba(237,52,53,.35);}
+.control-btn:disabled{background:#f7fafc;border-color:#edf2f7;color:#cbd5e0;cursor:not-allowed;}
 
-    /* ── Programs Gallery ── */
-    .pg-filter-bar {
-        border: 1px solid #e9ecef;
-        background: #f8f9fa;
-    }
-    .pg-year-select {
-        min-width: 160px;
-        border: 1.5px solid #dee2e6;
-        border-radius: 8px;
-        padding: 8px 14px;
-        font-size: 0.92rem;
-        color: #0f1f3d;
-        background: #fff;
-        cursor: pointer;
-        outline: none;
-        appearance: auto;
-        transition: border-color .2s;
-    }
-    .pg-year-select:focus {
-        border-color: #ed3435;
-        box-shadow: 0 0 0 3px rgba(237,52,53,.1);
-    }
-    .pg-count-label { font-size:.88rem; color:#6c757d; margin-right:4px; }
-    .pg-count-year  { font-size:.95rem; color:#0f1f3d; font-weight:700; margin-right:4px; }
-    .pg-count-badge { font-size:.88rem; color:#6c757d; }
-    .pg-card {
-        border: 1px solid #f0f0f0;
-        box-shadow: 0 2px 10px rgba(0,0,0,.05);
-        transition: transform .22s ease, box-shadow .22s ease;
-    }
-    .pg-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,.10) !important; }
-    .pg-img-wrap { overflow:hidden; height:190px; background:#f5f5f5; }
-    .pg-img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease; }
-    .pg-card:hover .pg-img { transform:scale(1.04); }
-    .pg-img-placeholder { height:100%; }
-    .pg-year-badge {
-        position:absolute; top:10px; right:10px;
-        background:#fff; color:#0f1f3d;
-        font-size:.75rem; font-weight:700;
-        padding:3px 10px; border-radius:20px;
-        box-shadow:0 2px 8px rgba(0,0,0,.15);
-    }
-    .pg-card-title { font-size:.92rem; color:#0f1f3d; font-weight:600; line-height:1.35; }
-    .pg-card-desc { font-size:.80rem; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    @keyframes pgFadeIn {
-        from { opacity:0; transform:translateY(12px); }
-        to   { opacity:1; transform:translateY(0); }
-    }
-    .pg-card-col { animation:pgFadeIn .3s ease both; }
-    .pg-card-col:nth-child(1){ animation-delay:.05s; }
-    .pg-card-col:nth-child(2){ animation-delay:.10s; }
-    .pg-card-col:nth-child(3){ animation-delay:.15s; }
-    .pg-card-col:nth-child(4){ animation-delay:.20s; }
-    .pg-card-col:nth-child(5){ animation-delay:.25s; }
-    .pg-card-col:nth-child(6){ animation-delay:.30s; }
-    .pg-card-col:nth-child(7){ animation-delay:.35s; }
-    .pg-card-col:nth-child(8){ animation-delay:.40s; }
+/* ═══════════════════════════════════
+   PROGRAMS GALLERY
+═══════════════════════════════════ */
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-        .journey-section { padding:40px 15px; }
-        .section-heading { font-size:36px; }
-        .timeline-container { padding:30px 30px 25px; border-radius:24px; }
-        .year-number { padding:12px 22px; font-size:16px; }
-        .milestone-content { padding:28px 25px; border-radius:20px; }
-        .milestone-year { font-size:32px; }
-        .control-btn { width:55px; height:55px; }
-    }
-    @media (max-width: 480px) {
-        .section-heading { font-size:32px; }
-        .timeline-container { padding:25px 20px 20px; border-radius:20px; }
-        .year-number { padding:10px 18px; font-size:15px; }
-        .milestone-year { font-size:28px; }
-        .control-btn { width:50px; height:50px; }
-    }
+/* Filter bar */
+.pg-filter-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f8f9fa;border:1px solid #e9ecef;border-radius:14px;padding:14px 18px;}
+.pg-cat-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pg-cat-pill{padding:8px 20px;font-size:.84rem;font-weight:600;border-radius:50px;border:2px solid #dee2e6;background:#fff;color:#495057;cursor:pointer;transition:all .22s ease;white-space:nowrap;}
+.pg-cat-pill:hover{border-color:var(--primary);color:var(--primary);background:#fff5f5;}
+.pg-cat-pill.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(237,52,53,.3);}
+.pg-filter-right{display:flex;align-items:center;gap:12px;}
+.pg-year-sel{min-width:130px;border:1.5px solid #dee2e6;border-radius:8px;padding:7px 12px;font-size:.86rem;color:var(--dark);background:#fff;cursor:pointer;outline:none;appearance:auto;}
+.pg-year-sel:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(237,52,53,.1);}
+.pg-result-count{font-size:.84rem;color:#6c757d;white-space:nowrap;}
+
+/* Event card */
+.pg-event-card{border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm);background:#fff;border:1px solid #f0f0f0;transition:transform .25s ease,box-shadow .25s ease;height:100%;}
+.pg-event-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
+
+/* Slider */
+.pg-slider{position:relative;height:220px;overflow:hidden;background:#f5f5f5;}
+.pg-slides{display:flex;height:100%;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+.pg-slide{min-width:100%;height:100%;flex-shrink:0;}
+.pg-slide img{width:100%;height:100%;object-fit:cover;}
+.pg-slide-placeholder{background:#f0f0f0;}
+.pg-placeholder-inner{height:100%;display:flex;align-items:center;justify-content:center;}
+
+/* Slider nav */
+.pg-sl-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.pg-sl-btn:hover{background:rgba(0,0,0,.7);}
+.pg-sl-prev{left:8px;}
+.pg-sl-next{right:8px;}
+.pg-sl-counter{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.5);color:#fff;font-size:.70rem;padding:2px 8px;border-radius:10px;}
+
+/* Badges */
+.pg-year-pill{position:absolute;top:10px;right:10px;background:#fff;color:var(--dark);font-size:.70rem;font-weight:700;padding:3px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.pg-cat-pill-badge{position:absolute;top:10px;left:10px;background:var(--primary);color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(237,52,53,.4);max-width:calc(100% - 70px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Lightbox open btn */
+.pg-lightbox-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);color:var(--dark);border:none;border-radius:20px;padding:5px 16px;font-size:.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;backdrop-filter:blur(4px);box-shadow:0 2px 10px rgba(0,0,0,.15);transition:all .2s;white-space:nowrap;}
+.pg-lightbox-btn:hover{background:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(237,52,53,.4);}
+
+/* Card body */
+.pg-event-body{padding:16px;}
+.pg-event-title{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:5px;line-height:1.3;}
+.pg-event-desc{font-size:.82rem;color:var(--muted);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px;}
+.pg-event-meta{display:flex;align-items:center;gap:10px;}
+.pg-img-count{font-size:.78rem;color:#6c757d;display:flex;align-items:center;gap:4px;}
+
+/* Fade-in */
+@keyframes pgFade{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.pg-event-col{animation:pgFade .35s ease both;}
+.pg-event-col:nth-child(1){animation-delay:.04s;}.pg-event-col:nth-child(2){animation-delay:.08s;}
+.pg-event-col:nth-child(3){animation-delay:.12s;}.pg-event-col:nth-child(4){animation-delay:.16s;}
+.pg-event-col:nth-child(5){animation-delay:.20s;}.pg-event-col:nth-child(6){animation-delay:.24s;}
+
+/* ═══════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════ */
+.pg-lb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;animation:lbFadeIn .25s ease;}
+@keyframes lbFadeIn{from{opacity:0;}to{opacity:1;}}
+.pg-lb-box{background:#fff;border-radius:20px;width:100%;max-width:900px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);}
+
+.pg-lb-header{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 22px 12px;border-bottom:1px solid #f0f0f0;gap:12px;}
+.pg-lb-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin:0;}
+.pg-lb-subtitle{font-size:.82rem;color:var(--muted);margin:3px 0 0;}
+.pg-lb-close{background:none;border:none;font-size:28px;color:#aaa;cursor:pointer;line-height:1;padding:0;flex-shrink:0;transition:color .2s;}
+.pg-lb-close:hover{color:var(--primary);}
+
+.pg-lb-main{display:flex;align-items:center;gap:0;flex:1;overflow:hidden;background:#111;min-height:0;}
+.pg-lb-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;height:100%;position:relative;min-height:300px;}
+.pg-lb-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.pg-lb-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:.82rem;padding:20px 14px 10px;text-align:center;}
+
+.pg-lb-nav{background:rgba(255,255,255,.12);border:none;color:#fff;font-size:36px;width:52px;min-width:52px;height:100%;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;}
+.pg-lb-nav:hover{background:rgba(255,255,255,.22);}
+
+.pg-lb-thumbs{display:flex;gap:8px;padding:12px 18px;overflow-x:auto;background:#f8f9fa;border-top:1px solid #eee;scrollbar-width:thin;}
+.pg-lb-thumbs::-webkit-scrollbar{height:4px;}.pg-lb-thumbs::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px;}
+.pg-lb-thumb{width:60px;height:50px;border-radius:8px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2px solid transparent;transition:all .2s;opacity:.65;}
+.pg-lb-thumb:hover{opacity:1;}.pg-lb-thumb.active{border-color:var(--primary);opacity:1;}
+.pg-lb-thumb img{width:100%;height:100%;object-fit:cover;}
+.pg-lb-counter{text-align:center;font-size:.80rem;color:#6c757d;padding:6px 0 10px;}
+
+/* Responsive */
+@media(max-width:768px){
+    .journey-section{padding:40px 15px;} .section-heading{font-size:36px;}
+    .timeline-container{padding:30px 25px;border-radius:20px;} .year-number{padding:12px 18px;font-size:15px;}
+    .milestone-content{padding:24px 20px;} .milestone-year{font-size:30px;} .control-btn{width:52px;height:52px;}
+    .pg-filter-bar{flex-direction:column;align-items:flex-start;} .pg-filter-right{width:100%;justify-content:space-between;}
+    .pg-lb-box{border-radius:14px;} .pg-lb-nav{width:40px;min-width:40px;font-size:28px;}
+    .pg-slider{height:200px;}
+}
+@media(max-width:480px){
+    .section-heading{font-size:30px;} .milestone-year{font-size:26px;} .control-btn{width:46px;height:46px;}
+    .pg-lb-thumbs{padding:8px 12px;} .pg-lb-thumb{width:48px;height:40px;}
+}
 </style>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    (function() {
-        'use strict';
+(function(){
+'use strict';
 
-        /* ── Journey Timeline ── */
-        const yearBadges     = document.querySelectorAll('.year-badge');
-        const milestoneCards = document.querySelectorAll('.milestone-card');
-        const progressFill   = document.querySelector('.progress-fill');
-        const progressMarker = document.querySelector('.progress-marker');
-        const prevControl    = document.querySelector('.prev-control');
-        const nextControl    = document.querySelector('.next-control');
+/* ═══ Journey ═══ */
+const yearBadges=document.querySelectorAll('.year-badge');
+const milestonCards=document.querySelectorAll('.milestone-card');
+const pFill=document.querySelector('.progress-fill');
+const pMarker=document.querySelector('.progress-marker');
+const prevBtn=document.querySelector('.prev-control');
+const nextBtn=document.querySelector('.next-control');
+const total=milestonCards.length;
+let cur=0;
 
-        const totalMilestones = milestoneCards.length;
-        let currentMilestone  = 0;
+function goTo(i){
+    if(i<0||i>=total)return;
+    cur=i;
+    yearBadges.forEach((b,j)=>b.classList.toggle('active',j===i));
+    milestonCards.forEach((c,j)=>c.classList.toggle('active',j===i));
+    const pct=total>1?(i/(total-1))*100:0;
+    if(pFill)pFill.style.width=pct+'%';
+    if(pMarker)pMarker.style.left=pct+'%';
+    if(prevBtn)prevBtn.disabled=i===0;
+    if(nextBtn)nextBtn.disabled=i===total-1;
+}
+yearBadges.forEach((b,i)=>b.addEventListener('click',()=>goTo(i)));
+if(prevBtn)prevBtn.addEventListener('click',()=>goTo(cur-1));
+if(nextBtn)nextBtn.addEventListener('click',()=>goTo(cur+1));
+document.addEventListener('keydown',e=>{
+    if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();goTo(cur-1);}
+    if(['ArrowRight','ArrowDown'].includes(e.key)){e.preventDefault();goTo(cur+1);}
+});
+let tX=0;
+const sa=document.querySelector('.story-area');
+if(sa){
+    sa.addEventListener('touchstart',e=>{tX=e.changedTouches[0].screenX;},{passive:true});
+    sa.addEventListener('touchend',e=>{const d=tX-e.changedTouches[0].screenX;if(Math.abs(d)>50)goTo(cur+(d>0?1:-1));},{passive:true});
+}
+if(total>0)goTo(0);
 
-        function updateJourney(index) {
-            if (index < 0 || index >= totalMilestones) return;
-            currentMilestone = index;
-            yearBadges.forEach((badge, i) => badge.classList.toggle('active', i === index));
-            milestoneCards.forEach((card, i) => card.classList.toggle('active', i === index));
-            const pct = (index / (totalMilestones - 1)) * 100;
-            progressFill.style.width  = pct + '%';
-            progressMarker.style.left = pct + '%';
-            if (prevControl) prevControl.disabled = index === 0;
-            if (nextControl) nextControl.disabled = index === totalMilestones - 1;
-        }
+/* ═══ Event card sliders ═══ */
+const sliderState={};
+window.pgSlide=function(id,dir){
+    const wrap=document.querySelector('#slider-'+id+' .pg-slides');
+    if(!wrap)return;
+    const count=wrap.children.length;
+    if(!sliderState[id])sliderState[id]=0;
+    sliderState[id]=(sliderState[id]+dir+count)%count;
+    wrap.style.transform='translateX(-'+sliderState[id]+'00%)';
+    const ctr=document.getElementById('sl-counter-'+id);
+    if(ctr)ctr.textContent=(sliderState[id]+1)+' / '+count;
+};
 
-        yearBadges.forEach((badge, index) => badge.addEventListener('click', () => updateJourney(index)));
-        if (prevControl) prevControl.addEventListener('click', () => updateJourney(currentMilestone - 1));
-        if (nextControl) nextControl.addEventListener('click', () => updateJourney(currentMilestone + 1));
+/* ═══ Gallery filter ═══ */
+const catPills=document.querySelectorAll('.pg-cat-pill');
+const yearSel=document.getElementById('pgYearSel');
+const grid=document.getElementById('pgEventGrid');
+const noRes=document.getElementById('pgNoResults');
+const visCnt=document.getElementById('pgVisCount');
+const visPlu=document.getElementById('pgVisPlural');
+let activeCat='', activeYear='';
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); updateJourney(currentMilestone - 1); }
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  { e.preventDefault(); updateJourney(currentMilestone + 1); }
+function applyFilter(){
+    if(!grid)return;
+    const cols=grid.querySelectorAll('.pg-event-col');
+    let v=0;
+    cols.forEach(col=>{
+        const mc=!activeCat||col.dataset.cat===activeCat;
+        const my=!activeYear||col.dataset.year===activeYear;
+        col.style.display=(mc&&my)?'':'none';
+        if(mc&&my)v++;
+    });
+    if(visCnt)visCnt.textContent=v;
+    if(visPlu)visPlu.textContent=v===1?'':'s';
+    if(noRes)noRes.style.display=v===0?'block':'none';
+}
+
+catPills.forEach(p=>p.addEventListener('click',function(){
+    catPills.forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+    activeCat=this.dataset.cat;
+    applyFilter();
+}));
+if(yearSel)yearSel.addEventListener('change',function(){activeYear=this.value;applyFilter();});
+applyFilter();
+
+/* ═══ Lightbox ═══ */
+let lbImages=[], lbIdx=0;
+
+window.pgOpenLightbox=function(eventId){
+    const raw=document.getElementById('lb-data-'+eventId);
+    if(!raw)return;
+    try{
+        const data=JSON.parse(raw.textContent);
+        lbImages=data.images||[];
+        if(!lbImages.length)return;
+        document.getElementById('pgLbTitle').textContent=data.title;
+        document.getElementById('pgLbSubtitle').textContent=data.year+' · '+lbImages.length+' photo'+(lbImages.length!==1?'s':'');
+        // Build thumbnails
+        const thumbs=document.getElementById('pgLbThumbs');
+        thumbs.innerHTML='';
+        lbImages.forEach((img,i)=>{
+            const d=document.createElement('div');
+            d.className='pg-lb-thumb'+(i===0?' active':'');
+            d.innerHTML='<img src="'+img.url+'" alt="">';
+            d.onclick=()=>lbGoTo(i);
+            thumbs.appendChild(d);
         });
+        lbGoTo(0);
+        document.getElementById('pgLightbox').style.display='flex';
+        document.body.style.overflow='hidden';
+    }catch(e){}
+};
 
-        let touchStartX = 0;
-        const storyArea = document.querySelector('.story-area');
-        if (storyArea) {
-            storyArea.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive:true });
-            storyArea.addEventListener('touchend', (e) => {
-                const diff = touchStartX - e.changedTouches[0].screenX;
-                if (Math.abs(diff) > 50) updateJourney(currentMilestone + (diff > 0 ? 1 : -1));
-            }, { passive:true });
-        }
+window.pgCloseLightbox=function(){
+    document.getElementById('pgLightbox').style.display='none';
+    document.body.style.overflow='';
+};
 
-        if (totalMilestones > 0) updateJourney(0);
+function lbGoTo(i){
+    if(!lbImages.length)return;
+    lbIdx=(i+lbImages.length)%lbImages.length;
+    const img=lbImages[lbIdx];
+    document.getElementById('pgLbImg').src=img.url;
+    document.getElementById('pgLbCaption').textContent=img.caption||'';
+    document.getElementById('pgLbCounter').textContent=(lbIdx+1)+' / '+lbImages.length;
+    document.querySelectorAll('.pg-lb-thumb').forEach((t,j)=>t.classList.toggle('active',j===lbIdx));
+    // Scroll active thumb into view
+    const at=document.querySelectorAll('.pg-lb-thumb')[lbIdx];
+    if(at)at.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
 
-        /* ── Programs Gallery Filter ── */
-        const pgFilter     = document.getElementById('pgYearFilter');
-        const pgGrid       = document.getElementById('pgGrid');
-        const pgCountYear  = document.getElementById('pgCountYear');
-        const pgCountBadge = document.getElementById('pgCountBadge');
+window.pgLbNav=function(dir){lbGoTo(lbIdx+dir);};
 
-        if (pgFilter && pgGrid) {
-            pgFilter.addEventListener('change', function () {
-                const selected = this.value;
-                let visible = 0;
-                pgGrid.querySelectorAll('.pg-card-col').forEach(function (col) {
-                    const show = !selected || col.dataset.year === selected;
-                    col.style.display = show ? '' : 'none';
-                    if (show) visible++;
-                });
-                pgCountYear.textContent  = selected || 'All Years';
-                pgCountBadge.textContent = '(' + visible + ' item' + (visible !== 1 ? 's' : '') + ')';
-            });
-        }
+// Keyboard & click-outside for lightbox
+document.addEventListener('keydown',e=>{
+    const lb=document.getElementById('pgLightbox');
+    if(!lb||lb.style.display==='none')return;
+    if(e.key==='ArrowLeft')pgLbNav(-1);
+    else if(e.key==='ArrowRight')pgLbNav(1);
+    else if(e.key==='Escape')pgCloseLightbox();
+});
+document.getElementById('pgLightbox').addEventListener('click',function(e){
+    if(e.target===this)pgCloseLightbox();
+});
 
-    })();
+// Touch swipe in lightbox
+let lbTX=0;
+const lbMain=document.querySelector('.pg-lb-main');
+if(lbMain){
+    lbMain.addEventListener('touchstart',e=>{lbTX=e.changedTouches[0].screenX;},{passive:true});
+    lbMain.addEventListener('touchend',e=>{const d=lbTX-e.changedTouches[0].screenX;if(Math.abs(d)>40)pgLbNav(d>0?1:-1);},{passive:true});
+}
+
+})();
 </script>
 {% endblock %}

@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<section class="pg-page-section py-5">
+  <div class="container-fluid px-4 px-lg-5">
+
+    <!-- Section Header -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <div>
+        <h2 class="pg-page-title fw-bold mb-1">Programs Gallery</h2>
+        <div class="pg-title-underline"></div>
+      </div>
+      <div class="d-none d-md-flex gap-1">
+        <span class="pg-dot pg-dot-red"></span>
+        <span class="pg-dot pg-dot-navy"></span>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="pg-filter-bar mb-4">
+
+      <!-- Category Pills -->
+      <div class="pg-category-pills">
+        <button class="pg-cat-btn {% if not selected_cat %}active{% endif %}" data-cat="">All Categories</button>
+        {% for cat in categories %}
+        <button class="pg-cat-btn {% if selected_cat == cat.slug %}active{% endif %}" data-cat="{{ cat.slug }}">{{ cat.name }}</button>
+        {% endfor %}
+      </div>
+
+      <!-- Right: Year + Count -->
+      <div class="pg-filter-right">
+        <select id="pgYearFilter" class="pg-year-select">
+          <option value="">All Years</option>
+          {% for year in all_years %}
+            <option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>
+          {% endfor %}
+        </select>
+        <span class="pg-count-text">
+          Showing: <strong id="pgCountLabel">All</strong>
+          <span id="pgCountBadge">({{ total_count }} event{{ total_count|pluralize }})</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Event Cards Grid -->
+    <div class="row g-4" id="pgGrid">
+      {% for event in events %}
+      {% with imgs=event.active_images %}
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pg-card-col"
+           data-year="{{ event.year }}"
+           data-cat="{{ event.category.slug }}">
+
+        <div class="pg-card bg-white rounded-3 overflow-hidden h-100">
+
+          <!-- Image slider -->
+          <div class="pg-slider" data-event="{{ event.pk }}">
+            <div class="pg-slides">
+              {% if event.cover_image %}
+              <div class="pg-slide"><img src="{{ event.cover_image.url }}" alt="{{ event.title }}" loading="lazy"></div>
+              {% endif %}
+              {% for img in imgs %}
+              <div class="pg-slide"><img src="{{ img.image.url }}" alt="{{ img.caption|default:event.title }}" loading="lazy"></div>
+              {% endfor %}
+              {% if not event.cover_image and not imgs %}
+              <div class="pg-slide pg-slide-placeholder">
+                <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="#ccc">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              {% endif %}
+            </div>
+
+            <!-- Slider arrows + counter (JS shows them only if 2+ slides) -->
+            <button class="pg-sl-btn pg-sl-prev" aria-label="Previous photo">&#8249;</button>
+            <button class="pg-sl-btn pg-sl-next" aria-label="Next photo">&#8250;</button>
+            <div class="pg-sl-counter"></div>
+
+            <!-- Badges -->
+            <span class="pg-year-badge">{{ event.year }}</span>
+            <span class="pg-cat-badge">{{ event.category.name }}</span>
+
+            <!-- Lightbox button -->
+            <button class="pg-lightbox-btn" data-lb="{{ event.pk }}" aria-label="View all photos">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+              </svg>
+              View all
+            </button>
+          </div>
+
+          <!-- Card body -->
+          <div class="p-3">
+            <h6 class="pg-card-title mb-1">{{ event.title }}</h6>
+            {% if event.description %}
+              <p class="pg-card-desc text-muted small mb-2">{{ event.description }}</p>
+            {% endif %}
+            <span class="pg-img-count">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+              </svg>
+              {{ event.image_count }} photo{{ event.image_count|pluralize }}
+            </span>
+          </div>
+
+          <!-- Lightbox data -->
+          <script type="application/json" id="lb-data-{{ event.pk }}">
+          {
+            "title": "{{ event.title|escapejs }}",
+            "year": {{ event.year }},
+            "images": [
+              {% if event.cover_image %}{"url":"{{ event.cover_image.url }}","caption":"{{ event.title|escapejs }}"}{% if imgs %},{% endif %}{% endif %}
+              {% for img in imgs %}{"url":"{{ img.image.url }}","caption":"{{ img.caption|default:event.title|escapejs }}"}{% if not forloop.last %},{% endif %}{% endfor %}
+            ]
+          }
+          </script>
+
+        </div>
+      </div>
+      {% endwith %}
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">No programs added yet. Add categories and events from the admin panel.</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- No results -->
+    <div id="pgNoResults" class="text-center py-5" style="display:none;">
+      <p class="text-muted">No events found for the selected filters.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== Lightbox ===== -->
+<div class="pg-lb-overlay" id="pgLightbox" aria-hidden="true">
+  <button class="pg-lb-close" id="pgLbClose" aria-label="Close">&times;</button>
+  <button class="pg-lb-nav pg-lb-prev" id="pgLbPrev" aria-label="Previous">&#8249;</button>
+  <div class="pg-lb-stage">
+    <img src="" alt="" id="pgLbImg">
+    <div class="pg-lb-info">
+      <span id="pgLbTitle"></span>
+      <span id="pgLbCounter"></span>
+    </div>
+  </div>
+  <button class="pg-lb-nav pg-lb-next" id="pgLbNext" aria-label="Next">&#8250;</button>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .pg-page-title { font-size:1.6rem; color:#0f1f3d; }
+  .pg-title-underline { width:48px; height:3px; background:#dc2626; border-radius:2px; margin-top:6px; }
+  .pg-dot { display:inline-block; width:14px; height:14px; border-radius:3px; }
+  .pg-dot-red  { background:#dc2626; }
+  .pg-dot-navy { background:#0f1f3d; }
+
+  /* Filter bar */
+  .pg-filter-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:12px; padding:14px 18px; }
+  .pg-category-pills { display:flex; flex-wrap:wrap; gap:8px; }
+  .pg-cat-btn { padding:7px 18px; font-size:.85rem; font-weight:600; border-radius:50px; border:2px solid #dee2e6; background:#fff; color:#495057; cursor:pointer; transition:all .22s ease; white-space:nowrap; }
+  .pg-cat-btn:hover { border-color:#ed3435; color:#ed3435; background:#fff5f5; }
+  .pg-cat-btn.active { background:#ed3435; border-color:#ed3435; color:#fff; box-shadow:0 4px 12px rgba(237,52,53,.3); }
+  .pg-filter-right { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .pg-year-select { min-width:140px; border:1.5px solid #dee2e6; border-radius:8px; padding:7px 12px; font-size:.88rem; color:#0f1f3d; background:#fff; cursor:pointer; outline:none; transition:border-color .2s; }
+  .pg-year-select:focus { border-color:#ed3435; box-shadow:0 0 0 3px rgba(237,52,53,.1); }
+  .pg-count-text { font-size:.85rem; color:#6c757d; white-space:nowrap; }
+  .pg-count-text strong { color:#0f1f3d; }
+
+  /* Cards */
+  .pg-card { border:1px solid #f0f0f0; box-shadow:0 2px 10px rgba(0,0,0,.05); transition:transform .22s ease, box-shadow .22s ease; }
+  .pg-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,.10) !important; }
+  .pg-card-title { font-size:.95rem; color:#0f1f3d; font-weight:600; line-height:1.35; }
+  .pg-card-desc  { font-size:.80rem; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .pg-img-count  { display:inline-flex; align-items:center; gap:5px; font-size:.75rem; font-weight:600; color:#6c757d; }
+
+  /* Slider */
+  .pg-slider { position:relative; overflow:hidden; height:210px; background:#f5f5f5; }
+  .pg-slides { display:flex; height:100%; transition:transform .35s ease; }
+  .pg-slide  { flex:0 0 100%; height:100%; }
+  .pg-slide img { width:100%; height:100%; object-fit:cover; }
+  .pg-slide-placeholder { display:flex; align-items:center; justify-content:center; }
+  .pg-sl-btn { position:absolute; top:50%; transform:translateY(-50%); width:30px; height:30px; border:none; border-radius:50%; background:rgba(255,255,255,.9); color:#0f1f3d; font-size:1.2rem; line-height:1; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,.2); z-index:2; transition:background .2s; }
+  .pg-sl-btn:hover { background:#ed3435; color:#fff; }
+  .pg-slider.has-multi .pg-sl-btn { display:flex; }
+  .pg-sl-prev { left:8px; }
+  .pg-sl-next { right:8px; }
+  .pg-sl-counter { position:absolute; bottom:8px; right:8px; background:rgba(15,31,61,.75); color:#fff; font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:20px; display:none; z-index:2; }
+  .pg-slider.has-multi .pg-sl-counter { display:block; }
+
+  .pg-year-badge { position:absolute; top:8px; right:8px; background:#fff; color:#0f1f3d; font-size:.72rem; font-weight:700; padding:3px 9px; border-radius:20px; box-shadow:0 2px 8px rgba(0,0,0,.15); z-index:2; }
+  .pg-cat-badge  { position:absolute; top:8px; left:8px; background:#ed3435; color:#fff; font-size:.70rem; font-weight:700; padding:3px 9px; border-radius:20px; box-shadow:0 2px 8px rgba(237,52,53,.35); max-width:calc(100% - 80px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; z-index:2; }
+  .pg-lightbox-btn { position:absolute; bottom:8px; left:8px; display:inline-flex; align-items:center; gap:5px; border:none; background:rgba(255,255,255,.92); color:#0f1f3d; font-size:.72rem; font-weight:700; padding:5px 11px; border-radius:20px; cursor:pointer; z-index:2; box-shadow:0 2px 8px rgba(0,0,0,.15); transition:background .2s, color .2s; }
+  .pg-lightbox-btn:hover { background:#ed3435; color:#fff; }
+
+  @keyframes pgFadeIn { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+  .pg-card-col { animation:pgFadeIn .3s ease both; }
+
+  /* Lightbox */
+  .pg-lb-overlay { position:fixed; inset:0; background:rgba(10,15,28,.94); z-index:9999; display:none; align-items:center; justify-content:center; padding:20px; }
+  .pg-lb-overlay.open { display:flex; }
+  .pg-lb-stage { max-width:min(1000px, 90vw); max-height:85vh; display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .pg-lb-stage img { max-width:100%; max-height:75vh; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.5); object-fit:contain; }
+  .pg-lb-info { display:flex; gap:16px; align-items:center; color:#fff; font-size:.9rem; }
+  #pgLbTitle { font-weight:600; }
+  #pgLbCounter { opacity:.7; font-size:.8rem; }
+  .pg-lb-close { position:absolute; top:18px; right:24px; border:none; background:transparent; color:#fff; font-size:2.4rem; line-height:1; cursor:pointer; opacity:.8; z-index:2; }
+  .pg-lb-close:hover { opacity:1; }
+  .pg-lb-nav { position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; border:none; border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font-size:1.8rem; line-height:1; cursor:pointer; transition:background .2s; z-index:2; }
+  .pg-lb-nav:hover { background:#ed3435; }
+  .pg-lb-prev { left:18px; }
+  .pg-lb-next { right:18px; }
+
+  @media(max-width:768px){
+    .pg-filter-bar{flex-direction:column;align-items:flex-start;}
+    .pg-filter-right{width:100%;justify-content:space-between;}
+    .pg-lb-nav{width:38px;height:38px;font-size:1.4rem;}
+    .pg-lb-prev{left:8px;} .pg-lb-next{right:8px;}
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  /* ============ CARD SLIDERS ============ */
+  document.querySelectorAll('.pg-slider').forEach(function (slider) {
+    var slidesWrap = slider.querySelector('.pg-slides');
+    var slides = slider.querySelectorAll('.pg-slide');
+    var counter = slider.querySelector('.pg-sl-counter');
+    var idx = 0;
+
+    if (slides.length > 1) slider.classList.add('has-multi');
+
+    function update() {
+      slidesWrap.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      if (counter) counter.textContent = (idx + 1) + ' / ' + slides.length;
+    }
+    update();
+
+    var prev = slider.querySelector('.pg-sl-prev');
+    var next = slider.querySelector('.pg-sl-next');
+    if (prev) prev.addEventListener('click', function (e) { e.stopPropagation(); idx = (idx - 1 + slides.length) % slides.length; update(); });
+    if (next) next.addEventListener('click', function (e) { e.stopPropagation(); idx = (idx + 1) % slides.length; update(); });
+  });
+
+  /* ============ LIGHTBOX ============ */
+  var lb = document.getElementById('pgLightbox');
+  var lbImg = document.getElementById('pgLbImg');
+  var lbTitle = document.getElementById('pgLbTitle');
+  var lbCounter = document.getElementById('pgLbCounter');
+  var lbImages = [];
+  var lbIdx = 0;
+
+  function lbShow() {
+    if (!lbImages.length) return;
+    lbImg.src = lbImages[lbIdx].url;
+    lbImg.alt = lbImages[lbIdx].caption || '';
+    lbCounter.textContent = (lbIdx + 1) + ' / ' + lbImages.length;
+  }
+  function lbOpen(eventId) {
+    var dataEl = document.getElementById('lb-data-' + eventId);
+    if (!dataEl) return;
+    try {
+      var data = JSON.parse(dataEl.textContent);
+      lbImages = data.images || [];
+      if (!lbImages.length) return;
+      lbIdx = 0;
+      lbTitle.textContent = data.title + ' (' + data.year + ')';
+      lbShow();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    } catch (e) { /* ignore bad data */ }
+  }
+  function lbClose() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.pg-lightbox-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { lbOpen(this.dataset.lb); });
+  });
+  document.getElementById('pgLbClose').addEventListener('click', lbClose);
+  document.getElementById('pgLbPrev').addEventListener('click', function () { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbShow(); });
+  document.getElementById('pgLbNext').addEventListener('click', function () { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lbClose(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbShow(); }
+    if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); }
+  });
+
+  /* ============ FILTERS ============ */
+  var grid = document.getElementById('pgGrid');
+  var yearSel = document.getElementById('pgYearFilter');
+  var countLabel = document.getElementById('pgCountLabel');
+  var countBadge = document.getElementById('pgCountBadge');
+  var noResults = document.getElementById('pgNoResults');
+  var catBtns = document.querySelectorAll('.pg-cat-btn');
+
+  var activeCat  = '{{ selected_cat|escapejs }}';
+  var activeYear = '{{ selected_year|escapejs }}';
+
+  function applyFilters() {
+    if (!grid) return;
+    var cols = grid.querySelectorAll('.pg-card-col');
+    var visible = 0;
+
+    cols.forEach(function (col) {
+      var matchCat  = !activeCat  || col.dataset.cat  === activeCat;
+      var matchYear = !activeYear || col.dataset.year === activeYear;
+      var show = matchCat && matchYear;
+      col.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    var activeBtn = document.querySelector('.pg-cat-btn.active');
+    var catName = activeBtn && activeBtn.dataset.cat ? activeBtn.textContent : 'All';
+    countLabel.textContent = catName + (activeYear ? ' · ' + activeYear : '');
+    countBadge.textContent = '(' + visible + ' event' + (visible !== 1 ? 's' : '') + ')';
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+
+    // Sync URL without reload
+    var url = new URL(window.location.href);
+    activeYear ? url.searchParams.set('year', activeYear) : url.searchParams.delete('year');
+    activeCat  ? url.searchParams.set('category', activeCat) : url.searchParams.delete('category');
+    window.history.replaceState({}, '', url.toString());
+  }
+
+  catBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      catBtns.forEach(function (b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      activeCat = this.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  if (yearSel) {
+    yearSel.addEventListener('change', function () {
+      activeYear = this.value;
+      applyFilters();
+    });
+  }
+
+  if (activeCat || activeYear) applyFilters();
+})();
+</script>
+{% endblock %}

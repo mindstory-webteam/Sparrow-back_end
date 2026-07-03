@@ -3,7 +3,7 @@ from django.utils.html import format_html
 from .models import (
     JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication,
     MapLocation, MapConnection, Testimonial,
-    ProgramCategory, ProgramEvent, ProgramImage, ProgramGallery
+    ProgramCategory, ProgramEvent, ProgramImage
 )
 
 
@@ -210,19 +210,3 @@ class ProgramImageAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" height="50" style="border-radius:6px;">', obj.image.url)
         return '—'
     preview.short_description = 'Photo'
-
-
-# ── Legacy single-image gallery (old data only) ──
-# Delete this block once old entries are migrated to Events.
-@admin.register(ProgramGallery)
-class ProgramGalleryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'year', 'order', 'is_active', 'preview']
-    list_filter = ['is_active', 'year']
-    search_fields = ['title']
-    list_editable = ['year', 'order', 'is_active']
-
-    def preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" height="40" style="border-radius:4px;">', obj.image.url)
-        return '—'
-    preview.short_description = 'Preview'

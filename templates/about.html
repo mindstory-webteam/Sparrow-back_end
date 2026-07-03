@@ -55,9 +55,9 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="hero-image-collge-wrap">
-                                    <div class="single-dec_img"><img src="{% static 'images/all/sparrow1.png' %}" alt="" class="respimg"></div>
-                                    {% comment %} <div class="hero_images-collage-item" style="width:25%;bottom:-35px;z-index:15;left:-30px;"><img src="{% static 'images/all/founder-img.png' %}" class="respimg" alt=""></div>
-                                    <div class="hero_images-collage-item" style="width:35%;top:-50px;z-index:11;right:-50px;"><img src="{% static 'images/all/founder-img.png' %}" class="respimg" alt=""></div> {% endcomment %}
+                                    <div class="single-dec_img"><img src="{% static 'images/all/sparrow2.png' %}" alt="" class="respimg"></div>
+                                    <div class="hero_images-collage-item" style="width:25%;bottom:-35px;z-index:15;left:-30px;"><img src="{% static 'images/all/sparrow3.png' %}" class="respimg" alt=""></div>
+                                    <div class="hero_images-collage-item" style="width:35%;top:-50px;z-index:11;right:-50px;"><img src="{% static 'images/all/sparrow1.png' %}" class="respimg" alt=""></div>
                                     <div class="dc_dec-item_right"><h4><span>9</span>Years of experience</h4></div>
                                 </div>
                             </div>
@@ -224,13 +224,11 @@
                                         </div>
 
                                         <!-- Slider controls -->
-                                        {% with total_count=imgs|length %}
-                                        {% if total_count > 1 or event.cover_image and total_count > 0 %}
+                                        {% if event.slide_count > 1 %}
                                         <button class="pg-sl-btn pg-sl-prev" onclick="pgSlide('{{ event.pk }}',-1)" aria-label="prev">&#8249;</button>
                                         <button class="pg-sl-btn pg-sl-next" onclick="pgSlide('{{ event.pk }}',1)"  aria-label="next">&#8250;</button>
-                                        <div class="pg-sl-counter" id="sl-counter-{{ event.pk }}">1 / {{ total_count|add:event.cover_image|yesno:"1,0"|add:total_count }}</div>
+                                        <div class="pg-sl-counter" id="sl-counter-{{ event.pk }}">1 / {{ event.slide_count }}</div>
                                         {% endif %}
-                                        {% endwith %}
 
                                         <!-- Badges -->
                                         <span class="pg-year-pill">{{ event.year }}</span>

@@ -3,6 +3,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 
 
+def current_year():
+    """Callable default — always returns THIS year (not the year the server started)."""
+    return timezone.now().year
+
+
 # ---------------------(MAP)-------------------
 class MapLocation(models.Model):
     LOCATION_TYPE_CHOICES = [
@@ -242,7 +247,7 @@ class ProgramEvent(models.Model):
     description = models.TextField(blank=True, help_text="Short description (optional)")
     year = models.IntegerField(
         validators=[MinValueValidator(2000), MaxValueValidator(2100)],
-        default=timezone.now().year,
+        default=current_year,
         help_text="Year the event took place"
     )
     cover_image = models.ImageField(upload_to='program_events/', blank=True, null=True,
@@ -276,6 +281,11 @@ class ProgramEvent(models.Model):
     def image_count(self):
         return self.images.filter(is_active=True).count()
 
+    @property
+    def slide_count(self):
+        """Total slides shown on the card = cover image (if any) + active photos."""
+        return self.image_count + (1 if self.cover_image else 0)
+
 
 class ProgramImage(models.Model):
     """Individual image belonging to a ProgramEvent"""
@@ -296,24 +306,3 @@ class ProgramImage(models.Model):
 
     def __str__(self):
         return f"Image {self.order} — {self.event.title}"
-
-
-# Keep ProgramGallery for backward compatibility (old single-image model)
-class ProgramGallery(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='programs/')
-    year = models.IntegerField(validators=[MinValueValidator(2000), MaxValueValidator(2100)], default=timezone.now().year)
-    category = models.ForeignKey(ProgramCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='legacy_programs')
-    order = models.IntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['-year', 'order', 'title']
-        verbose_name = "Program Gallery (Legacy)"
-        verbose_name_plural = "Program Gallery (Legacy)"
-
-    def __str__(self):
-        return f"{self.title} ({self.year})"

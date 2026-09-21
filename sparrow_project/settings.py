@@ -38,6 +38,21 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sparrow_project.urls'
 
+
+# -----------------------------------------
+
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'mail.mindstory.in'      # or 'smtp.gmail.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = 'web@mindstory.in'
+EMAIL_HOST_PASSWORD = 'your-password-here'
+DEFAULT_FROM_EMAIL  = 'web@mindstory.in'
+
+
+
+# --------------------------------------
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

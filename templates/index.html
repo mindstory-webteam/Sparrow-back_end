@@ -873,68 +873,86 @@
                         const map = L.map('map').setView([10.55, 76.45], 12);
 
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '© OpenStreetMap contributors',
-                            maxZoom: 19
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+                            maxZoom: 19,
+                            referrerPolicy: 'strict-origin-when-cross-origin'
                         }).addTo(map);
 
                         const markerLayers = L.featureGroup().addTo(map);
 
-                        locations.forEach(async (location) => {
-                            const customIcon = L.divIcon({
-                                html: `<div class="custom-marker ${location.category}">${location.icon}</div>`,
-                                className: '',
-                                iconSize: [location.category === 'hq' ? 60 : location.category === 'unit' ? 50 : 40, 
-                                        location.category === 'hq' ? 60 : location.category === 'unit' ? 50 : 40],
-                                iconAnchor: [location.category === 'hq' ? 30 : location.category === 'unit' ? 25 : 20, 
-                                            location.category === 'hq' ? 60 : location.category === 'unit' ? 50 : 40]
-                            });
+                        console.log('Map locations received:', locations);
 
-                            let fetchedAddress = location.address;
-                            
+                        // Each location is validated and wrapped in try/catch, so one bad entry can never stop the
+                        // other markers from showing. (No Nominatim requests - the address comes from the database.)
+                        locations.forEach((location, index) => {
                             try {
-                                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${location.lat}&lon=${location.lng}&zoom=18&addressdetails=1`);
-                                const data = await response.json();
-                                if (data && data.display_name) { fetchedAddress = data.display_name; }
-                            } catch (error) {
-                                console.error('Error fetching address:', error);
+                                const lat = parseFloat(location.lat);
+                                const lng = parseFloat(location.lng);
+
+                                if (isNaN(lat) || isNaN(lng)) {
+                                    console.warn('Location skipped - invalid lat/lng:', index, location);
+                                    return;
+                                }
+
+                                const category = location.category || 'unit';
+                                const size = category === 'hq' ? 60 : category === 'unit' ? 50 : 40;
+
+                                const customIcon = L.divIcon({
+                                    html: `<div class="custom-marker ${category}">${location.icon || '&#128205;'}</div>`,
+                                    className: '',
+                                    iconSize: [size, size],
+                                    iconAnchor: [size / 2, size]
+                                });
+
+                                const popupContent = `
+                                    <div class="popup-content">
+                                        <div class="popup-title">${location.name || ''}</div>
+                                        <div class="popup-detail"><strong>Type:</strong> ${location.type || ''}</div>
+                                        <div class="popup-detail"><strong>Address:</strong> ${location.address || ''}</div>
+                                    </div>
+                                `;
+
+                                const marker = L.marker([lat, lng], { icon: customIcon, title: location.name || '' })
+                                    .bindPopup(popupContent, { maxWidth: 300 })
+                                    .addTo(map);
+
+                                marker.on('click', function() {
+                                    map.flyTo([lat, lng], 15, { duration: 1.5, easeLinearity: 0.25 });
+                                });
+
+                                markerLayers.addLayer(marker);
+                            } catch (err) {
+                                console.error('Location failed to load:', index, location, err);
                             }
-
-                            const popupContent = `
-                                <div class="popup-content">
-                                    <div class="popup-title">${location.name}</div>
-                                    <div class="popup-detail"><strong>Type:</strong> ${location.type}</div>
-                                    <div class="popup-detail"><strong>Address:</strong> ${fetchedAddress}</div>
-                                </div>
-                            `;
-
-                            const marker = L.marker([location.lat, location.lng], { icon: customIcon, title: location.name })
-                                .bindPopup(popupContent, { maxWidth: 300 })
-                                .addTo(map);
-
-                            marker.on('click', function() {
-                                map.flyTo([location.lat, location.lng], 15, { duration: 1.5, easeLinearity: 0.25 });
-                            });
-
-                            markerLayers.addLayer(marker);
                         });
 
                         connections.forEach((connection) => {
-                            L.polyline([[connection.from.lat, connection.from.lng], [connection.to.lat, connection.to.lng]], {
-                                color: connection.color, weight: 2.5, opacity: 0.7, dashArray: '6, 4', lineCap: 'round', lineJoin: 'round'
-                            }).addTo(map);
-                            L.polyline([[connection.from.lat, connection.from.lng], [connection.to.lat, connection.to.lng]], {
-                                color: connection.color, weight: 8, opacity: 0.12, lineCap: 'round', lineJoin: 'round'
-                            }).addTo(map);
+                            try {
+                                if (!connection.from || !connection.to) { return; }
+                                const from = [parseFloat(connection.from.lat), parseFloat(connection.from.lng)];
+                                const to = [parseFloat(connection.to.lat), parseFloat(connection.to.lng)];
+                                if (from.some(isNaN) || to.some(isNaN)) { return; }
+                                const color = connection.color || '#dc2626';
+
+                                L.polyline([from, to], {
+                                    color: color, weight: 2.5, opacity: 0.7, dashArray: '6, 4', lineCap: 'round', lineJoin: 'round'
+                                }).addTo(map);
+                                L.polyline([from, to], {
+                                    color: color, weight: 8, opacity: 0.12, lineCap: 'round', lineJoin: 'round'
+                                }).addTo(map);
+                            } catch (err) {
+                                console.error('Connection failed to load:', connection, err);
+                            }
                         });
 
-                        if (locations.length > 0) { map.fitBounds(markerLayers.getBounds().pad(0.15)); }
+                        if (markerLayers.getLayers().length > 0) { map.fitBounds(markerLayers.getBounds().pad(0.15)); }
 
                         function handleResize() {
                             map.invalidateSize();
                             const width = window.innerWidth;
                             if (width < 480) { map.setZoom(10); }
                             else if (width < 768) { map.setZoom(11); }
-                            else if (locations.length > 0) { map.fitBounds(markerLayers.getBounds().pad(0.15)); }
+                            else if (markerLayers.getLayers().length > 0) { map.fitBounds(markerLayers.getBounds().pad(0.15)); }
                         }
 
                         window.addEventListener('resize', handleResize);

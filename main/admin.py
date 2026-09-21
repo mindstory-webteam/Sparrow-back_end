@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django import forms
+from decimal import Decimal, ROUND_HALF_UP
 from django.utils.html import format_html
 from .models import (
     JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication,
@@ -6,12 +8,61 @@ from .models import (
     ProgramCategory, ProgramEvent, ProgramImage
 )
 
+# ProgramGallery is the old (legacy) model. Import it only if it exists in models.py,
+# so the admin never crashes with "cannot import name 'ProgramGallery'".
+try:
+    from .models import ProgramGallery
+except ImportError:
+    ProgramGallery = None
+
 
 # ── MAP ──────────────────────────────────────────
+class MapLocationAdminForm(forms.ModelForm):
+    """
+    Google Maps gives coordinates with 7 decimals (e.g. 10.6039532).
+    The database column stores 6 decimals, so the default form rejected them with
+    "Ensure that there are no more than 6 decimal places" and the location was never saved.
+    This form accepts extra decimals, checks the valid range, and rounds to 6 decimals.
+    """
+    latitude = forms.DecimalField(
+        max_digits=15, decimal_places=10,
+        widget=forms.NumberInput(attrs={'step': 'any'}),
+        help_text="Example: 10.603953  (first number when you copy from Google Maps)",
+    )
+    longitude = forms.DecimalField(
+        max_digits=15, decimal_places=10,
+        widget=forms.NumberInput(attrs={'step': 'any'}),
+        help_text="Example: 76.480123  (second number when you copy from Google Maps)",
+    )
+
+    class Meta:
+        model = MapLocation
+        fields = '__all__'
+
+    @staticmethod
+    def _round6(value):
+        return value.quantize(Decimal('0.000001'), rounding=ROUND_HALF_UP)
+
+    def clean_latitude(self):
+        value = self.cleaned_data['latitude']
+        if not Decimal('-90') <= value <= Decimal('90'):
+            raise forms.ValidationError("Latitude must be between -90 and 90.")
+        return self._round6(value)
+
+    def clean_longitude(self):
+        value = self.cleaned_data['longitude']
+        if not Decimal('-180') <= value <= Decimal('180'):
+            raise forms.ValidationError("Longitude must be between -180 and 180.")
+        return self._round6(value)
+
+
 @admin.register(MapLocation)
 class MapLocationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'location_type', 'is_active', 'display_order']
+    form = MapLocationAdminForm
+    list_display = ['name', 'location_type', 'latitude', 'longitude', 'is_active', 'display_order']
     list_editable = ['display_order', 'is_active']
+    list_filter = ['location_type', 'is_active']
+    search_fields = ['name', 'address']
 
 @admin.register(MapConnection)
 class MapConnectionAdmin(admin.ModelAdmin):
@@ -94,23 +145,17 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 # ══════════════════════════════════════════════════
 #   PROGRAMS GALLERY ADMIN
-#
-#   How the client uses it (simple 2-step flow):
-#   1. Program Categories  → create "Onam", "Christmas", etc.
-#   2. Program Events      → create "Onam 2025", pick category,
-#                            and upload ALL photos on the SAME page
-#                            (scroll down to the Images section).
 # ══════════════════════════════════════════════════
 
 class ProgramImageInline(admin.TabularInline):
-    """Photo upload rows shown inside the Event page."""
+    """
+    Inline images inside ProgramEvent — add multiple images at once.
+    """
     model = ProgramImage
-    extra = 5                       # 5 empty upload slots ready by default
-    fields = ['preview', 'image', 'caption', 'order', 'is_active']
+    extra = 5          # shows 5 blank image upload slots by default
+    fields = ['image', 'caption', 'order', 'is_active', 'preview']
     readonly_fields = ['preview']
     ordering = ['order']
-    verbose_name = "Photo"
-    verbose_name_plural = "Photos (upload event photos here)"
 
     def preview(self, obj):
         if obj.pk and obj.image:
@@ -122,91 +167,108 @@ class ProgramImageInline(admin.TabularInline):
     preview.short_description = 'Preview'
 
 
+class ProgramEventInline(admin.TabularInline):
+    """Events shown inline inside Category admin"""
+    model = ProgramEvent
+    extra = 1
+    fields = ['title', 'year', 'order', 'is_active']
+    show_change_link = True  # link to full event edit page
+
+
 @admin.register(ProgramCategory)
 class ProgramCategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'event_count', 'total_photos', 'order', 'is_active']
+    list_display = ['name', 'slug', 'order', 'is_active', 'event_count', 'total_images', 'cover_preview']
     list_editable = ['order', 'is_active']
     search_fields = ['name']
-    prepopulated_fields = {'slug': ('name',)}   # slug fills itself while typing
+    prepopulated_fields = {'slug': ('name',)}
+    inlines = [ProgramEventInline]
 
     fieldsets = (
-        ('Category', {
-            'fields': ('name', 'slug'),
-            'description': 'Example categories: Onam, Christmas, Sports Day, Annual Meet.'
+        ('Category Info', {
+            'fields': ('name', 'slug', 'description', 'cover_image')
         }),
-        ('Optional', {
-            'fields': ('description', 'cover_image'),
-            'classes': ('collapse',),           # hidden by default — keeps the form clean
+        ('Display Settings', {
+            'fields': ('order', 'is_active')
         }),
-        ('Display Settings', {'fields': ('order', 'is_active')}),
     )
 
     def event_count(self, obj):
         return obj.events.filter(is_active=True).count()
     event_count.short_description = 'Events'
 
-    def total_photos(self, obj):
+    def total_images(self, obj):
         return obj.total_images
-    total_photos.short_description = 'Photos'
+    total_images.short_description = 'Images'
+
+    def cover_preview(self, obj):
+        if obj.cover_image:
+            return format_html('<img src="{}" height="40" style="border-radius:4px;">', obj.cover_image.url)
+        return '—'
+    cover_preview.short_description = 'Cover'
 
 
 @admin.register(ProgramEvent)
 class ProgramEventAdmin(admin.ModelAdmin):
-    list_display = ['cover_preview', 'title', 'category', 'year', 'photo_count', 'order', 'is_active']
-    list_display_links = ['cover_preview', 'title']
-    list_filter = ['category', 'year', 'is_active']
+    list_display = ['title', 'category', 'year', 'order', 'is_active', 'image_count', 'cover_preview', 'updated_at']
+    list_filter = ['is_active', 'year', 'category']
     search_fields = ['title', 'description', 'category__name']
-    list_editable = ['order', 'is_active']
-    list_select_related = ['category']
+    list_editable = ['category', 'year', 'order', 'is_active']
     ordering = ['-year', 'order']
-    save_on_top = True                      # save button also at the top
-    inlines = [ProgramImageInline]          # ← photos are added right here
+    inlines = [ProgramImageInline]   # ← Add multiple images right here
 
     fieldsets = (
-        ('Event Details', {
-            'fields': ('title', 'category', 'year', 'description'),
+        ('Event Information', {
+            'fields': ('title', 'description', 'category', 'year')
         }),
-        ('Cover Image (optional)', {
+        ('Cover Image', {
             'fields': ('cover_image',),
-            'description': 'If left blank, the first uploaded photo below is used as the cover automatically.',
-            'classes': ('collapse',),
+            'description': 'Optional. If left blank, the first uploaded image is used as cover.'
         }),
-        ('Display Settings', {'fields': ('order', 'is_active')}),
+        ('Display Settings', {
+            'fields': ('order', 'is_active')
+        }),
     )
 
-    def photo_count(self, obj):
+    def image_count(self, obj):
+        count = obj.image_count
         return format_html(
-            '<span style="background:#e8f5e9;color:#2e7d32;padding:2px 10px;'
-            'border-radius:12px;font-weight:700;">{} photos</span>',
-            obj.image_count
+            '<span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:12px;font-weight:700;">{} 📷</span>',
+            count
         )
-    photo_count.short_description = 'Photos'
+    image_count.short_description = 'Images'
 
     def cover_preview(self, obj):
         url = obj.get_cover
         if url:
-            return format_html(
-                '<img src="{}" height="50" width="70" style="border-radius:6px;object-fit:cover;">', url
-            )
+            return format_html('<img src="{}" height="50" style="border-radius:6px;object-fit:cover;">', url)
         return '—'
     cover_preview.short_description = 'Cover'
 
 
 @admin.register(ProgramImage)
 class ProgramImageAdmin(admin.ModelAdmin):
-    """
-    Usually not needed — photos are managed inside each Event.
-    Kept here so all photos can be searched/filtered in one place.
-    """
-    list_display = ['preview', 'event', 'caption', 'order', 'is_active']
-    list_display_links = ['preview', 'event']
-    list_filter = ['event__category', 'event__year', 'is_active']
+    list_display = ['event', 'caption', 'order', 'is_active', 'preview']
+    list_filter = ['is_active', 'event__category', 'event__year']
     search_fields = ['event__title', 'caption']
     list_editable = ['order', 'is_active']
-    list_select_related = ['event', 'event__category']
 
     def preview(self, obj):
         if obj.image:
             return format_html('<img src="{}" height="50" style="border-radius:6px;">', obj.image.url)
         return '—'
-    preview.short_description = 'Photo'
+    preview.short_description = 'Preview'
+
+
+if ProgramGallery is not None:
+    @admin.register(ProgramGallery)
+    class ProgramGalleryAdmin(admin.ModelAdmin):
+        list_display = ['title', 'year', 'order', 'is_active', 'preview']
+        list_filter = ['is_active', 'year']
+        search_fields = ['title']
+        list_editable = ['year', 'order', 'is_active']
+
+        def preview(self, obj):
+            if obj.image:
+                return format_html('<img src="{}" height="40" style="border-radius:4px;">', obj.image.url)
+            return '—'
+        preview.short_description = 'Preview'

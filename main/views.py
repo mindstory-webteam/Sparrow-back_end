@@ -9,26 +9,58 @@ from django.http import Http404, JsonResponse
 import json
 
 
+def _script_safe_json(data):
+    """json.dumps that is safe to print inside <script> with |safe
+    (escapes <, > and & so text like "</script>" in an address cannot break the page)."""
+    return (json.dumps(data)
+            .replace('<', '\\u003c')
+            .replace('>', '\\u003e')
+            .replace('&', '\\u0026'))
+
+
+def get_map_context():
+    """locations_json + connections_json used by the Leaflet map on Home and Contact pages."""
+    locations = MapLocation.objects.filter(is_active=True)
+    connections = MapConnection.objects.filter(
+        is_active=True,
+        from_location__is_active=True,
+        to_location__is_active=True,
+    ).select_related('from_location', 'to_location')
+
+    locations_data = [{
+        'name': l.name,
+        'type': l.get_location_type_display(),
+        'lat': float(l.latitude),
+        'lng': float(l.longitude),
+        'address': l.address,
+        'icon': l.icon,
+        'category': l.location_type,
+    } for l in locations]
+
+    connections_data = [{
+        'from': {'lat': float(c.from_location.latitude), 'lng': float(c.from_location.longitude)},
+        'to': {'lat': float(c.to_location.latitude), 'lng': float(c.to_location.longitude)},
+        'color': c.color,
+    } for c in connections]
+
+    return {
+        'locations_json': _script_safe_json(locations_data),
+        'connections_json': _script_safe_json(connections_data),
+    }
+
+
 def contact(request):
     if request.method == 'POST':
         messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
         return redirect('contact')
-    locations = MapLocation.objects.filter(is_active=True)
-    connections = MapConnection.objects.filter(is_active=True).select_related('from_location', 'to_location')
-    locations_data = [{'name': l.name, 'type': l.get_location_type_display(), 'lat': float(l.latitude), 'lng': float(l.longitude), 'address': l.address, 'icon': l.icon, 'category': l.location_type} for l in locations]
-    connections_data = [{'from': {'lat': float(c.from_location.latitude), 'lng': float(c.from_location.longitude)}, 'to': {'lat': float(c.to_location.latitude), 'lng': float(c.to_location.longitude)}, 'color': c.color} for c in connections]
-    return render(request, 'contact.html', {'page_title': 'Contact Us - Sparrow International', 'active_page': 'contact', 'locations_json': json.dumps(locations_data), 'connections_json': json.dumps(connections_data)})
+    return render(request, 'contact.html', {'page_title': 'Contact Us - Sparrow International', 'active_page': 'contact', **get_map_context()})
 
 
 def Home(request):
     team_members = TeamMember.objects.filter(is_active=True).order_by('order')[:2]
     brands = Brand.objects.filter(is_active=True).order_by('order')
     testimonials = Testimonial.objects.filter(is_active=True).order_by('order')
-    locations = MapLocation.objects.filter(is_active=True)
-    connections = MapConnection.objects.filter(is_active=True).select_related('from_location', 'to_location')
-    locations_data = [{'name': l.name, 'type': l.get_location_type_display(), 'lat': float(l.latitude), 'lng': float(l.longitude), 'address': l.address, 'icon': l.icon, 'category': l.location_type} for l in locations]
-    connections_data = [{'from': {'lat': float(c.from_location.latitude), 'lng': float(c.from_location.longitude)}, 'to': {'lat': float(c.to_location.latitude), 'lng': float(c.to_location.longitude)}, 'color': c.color} for c in connections]
-    return render(request, 'index.html', {'page_title': 'Home - Sparrow International', 'active_page': 'home', 'team_members': team_members, 'brands': brands, 'testimonials': testimonials, 'locations_json': json.dumps(locations_data), 'connections_json': json.dumps(connections_data)})
+    return render(request, 'index.html', {'page_title': 'Home - Sparrow International', 'active_page': 'home', 'team_members': team_members, 'brands': brands, 'testimonials': testimonials, **get_map_context()})
 
 
 def about(request):

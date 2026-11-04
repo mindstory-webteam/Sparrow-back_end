@@ -1,12 +1,20 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from .models import (
     JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication,
     MapLocation, MapConnection, Testimonial,
-    ProgramCategory, ProgramEvent, ProgramImage
+    ProgramCategory, ProgramEvent, ProgramImage, HeroBanner
 )
 from django.contrib import messages
 from django.http import Http404, JsonResponse
 import json
+import logging
+
+from .emails import send_career_application_email, send_applicant_acknowledgement
+
+logger = logging.getLogger(__name__)
 
 
 def _script_safe_json(data):
@@ -52,7 +60,7 @@ def get_map_context():
 def contact(request):
     if request.method == 'POST':
         messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
-        return redirect('contact')
+        return redirect('main:contact')
     return render(request, 'contact.html', {'page_title': 'Contact Us - Sparrow International', 'active_page': 'contact', **get_map_context()})
 
 
@@ -60,7 +68,16 @@ def Home(request):
     team_members = TeamMember.objects.filter(is_active=True).order_by('order')[:2]
     brands = Brand.objects.filter(is_active=True).order_by('order')
     testimonials = Testimonial.objects.filter(is_active=True).order_by('order')
-    return render(request, 'index.html', {'page_title': 'Home - Sparrow International', 'active_page': 'home', 'team_members': team_members, 'brands': brands, 'testimonials': testimonials, **get_map_context()})
+    hero_banners = HeroBanner.objects.filter(is_active=True).exclude(media='').order_by('order', 'created_at')
+    return render(request, 'index.html', {
+        'page_title': 'Home - Sparrow International',
+        'active_page': 'home',
+        'hero_banners': hero_banners,
+        'team_members': team_members,
+        'brands': brands,
+        'testimonials': testimonials,
+        **get_map_context(),
+    })
 
 
 def about(request):
@@ -98,26 +115,52 @@ def about(request):
 
 
 def career(request):
+    career_url = reverse('main:career') + '#apply'
+
     if request.method == 'POST':
+        full_name = request.POST.get('full_name', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        job_role = request.POST.get('job_role', '').strip()
+        message_text = request.POST.get('message', '').strip()
+
+        if not all([full_name, email, phone, job_role]):
+            messages.error(request, 'Please fill in all required fields.')
+            return redirect(career_url)
         try:
-            full_name = request.POST.get('full_name', '').strip()
-            email = request.POST.get('email', '').strip()
-            phone = request.POST.get('phone', '').strip()
-            job_role = request.POST.get('job_role', '').strip()
-            message_text = request.POST.get('message', '').strip()
-            if not all([full_name, email, phone, job_role]):
-                messages.error(request, 'Please fill in all required fields.')
-                return redirect('main:career')
-            CareerApplication.objects.create(full_name=full_name, email=email, phone=phone, job_role=job_role, message=message_text)
-            messages.success(request, 'Thank you for your application! We will review it and get back to you soon.')
-            return redirect('main:career')
+            validate_email(email)
+        except ValidationError:
+            messages.error(request, 'Please enter a valid email address.')
+            return redirect(career_url)
+
+        try:
+            application = CareerApplication.objects.create(
+                full_name=full_name, email=email, phone=phone,
+                job_role=job_role, message=message_text,
+            )
         except Exception:
+            logger.exception("Career application could not be saved")
             messages.error(request, 'An error occurred. Please try again later.')
-            return redirect('main:career')
+            return redirect(career_url)
+
+        # Email the application to HR (Hr@sparrowgroup.in). Never breaks the page if mail fails —
+        # the application is already saved in Admin → Career Applications.
+        send_career_application_email(application, request)
+        send_applicant_acknowledgement(application)
+
+        messages.success(request, 'Thank you for your application! Our HR team will review it and get back to you soon.')
+        return redirect(career_url)
+
     job_roles = JobRole.objects.filter(is_active=True).order_by('order')
     recent_jobs = JobRole.objects.filter(is_active=True, show_in_recent=True).order_by('-posted_date')[:3]
     total_vacancies = sum(job.vacancy_count for job in job_roles)
-    return render(request, 'career.html', {'page_title': 'Career - Sparrow International', 'active_page': 'career', 'job_roles': job_roles, 'recent_jobs': recent_jobs, 'total_vacancies': total_vacancies})
+    return render(request, 'career.html', {
+        'page_title': 'Career - Sparrow International',
+        'active_page': 'career',
+        'job_roles': job_roles,
+        'recent_jobs': recent_jobs,
+        'total_vacancies': total_vacancies,
+    })
 
 
 def programs_gallery(request):

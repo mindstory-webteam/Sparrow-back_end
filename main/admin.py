@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from .models import (
     JourneyMilestone, TeamMember, Brand, JobRole, CareerApplication,
     MapLocation, MapConnection, Testimonial,
-    ProgramCategory, ProgramEvent, ProgramImage
+    ProgramCategory, ProgramEvent, ProgramImage, HeroBanner
 )
 
 # ProgramGallery is the old (legacy) model. Import it only if it exists in models.py,
@@ -14,6 +14,48 @@ try:
     from .models import ProgramGallery
 except ImportError:
     ProgramGallery = None
+
+
+# ── HOME BANNER ──────────────────────────────────
+@admin.register(HeroBanner)
+class HeroBannerAdmin(admin.ModelAdmin):
+    list_display = ['preview', '__str__', 'media_type', 'order', 'is_active', 'updated_at']
+    list_display_links = ['preview', '__str__']
+    list_editable = ['order', 'is_active']
+    list_filter = ['media_type', 'is_active']
+    search_fields = ['title', 'subtitle', 'description']
+    readonly_fields = ['preview_large']
+    fieldsets = (
+        ('Photo / Video', {
+            'fields': ('media', 'preview_large'),
+            'description': 'Upload a photo or a video — the type is detected automatically. '
+                           'Videos play muted and looping in the background.',
+        }),
+        ('Text on the banner', {
+            'fields': ('subtitle', 'title', 'description', 'link_url'),
+            'description': 'Title tips: press Enter to start a new line. Put stars around a word to show it in red. '
+                           'Up to 3 lines, about 28 letters each, so every banner looks the same size.',
+        }),
+        ('Display Settings', {'fields': ('order', 'is_active')}),
+    )
+
+    def _media_html(self, obj, height):
+        if not obj or not obj.media:
+            return '—'
+        if obj.is_video:
+            return format_html('<video src="{}#t=0.1" height="{}" muted loop autoplay playsinline '
+                               'style="border-radius:6px;background:#000;max-width:100%;"></video>',
+                               obj.media.url, height)
+        return format_html('<img src="{}" height="{}" style="border-radius:6px;object-fit:cover;max-width:100%;">',
+                           obj.media.url, height)
+
+    def preview(self, obj):
+        return self._media_html(obj, 50)
+    preview.short_description = 'Preview'
+
+    def preview_large(self, obj):
+        return self._media_html(obj, 220)
+    preview_large.short_description = 'Current'
 
 
 # ── MAP ──────────────────────────────────────────
@@ -144,26 +186,58 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 
 # ══════════════════════════════════════════════════
-#   PROGRAMS GALLERY ADMIN
+#   PROGRAMS GALLERY ADMIN  (photos + videos)
 # ══════════════════════════════════════════════════
+
+def media_preview(obj, height=60):
+    """Small preview: photo, playable video, or YouTube thumbnail."""
+    if not obj or not obj.pk:
+        return '—'
+    if obj.is_video:
+        if obj.image:   # uploaded video file
+            return format_html(
+                '<video src="{}#t=0.5" height="{}" muted preload="metadata" controls '
+                'style="border-radius:6px;background:#000;max-width:160px;"></video>',
+                obj.image.url, height,
+            )
+        thumb = obj.thumbnail_url
+        if thumb:       # YouTube
+            return format_html(
+                '<a href="{}" target="_blank" style="position:relative;display:inline-block;">'
+                '<img src="{}" height="{}" style="border-radius:6px;object-fit:cover;">'
+                '<span style="position:absolute;inset:0;display:flex;align-items:center;'
+                'justify-content:center;color:#fff;font-size:22px;'
+                'text-shadow:0 0 6px rgba(0,0,0,.8);">▶</span></a>',
+                obj.video_url, thumb, height,
+            )
+        return format_html(
+            '<a href="{}" target="_blank" style="background:#fdecea;color:#c62828;'
+            'padding:3px 10px;border-radius:12px;font-weight:700;">▶ Video link</a>',
+            obj.video_url,
+        )
+    if obj.image:
+        return format_html(
+            '<img src="{}" height="{}" style="border-radius:6px;object-fit:cover;">',
+            obj.image.url, height,
+        )
+    return '—'
+
 
 class ProgramImageInline(admin.TabularInline):
     """
-    Inline images inside ProgramEvent — add multiple images at once.
+    Photos & videos inside ProgramEvent — just choose a file.
+    A jpg/png becomes a photo, an mp4/webm/mov becomes a video automatically.
     """
     model = ProgramImage
-    extra = 5          # shows 5 blank image upload slots by default
-    fields = ['image', 'caption', 'order', 'is_active', 'preview']
+    extra = 5
+    fields = ['image', 'video_url', 'caption', 'order', 'is_active', 'preview']
     readonly_fields = ['preview']
     ordering = ['order']
+    verbose_name = "Photo / Video"
+    verbose_name_plural = "Photos & Videos  (choose a photo or video file — or paste a YouTube / Vimeo link)"
 
     def preview(self, obj):
-        if obj.pk and obj.image:
-            return format_html(
-                '<img src="{}" height="60" style="border-radius:6px;object-fit:cover;">',
-                obj.image.url
-            )
-        return '—'
+        return media_preview(obj, 60)
     preview.short_description = 'Preview'
 
 
@@ -177,7 +251,8 @@ class ProgramEventInline(admin.TabularInline):
 
 @admin.register(ProgramCategory)
 class ProgramCategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'order', 'is_active', 'event_count', 'total_images', 'cover_preview']
+    list_display = ['name', 'slug', 'order', 'is_active', 'event_count',
+                    'total_images', 'total_videos', 'cover_preview']
     list_editable = ['order', 'is_active']
     search_fields = ['name']
     prepopulated_fields = {'slug': ('name',)}
@@ -198,7 +273,11 @@ class ProgramCategoryAdmin(admin.ModelAdmin):
 
     def total_images(self, obj):
         return obj.total_images
-    total_images.short_description = 'Images'
+    total_images.short_description = 'Photos'
+
+    def total_videos(self, obj):
+        return obj.total_videos
+    total_videos.short_description = 'Videos'
 
     def cover_preview(self, obj):
         if obj.cover_image:
@@ -209,12 +288,13 @@ class ProgramCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(ProgramEvent)
 class ProgramEventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'year', 'order', 'is_active', 'image_count', 'cover_preview', 'updated_at']
+    list_display = ['title', 'category', 'year', 'order', 'is_active',
+                    'media_counts', 'cover_preview', 'updated_at']
     list_filter = ['is_active', 'year', 'category']
     search_fields = ['title', 'description', 'category__name']
     list_editable = ['category', 'year', 'order', 'is_active']
     ordering = ['-year', 'order']
-    inlines = [ProgramImageInline]   # ← Add multiple images right here
+    inlines = [ProgramImageInline]   # ← Add photos & videos right here
 
     fieldsets = (
         ('Event Information', {
@@ -222,20 +302,20 @@ class ProgramEventAdmin(admin.ModelAdmin):
         }),
         ('Cover Image', {
             'fields': ('cover_image',),
-            'description': 'Optional. If left blank, the first uploaded image is used as cover.'
+            'description': 'Optional. If left blank, the first photo is used as cover.'
         }),
         ('Display Settings', {
             'fields': ('order', 'is_active')
         }),
     )
 
-    def image_count(self, obj):
-        count = obj.image_count
+    def media_counts(self, obj):
         return format_html(
-            '<span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:12px;font-weight:700;">{} 📷</span>',
-            count
+            '<span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:12px;font-weight:700;">{} 📷</span> '
+            '<span style="background:#fdecea;color:#c62828;padding:2px 8px;border-radius:12px;font-weight:700;">{} 🎬</span>',
+            obj.image_count, obj.video_count,
         )
-    image_count.short_description = 'Images'
+    media_counts.short_description = 'Photos / Videos'
 
     def cover_preview(self, obj):
         url = obj.get_cover
@@ -247,15 +327,21 @@ class ProgramEventAdmin(admin.ModelAdmin):
 
 @admin.register(ProgramImage)
 class ProgramImageAdmin(admin.ModelAdmin):
-    list_display = ['event', 'caption', 'order', 'is_active', 'preview']
-    list_filter = ['is_active', 'event__category', 'event__year']
+    list_display = ['event', 'media_type', 'caption', 'order', 'is_active', 'preview']
+    list_filter = ['media_type', 'is_active', 'event__category', 'event__year']
     search_fields = ['event__title', 'caption']
     list_editable = ['order', 'is_active']
+    fieldsets = (
+        (None, {
+            'fields': ('event', 'image', 'video_url', 'caption'),
+            'description': 'Choose a photo or video file (type is detected automatically), '
+                           'or paste a YouTube / Vimeo link instead.',
+        }),
+        ('Display Settings', {'fields': ('order', 'is_active')}),
+    )
 
     def preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" height="50" style="border-radius:6px;">', obj.image.url)
-        return '—'
+        return media_preview(obj, 50)
     preview.short_description = 'Preview'
 
 

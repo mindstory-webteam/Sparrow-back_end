@@ -49,23 +49,37 @@
     <!-- Event Cards Grid -->
     <div class="row g-4" id="pgGrid">
       {% for event in events %}
-      {% with imgs=event.active_images %}
+      {% with items=event.active_media %}
       <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pg-card-col"
            data-year="{{ event.year }}"
            data-cat="{{ event.category.slug }}">
 
         <div class="pg-card bg-white rounded-3 overflow-hidden h-100">
 
-          <!-- Image slider -->
+          <!-- Photo / video slider -->
           <div class="pg-slider" data-event="{{ event.pk }}">
             <div class="pg-slides">
               {% if event.cover_image %}
               <div class="pg-slide"><img src="{{ event.cover_image.url }}" alt="{{ event.title }}" loading="lazy"></div>
               {% endif %}
-              {% for img in imgs %}
-              <div class="pg-slide"><img src="{{ img.image.url }}" alt="{{ img.caption|default:event.title }}" loading="lazy"></div>
+              {% for it in items %}
+                {% if it.is_video %}
+                <div class="pg-slide pg-slide-video"
+                     data-lb="{{ event.pk }}"
+                     data-lb-index="{% if event.cover_image %}{{ forloop.counter }}{% else %}{{ forloop.counter0 }}{% endif %}"
+                     title="Click to watch with sound">
+                  {% if it.is_embed %}
+                  {% if it.thumbnail_url %}<img src="{{ it.thumbnail_url }}" alt="{{ it.caption|default:event.title }}" loading="lazy">{% endif %}<iframe class="pg-card-embed" data-src="{{ it.card_embed_url }}" allow="autoplay; encrypted-media" tabindex="-1" title="{{ it.caption|default:event.title }}"></iframe>
+                  {% else %}
+                  <video src="{{ it.video_src }}#t=0.1" preload="metadata" muted loop playsinline disablepictureinpicture></video>
+                  {% endif %}
+                  <span class="pg-play-icon" aria-hidden="true">&#9654;</span>
+                </div>
+                {% else %}
+                <div class="pg-slide"><img src="{{ it.image.url }}" alt="{{ it.caption|default:event.title }}" loading="lazy"></div>
+                {% endif %}
               {% endfor %}
-              {% if not event.cover_image and not imgs %}
+              {% if not event.cover_image and not items %}
               <div class="pg-slide pg-slide-placeholder">
                 <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="#ccc">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -75,8 +89,8 @@
             </div>
 
             <!-- Slider arrows + counter (JS shows them only if 2+ slides) -->
-            <button class="pg-sl-btn pg-sl-prev" aria-label="Previous photo">&#8249;</button>
-            <button class="pg-sl-btn pg-sl-next" aria-label="Next photo">&#8250;</button>
+            <button class="pg-sl-btn pg-sl-prev" aria-label="Previous">&#8249;</button>
+            <button class="pg-sl-btn pg-sl-next" aria-label="Next">&#8250;</button>
             <div class="pg-sl-counter"></div>
 
             <!-- Badges -->
@@ -84,7 +98,7 @@
             <span class="pg-cat-badge">{{ event.category.name }}</span>
 
             <!-- Lightbox button -->
-            <button class="pg-lightbox-btn" data-lb="{{ event.pk }}" aria-label="View all photos">
+            <button class="pg-lightbox-btn" data-lb="{{ event.pk }}" aria-label="View all photos and videos">
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
               </svg>
@@ -98,12 +112,22 @@
             {% if event.description %}
               <p class="pg-card-desc text-muted small mb-2">{{ event.description }}</p>
             {% endif %}
-            <span class="pg-img-count">
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-              </svg>
-              {{ event.image_count }} photo{{ event.image_count|pluralize }}
-            </span>
+            <div class="pg-card-meta">
+              <span class="pg-img-count">
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                </svg>
+                {{ event.image_count }} photo{{ event.image_count|pluralize }}
+              </span>
+              {% if event.video_count %}
+              <span class="pg-img-count">
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="5" width="15" height="14" rx="2"/><polygon points="22 7 17 11 17 13 22 17 22 7"/>
+                </svg>
+                {{ event.video_count }} video{{ event.video_count|pluralize }}
+              </span>
+              {% endif %}
+            </div>
           </div>
 
           <!-- Lightbox data -->
@@ -112,8 +136,8 @@
             "title": "{{ event.title|escapejs }}",
             "year": {{ event.year }},
             "images": [
-              {% if event.cover_image %}{"url":"{{ event.cover_image.url }}","caption":"{{ event.title|escapejs }}"}{% if imgs %},{% endif %}{% endif %}
-              {% for img in imgs %}{"url":"{{ img.image.url }}","caption":"{{ img.caption|default:event.title|escapejs }}"}{% if not forloop.last %},{% endif %}{% endfor %}
+              {% if event.cover_image %}{"type":"image","url":"{{ event.cover_image.url|escapejs }}","thumb":"{{ event.cover_image.url|escapejs }}","caption":"{{ event.title|escapejs }}"}{% if items %},{% endif %}{% endif %}
+              {% for it in items %}{% if it.is_video %}{"type":"{% if it.is_embed %}embed{% else %}video{% endif %}","url":"{{ it.video_src|escapejs }}","thumb":"{{ it.thumbnail_url|default_if_none:''|escapejs }}","caption":"{{ it.caption|default:event.title|escapejs }}"}{% else %}{"type":"image","url":"{{ it.image.url|escapejs }}","thumb":"{{ it.image.url|escapejs }}","caption":"{{ it.caption|default:event.title|escapejs }}"}{% endif %}{% if not forloop.last %},{% endif %}{% endfor %}
             ]
           }
           </script>
@@ -136,14 +160,16 @@
   </div>
 </section>
 
-<!-- ===== Lightbox ===== -->
+<!-- ===== Lightbox (photos + videos) ===== -->
 <div class="pg-lb-overlay" id="pgLightbox" aria-hidden="true">
   <button class="pg-lb-close" id="pgLbClose" aria-label="Close">&times;</button>
   <button class="pg-lb-nav pg-lb-prev" id="pgLbPrev" aria-label="Previous">&#8249;</button>
   <div class="pg-lb-stage">
     <img src="" alt="" id="pgLbImg">
+    <div class="pg-lb-video" id="pgLbVideo" style="display:none"></div>
     <div class="pg-lb-info">
       <span id="pgLbTitle"></span>
+      <span id="pgLbCaption"></span>
       <span id="pgLbCounter"></span>
     </div>
   </div>
@@ -177,14 +203,28 @@
   .pg-card:hover { transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,.10) !important; }
   .pg-card-title { font-size:.95rem; color:#0f1f3d; font-weight:600; line-height:1.35; }
   .pg-card-desc  { font-size:.80rem; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .pg-card-meta  { display:flex; flex-wrap:wrap; gap:12px; }
   .pg-img-count  { display:inline-flex; align-items:center; gap:5px; font-size:.75rem; font-weight:600; color:#6c757d; }
 
   /* Slider */
   .pg-slider { position:relative; overflow:hidden; height:210px; background:#f5f5f5; }
   .pg-slides { display:flex; height:100%; transition:transform .35s ease; }
   .pg-slide  { flex:0 0 100%; height:100%; }
-  .pg-slide img { width:100%; height:100%; object-fit:cover; }
+  .pg-slide img, .pg-slide video { width:100%; height:100%; object-fit:cover; display:block; }
   .pg-slide-placeholder { display:flex; align-items:center; justify-content:center; }
+
+  /* Video slide (card) */
+  .pg-slide-video { position:relative; background:#111; cursor:pointer; }
+  .pg-play-icon { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:52px; height:52px; border-radius:50%; background:rgba(237,52,53,.9); color:#fff; font-size:19px; display:flex; align-items:center; justify-content:center; padding-left:4px; box-shadow:0 4px 18px rgba(0,0,0,.35); transition:transform .2s; pointer-events:none; }
+  .pg-slide-video:hover .pg-play-icon { transform:translate(-50%,-50%) scale(1.1); }
+
+/* Card video autoplay */
+.pg-slide-video video,.pg-slide-video img{position:absolute;inset:0;}
+.pg-slide-video iframe.pg-card-embed{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;background:transparent;}
+.pg-play-icon{z-index:2;transition:opacity .25s,transform .2s;}
+.pg-slide-video.is-playing .pg-play-icon{opacity:0;}
+.pg-slide-video.is-playing:hover .pg-play-icon{opacity:1;}
+
   .pg-sl-btn { position:absolute; top:50%; transform:translateY(-50%); width:30px; height:30px; border:none; border-radius:50%; background:rgba(255,255,255,.9); color:#0f1f3d; font-size:1.2rem; line-height:1; cursor:pointer; display:none; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,.2); z-index:2; transition:background .2s; }
   .pg-sl-btn:hover { background:#ed3435; color:#fff; }
   .pg-slider.has-multi .pg-sl-btn { display:flex; }
@@ -206,12 +246,15 @@
   .pg-lb-overlay.open { display:flex; }
   .pg-lb-stage { max-width:min(1000px, 90vw); max-height:85vh; display:flex; flex-direction:column; align-items:center; gap:12px; }
   .pg-lb-stage img { max-width:100%; max-height:75vh; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.5); object-fit:contain; }
-  .pg-lb-info { display:flex; gap:16px; align-items:center; color:#fff; font-size:.9rem; }
+  .pg-lb-video { width:min(1000px, 80vw); aspect-ratio:16/9; max-height:75vh; background:#000; border-radius:10px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  .pg-lb-video video, .pg-lb-video iframe { width:100%; height:100%; border:0; display:block; background:#000; }
+  .pg-lb-info { display:flex; gap:16px; align-items:center; color:#fff; font-size:.9rem; flex-wrap:wrap; justify-content:center; text-align:center; }
   #pgLbTitle { font-weight:600; }
+  #pgLbCaption { opacity:.85; font-size:.85rem; }
   #pgLbCounter { opacity:.7; font-size:.8rem; }
-  .pg-lb-close { position:absolute; top:18px; right:24px; border:none; background:transparent; color:#fff; font-size:2.4rem; line-height:1; cursor:pointer; opacity:.8; z-index:2; }
+  .pg-lb-close { position:absolute; top:18px; right:24px; border:none; background:transparent; color:#fff; font-size:2.4rem; line-height:1; cursor:pointer; opacity:.8; z-index:3; }
   .pg-lb-close:hover { opacity:1; }
-  .pg-lb-nav { position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; border:none; border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font-size:1.8rem; line-height:1; cursor:pointer; transition:background .2s; z-index:2; }
+  .pg-lb-nav { position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; border:none; border-radius:50%; background:rgba(255,255,255,.12); color:#fff; font-size:1.8rem; line-height:1; cursor:pointer; transition:background .2s; z-index:3; }
   .pg-lb-nav:hover { background:#ed3435; }
   .pg-lb-prev { left:18px; }
   .pg-lb-next { right:18px; }
@@ -221,6 +264,7 @@
     .pg-filter-right{width:100%;justify-content:space-between;}
     .pg-lb-nav{width:38px;height:38px;font-size:1.4rem;}
     .pg-lb-prev{left:8px;} .pg-lb-next{right:8px;}
+    .pg-lb-video{width:92vw;}
   }
 </style>
 {% endblock %}
@@ -249,52 +293,115 @@
     if (next) next.addEventListener('click', function (e) { e.stopPropagation(); idx = (idx + 1) % slides.length; update(); });
   });
 
-  /* ============ LIGHTBOX ============ */
+  /* ============ LIGHTBOX (photos + videos) ============ */
   var lb = document.getElementById('pgLightbox');
   var lbImg = document.getElementById('pgLbImg');
+  var lbVideo = document.getElementById('pgLbVideo');
   var lbTitle = document.getElementById('pgLbTitle');
+  var lbCaption = document.getElementById('pgLbCaption');
   var lbCounter = document.getElementById('pgLbCounter');
-  var lbImages = [];
+  var lbItems = [];
   var lbIdx = 0;
 
-  function lbShow() {
-    if (!lbImages.length) return;
-    lbImg.src = lbImages[lbIdx].url;
-    lbImg.alt = lbImages[lbIdx].caption || '';
-    lbCounter.textContent = (lbIdx + 1) + ' / ' + lbImages.length;
+  function withParam(url, param) { return url + (url.indexOf('?') > -1 ? '&' : '?') + param; }
+
+  function stopVideo() {
+    lbVideo.querySelectorAll('video').forEach(function (v) {
+      try { v.pause(); v.removeAttribute('src'); v.load(); } catch (e) {}
+    });
+    lbVideo.innerHTML = '';
   }
-  function lbOpen(eventId) {
+
+  function lbShow() {
+    if (!lbItems.length) return;
+    var it = lbItems[lbIdx];
+    stopVideo();
+
+    if (it.type === 'image') {
+      lbVideo.style.display = 'none';
+      lbImg.style.display = '';
+      lbImg.src = it.url;
+      lbImg.alt = it.caption || '';
+    } else {
+      lbImg.style.display = 'none';
+      lbImg.removeAttribute('src');
+      lbVideo.style.display = '';
+      if (it.type === 'embed') {
+        var f = document.createElement('iframe');
+        f.src = withParam(it.url, 'autoplay=1');
+        f.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+        f.setAttribute('allowfullscreen', '');
+        lbVideo.appendChild(f);
+      } else {
+        var v = document.createElement('video');
+        v.src = it.url;
+        v.controls = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.preload = 'metadata';
+        if (it.thumb) v.poster = it.thumb;
+        lbVideo.appendChild(v);
+      }
+    }
+    lbCaption.textContent = (it.caption && it.caption !== lbTitle.dataset.plain) ? it.caption : '';
+    lbCounter.textContent = (lbIdx + 1) + ' / ' + lbItems.length;
+  }
+
+  function lbOpen(eventId, startIdx) {
     var dataEl = document.getElementById('lb-data-' + eventId);
     if (!dataEl) return;
     try {
       var data = JSON.parse(dataEl.textContent);
-      lbImages = data.images || [];
-      if (!lbImages.length) return;
-      lbIdx = 0;
+      lbItems = data.images || [];
+      if (!lbItems.length) return;
+      lbIdx = (typeof startIdx === 'number' && startIdx >= 0 && startIdx < lbItems.length) ? startIdx : 0;
       lbTitle.textContent = data.title + ' (' + data.year + ')';
-      lbShow();
+      lbTitle.dataset.plain = data.title;
       lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      lbShow();
     } catch (e) { /* ignore bad data */ }
   }
   function lbClose() {
+    stopVideo();
     lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
+  function lbPrev() { lbIdx = (lbIdx - 1 + lbItems.length) % lbItems.length; lbShow(); }
+  function lbNext() { lbIdx = (lbIdx + 1) % lbItems.length; lbShow(); }
 
+  // "View all" buttons
   document.querySelectorAll('.pg-lightbox-btn').forEach(function (btn) {
     btn.addEventListener('click', function () { lbOpen(this.dataset.lb); });
   });
+  // Click a video slide on a card → open lightbox at that video
+  document.querySelectorAll('.pg-slide-video').forEach(function (slide) {
+    slide.addEventListener('click', function () {
+      lbOpen(this.dataset.lb, parseInt(this.dataset.lbIndex, 10));
+    });
+  });
+
   document.getElementById('pgLbClose').addEventListener('click', lbClose);
-  document.getElementById('pgLbPrev').addEventListener('click', function () { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbShow(); });
-  document.getElementById('pgLbNext').addEventListener('click', function () { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); });
+  document.getElementById('pgLbPrev').addEventListener('click', lbPrev);
+  document.getElementById('pgLbNext').addEventListener('click', lbNext);
   lb.addEventListener('click', function (e) { if (e.target === lb) lbClose(); });
   document.addEventListener('keydown', function (e) {
     if (!lb.classList.contains('open')) return;
     if (e.key === 'Escape') lbClose();
-    if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbShow(); }
-    if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); }
+    if (e.key === 'ArrowLeft')  lbPrev();
+    if (e.key === 'ArrowRight') lbNext();
   });
+
+  // Touch swipe (photos only — videos keep their own controls)
+  var touchX = 0;
+  lb.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].screenX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (!lbItems.length || lbItems[lbIdx].type !== 'image') return;
+    var d = touchX - e.changedTouches[0].screenX;
+    if (Math.abs(d) > 40) { d > 0 ? lbNext() : lbPrev(); }
+  }, { passive: true });
 
   /* ============ FILTERS ============ */
   var grid = document.getElementById('pgGrid');
@@ -350,6 +457,66 @@
   }
 
   if (activeCat || activeYear) applyFilters();
+
+  /* ============ CARD VIDEO AUTOPLAY ============
+     Videos play muted + looping inside the card, only while the card is on
+     screen and that slide is showing. Click opens the popup with sound. */
+  (function () {
+    var popup = document.getElementById('pgLightbox');
+    function popupOpen() {
+      return popup && (popup.classList.contains('open') || (popup.style.display && popup.style.display !== 'none'));
+    }
+    function activeSlide(slider) {
+      var wrap = slider.querySelector('.pg-slides');
+      if (!wrap) return null;
+      var m = (wrap.style.transform || '').match(/(\d+(?:\.\d+)?)%/);
+      return wrap.children[m ? Math.round(parseFloat(m[1]) / 100) : 0];
+    }
+    function sync(slider) {
+      var current = activeSlide(slider);
+      var visible = slider.dataset.inView === '1' && !popupOpen();
+      slider.querySelectorAll('.pg-slide-video').forEach(function (slide) {
+        var on = visible && slide === current;
+        var v = slide.querySelector('video');
+        var f = slide.querySelector('iframe.pg-card-embed');
+        if (v) {
+          if (on) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else if (!v.paused) v.pause();
+        }
+        if (f) {
+          if (on && !f.getAttribute('src')) { f.setAttribute('src', f.dataset.src); slide.classList.add('is-playing'); }
+          if (!on && f.getAttribute('src')) { f.removeAttribute('src'); slide.classList.remove('is-playing'); }
+        }
+      });
+    }
+    var sliders = document.querySelectorAll('.pg-slider');
+    sliders.forEach(function (slider) {
+      slider.querySelectorAll('.pg-slide-video video').forEach(function (v) {
+        v.addEventListener('playing', function () { v.parentNode.classList.add('is-playing'); });
+        v.addEventListener('pause',   function () { v.parentNode.classList.remove('is-playing'); });
+      });
+      var wrap = slider.querySelector('.pg-slides');
+      if (wrap && 'MutationObserver' in window) {
+        new MutationObserver(function () { sync(slider); }).observe(wrap, { attributes: true, attributeFilter: ['style'] });
+      }
+    });
+    function syncAll() { sliders.forEach(sync); }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          en.target.dataset.inView = en.isIntersecting ? '1' : '0';
+          sync(en.target);
+        });
+      }, { threshold: 0.5 });
+      sliders.forEach(function (s) { io.observe(s); });
+    } else {
+      sliders.forEach(function (s) { s.dataset.inView = '1'; });
+      syncAll();
+    }
+    if (popup && 'MutationObserver' in window) {
+      new MutationObserver(syncAll).observe(popup, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
+  })();
 })();
 </script>
 {% endblock %}

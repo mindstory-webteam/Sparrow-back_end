@@ -2,9 +2,9 @@
 main/emails.py
 Email helpers for the Sparrow International site.
 
-Career form submissions are delivered to settings.CAREER_NOTIFY_EMAILS
-(default: rahoofmindstory@gmail.com) and an optional acknowledgement is
-sent back to the applicant.
+Career form submissions are always delivered to HR (Hr@sparrowgroup.in),
+plus any extra addresses in settings.CAREER_NOTIFY_EMAILS. An optional
+acknowledgement is sent back to the applicant.
 
 Nothing here is allowed to raise: if SMTP fails, we log the error and the
 application still stays safely in the database.
@@ -18,6 +18,23 @@ from django.core.mail import EmailMultiAlternatives, get_connection
 from django.utils import timezone
 
 logger = logging.getLogger(__name__)
+
+# Every career application is emailed here.
+HR_EMAIL = "Hr@sparrowgroup.in"
+
+
+def career_recipients():
+    """HR address + any extra addresses from settings.CAREER_NOTIFY_EMAILS (no duplicates)."""
+    extra = getattr(settings, "CAREER_NOTIFY_EMAILS", []) or []
+    if isinstance(extra, str):
+        extra = [extra]
+    recipients, seen = [], set()
+    for addr in [HR_EMAIL, *extra]:
+        addr = (addr or "").strip()
+        if addr and addr.lower() not in seen:
+            seen.add(addr.lower())
+            recipients.append(addr)
+    return recipients
 
 
 # ──────────────────────────────────────────────────────────────
@@ -170,7 +187,7 @@ This is an automated message from the {company} website.
         subject=subject,
         text_body=text_body,
         html_body=html_body,
-        to_list=list(getattr(settings, "CAREER_NOTIFY_EMAILS", [])),
+        to_list=career_recipients(),
         # Hitting "Reply" in Gmail replies to the applicant, not to the server.
         reply_to=[application.email],
     )

@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-%e=-vk=_d$++mgbmgyl9okepahzqa*%%s*lpkzkqdb6pao-nkh
 
 DEBUG = True  # Change to False when deploying
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'yourdomain.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'sparrowgroup.in', 'www.sparrowgroup.in']
 
 # Application definition
 INSTALLED_APPS = [
@@ -38,20 +38,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sparrow_project.urls'
 
-
-# -----------------------------------------
-
-EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'mail.mindstory.in'      # or 'smtp.gmail.com'
-EMAIL_PORT          = 587
-EMAIL_USE_TLS       = True
-EMAIL_HOST_USER     = 'web@mindstory.in'
-EMAIL_HOST_PASSWORD = 'your-password-here'
-DEFAULT_FROM_EMAIL  = 'web@mindstory.in'
-
-
-
-# --------------------------------------
 
 TEMPLATES = [
     {
@@ -110,6 +96,47 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = '/admin/login/'
 LOGIN_REDIRECT_URL  = '/admin/'
 LOGIN_URL           = '/admin/login/'
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ✅ EMAIL  (Career form → Hr@sparrowgroup.in)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# The site logs in to the Hr@sparrowgroup.in mailbox and sends the
+# application email to HR. Fill in EMAIL_HOST_PASSWORD below.
+#
+# Pick the block that matches who hosts sparrowgroup.in email:
+#   Google Workspace : smtp.gmail.com     587  TLS   (password = 16-letter App password)
+#   Zoho Mail        : smtp.zoho.in       587  TLS   (mailbox password)
+#   Microsoft 365    : smtp.office365.com 587  TLS   (mailbox password)
+#   cPanel / hosting : mail.sparrowgroup.in 465 SSL  (mailbox password)
+#                      → for 465 set EMAIL_USE_TLS = False and EMAIL_USE_SSL = True
+
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_USE_SSL       = False
+EMAIL_HOST_USER     = 'Hr@sparrowgroup.in'
+EMAIL_HOST_PASSWORD = 'PASTE-PASSWORD-HERE'      # ← put the App password / mailbox password here
+EMAIL_TIMEOUT       = 20                         # seconds; the page never hangs on a slow mail server
+
+DEFAULT_FROM_EMAIL  = f'Sparrow International Website <{EMAIL_HOST_USER}>'
+SERVER_EMAIL        = EMAIL_HOST_USER
+
+# Used by main/emails.py
+COMPANY_NAME                   = 'Sparrow International'
+CAREER_NOTIFY_EMAILS           = []      # extra copies (HR is always included automatically)
+SEND_APPLICANT_ACKNOWLEDGEMENT = False   # True = also send a "we received your application" mail to the applicant
+EMAIL_SEND_ASYNC               = True    # send in the background so the form submits instantly
+
+# Show email errors in the runserver console (so you can see if a mail failed)
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {'console': {'class': 'logging.StreamHandler'}},
+    'loggers': {
+        'main': {'handlers': ['console'], 'level': 'INFO'},
+    },
+}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # ✅ SECURITY SETTINGS (for production)
@@ -173,6 +200,10 @@ JAZZMIN_SETTINGS = {
         "ventures.products":       "fas fa-box-open",
         "ventures.brands":         "fas fa-tags",
         "ventures.galleries":      "fas fa-images",
+        "main.herobanner":         "fas fa-photo-video",
+        "main.programcategory":    "fas fa-folder-open",
+        "main.programevent":       "fas fa-calendar-alt",
+        "main.programimage":       "fas fa-photo-video",
     },
 
     "default_icon_parents":  "fas fa-chevron-circle-right",

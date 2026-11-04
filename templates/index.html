@@ -17,6 +17,42 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
 
+                    {% if hero_banners %}
+                    {% for banner in hero_banners %}
+                    <!-- swiper-slide (from admin: Home Banners) -->
+                    <div class="swiper-slide">
+                        {% with has_text=banner.subtitle|default:banner.title|default:banner.description %}
+                        <div class="fs-slider-item fl-wrap hero-dyn{% if not has_text %} hero-no-text{% endif %}">
+                            {% if banner.is_video %}
+                            <div class="bg hero-video-bg" data-swiper-parallax="20%">
+                                <video class="hero-bg-video" src="{{ banner.media.url }}" muted loop playsinline
+                                       preload="{% if forloop.first %}auto{% else %}metadata{% endif %}"
+                                       {% if forloop.first %}autoplay{% endif %} disablepictureinpicture></video>
+                            </div>
+                            {% else %}
+                            <div class="bg" data-bg="{{ banner.media.url }}" data-swiper-parallax="20%"></div>
+                            {% endif %}
+                            {% if has_text %}
+                            <div class="overlay"></div>
+                            <div class="hero_align_title">
+                                <div class="container">
+                                    <div class="hero_align_title-container">
+                                        {% if banner.subtitle %}<div class="hhw_header">{{ banner.subtitle }}</div>{% endif %}
+                                        {% if banner.title %}<h2 class="{% if banner.title|length > 90 %}hero-title-xl{% elif banner.title|length > 55 %}hero-title-long{% endif %}"><a{% if banner.link_url %} href="{{ banner.link_url }}"{% endif %}>{{ banner.title_html }}</a></h2>{% endif %}
+                                        {% if banner.description %}<p>{{ banner.description }}</p>{% endif %}
+                                        <div class="hero_align_title_dec"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endwith %}
+                    </div>
+                    <!-- swiper-slide end-->
+                    {% endfor %}
+                    {% else %}
+                    {# No banners added in admin yet — show the original static slides #}
+
                     <div class="swiper-slide">
                         <div class="fs-slider-item fl-wrap">
                             <div class="bg" data-bg="{% static 'images/Banner/banner-new/corperate.png' %}" data-swiper-parallax="20%"></div>
@@ -71,6 +107,7 @@
                         </div>
                     </div>
                     <!-- swiper-slide end-->
+                    {% endif %}
 
                 </div>
             </div>
@@ -826,7 +863,7 @@
                                             <h4>Head Office</h4>
                                             <p>Visit us at our office, We'd love to connect with you<br> in person.</p>
                                             <a href="#" class="card-link" style="text-align: left; color:#000;">
-                                                SPAROW INTERNATIONAL VENTURES PVT LTD,<br>
+                                                SPARROW INTERNATIONAL VENTURES PVT LTD,<br>
                                                 12/1624&125,2nd floor Delma Centre,<br>
                                                 Vadakkencherry,Palakkad, Kerala,678683</a>
                                              <br>
@@ -1000,7 +1037,86 @@
 {% endblock %}
 
 {% block extra_js %}
+<style>
+    /* Home banner: background video fills the slide like a photo */
+    .hero-video-bg { overflow: hidden; background: #000; }
+    .hero-video-bg .hero-bg-video {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover; display: block; pointer-events: none;
+    }
+
+    /* Banner with no text: show only the photo/video — no dark box, no dark overlay */
+    .hero-no-text .hero_align_title,
+    .hero-no-text .overlay { display: none !important; }
+
+    /* Keep banner text inside the dark box and readable over photos/videos */
+    /* The theme's dark box is about 1035px wide with ~60px padding,
+       so the text must stay within ~880px (and within the screen on mobile). */
+    .hero-dyn .hero_align_title-container h2,
+    .hero-dyn .hero_align_title-container .hhw_header {
+        max-width: min(880px, calc(100vw - 60px)) !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+    .hero-dyn .hero_align_title-container h2 a { white-space: normal !important; }
+    .hero-dyn .hero_align_title-container h2.hero-title-long { font-size: clamp(30px, 3.6vw, 56px); line-height: 1.15; }
+    .hero-dyn .hero_align_title-container h2.hero-title-xl   { font-size: clamp(24px, 2.8vw, 42px); line-height: 1.2; }
+    .hero-dyn .hero_align_title-container p {
+        max-width: min(720px, calc(100vw - 60px)) !important;
+        display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .hero-dyn .hhw_header,
+    .hero-dyn .hero_align_title-container h2,
+    .hero-dyn .hero_align_title-container h2 a,
+    .hero-dyn .hero_align_title-container p {
+        text-shadow: 0 2px 14px rgba(0, 0, 0, .65), 0 1px 3px rgba(0, 0, 0, .5);
+    }
+    @media (max-width: 768px) {
+        .hero-dyn .hero_align_title-container h2.hero-title-long { font-size: 30px; }
+        .hero-dyn .hero_align_title-container h2.hero-title-xl   { font-size: 24px; }
+        .hero-dyn .hero_align_title-container p { -webkit-line-clamp: 3; }
+    }
+</style>
+
 <script>
-    // Add any page-specific JavaScript here
+/* Home banner videos: play only the video on the active slide, pause the rest.
+   Works with the theme's Swiper (including loop copies) without changing it. */
+(function () {
+    var wrap = document.querySelector('.main-hero-wrap .swiper-wrapper');
+    if (!wrap) return;
+
+    function sync() {
+        var slides = wrap.querySelectorAll('.swiper-slide');
+        // Before Swiper marks a slide active, treat the first slide as the visible one
+        var active = wrap.querySelector('.swiper-slide-active') || slides[0];
+        slides.forEach(function (slide) {
+            var v = slide.querySelector('video.hero-bg-video');
+            if (!v) return;
+            if (slide === active) {
+                v.muted = true;
+                try { if (v.currentTime > 0 && v.ended) v.currentTime = 0; } catch (e) {}
+                var p = v.play();
+                if (p && p.catch) p.catch(function () {});
+            } else if (!v.paused) {
+                v.pause();
+            }
+        });
+    }
+
+    // Re-check whenever Swiper changes the active slide (or adds loop copies)
+    if ('MutationObserver' in window) {
+        new MutationObserver(sync).observe(wrap, {
+            subtree: true, childList: true, attributes: true, attributeFilter: ['class']
+        });
+    }
+    sync();
+    window.addEventListener('load', sync);
+    // Save data/CPU when the tab is hidden
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) wrap.querySelectorAll('video.hero-bg-video').forEach(function (v) { v.pause(); });
+        else sync();
+    });
+})();
 </script>
 {% endblock %}

@@ -66,9 +66,18 @@
                             </div>
                             {% endif %}
 
-                            <h3 class="bold-text">Apply Now<span class="bt_dec"></span></h3>
+                            <h3 class="bold-text" id="apply" style="scroll-margin-top: 120px;">Apply Now<span class="bt_dec"></span></h3>
                             
                             <div class="comment-form custom-form">
+                                <!-- Success/Error Messages -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }}" style="margin-bottom: 20px; padding: 15px; border-radius: 5px; {% if message.tags == 'success' %}background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;{% else %}background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;{% endif %}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
                                 <form class="comment-form" name="careerform" id="careerform" method="post" action="{% url 'main:career' %}">
                                     {% csrf_token %}
                                     <fieldset>
@@ -243,14 +252,6 @@
                                     </fieldset>
                                 </form>
 
-                                <!-- Success/Error Messages -->
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div class="alert alert-{{ message.tags }}" style="margin-top: 20px; padding: 15px; border-radius: 5px; {% if message.tags == 'success' %}background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;{% else %}background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;{% endif %}">
-                                            {{ message }}
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
                             </div>
 
                         </div>
@@ -394,7 +395,7 @@
     document.getElementById('careerform').addEventListener('submit', function(e) {
         const fullName = document.querySelector('input[name="full_name"]').value.trim();
         const email = document.querySelector('input[name="email"]').value.trim();
-        const phone = document.querySelector('input[name="phone"]').value.trim();
+        const phone = document.querySelector('input[name="phone"]').value.replace(/[\s-]/g, '').replace(/^(\+91|0)/, '');
         const jobRole = document.querySelector('select[name="job_role"]').value;
 
         if (!fullName || !email || !phone || !jobRole) {
@@ -410,6 +411,12 @@
             alert('Please enter a valid 10-digit phone number');
             return false;
         }
+
+        // Prevent double submission (and double emails)
+        const btn = document.getElementById('commentssubmit');
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        btn.textContent = 'Sending...';
     });
 
     // Auto-hide alert messages after 5 seconds
@@ -422,6 +429,6 @@
                 alert.remove();
             }, 500);
         });
-    }, 5000);
+    }, 8000);
 </script>
 {% endblock %}

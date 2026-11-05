@@ -3,3 +3,9 @@ __pycache__/
 venv/
 wrk-file.zip
 *.zip
+
+sparrow_project/settings.py
+db.sqlite3
+media/
+__pycache__/
+*.pyc

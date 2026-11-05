@@ -110,17 +110,15 @@ LOGIN_URL           = '/admin/login/'
 #   cPanel / hosting : mail.sparrowgroup.in 465 SSL  (mailbox password)
 #                      → for 465 set EMAIL_USE_TLS = False and EMAIL_USE_SSL = True
 
-EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST          = 'smtp.gmail.com'
-EMAIL_PORT          = 587
-EMAIL_USE_TLS       = True
-EMAIL_USE_SSL       = False
-EMAIL_HOST_USER     = 'Hr@sparrowgroup.in'
-EMAIL_HOST_PASSWORD = 'PASTE-PASSWORD-HERE'      # ← put the App password / mailbox password here
-EMAIL_TIMEOUT       = 20                         # seconds; the page never hangs on a slow mail server
+EMAIL_HOST          = 'smtppro.zoho.in'
+EMAIL_PORT          = 465
+EMAIL_USE_SSL       = True
+EMAIL_USE_TLS       = False
+EMAIL_HOST_USER     = 'hr@sparrowgroup.in'
+EMAIL_HOST_PASSWORD = 'Sp#Admin#@2026'
 
-DEFAULT_FROM_EMAIL  = f'Sparrow International Website <{EMAIL_HOST_USER}>'
-SERVER_EMAIL        = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL  = 'Sparrow International Website <hr@sparrowgroup.in>'
+SERVER_EMAIL        = 'hr@sparrowgroup.in'
 
 # Used by main/emails.py
 COMPANY_NAME                   = 'Sparrow International'

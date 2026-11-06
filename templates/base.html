@@ -32,7 +32,7 @@
     {% block extra_css %}{% endblock %}
 </head>
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
 <!-- Loader -->
 {% comment %} <div class="loader-wrap">

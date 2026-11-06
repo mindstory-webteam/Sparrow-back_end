@@ -3,6 +3,8 @@
 
 {% block title %}Home - Sparrow International{% endblock %}
 
+{% block body_class %}home-hero-page{% endblock %}
+
 {% comment %}
     Hide the footer on the home page by overriding the footer block with nothing.
 {% endcomment %}
@@ -13,6 +15,7 @@
 <!-- main-hero-wrap-->
 <div class="main-hero-wrap full-height">
     <div class="main-hero-wrap-container full-height">
+        <div class="hero-top-shade" aria-hidden="true"></div>
         <div class="fs-slider lightgallery full-height scroll_sec" data-mousecontrol2="false">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
@@ -1038,46 +1041,165 @@
 
 {% block extra_js %}
 <style>
-    /* Home banner: background video fills the slide like a photo */
-    .hero-video-bg { overflow: hidden; background: #000; }
-    .hero-video-bg .hero-bg-video {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        object-fit: cover; display: block; pointer-events: none;
-    }
+/* ═══════════════════════════════════════════════════════════════
+   HOME PAGE ONLY
+   • Transparent navbar over the banner (turns normal after scroll)
+   • Banner is full-screen and starts at the very top
+   • Banner text keeps the ORIGINAL theme design (dark box)
+═══════════════════════════════════════════════════════════════ */
 
-    /* Banner with no text: show only the photo/video — no dark box, no dark overlay */
-    .hero-no-text .hero_align_title,
-    .hero-no-text .overlay { display: none !important; }
+/* ── Banner: full screen, under the transparent navbar ── */
+.home-overlay-nav .main-hero-wrap,
+.home-overlay-nav .main-hero-wrap .full-height,
+.home-overlay-nav .main-hero-wrap .swiper-container,
+.home-overlay-nav .main-hero-wrap .swiper-slide,
+.home-overlay-nav .main-hero-wrap .fs-slider-item {
+    height: 100vh !important;
+    min-height: 560px;
+}
+.home-overlay-nav .main-hero-wrap { position: relative; overflow: hidden; }
 
-    /* Keep banner text inside the dark box and readable over photos/videos */
-    /* The theme's dark box is about 1035px wide with ~60px padding,
-       so the text must stay within ~880px (and within the screen on mobile). */
-    .hero-dyn .hero_align_title-container h2,
-    .hero-dyn .hero_align_title-container .hhw_header {
-        max-width: min(880px, calc(100vw - 60px)) !important;
-        white-space: normal !important;
-        overflow-wrap: anywhere;
-        word-break: normal;
-    }
-    .hero-dyn .hero_align_title-container h2 a { white-space: normal !important; }
-    .hero-dyn .hero_align_title-container h2.hero-title-long { font-size: clamp(30px, 3.6vw, 56px); line-height: 1.15; }
-    .hero-dyn .hero_align_title-container h2.hero-title-xl   { font-size: clamp(24px, 2.8vw, 42px); line-height: 1.2; }
-    .hero-dyn .hero_align_title-container p {
-        max-width: min(720px, calc(100vw - 60px)) !important;
-        display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-    }
-    .hero-dyn .hhw_header,
-    .hero-dyn .hero_align_title-container h2,
-    .hero-dyn .hero_align_title-container h2 a,
-    .hero-dyn .hero_align_title-container p {
-        text-shadow: 0 2px 14px rgba(0, 0, 0, .65), 0 1px 3px rgba(0, 0, 0, .5);
-    }
-    @media (max-width: 768px) {
-        .hero-dyn .hero_align_title-container h2.hero-title-long { font-size: 30px; }
-        .hero-dyn .hero_align_title-container h2.hero-title-xl   { font-size: 24px; }
-        .hero-dyn .hero_align_title-container p { -webkit-line-clamp: 3; }
-    }
+/* Soft shade at the top only, so the white menu text is readable */
+.hero-top-shade {
+    position: absolute; left: 0; right: 0; top: 0; height: 170px; z-index: 5; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.2) 55%, rgba(0,0,0,0) 100%);
+}
+
+/* Background video fills the slide like a photo */
+.hero-video-bg { overflow: hidden; background: #000; }
+.hero-video-bg .hero-bg-video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block; pointer-events: none;
+}
+
+/* Keep the text box above the video/photo */
+.main-hero-wrap .hero_align_title { z-index: 6; }
+
+/* Banner with no text: show only the photo/video */
+.hero-no-text .hero_align_title,
+.hero-no-text .overlay { display: none !important; }
+
+/* Original text box design — just keep long text inside the box */
+.hero-dyn .hero_align_title-container h2,
+.hero-dyn .hero_align_title-container .hhw_header {
+    max-width: min(880px, calc(100vw - 60px)) !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+.hero-dyn .hero_align_title-container h2 a { white-space: normal !important; }
+.hero-dyn .hero_align_title-container p {
+    max-width: min(720px, calc(100vw - 60px)) !important;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+}
+.hero-dyn .hhw_header,
+.hero-dyn .hero_align_title-container h2,
+.hero-dyn .hero_align_title-container h2 a,
+.hero-dyn .hero_align_title-container p {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .65), 0 1px 3px rgba(0, 0, 0, .5);
+}
+@media (max-width: 768px) {
+    .hero-dyn .hero_align_title-container p { -webkit-line-clamp: 3; }
+}
+
+/* ── Navbar (.header-top) transparent over the banner ── */
+.home-hero-page .header-top { transition: background-color .35s ease, box-shadow .35s ease; }
+.home-hero-page .header-top.hdr-overlay {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+.home-hero-page .header-top.hdr-overlay::before,
+.home-hero-page .header-top.hdr-overlay::after { background: transparent !important; border-color: transparent !important; }
+
+/* Menu: plain white text links (no pill boxes, no icons) */
+.home-hero-page .header-top.hdr-overlay .nav-special { gap: 38px !important; }
+.home-hero-page .header-top.hdr-overlay .share-button,
+.home-hero-page .header-top.hdr-overlay .share-button::before,
+.home-hero-page .header-top.hdr-overlay .share-button::after {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.home-hero-page .header-top.hdr-overlay .share-button { padding-left: 0 !important; padding-right: 0 !important; }
+.home-hero-page .header-top.hdr-overlay .share-button,
+.home-hero-page .header-top.hdr-overlay .share-button a,
+.home-hero-page .header-top.hdr-overlay .share-button span {
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    letter-spacing: .2px !important;
+    text-shadow: 0 1px 10px rgba(0,0,0,.35);
+}
+.home-hero-page .header-top.hdr-overlay .share-button i { display: none !important; }
+.home-hero-page .header-top.hdr-overlay .share-button span { position: relative; padding-bottom: 6px; }
+.home-hero-page .header-top.hdr-overlay .share-button span::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background: #ed3435; transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+}
+.home-hero-page .header-top.hdr-overlay .share-button:hover span::after,
+.home-hero-page .header-top.hdr-overlay .share-button.active span::after { transform: scaleX(1); }
+
+/* ☰ button → white */
+.home-hero-page .header-top.hdr-overlay .nav-button span { background: #fff !important; }
+.home-hero-page .header-top.hdr-overlay .nav-button-wrap,
+.home-hero-page .header-top.hdr-overlay .nav-button {
+    background: transparent !important; border-color: rgba(255,255,255,.35) !important;
+}
 </style>
+
+<script>
+/* Home page only: the top bar (.header-top) is transparent over the hero and the
+   hero is pulled up under it (no white gap). Back to normal after scrolling. */
+(function () {
+    var hero = document.querySelector('.main-hero-wrap');
+    var bar  = document.querySelector('.header-top');
+    if (!hero) return;
+    document.body.classList.add('home-overlay-nav');
+
+    if (bar) {
+        var cs = window.getComputedStyle(bar);
+        if (cs.position === 'static') bar.style.position = 'relative';
+        if ((parseInt(cs.zIndex, 10) || 0) < 1000) bar.style.zIndex = 1000;
+    }
+
+    function pullHeroUp() {
+        hero.style.marginTop = '0px';
+        var top = hero.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop);
+        if (top > 0) hero.style.marginTop = (-top) + 'px';
+    }
+    function onScroll() {
+        if (!bar) return;
+        var y = window.pageYOffset || document.documentElement.scrollTop;
+        if (y < Math.max(60, bar.offsetHeight)) bar.classList.add('hdr-overlay');
+        else bar.classList.remove('hdr-overlay');
+    }
+    // One full-width slide at a time (no next slide peeking in from the side)
+    function oneSlidePerView() {
+        var c = hero.querySelector('.swiper-container');
+        var sw = c && c.swiper;
+        if (!sw || !sw.params) return;
+        var first = c.querySelector('.swiper-slide');
+        if (first && first.offsetWidth < c.offsetWidth * 0.98) {
+            sw.params.slidesPerView = 1;
+            sw.params.spaceBetween = 0;
+            sw.params.centeredSlides = false;
+            try { sw.update(); } catch (e) {}
+        }
+    }
+
+    pullHeroUp();
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', pullHeroUp);
+    window.addEventListener('load', function () {
+        pullHeroUp(); onScroll(); oneSlidePerView();
+        try { window.dispatchEvent(new Event('resize')); } catch (e) {}
+    });
+})();
+</script>
 
 <script>
 /* Home banner videos: play only the video on the active slide, pause the rest.

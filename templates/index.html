@@ -13,7 +13,7 @@
 {% block content %}
 <!-- section -->
 <!-- main-hero-wrap-->
-<div class="main-hero-wrap full-height">
+<div class="main-hero-wrap full-height{% if hero_banners and hero_banners|length == 1 %} hero-single{% endif %}">
     <div class="main-hero-wrap-container full-height">
         <div class="hero-top-shade" aria-hidden="true"></div>
         <div class="fs-slider lightgallery full-height scroll_sec" data-mousecontrol2="false">
@@ -1072,6 +1072,13 @@
     object-fit: cover; display: block; pointer-events: none;
 }
 
+/* ── Only ONE banner: no sliding / no repeated copies / no arrows ── */
+.hero-single .swiper-wrapper { transform: none !important; transition: none !important; }
+.hero-single .swiper-slide { width: 100% !important; }
+.hero-single .swiper-slide-duplicate { display: none !important; }
+.hero-single .hs-slider-button,
+.hero-single .main-hero-controls-wrap { display: none !important; }
+
 /* Keep the text box above the video/photo */
 .main-hero-wrap .hero_align_title { z-index: 6; }
 
@@ -1194,8 +1201,24 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', pullHeroUp);
+    // Only one banner → switch the theme slider off (no autoplay, no swipe, no loop copies)
+    function stopSliderIfSingle() {
+        if (!hero.classList.contains('hero-single')) return;
+        var c = hero.querySelector('.swiper-container');
+        var sw = c && c.swiper;
+        if (!sw) return;
+        try { if (sw.autoplay && sw.autoplay.stop) sw.autoplay.stop(); } catch (e) {}
+        try {
+            sw.allowTouchMove = false;
+            sw.allowSlideNext = false;
+            sw.allowSlidePrev = false;
+        } catch (e) {}
+    }
+
     window.addEventListener('load', function () {
-        pullHeroUp(); onScroll(); oneSlidePerView();
+        stopSliderIfSingle();
+        pullHeroUp(); onScroll();
+        if (!hero.classList.contains('hero-single')) oneSlidePerView();
         try { window.dispatchEvent(new Event('resize')); } catch (e) {}
     });
 })();
@@ -1210,8 +1233,12 @@
 
     function sync() {
         var slides = wrap.querySelectorAll('.swiper-slide');
-        // Before Swiper marks a slide active, treat the first slide as the visible one
-        var active = wrap.querySelector('.swiper-slide-active') || slides[0];
+        var single = wrap.closest('.hero-single');
+        // Single banner: the real (non-copy) slide is always the visible one.
+        // Otherwise: the slide Swiper marks active (or the first one before Swiper starts).
+        var active = single
+            ? (wrap.querySelector('.swiper-slide:not(.swiper-slide-duplicate)') || slides[0])
+            : (wrap.querySelector('.swiper-slide-active') || slides[0]);
         slides.forEach(function (slide) {
             var v = slide.querySelector('video.hero-bg-video');
             if (!v) return;
